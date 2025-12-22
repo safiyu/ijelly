@@ -381,32 +381,119 @@ body {
     transform: scale(1);
 }
 
-.videoOsdBottom {
-    box-sizing: border-box !important;
+div.videoOsdBottom.videoOsdBottom-maincontrols {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 1.5em 3em !important;
+    gap: 1.5em !important;
+    height: auto !important;
+    min-height: unset !important;
     background: var(--apple-glass) !important;
     backdrop-filter: var(--apple-blur) !important;
     -webkit-backdrop-filter: var(--apple-blur) !important;
+    border-radius: var(--apple-radius-large) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: var(--apple-shadow) !important;
     width: 90% !important;
     max-width: 1000px !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
     bottom: 2em !important;
-    border-radius: var(--apple-radius-large) !important;
-    padding: 1.5em !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    box-shadow: var(--apple-shadow) !important;
     margin: 0 !important;
     overflow: visible !important;
 }
 
-.osdHeader {
+div.videoOsdBottom.videoOsdBottom-maincontrols .osdControls {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: 100% !important;
+    gap: 1.5em !important;
+}
+
+/* Row 1: Progress Bar */
+div.videoOsdBottom.videoOsdBottom-maincontrols .osdControls>.flex.flex-direction-row {
+    display: flex !important;
+    flex-direction: row !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    flex-basis: auto !important;
+    order: 1 !important;
+}
+
+/* Row 2: Playback Controls */
+div.videoOsdBottom.videoOsdBottom-maincontrols .osdControls>.buttons {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    gap: 1.5em !important;
+    order: 2 !important;
+}
+
+div.videoOsdBottom.videoOsdBottom-maincontrols .osdControls>.buttons>div {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 0.8em !important;
+}
+
+div.videoOsdBottom.videoOsdBottom-maincontrols .volumeButtons {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 1em !important;
+}
+
+div.videoOsdBottom.videoOsdBottom-maincontrols .osdVolumeSliderContainer {
+    width: 100px !important;
+    max-width: 100px !important;
+}
+
+div.videoOsdBottom.videoOsdBottom-maincontrols .osdTimeText,
+div.videoOsdBottom.videoOsdBottom-maincontrols .endsAtText {
+    white-space: nowrap !important;
+    font-size: 0.9em !important;
+}
+
+/* Hide clutter but keep back button */
+div.videoOsdBottom.videoOsdBottom-maincontrols .osdTextContainer.osdMainTextContainer,
+div.videoOsdBottom.videoOsdBottom-maincontrols .osdTextContainer.osdSecondaryMediaInfo,
+div.videoOsdBottom.videoOsdBottom-maincontrols .osdTitle,
+.osdMainTextContainer,
+.osdSecondaryMediaInfo,
+.osdTitle {
+    display: none !important;
+}
+
+.videoOsdHeader {
+    display: flex !important;
+    padding: 2em !important;
     background: transparent !important;
 }
 
-.osdControls {
-    gap: 2em !important;
-    justify-content: center !important;
+.btnVideoOsdBack {
+    background: rgba(0, 0, 0, 0.3) !important;
+    backdrop-filter: var(--apple-blur) !important;
+    -webkit-backdrop-filter: var(--apple-blur) !important;
+    border-radius: 50% !important;
+    transition: transform 0.2s var(--apple-spring-fast) !important;
 }
+
+.btnVideoOsdBack:hover,
+.btnVideoOsdBack:focus {
+    transform: scale(1.1) !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
 
 .osdControls .paper-icon-button-light {
     border-radius: 50% !important;
@@ -426,6 +513,9 @@ body {
 .osdTitle {
     font-weight: 600 !important;
     font-size: 1.5em !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 
 ::-webkit-scrollbar {
@@ -465,7 +555,7 @@ body {
 
 .layout-tv .videoOsdBottom {
     width: 80% !important;
-    max-width: 1200px !important;
+    max-width: 1400px !important;
     padding: 2.5em !important;
     bottom: 4em !important;
 }
