@@ -1,6 +1,6 @@
 # 🍎 ijelly
 
-A pixel-perfect, functionally robust Apple TV-inspired theme for Jellyfin. **ijelly** brings a premium, glassmorphic aesthetic and tactile interactions to your media library, optimized for both desktop and lean-back TV experiences.
+A pixel-perfect, functionally robust Apple TV-inspired theme for Jellyfin. **ijelly** brings a premium, glassmorphic aesthetic and tactile interactions to your media library, optimized for both desktop and lean-back TV experiences. This theme is optimized for samsung TV's and Desktop.
 
 ---
 
