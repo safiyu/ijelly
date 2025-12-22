@@ -2,6 +2,18 @@
 
 A pixel-perfect, functionally robust Apple TV-inspired theme for Jellyfin. **ijelly** brings a premium, glassmorphic aesthetic and tactile interactions to your media library, optimized for both desktop and lean-back TV experiences.
 
+---
+
+## 📸 Showcase
+
+![Main Screen](screenshots/main.png)
+*Modern, immersive library view with glassmorphic elements.*
+
+![Item Details](screenshots/details.png)
+*Cinematic detail page with high-contrast typography and hero backdrops.*
+
+![Media Player](screenshots/mediaplayer.png)
+*Revamped OSD layout for distraction-free playback control.*
 
 
 ---
