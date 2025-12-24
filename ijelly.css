@@ -381,93 +381,88 @@ body {
     transform: scale(1);
 }
 
-div.videoOsdBottom.videoOsdBottom-maincontrols {
+.videoOsdBottom.videoOsdBottom-maincontrols {
     display: flex !important;
-    flex-direction: column !important;
+    flex-direction: row !important;
     align-items: center !important;
-    justify-content: center !important;
-    padding: 1.5em 3em !important;
-    gap: 1.5em !important;
+    justify-content: space-between !important;
+    padding: 0.5em 1.5em !important;
+    gap: 1em !important;
     height: auto !important;
     min-height: unset !important;
     background: var(--apple-glass) !important;
     backdrop-filter: var(--apple-blur) !important;
     -webkit-backdrop-filter: var(--apple-blur) !important;
-    border-radius: var(--apple-radius-large) !important;
+    border-radius: 50px !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
     box-shadow: var(--apple-shadow) !important;
-    width: 90% !important;
-    max-width: 1000px !important;
+    width: 96% !important;
+    max-width: 1600px !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
-    bottom: 2em !important;
+    bottom: 0.5em !important;
     margin: 0 !important;
     overflow: visible !important;
 }
 
-div.videoOsdBottom.videoOsdBottom-maincontrols .osdControls {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    width: 100% !important;
-    gap: 1.5em !important;
-}
-
-/* Row 1: Progress Bar */
-div.videoOsdBottom.videoOsdBottom-maincontrols .osdControls>.flex.flex-direction-row {
+.videoOsdBottom.videoOsdBottom-maincontrols .osdControls {
     display: flex !important;
     flex-direction: row !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    flex-basis: auto !important;
-    order: 1 !important;
-}
-
-/* Row 2: Playback Controls */
-div.videoOsdBottom.videoOsdBottom-maincontrols .osdControls>.buttons {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
     align-items: center !important;
-    justify-content: center !important;
     width: 100% !important;
     gap: 1.5em !important;
+}
+
+.videoOsdBottom.videoOsdBottom-maincontrols .osdControls>.flex.flex-direction-row {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-grow: 1 !important;
+    width: auto !important;
+    margin: 0 1em !important;
+    padding: 0 !important;
     order: 2 !important;
 }
 
-div.videoOsdBottom.videoOsdBottom-maincontrols .osdControls>.buttons>div {
+.videoOsdBottom.videoOsdBottom-maincontrols .osdControls>.buttons {
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     align-items: center !important;
-    gap: 0.8em !important;
-}
-
-div.videoOsdBottom.videoOsdBottom-maincontrols .volumeButtons {
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    align-items: center !important;
+    width: auto !important;
     gap: 1em !important;
+    order: 1 !important;
 }
 
-div.videoOsdBottom.videoOsdBottom-maincontrols .osdVolumeSliderContainer {
-    width: 100px !important;
-    max-width: 100px !important;
+.videoOsdBottom.videoOsdBottom-maincontrols .osdControls>.buttons>div {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 0.5em !important;
 }
 
-div.videoOsdBottom.videoOsdBottom-maincontrols .osdTimeText,
-div.videoOsdBottom.videoOsdBottom-maincontrols .endsAtText {
+.videoOsdBottom.videoOsdBottom-maincontrols .volumeButtons {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 0.5em !important;
+    order: 3 !important;
+}
+
+.videoOsdBottom.videoOsdBottom-maincontrols .osdVolumeSliderContainer {
+    width: 80px !important;
+}
+
+.videoOsdBottom.videoOsdBottom-maincontrols .osdTimeText,
+.videoOsdBottom.videoOsdBottom-maincontrols .endsAtText {
     white-space: nowrap !important;
-    font-size: 0.9em !important;
+    font-size: 0.85em !important;
 }
 
-/* Hide clutter but keep back button */
-div.videoOsdBottom.videoOsdBottom-maincontrols .osdTextContainer.osdMainTextContainer,
-div.videoOsdBottom.videoOsdBottom-maincontrols .osdTextContainer.osdSecondaryMediaInfo,
-div.videoOsdBottom.videoOsdBottom-maincontrols .osdTitle,
+.videoOsdBottom.videoOsdBottom-maincontrols .osdTextContainer.osdMainTextContainer,
+.videoOsdBottom.videoOsdBottom-maincontrols .osdTextContainer.osdSecondaryMediaInfo,
+.videoOsdBottom.videoOsdBottom-maincontrols .osdTitle,
 .osdMainTextContainer,
 .osdSecondaryMediaInfo,
 .osdTitle {
@@ -493,7 +488,6 @@ div.videoOsdBottom.videoOsdBottom-maincontrols .osdTitle,
     transform: scale(1.1) !important;
     background: rgba(255, 255, 255, 0.2) !important;
 }
-
 
 .osdControls .paper-icon-button-light {
     border-radius: 50% !important;
@@ -609,4 +603,66 @@ div.videoOsdBottom.videoOsdBottom-maincontrols .osdTitle,
 .layout-tv .cardText {
     font-size: 1.4em !important;
     margin-top: 0.5em !important;
+}
+
+.subtitles,
+.videoSubtitles,
+.videoSubtitlesInner,
+.subtitle-container,
+.libassjs-canvas-parent,
+.shaka-text-container {
+    bottom: 2em !important;
+    transition: bottom 0.3s ease !important;
+    z-index: 9999 !important;
+    transform: scale(0.85) !important;
+    transform-origin: bottom center !important;
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+}
+
+.videoOsd-visible .subtitles,
+.videoOsd-visible .videoSubtitles,
+.videoOsd-visible .videoSubtitlesInner,
+.videoOsd-visible .subtitle-container,
+.videoOsd-visible .libassjs-canvas-parent,
+.videoOsd-visible .shaka-text-container,
+.osd-visible .subtitles,
+.osd-visible .videoSubtitles,
+.osd-visible .videoSubtitlesInner,
+.osd-visible .subtitle-container,
+.osd-visible .libassjs-canvas-parent,
+.osd-visible .shaka-text-container,
+.showing-osd .subtitles,
+.showing-osd .videoSubtitles,
+.showing-osd .videoSubtitlesInner,
+.showing-osd .subtitle-container,
+.showing-osd .libassjs-canvas-parent,
+.showing-osd .shaka-text-container {
+    bottom: 18em !important;
+}
+
+.subtitles span,
+.videoSubtitles span,
+.videoSubtitlesInner span,
+.subtitle-container span,
+.subtitles div,
+.videoSubtitles div,
+.videoSubtitlesInner div,
+.subtitle-container div,
+::cue {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    padding: 0.1em 0.4em !important;
+    border-radius: 4px !important;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.9) !important;
+    font-size: 0.6rem !important;
+    font-weight: 400 !important;
+    line-height: normal !important;
+}
+
+.videoSubtitlesInner *,
+.videoSubtitles * {
+    font-size: 0.6rem !important;
+    line-height: normal !important;
 }
