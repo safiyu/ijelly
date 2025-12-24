@@ -657,8 +657,9 @@ body {
     border-radius: 4px !important;
     text-shadow: 0 0 4px rgba(0, 0, 0, 0.9) !important;
     font-size: 0.6rem !important;
-    font-weight: 400 !important;
+    font-weight: 500 !important;
     line-height: normal !important;
+    font-family: var(--apple-font) !important;
 }
 
 .videoSubtitlesInner *,
