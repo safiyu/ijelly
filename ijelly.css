@@ -297,6 +297,39 @@ body {
     padding-bottom: 3em !important;
 }
 
+#castCollapsible .emby-scroller,
+#guestCastCollapsible .emby-scroller {
+    margin-left: -20em !important;
+}
+
+#castCollapsible .sectionTitle,
+#guestCastCollapsible .sectionTitle,
+#peopleHeader,
+#scenesCollapsible .sectionTitle,
+#similarCollapsible .sectionTitle {
+    margin-left: -16em !important;
+    background: rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    padding: 0.2em 1.5em 0.2em 1em !important;
+    border-radius: 0 50px 50px 0 !important;
+    width: fit-content !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-left: none !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3) !important;
+    margin-bottom: 0.5em !important;
+}
+
+#scenesCollapsible .emby-scroller,
+#similarCollapsible .emby-scroller {
+    margin-left: -20em !important;
+}
+
+#scenesCollapsible .sectionTitle,
+#similarCollapsible .sectionTitle {
+    margin-left: -16em !important;
+}
+
 #searchPage {
     background-color: transparent !important;
 }
