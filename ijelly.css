@@ -550,8 +550,36 @@ body {
 .layout-tv .videoOsdBottom {
     width: 80% !important;
     max-width: 1400px !important;
-    padding: 2.5em !important;
-    bottom: 4em !important;
+    padding: 1.5em !important;
+    bottom: 0.5em !important;
+}
+
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols {
+    background: rgba(0, 0, 0, 0.7) !important;
+    backdrop-filter: var(--apple-blur) !important;
+    -webkit-backdrop-filter: var(--apple-blur) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+.layout-tv .osdControls .paper-icon-button-light {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 50% !important;
+}
+
+.layout-tv .osdControls .paper-icon-button-light:hover,
+.layout-tv .osdControls .paper-icon-button-light:focus {
+    background: rgba(255, 255, 255, 0.25) !important;
+    transform: scale(1.15) !important;
+}
+
+.layout-tv .osdControls .btnPlayPause {
+    background: rgba(255, 255, 255, 0.15) !important;
+    transform: scale(1.4) !important;
+}
+
+.layout-tv .osdControls .btnPlayPause:hover,
+.layout-tv .osdControls .btnPlayPause:focus {
+    background: rgba(255, 255, 255, 0.3) !important;
 }
 
 .layout-tv .card {
@@ -641,6 +669,31 @@ body {
 .showing-osd .libassjs-canvas-parent,
 .showing-osd .shaka-text-container {
     bottom: 8em !important;
+}
+
+.layout-tv.videoOsd-visible .subtitles,
+.layout-tv.videoOsd-visible .videoSubtitles,
+.layout-tv.videoOsd-visible .videoSubtitlesInner,
+.layout-tv.videoOsd-visible .subtitle-container,
+.layout-tv.videoOsd-visible .libassjs-canvas-parent,
+.layout-tv.videoOsd-visible .shaka-text-container,
+.layout-tv.osd-visible .subtitles,
+.layout-tv.osd-visible .videoSubtitles,
+.layout-tv.osd-visible .videoSubtitlesInner,
+.layout-tv.osd-visible .subtitle-container,
+.layout-tv.osd-visible .libassjs-canvas-parent,
+.layout-tv.osd-visible .shaka-text-container,
+.layout-tv.showing-osd .subtitles,
+.layout-tv.showing-osd .videoSubtitles,
+.layout-tv.showing-osd .videoSubtitlesInner,
+.layout-tv.showing-osd .subtitle-container,
+.layout-tv.showing-osd .libassjs-canvas-parent,
+.layout-tv.showing-osd .shaka-text-container {
+    bottom: 14em !important;
+}
+
+.layout-tv .libassjs-canvas-parent canvas {
+    max-height: calc(100vh - 16em) !important;
 }
 
 .subtitles span,
