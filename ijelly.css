@@ -226,6 +226,7 @@ body {
     box-shadow: none !important;
     border: none !important;
     outline: none !important;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease !important;
 }
 
 .portraitCard {
@@ -643,10 +644,11 @@ body {
 
 .layout-tv .card:hover,
 .layout-tv .card:focus {
-    transform: scale(1.15) !important;
-    clip-path: none !important;
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Crect width='100%25' height='100%25' rx='20' ry='20' fill='white'/%3E%3C/svg%3E") !important;
-    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Crect width='100%25' height='100%25' rx='20' ry='20' fill='white'/%3E%3C/svg%3E") !important;
+    transform: scale(1.1) !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6) !important;
+    z-index: 100 !important;
+    outline: none !important;
+    border: none !important;
 }
 
 .layout-tv .card,
