@@ -46,7 +46,7 @@ body {
 
 .skinHeader {
     background-color: transparent !important;
-    background: transparent !important;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%) !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     overflow: visible !important;
@@ -56,62 +56,67 @@ body {
     z-index: 1000 !important;
     contain: none !important;
     height: auto !important;
-    min-height: 4em !important;
-    border: none !important;
+    min-height: 6em !important;
+    padding-bottom: 2em !important;
 }
 
-.headerTop,
-.headerLeft,
-.headerRight,
 .headerTabs,
 .emby-tabs-slider,
-.emby-tabs-scroll-container {
+.emby-tabs-scroll-container,
+.headerTop,
+.headerLeft,
+.headerRight {
     overflow: visible !important;
     contain: none !important;
-    background: transparent !important;
 }
 
-.skinHeader .headerLeft img,
-.skinHeader .pageTitle img,
-.skinHeader .headerLogo,
-.skinHeader .logo,
-.skinHeader .pageTitleWithLogo,
-.skinHeader .headerLogo svg,
-.skinHeader .logo svg {
-    height: 32px !important;
+.headerLeft img,
+.pageTitle img {
+    height: 35px !important;
     width: auto !important;
-    min-width: 120px !important;
+    /* Proper for img tags */
     object-fit: contain !important;
     overflow: visible !important;
     display: block !important;
     opacity: 1 !important;
     visibility: visible !important;
-    margin: 0 !important;
-    flex-shrink: 0 !important;
+    margin: 0 10px 0 0 !important;
+}
+
+.headerLogo,
+.logo,
+.pageTitleWithLogo {
+    height: 35px !important;
+    overflow: visible !important;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    margin: 0 10px 0 0 !important;
     background-repeat: no-repeat !important;
     background-size: contain !important;
     background-position: left center !important;
-    z-index: 1001 !important;
-    transform: scale(1.1) !important;
-    transform-origin: left center !important;
+    flex-shrink: 0 !important;
+    /* Prevent collapsing */
 }
 
 .headerButton.headerButtonLeft {
     display: flex !important;
     align-items: center !important;
-    overflow: visible !important;
 }
 
 .pageTitle {
     display: flex !important;
     align-items: center !important;
     overflow: visible !important;
+    height: auto !important;
 }
 
 .headerLeft {
     display: flex !important;
     align-items: center !important;
-    padding: 0.5em 1em !important;
+    padding-top: 1em !important;
+    padding-bottom: 1em !important;
+    height: auto !important;
 }
 
 .emby-tab-button {
@@ -362,34 +367,10 @@ body {
     opacity: 0.8 !important;
 }
 
-.detailPagePrimaryContainer .card,
 .detailImageContainer .card {
     width: 360px !important;
     transform: none !important;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8) !important;
-}
-
-/* Movie Logo in Media Bar / Details */
-.detailPagePrimaryContainer .logo,
-.itemName .logo,
-.nameContainer .logo,
-.logo.high-quality {
-    height: 120px !important;
-    width: auto !important;
-    max-width: 50% !important;
-    object-fit: contain !important;
-    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5)) !important;
-    margin-bottom: 1em !important;
-    transform: none !important;
-    min-width: unset !important;
-    display: block !important;
-}
-
-.layout-tv .detailPagePrimaryContainer .logo,
-.layout-tv .itemName .logo,
-.layout-tv .nameContainer .logo {
-    height: 200px !important;
-    margin-bottom: 1.5em !important;
 }
 
 .layout-tv .detailImageContainer .card {
@@ -693,31 +674,6 @@ body {
 
 .layout-tv {
     font-size: 1.25em !important;
-}
-
-.layout-tv .btnMenu,
-.layout-tv .headerButtonMenu,
-.layout-tv .btnHeaderBack,
-.layout-tv button[data-role="button"].btnMenu,
-.layout-tv .mainDrawerButton,
-.layout-tv .drawerButton,
-.layout-tv [class*="MainDrawerButton"] {
-    display: none !important;
-}
-
-.layout-tv .headerLeft .paper-icon-button-light:not(.headerLogo):not(.logo):not(.pageTitleWithLogo) {
-    display: none !important;
-}
-
-.layout-tv .headerLeft img,
-.layout-tv .pageTitle img,
-.layout-tv .headerLogo,
-.layout-tv .logo,
-.layout-tv .pageTitleWithLogo,
-.layout-tv .headerLogo svg,
-.layout-tv .logo svg {
-    height: 55px !important;
-    transform: scale(1.6) !important;
 }
 
 .layout-tv .videoOsdBottom {
