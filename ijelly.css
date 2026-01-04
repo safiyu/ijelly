@@ -289,6 +289,14 @@ body {
     width: 480px !important;
 }
 
+.layout-tv .detailPagePrimaryContainer {
+    padding-bottom: 4em !important;
+}
+
+.layout-tv .detailPageWrapperContainer {
+    padding-bottom: 3em !important;
+}
+
 #searchPage {
     background-color: transparent !important;
 }
