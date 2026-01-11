@@ -404,16 +404,16 @@ body {
     padding-bottom: 3em !important;
 }
 
-#castCollapsible .emby-scroller,
-#guestCastCollapsible .emby-scroller {
+.layout-tv #castCollapsible .emby-scroller,
+.layout-tv #guestCastCollapsible .emby-scroller {
     margin-left: -20em !important;
 }
 
-#castCollapsible .sectionTitle,
-#guestCastCollapsible .sectionTitle,
-#peopleHeader,
-#scenesCollapsible .sectionTitle,
-#similarCollapsible .sectionTitle {
+.layout-tv #castCollapsible .sectionTitle,
+.layout-tv #guestCastCollapsible .sectionTitle,
+.layout-tv #peopleHeader,
+.layout-tv #scenesCollapsible .sectionTitle,
+.layout-tv #similarCollapsible .sectionTitle {
     margin-left: -16em !important;
     background: rgba(0, 0, 0, 0.4) !important;
     backdrop-filter: blur(20px) !important;
@@ -427,13 +427,13 @@ body {
     margin-bottom: 0.5em !important;
 }
 
-#scenesCollapsible .emby-scroller,
-#similarCollapsible .emby-scroller {
+.layout-tv #scenesCollapsible .emby-scroller,
+.layout-tv #similarCollapsible .emby-scroller {
     margin-left: -20em !important;
 }
 
-#scenesCollapsible .sectionTitle,
-#similarCollapsible .sectionTitle {
+.layout-tv #scenesCollapsible .sectionTitle,
+.layout-tv #similarCollapsible .sectionTitle {
     margin-left: -16em !important;
 }
 
@@ -898,4 +898,145 @@ body {
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
+}
+
+/* Mobile and Tablet Optimizations */
+@media (max-width: 1000px) {
+    :root {
+        --apple-blur: blur(10px) saturate(140%);
+    }
+
+    .portraitCard,
+    .squareCard {
+        width: 140px !important;
+    }
+
+    .backdropCard {
+        width: 260px !important;
+    }
+
+    .card {
+        margin: 0.5em !important;
+    }
+
+    .detailPagePrimaryContainer .card,
+    .detailImageContainer .card {
+        width: 180px !important;
+    }
+
+    .skinHeader {
+        position: absolute !important;
+        min-height: 3.5em !important;
+        background: rgba(0, 0, 0, 0.8) !important;
+    }
+
+    /* Disable expensive filters on mobile to prevent UI freezes */
+    * {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+
+    .mainDrawer,
+    .dialog,
+    .emby-tab-button.emby-tab-button-active {
+        backdrop-filter: blur(10px) !important;
+        -webkit-backdrop-filter: blur(10px) !important;
+    }
+
+    .skinHeader .headerLeft img,
+    .skinHeader .pageTitle img,
+    .skinHeader .headerLogo,
+    .skinHeader .logo,
+    .skinHeader .pageTitleWithLogo {
+        height: 24px !important;
+        min-width: 80px !important;
+    }
+
+    .emby-tab-button {
+        padding: 0.4em 1em !important;
+        font-size: 0.9em !important;
+        margin: 0 0.2em !important;
+    }
+
+    .videoOsdBottom.videoOsdBottom-maincontrols {
+        width: 96% !important;
+        padding: 1em 1.25em !important;
+        border-radius: 24px !important;
+        bottom: 1.5em !important;
+        height: auto !important;
+    }
+
+    .videoOsdBottom.videoOsdBottom-maincontrols .osdControls {
+        flex-direction: column !important;
+        gap: 0.75em !important;
+    }
+
+    .videoOsdBottom.videoOsdBottom-maincontrols .osdControls>.flex.flex-direction-row {
+        width: 100% !important;
+        margin: 0 !important;
+        order: 1 !important;
+        /* Slider on top row */
+        padding: 0 0.5em !important;
+    }
+
+    .videoOsdBottom.videoOsdBottom-maincontrols .osdControls>.buttons {
+        width: 100% !important;
+        justify-content: center !important;
+        order: 2 !important;
+        /* Buttons on bottom row */
+        gap: 1em !important;
+    }
+
+    .videoOsdBottom.videoOsdBottom-maincontrols .osdControls>.buttons>div {
+        gap: 1em !important;
+    }
+
+    .videoOsdBottom.videoOsdBottom-maincontrols .volumeButtons,
+    .osdVolumeSliderContainer {
+        display: none !important;
+    }
+
+    .view,
+    .mainAnimatedPages,
+    .skinBody,
+    .page-current {
+        padding-top: 4em !important;
+    }
+
+    .doc-loading-indicator {
+        z-index: 900 !important;
+    }
+
+    .content-loader {
+        animation: appleFadeIn 0.4s ease-out forwards !important;
+    }
+
+    /* Fix for 'frozen' UI: Ensure dialogs and errors are ALWAYS on top of the loading screen */
+    .dialogContainer,
+    .dialog,
+    .actionSheet,
+    .menu,
+    .toast,
+    .alert {
+        z-index: 200000 !important;
+    }
+
+    /* Enhance progress slider for touch */
+    .sliderContainer {
+        height: 12px !important;
+        margin: 10px 0 !important;
+    }
+
+    .mdl-slider::-webkit-slider-thumb {
+        transform: scale(1.4) !important;
+        opacity: 1 !important;
+    }
+}
+
+/* Ensure background container doesn't block loading screens */
+.doc-loading-indicator {
+    background-color: rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    z-index: 900 !important;
 }
