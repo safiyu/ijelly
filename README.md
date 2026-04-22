@@ -31,12 +31,11 @@ A pixel-perfect, functionally robust Apple TV-inspired theme for Jellyfin. **ije
 
 ## 🚀 Installation
 
-1. Copy the contents of [`ijelly.css`].
-2. Go to your Jellyfin **Dashboard** -> **General**.
-3. Scroll down to **Custom CSS**.
-4. Paste the code into the text area.
-5. Click **Save**.
-6. **Settings** -> **Display** -> Enable Backdrops.
+1. Go to your Jellyfin **Dashboard** -> **General**.
+2. Scroll down to **Custom CSS**.
+3. Add @import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@main/ijelly.css');
+4. Click **Save**.
+5. **Settings** -> **Display** -> Enable Backdrops.
 
 ---
 
