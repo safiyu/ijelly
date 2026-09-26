@@ -57,7 +57,19 @@ body {
 .header,
 header,
 .app-header,
-.header-top {
+.header-top,
+.skinHeader-withBackground,
+.header-withBackground,
+.skinHeader.semiTransparent,
+.skinHeader-semiTransparent,
+.headerSemiTransparent,
+.header-semiTransparent,
+header.semiTransparent,
+header.withBackground,
+header.header-scrolled,
+.headroom--not-top,
+.headroom--pinned,
+.headroom--unpinned {
     background-color: transparent !important;
     background: transparent !important;
     backdrop-filter: none !important;
@@ -997,7 +1009,20 @@ html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-cont
         width: 180px !important;
     }
 
-    .skinHeader {
+    .skinHeader,
+    .header,
+    header,
+    .app-header,
+    .header-top,
+    .skinHeader-withBackground,
+    .header-withBackground,
+    .skinHeader.semiTransparent,
+    .skinHeader-semiTransparent,
+    .headerSemiTransparent,
+    .header-semiTransparent,
+    header.semiTransparent,
+    header.withBackground,
+    header.header-scrolled {
         position: absolute !important;
         min-height: 3.5em !important;
         background: rgba(0, 0, 0, 0.8) !important;
