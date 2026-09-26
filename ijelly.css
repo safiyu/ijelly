@@ -37,7 +37,7 @@ body {
 }
 
 .backgroundContainer.withBackdrop {
-    background-color: rgba(0, 0, 0, 0) !important;
+    background-color: transparent !important;
 }
 
 .view,
@@ -49,8 +49,16 @@ body {
 }
 
 .backdropContainer {
-    filter: blur(20px) brightness(60%) !important;
-    background-color: var(--apple-bg) !important;
+    background-color: transparent !important;
+    overflow: hidden !important;
+}
+
+.backdropImage {
+    filter: blur(25px) brightness(65%) !important;
+    -webkit-filter: blur(25px) brightness(65%) !important;
+    background-size: cover !important;
+    background-position: center !important;
+    transition: opacity 0.8s ease-in-out !important;
 }
 
 .skinHeader,
