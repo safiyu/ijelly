@@ -844,32 +844,48 @@ body {
 .videoSubtitlesInner,
 .subtitle-container {
     position: absolute !important;
-    bottom: 6rem !important;
+    bottom: 7.5rem !important;
     left: 0 !important;
     right: 0 !important;
     width: 100% !important;
     text-align: center !important;
     pointer-events: none !important;
-    transition: transform 0.2s ease !important;
+    transition: transform 0.25s var(--apple-spring-fast) !important;
 }
 
 .libassjs-canvas-parent {
-    transform: translateY(-3.5rem) !important;
-    transition: transform 0.2s ease !important;
+    transform: translateY(-5.5rem) !important;
+    transition: transform 0.25s var(--apple-spring-fast) !important;
 }
 
 html:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
 html:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
 html:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent,
-html:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
-    transform: translateY(-8.5rem) !important;
+html:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container,
+.videoOsd-visible .videoSubtitlesInner,
+.videoOsd-visible .subtitle-container,
+.videoOsd-visible .libassjs-canvas-parent,
+.videoOsd-visible .shaka-text-container,
+.showing-osd .videoSubtitlesInner,
+.showing-osd .subtitle-container,
+.showing-osd .libassjs-canvas-parent,
+.showing-osd .shaka-text-container {
+    transform: translateY(-11rem) !important;
 }
 
 html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
 html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
 html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent,
-html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
-    transform: translateY(-12rem) !important;
+html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container,
+.layout-tv.videoOsd-visible .videoSubtitlesInner,
+.layout-tv.videoOsd-visible .subtitle-container,
+.layout-tv.videoOsd-visible .libassjs-canvas-parent,
+.layout-tv.videoOsd-visible .shaka-text-container,
+.layout-tv.showing-osd .videoSubtitlesInner,
+.layout-tv.showing-osd .subtitle-container,
+.layout-tv.showing-osd .libassjs-canvas-parent,
+.layout-tv.showing-osd .shaka-text-container {
+    transform: translateY(-14.5rem) !important;
 }
 
 .subtitles span,
