@@ -828,41 +828,56 @@ body {
 
 .subtitles,
 .videoSubtitles,
-.videoSubtitlesInner,
-.subtitle-container,
 .libassjs-canvas-parent,
 .shaka-text-container {
-    bottom: 2em !important;
-    z-index: 9999 !important;
     position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
+    pointer-events: none !important;
+    z-index: 9999 !important;
+}
+
+.videoSubtitlesInner,
+.subtitle-container {
+    position: absolute !important;
+    bottom: 3.5rem !important;
     left: 0 !important;
     right: 0 !important;
     width: 100% !important;
-    max-width: 100vw !important;
     text-align: center !important;
     pointer-events: none !important;
+    transition: transform 0.2s ease !important;
 }
 
-html:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitles,
-html:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitles,
+.libassjs-canvas-parent {
+    transition: transform 0.2s ease !important;
+}
+
+.libassjs-canvas-parent canvas {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: none !important;
+    object-fit: contain !important;
+}
+
 html:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
 html:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
 html:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent,
 html:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
-    bottom: 8em !important;
+    transform: translateY(-6rem) !important;
 }
 
-html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitles,
-html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitles,
 html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
 html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
 html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent,
 html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
-    bottom: 14em !important;
-}
-
-.layout-tv .libassjs-canvas-parent canvas {
-    max-height: calc(100vh - 16em) !important;
+    transform: translateY(-9.5rem) !important;
 }
 
 .subtitles span,
@@ -870,14 +885,17 @@ html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-cont
 .videoSubtitlesInner span,
 .subtitle-container span,
 ::cue {
-    background-color: rgba(0, 0, 0, 0.4) !important;
-    padding: 0.1em 0.4em !important;
-    border-radius: 4px !important;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    padding: 0.2em 0.5em !important;
+    border-radius: 6px !important;
     text-shadow: 0 0 4px rgba(0, 0, 0, 0.9) !important;
     font-weight: 500 !important;
     font-family: var(--apple-font) !important;
     display: inline-block !important;
+    vertical-align: bottom !important;
     margin: 0 auto !important;
+    box-decoration-break: clone !important;
+    -webkit-box-decoration-break: clone !important;
 }
 
 .subtitles div,
