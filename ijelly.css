@@ -844,7 +844,7 @@ body {
 .videoSubtitlesInner,
 .subtitle-container {
     position: absolute !important;
-    bottom: 7.5rem !important;
+    bottom: max(6rem, var(--subtitle-bottom, 6rem)) !important;
     left: 0 !important;
     right: 0 !important;
     width: 100% !important;
@@ -854,7 +854,7 @@ body {
 }
 
 .libassjs-canvas-parent {
-    transform: translateY(-5.5rem) !important;
+    transform: translateY(-4rem) !important;
     transition: transform 0.25s var(--apple-spring-fast) !important;
 }
 
