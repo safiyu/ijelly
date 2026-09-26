@@ -844,7 +844,7 @@ body {
 .videoSubtitlesInner,
 .subtitle-container {
     position: absolute !important;
-    bottom: 4.5rem !important;
+    bottom: 6rem !important;
     left: 0 !important;
     right: 0 !important;
     width: 100% !important;
@@ -854,7 +854,7 @@ body {
 }
 
 .libassjs-canvas-parent {
-    transform: translateY(-2rem) !important;
+    transform: translateY(-3.5rem) !important;
     transition: transform 0.2s ease !important;
 }
 
@@ -862,14 +862,14 @@ html:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
 html:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
 html:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent,
 html:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
-    transform: translateY(-7rem) !important;
+    transform: translateY(-8.5rem) !important;
 }
 
 html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
 html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
 html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent,
 html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
-    transform: translateY(-10.5rem) !important;
+    transform: translateY(-12rem) !important;
 }
 
 .subtitles span,
