@@ -50,7 +50,7 @@ ijelly exposes its design tokens as CSS custom properties on `:root`. Override a
 
 | Variable | Default | Purpose |
 |---|---|---|
-| `--apple-bg` | `#000` | Base page background |
+| `--apple-bg` | `#0a0a0c` | Base page background |
 | `--apple-glass` | `rgba(255, 255, 255, 0.1)` | Light glass fill |
 | `--apple-glass-heavy` | `rgba(255, 255, 255, 0.2)` | Heavier glass fill |
 | `--apple-text` | `#ffffff` | Primary text color |
@@ -75,7 +75,9 @@ Example — swap the accent color:
 
 ## ✅ Compatibility
 
-- **Tested against:** Jellyfin Web (current stable release), desktop Chrome/Firefox/Safari, and the Samsung Tizen TV app.
+- **Jellyfin 12.0 (Modern UI):** Fully supported. ijelly maps its design tokens to Jellyfin 12's native `--jf-palette-*` and `--mui-palette-*` CSS variables, and targets the new MUI-based app bar, drawer, dialog, tab, and card components. No companion CSS file is needed — the theme works out of the box on both "Modern" (default) and "Legacy" display modes.
+- **Jellyfin 10.9+:** Supported via the `--theme-*` legacy variable overrides.
+- **Tested against:** Jellyfin Web 10.9 and 12.0, desktop Chrome/Firefox/Safari, and the Samsung Tizen TV app.
 - **Subtitle repositioning** while the on-screen display is visible relies on the CSS `:has()` selector (Chrome/Edge 105+, Safari 15.4+, Firefox 121+). Older browsers, including some pre-2023 Tizen firmware, will keep subtitles at their default position instead of shifting them — playback and readability are unaffected.
 - **Mobile/tablet** (≤1000px width) automatically reduces or disables backdrop blur to avoid GPU-related UI stalls on lower-powered devices.
 - Uses the OS/browser's system font stack — no external font requests are made, so the theme works on offline or LAN-only servers.

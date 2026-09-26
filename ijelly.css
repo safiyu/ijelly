@@ -1,5 +1,5 @@
 :root {
-    --apple-bg: #000;
+    --apple-bg: #0a0a0c;
     --apple-glass: rgba(255, 255, 255, 0.1);
     --apple-glass-heavy: rgba(255, 255, 255, 0.2);
     --apple-text: #ffffff;
@@ -13,7 +13,7 @@
     --apple-spring-fast: cubic-bezier(0.16, 1, 0.3, 1);
     --apple-spring-bouncy: cubic-bezier(0.34, 1.56, 0.64, 1);
 
-    /* Jellyfin 10.9+ / 12.0 Native CSS Variable Overrides */
+    /* ── Jellyfin 10.9 Legacy Variable Overrides ── */
     --theme-background: var(--apple-bg);
     --theme-header-background: transparent;
     --theme-drawer-background: rgba(10, 10, 10, 0.85);
@@ -23,6 +23,39 @@
     --theme-accent-color: var(--apple-accent);
     --theme-text-color: var(--apple-text);
     --theme-text-color-dim: var(--apple-text-dim);
+
+    /* ── Jellyfin 12.0 MUI / Native Variable Bridge ──
+     * Jellyfin 12 uses a shared base theme built on MUI CSS variables.
+     * Mapping our design tokens to the --jf-palette-* and --mui-palette-*
+     * properties ensures the theme integrates natively with 12.0's "Modern"
+     * layout without requiring a companion fix CSS. */
+    --jf-palette-background-default: var(--apple-bg);
+    --jf-palette-background-defaultImage: none;
+    --jf-palette-background-paper: rgba(15, 15, 15, 0.9);
+    --jf-palette-primary-main: var(--apple-accent);
+    --jf-palette-primary-dark: #005ec4;
+    --jf-palette-primary-light: #4da3ff;
+    --jf-palette-secondary-main: var(--apple-accent);
+    --jf-palette-text-primary: var(--apple-text);
+    --jf-palette-text-secondary: var(--apple-text-dim);
+    --jf-palette-divider: rgba(255, 255, 255, 0.1);
+    --jf-palette-action-focus: rgba(255, 255, 255, 0.12);
+    --jf-palette-action-hover: rgba(255, 255, 255, 0.08);
+    --jf-palette-AppBar-defaultBg: transparent;
+    --jf-palette-AppBar-transparentBg: transparent;
+    --jf-palette-AppBar-gradient: none;
+    --jf-card-borderRadius: var(--apple-radius);
+
+    /* MUI CSS-vars mode (Jellyfin 12 builds with @mui/material v6+) */
+    --mui-palette-background-default: var(--apple-bg);
+    --mui-palette-background-paper: rgba(15, 15, 15, 0.9);
+    --mui-palette-primary-main: var(--apple-accent);
+    --mui-palette-secondary-main: var(--apple-accent);
+    --mui-palette-text-primary: var(--apple-text);
+    --mui-palette-text-secondary: var(--apple-text-dim);
+    --mui-palette-divider: rgba(255, 255, 255, 0.1);
+    --mui-palette-AppBar-defaultBg: transparent;
+    --mui-shape-borderRadius: var(--apple-radius);
 }
 
 html,
@@ -203,9 +236,10 @@ header .logo svg {
 .tab-button.active,
 .nav-tab-button.active {
     color: var(--apple-text) !important;
-    background: rgba(0, 0, 0, 0.5) !important;
-    background-color: rgba(0, 0, 0, 0.5) !important;
-    box-shadow: none !important;
+    background: rgba(255, 255, 255, 0.12) !important;
+    background-color: rgba(255, 255, 255, 0.12) !important;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15),
+                0 2px 8px rgba(0, 0, 0, 0.3) !important;
     backdrop-filter: var(--apple-blur) !important;
     -webkit-backdrop-filter: var(--apple-blur) !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
@@ -282,6 +316,19 @@ header .logo svg {
     border-radius: 0 var(--apple-radius) var(--apple-radius) 0 !important;
     box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5) !important;
     isolation: isolate !important;
+    transform: translateX(-100%);
+    transition: transform 0.4s var(--apple-spring-fast),
+                opacity 0.3s ease !important;
+    opacity: 0;
+}
+
+.mainDrawer.is-open,
+.mainDrawer[style*="transform: none"],
+.mainDrawer.drawer-open,
+.drawer.is-open,
+.navDrawer.is-open {
+    transform: translateX(0) !important;
+    opacity: 1 !important;
 }
 
 .actionSheet-title {
@@ -366,6 +413,38 @@ header .logo svg {
 .cardImageContainer {
     background-size: cover !important;
     background-position: center !important;
+    position: relative !important;
+}
+
+/* Gradient scrim for card text legibility */
+.cardImageContainer::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.65) 0%, transparent 100%);
+    pointer-events: none;
+    border-radius: 0 0 var(--apple-radius) var(--apple-radius);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover .cardImageContainer::after,
+.card:focus .cardImageContainer::after {
+    opacity: 1;
+}
+
+.cardText,
+.cardTextCentered {
+    position: relative;
+    z-index: 2;
+    font-weight: 500 !important;
+    letter-spacing: 0.02em !important;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+    padding: 0.4em 0.6em !important;
 }
 
 .card:hover .cardContent,
@@ -375,7 +454,7 @@ header .logo svg {
 }
 
 .card:focus {
-    transform: scale(1.1) !important;
+    transform: scale(1.06) !important;
     box-shadow: var(--apple-shadow) !important;
     z-index: 100 !important;
     outline: none !important;
@@ -384,7 +463,7 @@ header .logo svg {
 
 @media (hover: hover) {
     .card:hover {
-        transform: scale(1.1) !important;
+        transform: scale(1.06) !important;
         box-shadow: var(--apple-shadow) !important;
         z-index: 100 !important;
         outline: none !important;
@@ -435,6 +514,20 @@ header .logo svg {
 .cardOverlayButton:hover {
     background: var(--apple-text) !important;
     color: #000 !important;
+}
+
+/* Etched section headers */
+.sectionTitle,
+h2.sectionTitle,
+.sectionTitleText,
+.sectionTitleTextButton {
+    font-weight: 700 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: none !important;
+    border-left: 3px solid var(--apple-accent) !important;
+    padding-left: 0.8em !important;
+    margin-left: 0.5em !important;
+    color: var(--apple-text) !important;
 }
 
 #itemDetailPage {
@@ -522,6 +615,58 @@ header .logo svg {
     margin-bottom: 0.5em !important;
 }
 
+/* Detail page — glass metadata card */
+.detailPageContent,
+.detailSection {
+    background: var(--apple-glass) !important;
+    backdrop-filter: var(--apple-blur) !important;
+    -webkit-backdrop-filter: var(--apple-blur) !important;
+    border-radius: var(--apple-radius) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding: 2em !important;
+    margin: 1em 0 !important;
+}
+
+/* Separator between metadata rows */
+.detailPageContent .itemMiscInfo,
+.detailPageContent .itemGenres,
+.detailPageContent .itemTags {
+    border-top: 1px solid rgba(255, 255, 255, 0.06) !important;
+    padding-top: 0.8em !important;
+    margin-top: 0.8em !important;
+}
+
+/* Hero Play button */
+.detailButtons .btnPlay,
+.detailButtons .button-play,
+.detailButtons [data-action="play"],
+.mainDetailButtons .btnPlay {
+    background: var(--apple-accent) !important;
+    color: #fff !important;
+    border-radius: 50px !important;
+    padding: 0.8em 2em !important;
+    font-weight: 700 !important;
+    font-size: 1.1em !important;
+    box-shadow: 0 4px 20px rgba(0, 122, 255, 0.4) !important;
+    transition: all 0.3s var(--apple-spring-fast) !important;
+    border: none !important;
+}
+
+@media (hover: hover) {
+    .detailButtons .btnPlay:hover,
+    .detailButtons .button-play:hover,
+    .detailButtons [data-action="play"]:hover,
+    .mainDetailButtons .btnPlay:hover {
+        transform: scale(1.05) !important;
+        box-shadow: 0 6px 30px rgba(0, 122, 255, 0.6) !important;
+    }
+}
+
+.detailButtons .btnPlay:active,
+.mainDetailButtons .btnPlay:active {
+    transform: scale(0.95) !important;
+}
+
 #searchPage {
     background-color: transparent !important;
 }
@@ -568,6 +713,21 @@ header .logo svg {
         color: #000 !important;
         transform: scale(1.05) !important;
     }
+}
+
+.emby-button.raised:active {
+    transform: scale(0.95) !important;
+    transition: transform 0.1s ease !important;
+}
+
+/* Cinematic page vignette */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, 0.35) 100%);
+    pointer-events: none;
+    z-index: 0;
 }
 
 @keyframes appleFadeIn {
@@ -1140,6 +1300,174 @@ html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-cont
     backdrop-filter: var(--apple-blur) !important;
     -webkit-backdrop-filter: var(--apple-blur) !important;
     z-index: 900 !important;
+}
+
+/* Shimmer loading skeleton */
+@keyframes shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.cardImageContainer:empty,
+.cardImageContainer .emby-lazy-image-placeholder,
+.lazy-image-fadein-fast[src=""],
+.cardImageContainer:not([style*="background"]):not(:has(img)) {
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.04) 25%,
+        rgba(255, 255, 255, 0.08) 50%,
+        rgba(255, 255, 255, 0.04) 75%
+    ) !important;
+    background-size: 200% 100% !important;
+    animation: shimmer 1.5s infinite ease-in-out !important;
+    border-radius: var(--apple-radius) !important;
+}
+
+/* Glass tags for metadata badges */
+.mediaInfoItem,
+.starRatingContainer,
+.itemTag,
+.itemCommunityRating {
+    background: var(--apple-glass) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 20px !important;
+    padding: 0.2em 0.8em !important;
+    font-size: 0.85em !important;
+    font-weight: 600 !important;
+    color: var(--apple-text-dim) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.3em !important;
+}
+
+/* ═══════════════════════════════════════════════════
+   Jellyfin 12.0 "Modern" Layout Compatibility
+   ═══════════════════════════════════════════════════
+   JF 12 merged the library toolbar into the app bar and
+   switched to MUI components.  The selectors below
+   target the new class names so the theme works on
+   both "Modern" (default) and "Legacy" display modes.
+   ═══════════════════════════════════════════════════ */
+
+/* Modern app bar / toolbar — transparent + no border */
+.MuiAppBar-root,
+.MuiToolbar-root,
+[class*="AppBar-root"],
+[class*="Toolbar-root"] {
+    background-color: transparent !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* MUI Drawer (side nav) — glass treatment */
+.MuiDrawer-paper,
+[class*="Drawer-paper"] {
+    background-color: rgba(10, 10, 10, 0.85) !important;
+    backdrop-filter: var(--apple-blur) !important;
+    -webkit-backdrop-filter: var(--apple-blur) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* MUI Dialog / Menu — frosted glass */
+.MuiDialog-paper,
+.MuiMenu-paper,
+.MuiPaper-root,
+[class*="Dialog-paper"],
+[class*="Menu-paper"] {
+    background-color: rgba(15, 15, 15, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: var(--apple-radius) !important;
+    color: white !important;
+}
+
+/* MUI Buttons — ijelly styling */
+.MuiButton-root,
+.MuiIconButton-root,
+[class*="Button-root"],
+[class*="IconButton-root"] {
+    border-radius: 30px !important;
+    transition: all 0.2s var(--apple-spring-fast) !important;
+}
+
+.MuiButton-root:active,
+[class*="Button-root"]:active {
+    transform: scale(0.95) !important;
+}
+
+/* MUI Tabs — pill navigation */
+.MuiTab-root,
+[class*="Tab-root"] {
+    font-weight: 600 !important;
+    color: var(--apple-text-dim) !important;
+    border-radius: 40px !important;
+    transition: all 0.4s var(--apple-spring-fast) !important;
+    text-transform: none !important;
+}
+
+.MuiTab-root.Mui-selected,
+[class*="Tab-root"][class*="selected"] {
+    color: var(--apple-text) !important;
+    background: rgba(255, 255, 255, 0.12) !important;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.15),
+                0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Hide MUI tab indicator in favour of pill background */
+.MuiTabs-indicator,
+[class*="Tabs-indicator"] {
+    display: none !important;
+}
+
+/* MUI Cards — rounded + spring animation */
+.MuiCard-root,
+.MuiCardMedia-root,
+[class*="Card-root"],
+[class*="CardMedia-root"] {
+    border-radius: var(--apple-radius) !important;
+    overflow: hidden !important;
+    transition: transform 0.5s var(--apple-spring-bouncy), box-shadow 0.3s ease !important;
+}
+
+/* Sticky library header (12.0 merged bar) */
+.stickyLibraryHeader,
+[class*="stickyLibraryHeader"],
+[class*="libraryHeader"] {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* MUI Scrollbar override for JF12 surfaces */
+.MuiPaper-root,
+[class*="Paper-root"] {
+    scrollbar-width: thin !important;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent !important;
+}
+
+/* Detail ribbon — JF12 uses .detailRibbon for the metadata bar */
+.detailRibbon {
+    background-color: transparent !important;
+    background-image: none !important;
+}
+
+/* JF12 filled inputs — glass treatment */
+.MuiFilledInput-root,
+[class*="FilledInput-root"] {
+    background-color: var(--apple-glass) !important;
+    border-radius: var(--apple-radius) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.MuiFilledInput-root.Mui-focused,
+[class*="FilledInput-root"][class*="focused"] {
+    border-color: var(--apple-accent) !important;
+    box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.3) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
