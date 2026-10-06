@@ -1308,7 +1308,6 @@ html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-cont
     100% { background-position: 200% 0; }
 }
 
-.cardImageContainer:empty,
 .cardImageContainer .emby-lazy-image-placeholder,
 .lazy-image-fadein-fast[src=""],
 .cardImageContainer:not([style*="background"]):not(:has(img)) {
