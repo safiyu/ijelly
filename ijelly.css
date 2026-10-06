@@ -1302,25 +1302,6 @@ html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-cont
     z-index: 900 !important;
 }
 
-/* Shimmer loading skeleton */
-@keyframes shimmer {
-    0%   { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-}
-
-.cardImageContainer .emby-lazy-image-placeholder,
-.lazy-image-fadein-fast[src=""],
-.cardImageContainer:not([style*="background"]):not(:has(img)) {
-    background: linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0.04) 25%,
-        rgba(255, 255, 255, 0.08) 50%,
-        rgba(255, 255, 255, 0.04) 75%
-    ) !important;
-    background-size: 200% 100% !important;
-    animation: shimmer 1.5s infinite ease-in-out !important;
-    border-radius: var(--apple-radius) !important;
-}
 
 /* Glass tags for metadata badges */
 .mediaInfoItem,
