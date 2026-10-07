@@ -1,0 +1,13 @@
+{
+  "version": "1",
+  "tools": {
+    "test": {
+      "description": "test",
+      "command": [
+        "ls"
+      ],
+      "params": {},
+      "danger": "safe"
+    }
+  }
+}
