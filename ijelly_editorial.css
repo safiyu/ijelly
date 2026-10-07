@@ -22,24 +22,34 @@
 
 html,
 body {
-    background-color: var(--ed-bg) !important;
+    background-color: var(--ed-bg);
     color: var(--ed-text) !important;
     font-family: var(--ed-font-body) !important;
     -webkit-font-smoothing: antialiased;
 }
 
-.backgroundContainer,
+.backgroundContainer {
+    background-color: var(--ed-bg) !important;
+}
+
+.backgroundContainer.withBackdrop,
+body:has(#itemDetailPage) .backgroundContainer {
+    background-color: transparent !important;
+}
+
 .skinBody,
+.mainAnimatedPages,
 .mainAnimatedPage,
 .pageContainer,
 #itemDetailPage,
 #searchPage {
-    background-color: var(--ed-bg) !important;
+    background: transparent !important;
+    background-color: transparent !important;
 }
 
 .backdropContainer {
-    filter: grayscale(0.4) contrast(1.05) brightness(0.5) !important;
-    opacity: 0.5 !important;
+    filter: grayscale(0.4) contrast(1.05) brightness(0.65) !important;
+    opacity: 0.7 !important;
 }
 
 ::selection {
@@ -84,12 +94,15 @@ h3,
 .itemName,
 .itemName.parentNameLast {
     font-family: var(--ed-font-display) !important;
-    font-size: 4.5rem !important;
+    font-size: 2.2rem !important;
     font-weight: 400 !important;
     font-variation-settings: "opsz" 144 !important;
     letter-spacing: -0.03em !important;
-    line-height: 1 !important;
+    line-height: 1.15 !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
 }
+
 
 /* Metadata — byline treatment in serif italic */
 .mediaInfoItem,
@@ -112,19 +125,21 @@ h3,
     margin-bottom: 0.75rem !important;
 }
 
-/* Header: hairline rule, no chrome — absolute so it scrolls away instead of staying fixed */
+/* Header: solid translucent background with subtle blur, hairline rule */
 .skinHeader,
+.skinHeader-withBackground,
+.skinHeader.semiTransparent,
 .MuiAppBar-root {
     position: absolute !important;
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
-    background: var(--ed-bg) !important;
-    background-color: var(--ed-bg) !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
+    background: rgba(10, 10, 12, 0.85) !important;
+    background-color: rgba(10, 10, 12, 0.85) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
     border-bottom: 1px solid var(--ed-rule) !important;
-    box-shadow: none !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
     z-index: 1000 !important;
 }
 
@@ -217,7 +232,7 @@ h3,
     overflow: visible !important;
     background: transparent !important;
     margin: 1.5em 1em !important;
-    transition: transform 0.4s var(--ed-ease), filter 0.4s var(--ed-ease) !important;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .cardBox,
@@ -241,10 +256,10 @@ h3,
     width: 440px !important;
 }
 
-/* Hover: 3° tilt, red hairline underneath, grayscale lifts */
+/* Hover: smooth lift, red hairline underneath */
 .card:focus,
 .card:hover {
-    transform: rotate(-1.5deg) scale(1.03) !important;
+    transform: scale(1.05) !important;
     filter: none !important;
     z-index: 100 !important;
     outline: none !important;
@@ -255,16 +270,6 @@ h3,
     box-shadow:
         0 30px 60px rgba(0, 0, 0, 0.75),
         0 6px 0 var(--ed-accent) !important;
-}
-
-/* Non-focused cards fade to grayscale */
-@media (hover: hover) and (pointer: fine) {
-
-    .itemsContainer:hover .card:not(:hover),
-    .scrollSlider:hover .card:not(:hover) {
-        filter: grayscale(0.7) brightness(0.75);
-        transition: filter 0.4s var(--ed-ease);
-    }
 }
 
 .cardText {
@@ -300,7 +305,7 @@ h3,
     font-weight: 400 !important;
     background: transparent !important;
     color: var(--ed-text) !important;
-    border: 1px solid var(--ed-rule-strong) !important;
+    border: none !important;
     border-radius: 0 !important;
     padding: 0.7em 1.6em !important;
     backdrop-filter: none !important;
@@ -317,7 +322,6 @@ h3,
 .button-submit:hover {
     background: var(--ed-text) !important;
     color: var(--ed-bg) !important;
-    border-color: var(--ed-text) !important;
 }
 
 /* Primary play: filled with ink red */
@@ -325,7 +329,7 @@ h3,
 .mainDetailButtons .raised.button-submit:first-child {
     background: var(--ed-accent) !important;
     color: var(--ed-text) !important;
-    border-color: var(--ed-accent) !important;
+    border: none !important;
 }
 
 .btnPlay:focus,
@@ -422,22 +426,37 @@ h3,
     outline: none !important;
 }
 
-/* Detail page — editorial feature article */
-#itemDetailPage {
+/* Detail page — editorial feature article: translucent frosted banner and readable gradient backing */
+#itemDetailPage,
+.detailPageWrapperContainer {
+    background: transparent !important;
     background-color: transparent !important;
 }
 
 .detailRibbon {
-    background: rgba(32, 32, 32, 0.8) !important;
+    background: rgba(18, 16, 14, 0.88) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
 }
 
-.layout-desktop .detailRibbon {
+.layout-desktop .detailRibbon,
+.layout-desktop [dir=ltr] .detailRibbon {
     position: relative !important;
     display: flex !important;
     align-items: center !important;
+    justify-content: flex-start !important;
+    padding-left: 25vw !important;
     z-index: 2 !important;
+    background: rgba(18, 16, 14, 0.88) !important;
+}
+
+.layout-desktop [dir=rtl] .detailRibbon {
+    padding-left: 0 !important;
+    padding-right: 25vw !important;
+    justify-content: flex-start !important;
 }
 
 .layout-desktop .detailRibbon .mainDetailButtons {
@@ -451,32 +470,62 @@ h3,
 .layout-desktop .detailRibbon .infoWrapper {
     position: absolute !important;
     top: 100% !important;
-    left: 32.45vw !important;
+    left: 25vw !important;
     right: 3.3% !important;
-    width: calc(100% - 32.45vw - 3.3%) !important;
-    padding-top: 1.2em !important;
+    width: calc(100% - 25vw - 3.3%) !important;
+    padding-top: 0.8em !important;
     z-index: 2 !important;
 }
 
 .layout-desktop [dir=rtl] .detailRibbon .infoWrapper {
     left: 3.3% !important;
-    right: 32.45vw !important;
+    right: 25vw !important;
 }
 
-.layout-desktop .detailPagePrimaryContent {
-    padding-top: 13.5em !important;
+.layout-desktop .detailPagePrimaryContent,
+.layout-desktop [dir=ltr] .detailPagePrimaryContent {
+    padding-left: 25vw !important;
+    padding-top: 6.5em !important;
 }
+
+.layout-desktop [dir=rtl] .detailPagePrimaryContent {
+    padding-left: 0 !important;
+    padding-right: 25vw !important;
+}
+
+.mainDetailButtons {
+    display: flex !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 0.6em !important;
+}
+
 
 .detailPagePrimaryContainer {
     background: linear-gradient(180deg,
-            rgba(13, 13, 14, 0.4) 0%,
-            var(--ed-bg) 90%) !important;
+            rgba(14, 13, 11, 0.88) 0%,
+            var(--ed-bg) 25%) !important;
     padding-top: 2em !important;
     padding-bottom: 4em !important;
 }
 
+.detailPageSecondaryContainer,
+#itemDetailPage .detailSection,
+#itemDetailPage .verticalSection {
+    background: var(--ed-bg) !important;
+    background-color: var(--ed-bg) !important;
+}
+
 .detailPageWrapperContainer {
     padding-top: 1em !important;
+}
+
+.parentName,
+.itemName,
+.overview,
+.mediaInfoItems,
+.itemDetailsGroup {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 2px 10px rgba(0, 0, 0, 0.8) !important;
 }
 
 .itemBackdrop {
@@ -520,6 +569,16 @@ h3,
 .layout-tv .detailImageContainer .card {
     width: 480px !important;
 }
+
+.layout-tv #itemDetailPage .detailPageWrapperContainer,
+.layout-tv .detailPagePrimaryContainer {
+    padding-top: 25vh !important;
+}
+
+.layout-tv .detailRibbon {
+    margin-top: 20vh !important;
+}
+
 
 /* Overview — pull-quote treatment */
 .overview {
@@ -650,16 +709,16 @@ body:has(#videoOsdPage) .headerLeft {
     width: 100% !important;
     max-width: 100% !important;
     height: auto !important;
-    min-height: unset !important;
-    padding: 0.25rem 1.25rem 0.45rem !important;
+    min-height: 5.5rem !important;
+    padding: 1.25rem 1.75rem 1.1rem !important;
     box-sizing: border-box !important;
-    background: linear-gradient(to top, rgba(13, 13, 14, 0.95) 0%, rgba(13, 13, 14, 0.6) 70%, transparent 100%) !important;
+    background: linear-gradient(to top, rgba(13, 13, 14, 0.95) 0%, rgba(13, 13, 14, 0.75) 60%, rgba(13, 13, 14, 0.4) 100%) !important;
     border: none !important;
     border-top: 1px solid var(--ed-rule-strong) !important;
     border-radius: 0 !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-    box-shadow: none !important;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4) !important;
     z-index: 1000 !important;
     transition: transform 0.25s var(--ed-ease), opacity 0.25s var(--ed-ease) !important;
 }
@@ -676,7 +735,7 @@ body:has(#videoOsdPage) .headerLeft {
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
-    gap: 0.15rem !important;
+    gap: 0.65rem !important;
 }
 
 .videoOsdBottom .osdControls > .flex.flex-direction-row {
@@ -685,20 +744,20 @@ body:has(#videoOsdPage) .headerLeft {
     align-items: center !important;
     width: 100% !important;
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 0.25rem 0 !important;
     gap: 0.75rem !important;
 }
 
 .videoOsdBottom .sliderContainer {
     flex-grow: 1 !important;
-    height: 4px !important;
-    padding: 0 !important;
-    margin: 0 !important;
+    height: 6px !important;
+    padding: 0.25rem 0 !important;
+    margin: 0.25rem 0 !important;
     transition: height 0.2s var(--ed-ease) !important;
 }
 
 .videoOsdBottom .sliderContainer:hover {
-    height: 6px !important;
+    height: 8px !important;
 }
 
 .sliderContainer .mdl-slider-background-lower,
@@ -811,8 +870,10 @@ body:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
 }
 
 .layout-tv .itemName {
-    font-size: 6rem !important;
+    font-size: 2.8rem !important;
+    line-height: 1.15 !important;
 }
+
 
 .layout-tv .sectionTitle {
     font-size: 2rem !important;

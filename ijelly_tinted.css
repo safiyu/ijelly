@@ -20,20 +20,30 @@
 
 html,
 body {
-    background-color: var(--pt-bg) !important;
+    background-color: var(--pt-bg);
     color: var(--pt-text) !important;
     font-family: var(--pt-font) !important;
     -webkit-font-smoothing: antialiased;
     transition: background-color 1.2s var(--pt-ease);
 }
 
-.backgroundContainer,
+.backgroundContainer {
+    background-color: var(--pt-bg) !important;
+}
+
+.backgroundContainer.withBackdrop,
+body:has(#itemDetailPage) .backgroundContainer {
+    background-color: transparent !important;
+}
+
 .skinBody,
+.mainAnimatedPages,
 .mainAnimatedPage,
 .pageContainer,
 #itemDetailPage,
 #searchPage {
-    background-color: var(--pt-bg) !important;
+    background: transparent !important;
+    background-color: transparent !important;
 }
 
 /* The entire page bg gets a radial tint from the accent — the drama */
@@ -83,11 +93,14 @@ h3,
 
 .itemName,
 .itemName.parentNameLast {
-    font-size: 3.75rem !important;
+    font-size: 2.2rem !important;
     font-weight: 300 !important;
     letter-spacing: -0.035em !important;
-    line-height: 1 !important;
+    line-height: 1.15 !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
 }
+
 
 .mediaInfoItem,
 .listItemBodyText.secondary,
@@ -100,19 +113,21 @@ h3,
     font-weight: 500 !important;
 }
 
-/* Header — tinted translucent glass — absolute so it scrolls away instead of staying fixed */
+/* Header — solid translucent glass with subtle blur */
 .skinHeader,
+.skinHeader-withBackground,
+.skinHeader.semiTransparent,
 .MuiAppBar-root {
     position: absolute !important;
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
-    background: rgba(0, 0, 0, 0.55) !important;
-    background-color: rgba(0, 0, 0, 0.55) !important;
-    backdrop-filter: blur(24px) saturate(1.8) !important;
-    -webkit-backdrop-filter: blur(24px) saturate(1.8) !important;
+    background: rgba(13, 15, 20, 0.85) !important;
+    background-color: rgba(13, 15, 20, 0.85) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
     border-bottom: 1px solid var(--pt-accent-soft) !important;
-    box-shadow: none !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
     z-index: 1000 !important;
 }
 
@@ -179,7 +194,7 @@ h3,
     overflow: visible !important;
     background: transparent !important;
     margin: 1em !important;
-    transition: transform 0.4s var(--pt-ease) !important;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .cardBox,
@@ -189,7 +204,7 @@ h3,
     border-radius: var(--pt-r) !important;
     overflow: visible !important;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
-    transition: box-shadow 0.4s var(--pt-ease) !important;
+    transition: box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 .cardImageContainer,
@@ -203,7 +218,7 @@ h3,
 /* Focus: glow in the current accent — this is the signature */
 .card:focus,
 .card:hover {
-    transform: scale(1.08) !important;
+    transform: scale(1.05) !important;
     z-index: 100 !important;
     outline: none !important;
 }
@@ -246,7 +261,7 @@ h3,
 .MuiButton-contained {
     background: var(--pt-glass-strong) !important;
     color: var(--pt-text) !important;
-    border: 1px solid var(--pt-accent-soft) !important;
+    border: none !important;
 }
 
 .emby-button.raised:focus,
@@ -257,7 +272,6 @@ h3,
 .MuiButton-contained:hover {
     background: var(--pt-accent) !important;
     color: #000 !important;
-    border-color: var(--pt-accent) !important;
     transform: scale(1.04) !important;
     box-shadow: 0 0 30px var(--pt-accent-glow) !important;
 }
@@ -361,22 +375,37 @@ h3,
     outline: none !important;
 }
 
-/* Detail page — hero gets the full accent tint */
-#itemDetailPage {
+/* Detail page — hero: translucent frosted banner and readable gradient backing */
+#itemDetailPage,
+.detailPageWrapperContainer {
+    background: transparent !important;
     background-color: transparent !important;
 }
 
 .detailRibbon {
-    background: rgba(32, 32, 32, 0.8) !important;
+    background: rgba(18, 21, 28, 0.88) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
+    border-top: 1px solid var(--pt-border) !important;
+    border-bottom: 1px solid var(--pt-border) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
 }
 
-.layout-desktop .detailRibbon {
+.layout-desktop .detailRibbon,
+.layout-desktop [dir=ltr] .detailRibbon {
     position: relative !important;
     display: flex !important;
     align-items: center !important;
+    justify-content: flex-start !important;
+    padding-left: 25vw !important;
     z-index: 2 !important;
+    background: rgba(18, 21, 28, 0.88) !important;
+}
+
+.layout-desktop [dir=rtl] .detailRibbon {
+    padding-left: 0 !important;
+    padding-right: 25vw !important;
+    justify-content: flex-start !important;
 }
 
 .layout-desktop .detailRibbon .mainDetailButtons {
@@ -390,34 +419,55 @@ h3,
 .layout-desktop .detailRibbon .infoWrapper {
     position: absolute !important;
     top: 100% !important;
-    left: 32.45vw !important;
+    left: 25vw !important;
     right: 3.3% !important;
-    width: calc(100% - 32.45vw - 3.3%) !important;
-    padding-top: 1.2em !important;
+    width: calc(100% - 25vw - 3.3%) !important;
+    padding-top: 0.8em !important;
     z-index: 2 !important;
 }
 
 .layout-desktop [dir=rtl] .detailRibbon .infoWrapper {
     left: 3.3% !important;
-    right: 32.45vw !important;
+    right: 25vw !important;
 }
 
-.layout-desktop .detailPagePrimaryContent {
-    padding-top: 13.5em !important;
+.layout-desktop .detailPagePrimaryContent,
+.layout-desktop [dir=ltr] .detailPagePrimaryContent {
+    padding-left: 25vw !important;
+    padding-top: 6.5em !important;
 }
+
+.layout-desktop [dir=rtl] .detailPagePrimaryContent {
+    padding-left: 0 !important;
+    padding-right: 25vw !important;
+}
+
 
 .detailPagePrimaryContainer {
     background: linear-gradient(180deg,
-            rgba(0, 0, 0, 0.4) 0%,
-            var(--pt-accent-soft) 20%,
-            var(--pt-bg) 90%) !important;
+            rgba(13, 15, 20, 0.88) 0%,
+            var(--pt-bg) 25%) !important;
     padding-top: 2em !important;
     padding-bottom: 4em !important;
-    transition: background 1.2s var(--pt-ease) !important;
+}
+
+.detailPageSecondaryContainer,
+#itemDetailPage .detailSection,
+#itemDetailPage .verticalSection {
+    background: var(--pt-bg) !important;
+    background-color: var(--pt-bg) !important;
 }
 
 .detailPageWrapperContainer {
     padding-top: 1em !important;
+}
+
+.parentName,
+.itemName,
+.overview,
+.mediaInfoItems,
+.itemDetailsGroup {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 2px 10px rgba(0, 0, 0, 0.8) !important;
 }
 
 .itemBackdrop {
@@ -460,6 +510,16 @@ h3,
 .layout-tv .detailImageContainer .card {
     width: 480px !important;
 }
+
+.layout-tv #itemDetailPage .detailPageWrapperContainer,
+.layout-tv .detailPagePrimaryContainer {
+    padding-top: 25vh !important;
+}
+
+.layout-tv .detailRibbon {
+    margin-top: 20vh !important;
+}
+
 
 .parentName {
     color: var(--pt-accent) !important;
@@ -592,16 +652,16 @@ body:has(#videoOsdPage) .headerLeft {
     width: 100% !important;
     max-width: 100% !important;
     height: auto !important;
-    min-height: unset !important;
-    padding: 0.25rem 1.25rem 0.45rem !important;
+    min-height: 5.5rem !important;
+    padding: 1.25rem 1.75rem 1.1rem !important;
     box-sizing: border-box !important;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.6) 70%, transparent 100%) !important;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.75) 60%, rgba(0, 0, 0, 0.4) 100%) !important;
     border: none !important;
     border-top: 1px solid var(--pt-accent-soft) !important;
     border-radius: 0 !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
-    box-shadow: none !important;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4) !important;
     z-index: 1000 !important;
     transition: transform 0.25s var(--pt-ease), opacity 0.25s var(--pt-ease) !important;
 }
@@ -618,7 +678,7 @@ body:has(#videoOsdPage) .headerLeft {
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
-    gap: 0.15rem !important;
+    gap: 0.65rem !important;
 }
 
 .videoOsdBottom .osdControls > .flex.flex-direction-row {
@@ -627,20 +687,20 @@ body:has(#videoOsdPage) .headerLeft {
     align-items: center !important;
     width: 100% !important;
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 0.25rem 0 !important;
     gap: 0.75rem !important;
 }
 
 .videoOsdBottom .sliderContainer {
     flex-grow: 1 !important;
-    height: 4px !important;
-    padding: 0 !important;
-    margin: 0 !important;
+    height: 6px !important;
+    padding: 0.25rem 0 !important;
+    margin: 0.25rem 0 !important;
     transition: height 0.2s var(--pt-ease) !important;
 }
 
 .videoOsdBottom .sliderContainer:hover {
-    height: 6px !important;
+    height: 8px !important;
 }
 
 /* Scrubber: fills in the current accent */
@@ -755,8 +815,10 @@ body:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
 }
 
 .layout-tv .itemName {
-    font-size: 5rem !important;
+    font-size: 2.8rem !important;
+    line-height: 1.15 !important;
 }
+
 
 .layout-tv .cardText {
     font-size: 1.15rem !important;

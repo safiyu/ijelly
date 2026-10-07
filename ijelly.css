@@ -69,7 +69,18 @@ body {
     background-color: var(--apple-bg) !important;
 }
 
-.backgroundContainer.withBackdrop {
+.backgroundContainer.withBackdrop,
+body:has(#itemDetailPage) .backgroundContainer {
+    background-color: transparent !important;
+}
+
+.skinBody,
+.mainAnimatedPages,
+.mainAnimatedPage,
+.pageContainer,
+#itemDetailPage,
+#searchPage {
+    background: transparent !important;
     background-color: transparent !important;
 }
 
@@ -109,10 +120,10 @@ header.semiTransparent,
 header.withBackground,
 header.header-scrolled,
 .MuiAppBar-root {
-    background-color: transparent !important;
-    background: transparent !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
+    background: rgba(20, 20, 22, 0.82) !important;
+    background-color: rgba(20, 20, 22, 0.82) !important;
+    backdrop-filter: blur(25px) !important;
+    -webkit-backdrop-filter: blur(25px) !important;
     overflow: visible !important;
     position: absolute !important;
     top: 0 !important;
@@ -122,7 +133,8 @@ header.header-scrolled,
     height: auto !important;
     min-height: 4em !important;
     border: none !important;
-    box-shadow: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
 }
 
 .headroom--unpinned {
@@ -387,7 +399,7 @@ header .logo svg {
 .backdropCard,
 .scalableCard {
     overflow: visible !important;
-    transition: transform 0.5s var(--apple-spring-bouncy), box-shadow 0.3s ease !important;
+    transition: transform 0.28s var(--apple-spring-fast), box-shadow 0.28s ease !important;
     position: relative !important;
     background: transparent !important;
     background-color: transparent !important;
@@ -479,7 +491,7 @@ header .logo svg {
 
 .card:focus,
 .card:hover {
-    transform: scale(1.06) !important;
+    transform: scale(1.05) !important;
     box-shadow: var(--apple-shadow) !important;
     z-index: 100 !important;
     outline: none !important;
@@ -546,17 +558,106 @@ h2.sectionTitle,
     color: var(--apple-text) !important;
 }
 
-#itemDetailPage {
+#itemDetailPage,
+.detailPageWrapperContainer {
+    background: transparent !important;
     background-color: transparent !important;
 }
 
+.detailRibbon {
+    background: rgba(24, 24, 28, 0.85) !important;
+    backdrop-filter: blur(25px) !important;
+    -webkit-backdrop-filter: blur(25px) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+.layout-desktop .detailRibbon,
+.layout-desktop [dir=ltr] .detailRibbon {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding-left: 25vw !important;
+    z-index: 2 !important;
+    background: rgba(24, 24, 28, 0.85) !important;
+}
+
+.layout-desktop [dir=rtl] .detailRibbon {
+    padding-left: 0 !important;
+    padding-right: 25vw !important;
+    justify-content: flex-start !important;
+}
+
+.layout-desktop .detailRibbon .mainDetailButtons {
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.6em !important;
+    z-index: 2 !important;
+}
+
+.layout-desktop .detailRibbon .infoWrapper {
+    position: absolute !important;
+    top: 100% !important;
+    left: 25vw !important;
+    right: 3.3% !important;
+    width: calc(100% - 25vw - 3.3%) !important;
+    padding-top: 0.8em !important;
+    z-index: 2 !important;
+}
+
+.layout-desktop [dir=rtl] .detailRibbon .infoWrapper {
+    left: 3.3% !important;
+    right: 25vw !important;
+}
+
+.layout-desktop .detailPagePrimaryContent,
+.layout-desktop [dir=ltr] .detailPagePrimaryContent {
+    padding-left: 25vw !important;
+    padding-top: 6.5em !important;
+}
+
+.layout-desktop [dir=rtl] .detailPagePrimaryContent {
+    padding-left: 0 !important;
+    padding-right: 25vw !important;
+}
+
+
 .detailPagePrimaryContainer {
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 1) 90%) !important;
+    background: linear-gradient(180deg,
+            rgba(20, 20, 22, 0.85) 0%,
+            var(--apple-bg) 25%) !important;
     padding-top: 2em !important;
+    padding-bottom: 4em !important;
+}
+
+.detailPageSecondaryContainer,
+#itemDetailPage .detailSection,
+#itemDetailPage .verticalSection {
+    background: var(--apple-bg) !important;
+    background-color: var(--apple-bg) !important;
 }
 
 .detailPageWrapperContainer {
     padding-top: 1em !important;
+}
+
+.itemName,
+.itemName.parentNameLast {
+    font-size: 2.2rem !important;
+    line-height: 1.15 !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+}
+
+.parentName,
+.itemName,
+.overview,
+.mediaInfoItems,
+.itemDetailsGroup {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 2px 10px rgba(0, 0, 0, 0.8) !important;
 }
 
 .itemBackdrop {
@@ -598,6 +699,20 @@ h2.sectionTitle,
 
 .layout-tv .detailImageContainer .card {
     width: 480px !important;
+}
+
+.layout-tv #itemDetailPage .detailPageWrapperContainer,
+.layout-tv .detailPagePrimaryContainer {
+    padding-top: 25vh !important;
+}
+
+.layout-tv .detailRibbon {
+    margin-top: 20vh !important;
+}
+
+.layout-tv .itemName {
+    font-size: 2.8rem !important;
+    line-height: 1.15 !important;
 }
 
 .layout-tv .detailPagePrimaryContainer {
@@ -719,7 +834,7 @@ h2.sectionTitle,
     -webkit-backdrop-filter: var(--apple-blur) !important;
     border-radius: 30px !important;
     font-weight: 600 !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border: none !important;
     transition: all 0.2s ease !important;
 }
 
@@ -1544,7 +1659,7 @@ body:has(#videoOsdPage) .headerLeft {
     color: var(--apple-text) !important;
     backdrop-filter: var(--apple-blur) !important;
     -webkit-backdrop-filter: var(--apple-blur) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border: none !important;
     box-shadow: none !important;
 }
 
@@ -1643,11 +1758,7 @@ body:has(#videoOsdPage) .headerLeft {
     scrollbar-color: rgba(255, 255, 255, 0.2) transparent !important;
 }
 
-/* Detail ribbon — JF12 uses .detailRibbon for the metadata bar */
-.detailRibbon {
-    background-color: transparent !important;
-    background-image: none !important;
-}
+/* Detail ribbon — JF12 uses .detailRibbon for the metadata bar; styled above with frosted glass */
 
 /* Form controls */
 .MuiFilledInput-root,
