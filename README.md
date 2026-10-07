@@ -26,36 +26,36 @@ Six themes for Jellyfin. Covers everything from Apple TV glass to museum gallery
 
 Open **Dashboard › General › Custom CSS** and paste one of the imports below. Save, then enable **Settings › Display › Backdrops**.
 
-The `@2` version pin tracks the latest `2.x` release tag, so patch updates ship without a surprise major change.
+The `@latest` tag automatically tracks the newest release, so you always get the latest styling fixes and theme updates.
 
 ### Apple TV
 
 ```css
-@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@2/ijelly.css');
+@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@latest/ijelly.css');
 ```
 
 ### Cinematheque Noir
 
 ```css
-@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@2/ijelly_noir.css');
+@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@latest/ijelly_noir.css');
 ```
 
 ### Editorial
 
 ```css
-@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@2/ijelly_editorial.css');
+@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@latest/ijelly_editorial.css');
 ```
 
 ### Gallery
 
 ```css
-@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@2/ijelly_gallery.css');
+@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@latest/ijelly_gallery.css');
 ```
 
 ### Blueprint
 
 ```css
-@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@2/ijelly_blueprint.css');
+@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@latest/ijelly_blueprint.css');
 ```
 
 ### Poster-Tinted
@@ -63,13 +63,13 @@ The `@2` version pin tracks the latest `2.x` release tag, so patch updates ship 
 Two parts. First, paste the CSS into **Custom CSS** as above:
 
 ```css
-@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@2/ijelly_tinted.css');
+@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@latest/ijelly_tinted.css');
 ```
 
 Then install the companion script, which samples the dominant color from the focused poster and writes it to `--pt-accent` on `:root`. Load it via a Tampermonkey userscript, a Jellyfin plugin that permits inline JS, or a reverse-proxy injection:
 
 ```
-https://cdn.jsdelivr.net/gh/safiyu/ijelly@2/ijelly_tinted.js
+https://cdn.jsdelivr.net/gh/safiyu/ijelly@latest/ijelly_tinted.js
 ```
 
 Without the script the CSS still applies, but the accent stays white instead of adapting.
