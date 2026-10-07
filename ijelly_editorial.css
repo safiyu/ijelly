@@ -1,0 +1,536 @@
+/* ijelly Editorial — Letterboxd × New Yorker. Deep ink, cream, ink-red accent */
+/* Serif display, byline metadata, hairline rules */
+
+:root {
+    --ed-bg: #0d0d0e;
+    --ed-bg-elev: #141416;
+    --ed-text: #e8e4dc;
+    --ed-text-dim: rgba(232, 228, 220, 0.6);
+    --ed-text-faint: rgba(232, 228, 220, 0.35);
+    --ed-accent: #c8102e;
+    --ed-accent-dim: rgba(200, 16, 46, 0.4);
+    --ed-rule: rgba(232, 228, 220, 0.15);
+    --ed-rule-strong: rgba(232, 228, 220, 0.3);
+    --ed-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+    --ed-font-display: 'Fraunces', 'Source Serif Pro', 'Playfair Display', Georgia, 'Times New Roman', serif;
+    --ed-font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    --ed-font-meta: 'Fraunces', Georgia, serif;
+    --ed-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap');
+
+html,
+body {
+    background-color: var(--ed-bg) !important;
+    color: var(--ed-text) !important;
+    font-family: var(--ed-font-body) !important;
+    -webkit-font-smoothing: antialiased;
+}
+
+.backgroundContainer,
+.skinBody,
+.mainAnimatedPage,
+.pageContainer,
+#itemDetailPage,
+#searchPage {
+    background-color: var(--ed-bg) !important;
+}
+
+.backdropContainer {
+    filter: grayscale(0.4) contrast(1.05) brightness(0.5) !important;
+    opacity: 0.5 !important;
+}
+
+::selection {
+    background: var(--ed-accent);
+    color: var(--ed-text);
+}
+
+/* Typography — serif for all display, sans for body */
+h1,
+h2,
+h3,
+.sectionTitle,
+.pageTitle,
+.itemName,
+.MuiTypography-h1,
+.MuiTypography-h2,
+.MuiTypography-h3 {
+    font-family: var(--ed-font-display) !important;
+    color: var(--ed-text) !important;
+    font-weight: 400 !important;
+    letter-spacing: -0.01em !important;
+}
+
+.sectionTitle,
+.sectionTitleTextButton {
+    font-family: var(--ed-font-display) !important;
+    font-size: 1.5rem !important;
+    font-weight: 400 !important;
+    font-variation-settings: "opsz" 144 !important;
+    letter-spacing: -0.01em !important;
+    color: var(--ed-text) !important;
+    text-transform: none !important;
+}
+
+/* Rule above every section title — editorial separation */
+.sectionTitleContainer {
+    border-top: 1px solid var(--ed-rule-strong) !important;
+    padding-top: 1.5rem !important;
+    margin-top: 1rem !important;
+}
+
+.itemName,
+.itemName.parentNameLast {
+    font-family: var(--ed-font-display) !important;
+    font-size: 4.5rem !important;
+    font-weight: 400 !important;
+    font-variation-settings: "opsz" 144 !important;
+    letter-spacing: -0.03em !important;
+    line-height: 1 !important;
+}
+
+/* Metadata — byline treatment in serif italic */
+.mediaInfoItem,
+.listItemBodyText.secondary,
+.parentName,
+.cardText-secondary {
+    font-family: var(--ed-font-meta) !important;
+    font-style: italic !important;
+    font-size: 0.85rem !important;
+    color: var(--ed-text-dim) !important;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+    font-weight: 400 !important;
+}
+
+.parentName {
+    font-style: italic !important;
+    font-size: 0.9rem !important;
+    color: var(--ed-accent) !important;
+    margin-bottom: 0.75rem !important;
+}
+
+/* Header: hairline rule, no chrome */
+.skinHeader,
+.MuiAppBar-root {
+    background: var(--ed-bg) !important;
+    background-color: var(--ed-bg) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-bottom: 1px solid var(--ed-rule) !important;
+    box-shadow: none !important;
+}
+
+.pageTitle {
+    font-family: var(--ed-font-display) !important;
+    font-weight: 600 !important;
+    font-style: italic !important;
+}
+
+/* Tabs: inline serif, double-rule active state */
+.emby-tab-button,
+.MuiTab-root {
+    font-family: var(--ed-font-display) !important;
+    text-transform: none !important;
+    font-size: 1.05rem !important;
+    font-weight: 400 !important;
+    color: var(--ed-text-dim) !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    padding: 0.5em 0.5em !important;
+    margin: 0 1em !important;
+    border-top: 1px solid transparent !important;
+    border-bottom: 1px solid transparent !important;
+    transition: all 0.2s var(--ed-ease) !important;
+    min-height: unset !important;
+}
+
+.emby-tab-button:focus,
+.emby-tab-button:hover,
+.MuiTab-root:focus,
+.MuiTab-root:hover {
+    color: var(--ed-text) !important;
+    background: transparent !important;
+    border-bottom-color: var(--ed-rule) !important;
+}
+
+.emby-tab-button.emby-tab-button-active,
+.MuiTab-root.Mui-selected {
+    color: var(--ed-text) !important;
+    background: transparent !important;
+    border-top-color: var(--ed-text) !important;
+    border-bottom-color: var(--ed-text) !important;
+    font-style: italic !important;
+}
+
+.MuiTabs-indicator,
+.emby-tabs-selectionbar {
+    display: none !important;
+}
+
+/* Drawer */
+.mainDrawer,
+.MuiDrawer-paper {
+    background-color: var(--ed-bg-elev) !important;
+    background-image: none !important;
+    border-right: 1px solid var(--ed-rule) !important;
+    color: var(--ed-text) !important;
+}
+
+.navMenuOption {
+    color: var(--ed-text-dim) !important;
+    border-radius: 0 !important;
+    border-bottom: 1px solid var(--ed-rule) !important;
+    padding: 1em 1.5em !important;
+    font-family: var(--ed-font-display) !important;
+}
+
+.navMenuOption:focus,
+.navMenuOption:hover,
+.navMenuOption-selected {
+    color: var(--ed-accent) !important;
+    background: transparent !important;
+    font-style: italic !important;
+}
+
+/* Cards: no frames, just the image + serif caption + swash hover */
+.card,
+.portraitCard,
+.squareCard,
+.backdropCard,
+.scalableCard {
+    overflow: visible !important;
+    background: transparent !important;
+    margin: 1.5em 1em !important;
+    transition: transform 0.4s var(--ed-ease), filter 0.4s var(--ed-ease) !important;
+}
+
+.cardBox,
+.cardScalable {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5) !important;
+    overflow: hidden !important;
+}
+
+.cardImageContainer,
+.cardContent {
+    border-radius: 0 !important;
+    background-color: transparent !important;
+}
+
+/* First card in each shelf gets double width — asymmetric magazine grid */
+.itemsContainer>.card:first-child.portraitCard,
+.scrollSlider>.card:first-child.portraitCard {
+    width: 440px !important;
+}
+
+/* Hover: 3° tilt, red hairline underneath, grayscale lifts */
+.card:focus,
+.card:hover {
+    transform: rotate(-1.5deg) scale(1.03) !important;
+    filter: none !important;
+    z-index: 100 !important;
+    outline: none !important;
+}
+
+.card:focus .cardBox,
+.card:hover .cardBox {
+    box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.75),
+        0 6px 0 var(--ed-accent) !important;
+}
+
+/* Non-focused cards fade to grayscale */
+@media (hover: hover) and (pointer: fine) {
+
+    .itemsContainer:hover .card:not(:hover),
+    .scrollSlider:hover .card:not(:hover) {
+        filter: grayscale(0.7) brightness(0.75);
+        transition: filter 0.4s var(--ed-ease);
+    }
+}
+
+.cardText {
+    font-family: var(--ed-font-display) !important;
+    font-size: 1.05rem !important;
+    font-weight: 400 !important;
+    color: var(--ed-text) !important;
+    margin-top: 0.8em !important;
+    padding: 0 0.1em !important;
+    letter-spacing: -0.005em !important;
+    position: relative;
+}
+
+/* Swash underline on hover: serif tradition */
+.card:focus .cardText,
+.card:hover .cardText {
+    text-decoration: underline;
+    text-decoration-color: var(--ed-accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+    font-style: italic;
+}
+
+/* Buttons: outlined text-only buttons, serif */
+.emby-button.raised,
+.button-submit,
+.MuiButton-root,
+.MuiButton-contained {
+    font-family: var(--ed-font-display) !important;
+    text-transform: none !important;
+    font-style: italic !important;
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    background: transparent !important;
+    color: var(--ed-text) !important;
+    border: 1px solid var(--ed-rule-strong) !important;
+    border-radius: 0 !important;
+    padding: 0.7em 1.6em !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    transition: all 0.2s var(--ed-ease) !important;
+}
+
+.emby-button.raised:focus,
+.emby-button.raised:hover,
+.MuiButton-root:focus,
+.MuiButton-root:hover,
+.button-submit:focus,
+.button-submit:hover {
+    background: var(--ed-text) !important;
+    color: var(--ed-bg) !important;
+    border-color: var(--ed-text) !important;
+}
+
+/* Primary play: filled with ink red */
+.btnPlay,
+.mainDetailButtons .raised.button-submit:first-child {
+    background: var(--ed-accent) !important;
+    color: var(--ed-text) !important;
+    border-color: var(--ed-accent) !important;
+}
+
+.btnPlay:focus,
+.btnPlay:hover {
+    background: var(--ed-text) !important;
+    color: var(--ed-bg) !important;
+    border-color: var(--ed-text) !important;
+}
+
+.paper-icon-button-light,
+.MuiIconButton-root {
+    color: var(--ed-text) !important;
+    border-radius: 0 !important;
+}
+
+.paper-icon-button-light:focus,
+.paper-icon-button-light:hover,
+.MuiIconButton-root:focus,
+.MuiIconButton-root:hover {
+    color: var(--ed-accent) !important;
+    background: transparent !important;
+}
+
+/* Surfaces */
+.dialog,
+.menu,
+.actionSheet,
+.MuiDialog-paper,
+.MuiMenu-paper,
+.MuiPopover-paper,
+.MuiAutocomplete-paper {
+    background-color: var(--ed-bg-elev) !important;
+    background-image: none !important;
+    border: 1px solid var(--ed-rule-strong) !important;
+    border-radius: 0 !important;
+    color: var(--ed-text) !important;
+    box-shadow: var(--ed-shadow) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+.paperList {
+    background: transparent !important;
+    color: var(--ed-text) !important;
+    overflow-y: auto !important;
+}
+
+.MuiMenuItem-root,
+.MuiListItemButton-root,
+.actionSheetMenuItem {
+    color: var(--ed-text) !important;
+    border-radius: 0 !important;
+    font-family: var(--ed-font-body) !important;
+    border-bottom: 1px solid var(--ed-rule) !important;
+}
+
+.MuiMenuItem-root:focus,
+.MuiMenuItem-root:hover,
+.MuiListItemButton-root:focus,
+.MuiListItemButton-root:hover {
+    background: transparent !important;
+    color: var(--ed-accent) !important;
+    font-style: italic !important;
+}
+
+/* Form controls — underline input only (editorial form convention) */
+.emby-input,
+.emby-select,
+.emby-textarea,
+.MuiFilledInput-root,
+.MuiOutlinedInput-root,
+.MuiInputBase-root {
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid var(--ed-rule-strong) !important;
+    border-radius: 0 !important;
+    color: var(--ed-text) !important;
+    font-family: var(--ed-font-display) !important;
+    font-size: 1.1rem !important;
+    padding: 0.4em 0 !important;
+}
+
+.MuiFilledInput-root::before,
+.MuiFilledInput-root::after,
+.MuiOutlinedInput-notchedOutline {
+    display: none !important;
+}
+
+.emby-input:focus,
+.MuiFilledInput-root.Mui-focused,
+.MuiOutlinedInput-root.Mui-focused {
+    border-bottom-color: var(--ed-accent) !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* Detail page — editorial feature article */
+.detailPagePrimaryContainer {
+    background: linear-gradient(180deg,
+            transparent 0%,
+            rgba(13, 13, 14, 0.6) 50%,
+            var(--ed-bg) 100%) !important;
+    padding-top: 24vh !important;
+    padding-bottom: 4em !important;
+}
+
+.itemBackdrop {
+    height: 90vh !important;
+    position: relative !important;
+    filter: grayscale(0.5) contrast(1.1) brightness(0.6) !important;
+}
+
+.itemBackdrop::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg,
+            transparent 0%,
+            transparent 50%,
+            var(--ed-bg) 100%);
+}
+
+/* Overview — pull-quote treatment */
+.overview {
+    font-family: var(--ed-font-display) !important;
+    font-size: 1.35rem !important;
+    line-height: 1.5 !important;
+    color: var(--ed-text) !important;
+    max-width: 58ch !important;
+    font-weight: 400 !important;
+    border-left: 2px solid var(--ed-accent) !important;
+    padding-left: 1.5rem !important;
+    font-variation-settings: "opsz" 144 !important;
+}
+
+.overview::before {
+    content: '';
+}
+
+/* Player OSD */
+.videoOsdBottom.videoOsdBottom-maincontrols {
+    background: var(--ed-bg) !important;
+    border: 1px solid var(--ed-rule-strong) !important;
+    border-radius: 0 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: var(--ed-shadow) !important;
+}
+
+.sliderContainer .mdl-slider-background-lower,
+.mdl-slider-background-lower {
+    background-color: var(--ed-accent) !important;
+}
+
+.mdl-slider-background-upper {
+    background-color: var(--ed-rule-strong) !important;
+}
+
+/* Subtitles */
+.subtitles span,
+.videoSubtitles span,
+::cue {
+    font-family: var(--ed-font-display) !important;
+    color: var(--ed-text) !important;
+    background: rgba(13, 13, 14, 0.7) !important;
+    padding: 0.15em 0.6em !important;
+    border-radius: 0 !important;
+    font-weight: 400 !important;
+}
+
+/* TV layout */
+.layout-tv {
+    font-size: 1.25em !important;
+}
+
+.layout-tv .itemName {
+    font-size: 6rem !important;
+}
+
+.layout-tv .sectionTitle {
+    font-size: 2rem !important;
+}
+
+.layout-tv .cardText {
+    font-size: 1.3rem !important;
+}
+
+.layout-tv .emby-tab-button,
+.layout-tv .MuiTab-root {
+    font-size: 1.6rem !important;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+    width: 4px !important;
+    height: 4px !important;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--ed-rule-strong) !important;
+    border-radius: 0 !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--ed-accent) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}

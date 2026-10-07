@@ -1,0 +1,699 @@
+/* tvOS-Fin — an Apple TV-inspired Jellyfin theme, built from scratch */
+/* Target: Jellyfin Web 10.9+ and Jellyfin 12+ (jf12) */
+/* Tizen-safe: progressive enhancement, system fonts, D-pad focus states */
+/* Load via Dashboard > General > Custom CSS */
+
+:root {
+  /* Palette: true black, lifted glass, neutral accent */
+  --tv-bg: #000000;
+  --tv-bg-elev: #0a0a0a;
+  --tv-glass: rgba(255, 255, 255, 0.06);
+  --tv-glass-strong: rgba(255, 255, 255, 0.12);
+  --tv-glass-fallback: #141414;
+  --tv-glass-strong-fallback: #1f1f1f;
+  --tv-stroke: rgba(255, 255, 255, 0.08);
+  --tv-stroke-focus: #ffffff;
+  --tv-text: #f5f5f7;
+  --tv-text-dim: rgba(245, 245, 247, 0.65);
+  --tv-text-faint: rgba(245, 245, 247, 0.4);
+  --tv-accent: #64d2ff;
+
+  /* Radii */
+  --tv-r-card: 12px;
+  --tv-r-sheet: 16px;
+  --tv-r-pill: 999px;
+
+  /* Motion: tvOS "spring" */
+  --tv-ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --tv-dur: 320ms;
+  --tv-dur-fast: 180ms;
+
+  /* Shadows */
+  --tv-shadow-rest: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --tv-shadow-focus:
+    0 20px 60px rgba(0, 0, 0, 0.6),
+    0 0 0 3px var(--tv-stroke-focus);
+
+  /* System font stack — no CDN, no FOUT on TV */
+  --tv-font: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
+             'Segoe UI', 'Helvetica Neue', 'Noto Sans', Roboto, system-ui, sans-serif;
+}
+
+/* Base ------------------------------------------------------------- */
+
+html, body {
+  background: var(--tv-bg) !important;
+  color: var(--tv-text);
+  font-family: var(--tv-font);
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+}
+
+.skinBody,
+.mainAnimatedPage,
+.pageContainer,
+.backdropContainer {
+  background: var(--tv-bg) !important;
+}
+
+/* Softer backdrop; gradient overlay via pseudo-element (no mask-image) */
+.backdropImage {
+  opacity: 0.35 !important;
+  -webkit-filter: saturate(1.1);
+          filter: saturate(1.1);
+}
+
+.backdropContainer { position: relative; }
+.backdropContainer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    var(--tv-bg) 100%
+  );
+}
+
+::selection { background: var(--tv-accent); color: #000; }
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-thumb { background: transparent; border-radius: var(--tv-r-pill); }
+*:hover > ::-webkit-scrollbar-thumb { background: var(--tv-glass-strong); }
+
+/* Typography ------------------------------------------------------- */
+
+h1, h2, h3, .sectionTitle {
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--tv-text);
+}
+
+h1, .pageTitle {
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  font-size: 2.75rem;
+}
+
+.sectionTitle {
+  font-size: 1.35rem;
+  margin: 0 0 1rem 2.5rem !important;
+}
+
+.mediaInfoItem,
+.listItemBodyText.secondary {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  color: var(--tv-text-dim);
+  font-weight: 500;
+}
+
+/* Header / Top Nav ------------------------------------------------- */
+
+/* Fallback: solid dark. @supports upgrades to blurred glass */
+.skinHeader {
+  background: rgba(0, 0, 0, 0.75) !important;
+  border-bottom: 1px solid transparent;
+  -webkit-transition: background var(--tv-dur) var(--tv-ease);
+          transition: background var(--tv-dur) var(--tv-ease);
+}
+
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .skinHeader {
+    background: rgba(0, 0, 0, 0.45) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(1.6);
+            backdrop-filter: blur(20px) saturate(1.6);
+  }
+}
+
+.skinHeader.semiTransparent,
+.skinHeader-withBackground {
+  background: rgba(0, 0, 0, 0.75) !important;
+  border-bottom-color: var(--tv-stroke);
+}
+
+.headerTabs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.headerTabs .emby-tab-button {
+  padding: 0.5rem 1.1rem !important;
+  margin: 0 0.25rem;
+  border-radius: var(--tv-r-pill) !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+  color: var(--tv-text-dim) !important;
+  text-transform: none !important;
+  -webkit-transition: all var(--tv-dur-fast) var(--tv-ease);
+          transition: all var(--tv-dur-fast) var(--tv-ease);
+}
+
+.headerTabs .emby-tab-button:hover,
+.headerTabs .emby-tab-button:focus {
+  color: var(--tv-text) !important;
+  background: var(--tv-glass-strong-fallback);
+  outline: none;
+}
+
+.headerTabs .emby-tab-button.emby-tab-button-active,
+.headerTabs .emby-tab-button[data-selected="true"] {
+  color: var(--tv-text) !important;
+  background: var(--tv-glass-strong-fallback);
+}
+
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .headerTabs .emby-tab-button:hover,
+  .headerTabs .emby-tab-button:focus,
+  .headerTabs .emby-tab-button.emby-tab-button-active {
+    background: var(--tv-glass-strong);
+  }
+}
+
+.headerTabs .emby-tab-button::after,
+.emby-tab-button.emby-button-tab-active::after {
+  display: none !important;
+}
+
+/* Side drawer ------------------------------------------------------ */
+
+.mainDrawer-scrollContainer,
+.mainDrawer {
+  background: #0b0b0b !important;
+  border-right: 1px solid var(--tv-stroke);
+}
+
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .mainDrawer-scrollContainer,
+  .mainDrawer {
+    background: rgba(10, 10, 10, 0.85) !important;
+    -webkit-backdrop-filter: blur(30px) saturate(1.6);
+            backdrop-filter: blur(30px) saturate(1.6);
+  }
+}
+
+.navMenuOption {
+  border-radius: var(--tv-r-pill);
+  margin: 0.15rem 0.75rem;
+  padding: 0.65rem 1rem !important;
+  color: var(--tv-text-dim) !important;
+  -webkit-transition: all var(--tv-dur-fast) var(--tv-ease);
+          transition: all var(--tv-dur-fast) var(--tv-ease);
+}
+
+.navMenuOption:hover,
+.navMenuOption:focus {
+  background: var(--tv-glass-strong-fallback) !important;
+  color: var(--tv-text) !important;
+  outline: none;
+}
+
+.navMenuOption-selected {
+  background: var(--tv-glass-strong-fallback) !important;
+  color: var(--tv-text) !important;
+}
+
+/* Shelves ---------------------------------------------------------- */
+
+.verticalSection {
+  margin-bottom: 4rem !important;
+  padding: 0 !important;
+}
+
+.sectionTitleContainer {
+  padding: 0 2.5rem 0.5rem;
+}
+
+.sectionTitleTextButton {
+  color: var(--tv-text) !important;
+  font-weight: 500 !important;
+  letter-spacing: -0.02em !important;
+}
+
+.sectionTitleTextButton:hover,
+.sectionTitleTextButton:focus {
+  color: var(--tv-accent) !important;
+  outline: none;
+}
+
+.itemsContainer,
+.scrollSlider {
+  padding: 1.5rem 2.5rem !important;
+  scroll-padding-left: 2.5rem;
+  scroll-behavior: smooth;
+}
+
+/* `gap` is spotty on older Tizen flex — margin fallback */
+.itemsContainer > .card,
+.scrollSlider > .card {
+  margin-right: 1rem;
+}
+
+.emby-scrollbuttons { display: none !important; }
+
+/* Cards ------------------------------------------------------------ */
+
+.card {
+  padding: 0 !important;
+  margin: 0 1rem 0 0 !important;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+  -webkit-transition: -webkit-transform var(--tv-dur) var(--tv-ease);
+          transition: transform var(--tv-dur) var(--tv-ease);
+  -webkit-transform-origin: center center;
+          transform-origin: center center;
+  will-change: transform;
+}
+
+.cardBox {
+  background: transparent !important;
+  border: none !important;
+  border-radius: var(--tv-r-card) !important;
+  -webkit-box-shadow: var(--tv-shadow-rest);
+          box-shadow: var(--tv-shadow-rest);
+  overflow: visible !important;
+  -webkit-transition: -webkit-box-shadow var(--tv-dur) var(--tv-ease);
+          transition: box-shadow var(--tv-dur) var(--tv-ease);
+}
+
+.cardImageContainer,
+.cardImage,
+.cardScalable {
+  border-radius: var(--tv-r-card) !important;
+  overflow: hidden;
+}
+
+/* Focus — the signature tvOS lift. Covers mouse, keyboard, D-pad */
+.card:hover,
+.card:focus,
+.card:focus-within,
+.card.focused,
+.card[data-focus="true"] {
+  -webkit-transform: translate3d(0, 0, 0) scale(1.08);
+          transform: translate3d(0, 0, 0) scale(1.08);
+  z-index: 10;
+  outline: none;
+}
+
+.card:hover .cardBox,
+.card:focus .cardBox,
+.card:focus-within .cardBox,
+.card.focused .cardBox,
+.card[data-focus="true"] .cardBox {
+  -webkit-box-shadow: var(--tv-shadow-focus);
+          box-shadow: var(--tv-shadow-focus);
+}
+
+/* TV layout: larger lift, chunkier focus ring (10-foot UI) */
+.layout-tv .card:focus,
+.layout-tv .card.focused,
+.layout-tv .card[data-focus="true"] {
+  -webkit-transform: translate3d(0, 0, 0) scale(1.12);
+          transform: translate3d(0, 0, 0) scale(1.12);
+}
+
+.layout-tv .card:focus .cardBox,
+.layout-tv .card.focused .cardBox,
+.layout-tv .card[data-focus="true"] .cardBox {
+  -webkit-box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.75),
+    0 0 0 4px var(--tv-stroke-focus);
+          box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.75),
+    0 0 0 4px var(--tv-stroke-focus);
+}
+
+/* Dim non-focused siblings (desktop only — on TV it's hard to see) */
+@media (hover: hover) and (pointer: fine) {
+  .itemsContainer:hover .card:not(:hover),
+  .scrollSlider:hover .card:not(:hover) {
+    opacity: 0.55;
+    -webkit-transition: opacity var(--tv-dur) var(--tv-ease);
+            transition: opacity var(--tv-dur) var(--tv-ease);
+  }
+}
+
+.cardText {
+  color: var(--tv-text);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-top: 0.6rem !important;
+  padding: 0 0.1rem;
+  letter-spacing: -0.01em;
+}
+
+.cardText-secondary,
+.cardText.cardText-secondary {
+  color: var(--tv-text-faint);
+  font-size: 0.78rem;
+  font-weight: 400;
+}
+
+/* TV layout: bump text for 10-foot distance */
+.layout-tv .cardText { font-size: 1.05rem; }
+.layout-tv .cardText-secondary { font-size: 0.9rem; }
+.layout-tv .sectionTitle { font-size: 1.6rem; }
+
+.itemProgressBar {
+  height: 3px !important;
+  border-radius: var(--tv-r-pill);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.itemProgressBarForeground {
+  background: var(--tv-text) !important;
+  border-radius: var(--tv-r-pill);
+}
+
+/* Buttons ---------------------------------------------------------- */
+
+.button-submit,
+.raised.button-submit,
+.emby-button.raised,
+.emby-button {
+  border-radius: var(--tv-r-pill) !important;
+  padding: 0.75rem 1.6rem !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  text-transform: none !important;
+  -webkit-transition: -webkit-transform var(--tv-dur-fast) var(--tv-ease),
+                      background var(--tv-dur-fast) var(--tv-ease);
+          transition: transform var(--tv-dur-fast) var(--tv-ease),
+                      background var(--tv-dur-fast) var(--tv-ease);
+}
+
+/* Primary play: white on black */
+.btnPlay,
+.button-submit.detailButton-primary,
+.mainDetailButtons .raised.button-submit:first-child {
+  background: var(--tv-text) !important;
+  color: #000 !important;
+}
+
+.btnPlay:hover,
+.btnPlay:focus,
+.button-submit.detailButton-primary:hover,
+.button-submit.detailButton-primary:focus {
+  background: #fff !important;
+  -webkit-transform: scale(1.04);
+          transform: scale(1.04);
+  outline: none;
+}
+
+/* TV focus ring on primary */
+.layout-tv .btnPlay:focus,
+.layout-tv .button-submit.detailButton-primary:focus {
+  -webkit-box-shadow: 0 0 0 4px var(--tv-stroke-focus);
+          box-shadow: 0 0 0 4px var(--tv-stroke-focus);
+}
+
+/* Secondary: glass with solid fallback */
+.raised:not(.button-submit),
+.detailButton:not(.detailButton-primary) {
+  background: var(--tv-glass-strong-fallback) !important;
+  color: var(--tv-text) !important;
+}
+
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .raised:not(.button-submit),
+  .detailButton:not(.detailButton-primary) {
+    background: var(--tv-glass-strong) !important;
+    -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(16px);
+  }
+}
+
+.raised:not(.button-submit):hover,
+.raised:not(.button-submit):focus {
+  background: rgba(255, 255, 255, 0.2) !important;
+  -webkit-transform: scale(1.04);
+          transform: scale(1.04);
+  outline: none;
+}
+
+.layout-tv .raised:focus,
+.layout-tv .detailButton:focus,
+.layout-tv .emby-button:focus {
+  -webkit-box-shadow: 0 0 0 3px var(--tv-stroke-focus);
+          box-shadow: 0 0 0 3px var(--tv-stroke-focus);
+}
+
+/* Icon buttons */
+.paper-icon-button-light,
+.headerButton {
+  border-radius: var(--tv-r-pill);
+  -webkit-transition: all var(--tv-dur-fast) var(--tv-ease);
+          transition: all var(--tv-dur-fast) var(--tv-ease);
+}
+
+.paper-icon-button-light:hover,
+.paper-icon-button-light:focus,
+.headerButton:hover,
+.headerButton:focus {
+  background: var(--tv-glass-strong-fallback) !important;
+  color: var(--tv-text) !important;
+  outline: none;
+}
+
+.layout-tv .paper-icon-button-light:focus,
+.layout-tv .headerButton:focus {
+  -webkit-box-shadow: 0 0 0 3px var(--tv-stroke-focus);
+          box-shadow: 0 0 0 3px var(--tv-stroke-focus);
+}
+
+/* Item detail page ------------------------------------------------- */
+
+.detailPagePrimaryContainer {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    var(--tv-bg) 100%
+  ) !important;
+  padding-top: 20vh !important;
+  padding-bottom: 3rem !important;
+}
+
+/* Backdrop fade via gradient overlay (not mask-image — Tizen-unsafe) */
+.itemBackdrop {
+  height: 85vh !important;
+  position: relative;
+}
+
+.itemBackdrop::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    transparent 50%,
+    var(--tv-bg) 100%
+  );
+}
+
+.itemName,
+.itemName.parentNameLast {
+  font-size: 3.5rem !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.layout-tv .itemName { font-size: 4rem !important; }
+
+.parentName {
+  color: var(--tv-text-dim);
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+
+.overview {
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--tv-text-dim);
+  max-width: 60ch;
+  font-weight: 400;
+}
+
+.layout-tv .overview { font-size: 1.15rem; max-width: 70ch; }
+
+/* Sheets, dialogs, popovers --------------------------------------- */
+
+.dialog,
+.actionSheet,
+.focuscontainer-x {
+  background: #141414 !important;
+  border: 1px solid var(--tv-stroke);
+  border-radius: var(--tv-r-sheet) !important;
+  -webkit-box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+          box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .dialog,
+  .actionSheet,
+  .focuscontainer-x {
+    background: rgba(20, 20, 20, 0.85) !important;
+    -webkit-backdrop-filter: blur(30px) saturate(1.6);
+            backdrop-filter: blur(30px) saturate(1.6);
+  }
+}
+
+.actionSheetMenuItem {
+  border-radius: 8px;
+  margin: 0.1rem 0.4rem;
+  -webkit-transition: background var(--tv-dur-fast) var(--tv-ease);
+          transition: background var(--tv-dur-fast) var(--tv-ease);
+}
+
+.actionSheetMenuItem:hover,
+.actionSheetMenuItem:focus {
+  background: var(--tv-glass-strong-fallback) !important;
+  outline: none;
+}
+
+.layout-tv .actionSheetMenuItem:focus {
+  background: var(--tv-glass-strong-fallback) !important;
+  -webkit-box-shadow: inset 0 0 0 2px var(--tv-stroke-focus);
+          box-shadow: inset 0 0 0 2px var(--tv-stroke-focus);
+}
+
+/* Inputs ----------------------------------------------------------- */
+
+.emby-input,
+.emby-textarea,
+.emby-select {
+  background: var(--tv-glass-fallback) !important;
+  border: 1px solid var(--tv-stroke) !important;
+  border-radius: 10px !important;
+  color: var(--tv-text) !important;
+  padding: 0.7rem 0.95rem !important;
+  -webkit-transition: all var(--tv-dur-fast) var(--tv-ease);
+          transition: all var(--tv-dur-fast) var(--tv-ease);
+}
+
+.emby-input:focus,
+.emby-textarea:focus,
+.emby-select:focus {
+  border-color: var(--tv-stroke-focus) !important;
+  background: var(--tv-glass-strong-fallback) !important;
+  outline: none;
+  -webkit-box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+          box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+}
+
+/* Player (OSD) ----------------------------------------------------- */
+
+.videoOsdBottom {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.85) 100%
+  ) !important;
+  padding: 3rem 2.5rem 2rem !important;
+}
+
+.osdHeader {
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.75) 0%,
+    transparent 100%
+  ) !important;
+}
+
+.osdPositionSlider .mdl-slider-background-flex,
+.sliderContainer .mdl-slider-background-flex {
+  height: 3px !important;
+  border-radius: var(--tv-r-pill);
+  -webkit-transition: height var(--tv-dur-fast) var(--tv-ease);
+          transition: height var(--tv-dur-fast) var(--tv-ease);
+}
+
+.osdPositionSlider:hover .mdl-slider-background-flex,
+.osdPositionSlider:focus .mdl-slider-background-flex,
+.osdPositionSlider.focused .mdl-slider-background-flex,
+.sliderContainer:hover .mdl-slider-background-flex,
+.sliderContainer:focus .mdl-slider-background-flex {
+  height: 6px !important;
+}
+
+.layout-tv .osdPositionSlider .mdl-slider-background-flex,
+.layout-tv .sliderContainer .mdl-slider-background-flex {
+  height: 5px !important;
+}
+
+.mdl-slider-background-lower,
+.mdl-slider__background-lower {
+  background: var(--tv-text) !important;
+  border-radius: var(--tv-r-pill);
+}
+
+.mdl-slider-background-upper,
+.mdl-slider__background-upper {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.osdTimeText,
+.endsAtText {
+  font-variant-numeric: tabular-nums;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--tv-r-pill);
+  font-size: 0.85rem;
+}
+
+.chapterThumbContainer {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid var(--tv-stroke-focus);
+}
+
+/* Page transitions ------------------------------------------------- */
+
+.mainAnimatedPage {
+  -webkit-animation: tv-fade-in var(--tv-dur) var(--tv-ease);
+          animation: tv-fade-in var(--tv-dur) var(--tv-ease);
+}
+
+@-webkit-keyframes tv-fade-in {
+  from { opacity: 0; -webkit-transform: translate3d(0, 8px, 0); }
+  to   { opacity: 1; -webkit-transform: translate3d(0, 0, 0); }
+}
+
+@keyframes tv-fade-in {
+  from { opacity: 0; transform: translate3d(0, 8px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+/* TV layout: shorter transitions (slower GPU) */
+.layout-tv {
+  --tv-dur: 220ms;
+  --tv-dur-fast: 140ms;
+}
+
+/* Reduced motion ---------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    -webkit-animation-duration: 0.01ms !important;
+            animation-duration: 0.01ms !important;
+    -webkit-transition-duration: 0.01ms !important;
+            transition-duration: 0.01ms !important;
+  }
+  .card:hover, .card:focus, .card:focus-within, .card.focused {
+    -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+  }
+}

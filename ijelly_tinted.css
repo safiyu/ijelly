@@ -1,0 +1,476 @@
+/* ijelly Poster-Tinted — accent color derived from focused poster art */
+/* Pair with ijelly_tinted.js (userscript or Jellyfin plugin) */
+
+:root {
+    --pt-bg: #000000;
+    --pt-bg-elev: #0a0a0a;
+    --pt-glass: rgba(255, 255, 255, 0.08);
+    --pt-glass-strong: rgba(255, 255, 255, 0.15);
+    --pt-text: #ffffff;
+    --pt-text-dim: rgba(255, 255, 255, 0.65);
+    --pt-text-faint: rgba(255, 255, 255, 0.4);
+    --pt-accent: #ffffff;
+    --pt-accent-soft: rgba(255, 255, 255, 0.15);
+    --pt-accent-glow: rgba(255, 255, 255, 0.3);
+    --pt-r: 14px;
+    --pt-r-pill: 999px;
+    --pt-ease: cubic-bezier(0.32, 0.72, 0, 1);
+    --pt-font: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif;
+}
+
+html,
+body {
+    background-color: var(--pt-bg) !important;
+    color: var(--pt-text) !important;
+    font-family: var(--pt-font) !important;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 1.2s var(--pt-ease);
+}
+
+.backgroundContainer,
+.skinBody,
+.mainAnimatedPage,
+.pageContainer,
+#itemDetailPage,
+#searchPage {
+    background-color: var(--pt-bg) !important;
+}
+
+/* The entire page bg gets a radial tint from the accent — the drama */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background: radial-gradient(ellipse at top,
+            var(--pt-accent-soft) 0%,
+            transparent 60%);
+    transition: background 1.2s var(--pt-ease);
+}
+
+.backdropContainer {
+    filter: brightness(0.45) saturate(1.2) !important;
+    opacity: 0.6 !important;
+}
+
+::selection {
+    background: var(--pt-accent);
+    color: #000;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+.sectionTitle,
+.pageTitle,
+.itemName,
+.MuiTypography-h1,
+.MuiTypography-h2,
+.MuiTypography-h3 {
+    font-family: var(--pt-font) !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.025em !important;
+    color: var(--pt-text) !important;
+}
+
+.sectionTitle,
+.sectionTitleTextButton {
+    font-size: 1.4rem !important;
+    font-weight: 500 !important;
+}
+
+.itemName,
+.itemName.parentNameLast {
+    font-size: 3.75rem !important;
+    font-weight: 300 !important;
+    letter-spacing: -0.035em !important;
+    line-height: 1 !important;
+}
+
+.mediaInfoItem,
+.listItemBodyText.secondary,
+.parentName,
+.cardText-secondary {
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    font-size: 0.72rem !important;
+    color: var(--pt-text-dim) !important;
+    font-weight: 500 !important;
+}
+
+/* Header — tinted translucent glass */
+.skinHeader,
+.MuiAppBar-root {
+    background: rgba(0, 0, 0, 0.55) !important;
+    background-color: rgba(0, 0, 0, 0.55) !important;
+    backdrop-filter: blur(24px) saturate(1.8) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(1.8) !important;
+    border-bottom: 1px solid var(--pt-accent-soft) !important;
+    box-shadow: none !important;
+}
+
+/* Tabs */
+.emby-tab-button,
+.MuiTab-root {
+    font-family: var(--pt-font) !important;
+    text-transform: none !important;
+    font-size: 0.95rem !important;
+    font-weight: 500 !important;
+    color: var(--pt-text-dim) !important;
+    background: transparent !important;
+    border-radius: var(--pt-r-pill) !important;
+    padding: 0.55em 1.3em !important;
+    margin: 0 0.25em !important;
+    transition: all 0.25s var(--pt-ease) !important;
+    min-height: unset !important;
+}
+
+.emby-tab-button:focus,
+.emby-tab-button:hover,
+.MuiTab-root:focus,
+.MuiTab-root:hover {
+    color: var(--pt-text) !important;
+    background: var(--pt-glass) !important;
+}
+
+.emby-tab-button.emby-tab-button-active,
+.MuiTab-root.Mui-selected {
+    color: var(--pt-text) !important;
+    background: var(--pt-accent-soft) !important;
+    border: 1px solid var(--pt-accent) !important;
+}
+
+.MuiTabs-indicator,
+.emby-tabs-selectionbar {
+    display: none !important;
+}
+
+/* Drawer */
+.mainDrawer,
+.MuiDrawer-paper {
+    background-color: rgba(10, 10, 10, 0.85) !important;
+    backdrop-filter: blur(30px) saturate(1.6) !important;
+    -webkit-backdrop-filter: blur(30px) saturate(1.6) !important;
+    border-right: 1px solid var(--pt-accent-soft) !important;
+    color: var(--pt-text) !important;
+}
+
+/* Cards */
+.card,
+.portraitCard,
+.squareCard,
+.backdropCard,
+.scalableCard {
+    overflow: visible !important;
+    background: transparent !important;
+    margin: 1em !important;
+    transition: transform 0.4s var(--pt-ease) !important;
+}
+
+.cardBox,
+.cardScalable {
+    background: transparent !important;
+    border: none !important;
+    border-radius: var(--pt-r) !important;
+    overflow: visible !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
+    transition: box-shadow 0.4s var(--pt-ease) !important;
+}
+
+.cardImageContainer,
+.cardContent,
+.cardPadder {
+    border-radius: var(--pt-r) !important;
+    overflow: hidden !important;
+    background-color: transparent !important;
+}
+
+/* Focus: glow in the current accent — this is the signature */
+.card:focus,
+.card:hover {
+    transform: scale(1.08) !important;
+    z-index: 100 !important;
+    outline: none !important;
+}
+
+.card:focus .cardBox,
+.card:hover .cardBox {
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.65),
+        0 0 0 2px var(--pt-accent),
+        0 0 40px var(--pt-accent-glow) !important;
+}
+
+.cardText {
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    color: var(--pt-text) !important;
+    margin-top: 0.6em !important;
+    letter-spacing: -0.01em !important;
+}
+
+/* Buttons */
+.emby-button.raised,
+.button-submit,
+.MuiButton-root,
+.MuiButton-contained {
+    font-family: var(--pt-font) !important;
+    text-transform: none !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    border-radius: var(--pt-r-pill) !important;
+    padding: 0.75em 1.6em !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    box-shadow: none !important;
+    transition: all 0.2s var(--pt-ease) !important;
+}
+
+.emby-button.raised,
+.MuiButton-root,
+.MuiButton-contained {
+    background: var(--pt-glass-strong) !important;
+    color: var(--pt-text) !important;
+    border: 1px solid var(--pt-accent-soft) !important;
+}
+
+.emby-button.raised:focus,
+.emby-button.raised:hover,
+.MuiButton-root:focus,
+.MuiButton-root:hover,
+.MuiButton-contained:focus,
+.MuiButton-contained:hover {
+    background: var(--pt-accent) !important;
+    color: #000 !important;
+    border-color: var(--pt-accent) !important;
+    transform: scale(1.04) !important;
+    box-shadow: 0 0 30px var(--pt-accent-glow) !important;
+}
+
+/* Primary play: filled with the accent, tinted shadow */
+.btnPlay,
+.mainDetailButtons .raised.button-submit:first-child {
+    background: var(--pt-text) !important;
+    color: #000 !important;
+    border: none !important;
+}
+
+.btnPlay:focus,
+.btnPlay:hover {
+    background: var(--pt-accent) !important;
+    box-shadow: 0 0 40px var(--pt-accent-glow) !important;
+}
+
+.paper-icon-button-light,
+.MuiIconButton-root,
+.headerButton {
+    color: var(--pt-text) !important;
+    border-radius: var(--pt-r-pill) !important;
+    transition: all 0.2s var(--pt-ease) !important;
+}
+
+.paper-icon-button-light:focus,
+.paper-icon-button-light:hover,
+.MuiIconButton-root:focus,
+.MuiIconButton-root:hover {
+    background: var(--pt-glass-strong) !important;
+    color: var(--pt-accent) !important;
+}
+
+/* Surfaces */
+.dialog,
+.menu,
+.actionSheet,
+.MuiDialog-paper,
+.MuiMenu-paper,
+.MuiPopover-paper,
+.MuiAutocomplete-paper {
+    background-color: rgba(15, 15, 15, 0.9) !important;
+    background-image: none !important;
+    border: 1px solid var(--pt-accent-soft) !important;
+    border-radius: var(--pt-r) !important;
+    color: var(--pt-text) !important;
+    backdrop-filter: blur(30px) saturate(1.6) !important;
+    -webkit-backdrop-filter: blur(30px) saturate(1.6) !important;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7) !important;
+}
+
+.paperList {
+    background: transparent !important;
+    color: var(--pt-text) !important;
+    overflow-y: auto !important;
+}
+
+.MuiMenuItem-root,
+.MuiListItemButton-root,
+.actionSheetMenuItem {
+    color: var(--pt-text) !important;
+    border-radius: 8px !important;
+    margin: 0.1em 0.3em !important;
+}
+
+.MuiMenuItem-root:focus,
+.MuiMenuItem-root:hover,
+.MuiListItemButton-root:focus,
+.MuiListItemButton-root:hover,
+.actionSheetMenuItem:focus,
+.actionSheetMenuItem:hover {
+    background: var(--pt-accent-soft) !important;
+}
+
+/* Form controls */
+.emby-input,
+.emby-select,
+.emby-textarea,
+.MuiFilledInput-root,
+.MuiOutlinedInput-root,
+.MuiInputBase-root {
+    background-color: var(--pt-glass) !important;
+    border: 1px solid var(--pt-accent-soft) !important;
+    border-radius: 10px !important;
+    color: var(--pt-text) !important;
+    padding: 0.7em 0.95em !important;
+}
+
+.MuiFilledInput-root::before,
+.MuiFilledInput-root::after,
+.MuiOutlinedInput-notchedOutline {
+    display: none !important;
+}
+
+.emby-input:focus,
+.MuiFilledInput-root.Mui-focused,
+.MuiOutlinedInput-root.Mui-focused {
+    border-color: var(--pt-accent) !important;
+    box-shadow: 0 0 0 2px var(--pt-accent-soft) !important;
+    outline: none !important;
+}
+
+/* Detail page — hero gets the full accent tint */
+.detailPagePrimaryContainer {
+    background: linear-gradient(180deg,
+            transparent 0%,
+            var(--pt-accent-soft) 20%,
+            rgba(0, 0, 0, 0.7) 60%,
+            var(--pt-bg) 100%) !important;
+    padding-top: 22vh !important;
+    padding-bottom: 4em !important;
+    transition: background 1.2s var(--pt-ease) !important;
+}
+
+.itemBackdrop {
+    height: 85vh !important;
+    position: relative !important;
+}
+
+.itemBackdrop::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg,
+            transparent 0%,
+            transparent 50%,
+            var(--pt-bg) 100%);
+}
+
+.parentName {
+    color: var(--pt-accent) !important;
+    margin-bottom: 0.5em !important;
+}
+
+.overview {
+    font-size: 1.05rem !important;
+    line-height: 1.6 !important;
+    color: var(--pt-text-dim) !important;
+    max-width: 65ch !important;
+}
+
+/* Player OSD */
+.videoOsdBottom.videoOsdBottom-maincontrols {
+    background: rgba(0, 0, 0, 0.6) !important;
+    border: 1px solid var(--pt-accent-soft) !important;
+    border-radius: 50px !important;
+    backdrop-filter: blur(24px) saturate(1.6) !important;
+    -webkit-backdrop-filter: blur(24px) saturate(1.6) !important;
+}
+
+/* Scrubber: fills in the current accent */
+.sliderContainer .mdl-slider-background-lower,
+.mdl-slider-background-lower {
+    background-color: var(--pt-accent) !important;
+}
+
+.mdl-slider-background-upper {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.mdl-slider::-webkit-slider-thumb {
+    background: var(--pt-accent) !important;
+    box-shadow: 0 0 15px var(--pt-accent-glow) !important;
+}
+
+/* Subtitles */
+.subtitles span,
+.videoSubtitles span,
+::cue {
+    color: var(--pt-text) !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    padding: 0.15em 0.5em !important;
+    border-radius: 4px !important;
+    font-weight: 500 !important;
+}
+
+/* TV layout */
+.layout-tv {
+    font-size: 1.25em !important;
+}
+
+.layout-tv .sectionTitle {
+    font-size: 1.7rem !important;
+}
+
+.layout-tv .itemName {
+    font-size: 5rem !important;
+}
+
+.layout-tv .cardText {
+    font-size: 1.15rem !important;
+}
+
+.layout-tv .card:focus,
+.layout-tv .card:hover {
+    transform: scale(1.12) !important;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+    width: 6px !important;
+    height: 6px !important;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--pt-accent-soft) !important;
+    border-radius: var(--pt-r-pill) !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--pt-accent) !important;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}

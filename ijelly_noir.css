@@ -1,0 +1,513 @@
+/* ijelly Cinematheque Noir — warm sepia, Didone, brass, film grain */
+/* Jellyfin 10.9+ and 12+ (covers Legacy + MUI chrome) */
+
+:root {
+    --noir-bg: #0e0a07;
+    --noir-bg-elev: #15100b;
+    --noir-bg-raised: #1c1611;
+    --noir-text: #f4ebd8;
+    --noir-text-dim: rgba(244, 235, 216, 0.6);
+    --noir-text-faint: rgba(244, 235, 216, 0.35);
+    --noir-accent: #d4a24c;
+    --noir-accent-dim: rgba(212, 162, 76, 0.5);
+    --noir-rule: rgba(212, 162, 76, 0.3);
+    --noir-mat: #1a140e;
+    --noir-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 2px 8px rgba(0, 0, 0, 0.4);
+    --noir-font-display: 'Playfair Display', 'Bodoni Moda', 'Didot', 'Noto Serif Display', Georgia, serif;
+    --noir-font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
+    --noir-font-mono: 'JetBrains Mono', 'SF Mono', ui-monospace, Menlo, monospace;
+    --noir-ease: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+
+html,
+body {
+    background-color: var(--noir-bg) !important;
+    color: var(--noir-text) !important;
+    font-family: var(--noir-font-body) !important;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Film grain overlay — SVG noise, fixed, blends with everything beneath */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 99999;
+    opacity: 0.055;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.9  0 0 0 0 0.85  0 0 0 0 0.75  0 0 0 1 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    background-size: 200px 200px;
+}
+
+.backgroundContainer,
+.skinBody,
+.mainAnimatedPage,
+.pageContainer,
+#itemDetailPage,
+#searchPage {
+    background-color: var(--noir-bg) !important;
+}
+
+/* Backdrop art: warm the saturation, dim it, let the mat show through */
+.backdropContainer {
+    filter: sepia(0.25) saturate(0.9) brightness(0.5) contrast(1.05) !important;
+}
+
+::selection {
+    background: var(--noir-accent);
+    color: #000;
+}
+
+/* Typography — Didone drama for headlines */
+h1,
+h2,
+h3,
+.sectionTitle,
+.itemName,
+.itemName.parentNameLast,
+.pageTitle,
+.MuiTypography-h1,
+.MuiTypography-h2,
+.MuiTypography-h3,
+.MuiTypography-h4 {
+    font-family: var(--noir-font-display) !important;
+    font-weight: 400 !important;
+    letter-spacing: -0.01em !important;
+    color: var(--noir-text) !important;
+}
+
+.sectionTitle,
+.sectionTitleTextButton {
+    font-style: italic !important;
+    text-transform: lowercase !important;
+    font-size: 1.75rem !important;
+    letter-spacing: 0 !important;
+    color: var(--noir-text) !important;
+}
+
+.itemName,
+.itemName.parentNameLast {
+    font-size: 4.5rem !important;
+    line-height: 1 !important;
+}
+
+/* Metadata chips — small-caps mono, wide tracking (museum/credit style) */
+.mediaInfoItem,
+.listItemBodyText.secondary,
+.parentName,
+.cardText-secondary {
+    font-family: var(--noir-font-mono) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.18em !important;
+    font-size: 0.68rem !important;
+    color: var(--noir-text-dim) !important;
+    font-weight: 400 !important;
+}
+
+/* Header: thin brass rule, no chrome */
+.skinHeader,
+.MuiAppBar-root {
+    background: transparent !important;
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid var(--noir-rule) !important;
+}
+
+.skinHeader.semiTransparent {
+    background-color: rgba(14, 10, 7, 0.85) !important;
+}
+
+/* Tabs: Legacy + MUI, serif italic lowercase, brass underline when active */
+.emby-tab-button,
+.MuiTab-root {
+    font-family: var(--noir-font-display) !important;
+    font-style: italic !important;
+    text-transform: lowercase !important;
+    font-size: 1.1em !important;
+    font-weight: 400 !important;
+    color: var(--noir-text-dim) !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    padding: 0.4em 1em !important;
+    margin: 0 0.4em !important;
+    border-bottom: 1px solid transparent !important;
+    transition: all 0.3s var(--noir-ease) !important;
+    min-height: unset !important;
+}
+
+.emby-tab-button:focus,
+.emby-tab-button:hover,
+.MuiTab-root:focus,
+.MuiTab-root:hover {
+    color: var(--noir-accent) !important;
+    background: transparent !important;
+}
+
+.emby-tab-button.emby-tab-button-active,
+.MuiTab-root.Mui-selected {
+    color: var(--noir-accent) !important;
+    border-bottom-color: var(--noir-accent) !important;
+    background: transparent !important;
+}
+
+.MuiTabs-indicator,
+.emby-tabs-selectionbar {
+    display: none !important;
+}
+
+/* Drawer / user menu */
+.mainDrawer,
+.MuiDrawer-paper {
+    background-color: var(--noir-bg-elev) !important;
+    background-image: none !important;
+    border-right: 1px solid var(--noir-rule) !important;
+    color: var(--noir-text) !important;
+    border-radius: 0 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* Cards: brass hairline frame + cream mat around each poster */
+.card,
+.portraitCard,
+.squareCard,
+.backdropCard,
+.scalableCard {
+    overflow: visible !important;
+    background: transparent !important;
+    margin: 1.5em !important;
+    transition: transform 0.5s var(--noir-ease), filter 0.5s var(--noir-ease) !important;
+}
+
+.cardBox,
+.cardScalable {
+    background: var(--noir-mat) !important;
+    padding: 10px !important;
+    border: 1px solid var(--noir-rule) !important;
+    border-radius: 0 !important;
+    box-shadow: 0 1px 0 rgba(212, 162, 76, 0.15), var(--noir-shadow) !important;
+}
+
+.cardImageContainer,
+.cardContent,
+.cardPadder,
+.cardPadder-portrait,
+.cardPadder-backdrop,
+.cardPadder-square {
+    border-radius: 0 !important;
+    background-color: transparent !important;
+}
+
+/* Focus/hover: 2° tilt, inner amber glow, slight warm filter lift */
+.card:focus,
+.card:hover {
+    transform: scale(1.06) rotate(-1.2deg) !important;
+    filter: brightness(1.08) !important;
+    z-index: 100 !important;
+    outline: none !important;
+}
+
+.card:focus .cardBox,
+.card:hover .cardBox {
+    border-color: var(--noir-accent) !important;
+    box-shadow:
+        inset 0 0 0 1px var(--noir-accent-dim),
+        0 30px 70px rgba(0, 0, 0, 0.85),
+        0 0 40px rgba(212, 162, 76, 0.2) !important;
+}
+
+/* Dim non-focused cards in the row — spotlight effect */
+@media (hover: hover) and (pointer: fine) {
+
+    .itemsContainer:hover .card:not(:hover),
+    .scrollSlider:hover .card:not(:hover) {
+        opacity: 0.5;
+        filter: saturate(0.6);
+        transition: opacity 0.4s var(--noir-ease), filter 0.4s var(--noir-ease);
+    }
+}
+
+.cardText {
+    font-family: var(--noir-font-display) !important;
+    font-style: italic !important;
+    font-size: 1rem !important;
+    color: var(--noir-text) !important;
+    margin-top: 0.8em !important;
+    text-align: center !important;
+    letter-spacing: 0.01em !important;
+}
+
+/* Buttons: outlined brass, invert on hover */
+.emby-button.raised,
+.button-submit,
+.MuiButton-root,
+.MuiButton-contained {
+    font-family: var(--noir-font-mono) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.18em !important;
+    font-size: 0.78rem !important;
+    font-weight: 500 !important;
+    background: transparent !important;
+    color: var(--noir-accent) !important;
+    border: 1px solid var(--noir-accent) !important;
+    border-radius: 0 !important;
+    padding: 0.9em 2em !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    transition: all 0.3s var(--noir-ease) !important;
+}
+
+.emby-button.raised:focus,
+.emby-button.raised:hover,
+.MuiButton-root:focus,
+.MuiButton-root:hover,
+.MuiButton-contained:focus,
+.MuiButton-contained:hover,
+.button-submit:focus,
+.button-submit:hover {
+    background: var(--noir-accent) !important;
+    color: var(--noir-bg) !important;
+    transform: none !important;
+}
+
+/* Primary play button: filled brass by default */
+.btnPlay,
+.mainDetailButtons .raised.button-submit:first-child {
+    background: var(--noir-accent) !important;
+    color: var(--noir-bg) !important;
+}
+
+.btnPlay:hover,
+.btnPlay:focus {
+    background: var(--noir-text) !important;
+    color: var(--noir-bg) !important;
+}
+
+.paper-icon-button-light,
+.MuiIconButton-root {
+    color: var(--noir-text) !important;
+    border-radius: 0 !important;
+    transition: color 0.2s var(--noir-ease) !important;
+}
+
+.paper-icon-button-light:focus,
+.paper-icon-button-light:hover,
+.MuiIconButton-root:focus,
+.MuiIconButton-root:hover {
+    color: var(--noir-accent) !important;
+    background: transparent !important;
+}
+
+/* Surfaces: dialogs, menus, sheets — thin brass frames, no blur */
+.dialog,
+.menu,
+.actionSheet,
+.MuiDialog-paper,
+.MuiMenu-paper,
+.MuiPopover-paper,
+.MuiAutocomplete-paper {
+    background-color: var(--noir-bg-elev) !important;
+    background-image: none !important;
+    border: 1px solid var(--noir-rule) !important;
+    border-radius: 0 !important;
+    color: var(--noir-text) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: var(--noir-shadow) !important;
+}
+
+.paperList {
+    background: transparent !important;
+    color: var(--noir-text) !important;
+    overflow-y: auto !important;
+}
+
+.MuiMenuItem-root,
+.MuiListItemButton-root,
+.actionSheetMenuItem {
+    color: var(--noir-text) !important;
+    border-radius: 0 !important;
+    font-family: var(--noir-font-body) !important;
+}
+
+.MuiMenuItem-root:focus,
+.MuiMenuItem-root:hover,
+.MuiListItemButton-root:focus,
+.MuiListItemButton-root:hover {
+    background: rgba(212, 162, 76, 0.12) !important;
+    color: var(--noir-accent) !important;
+}
+
+/* Form controls — Legacy + MUI */
+.emby-input,
+.emby-select,
+.emby-textarea,
+.MuiFilledInput-root,
+.MuiOutlinedInput-root,
+.MuiInputBase-root {
+    background-color: var(--noir-bg-elev) !important;
+    border: 1px solid var(--noir-rule) !important;
+    border-radius: 0 !important;
+    color: var(--noir-text) !important;
+    font-family: var(--noir-font-body) !important;
+    padding: 0.75em 1em !important;
+}
+
+.MuiFilledInput-root::before,
+.MuiFilledInput-root::after,
+.MuiOutlinedInput-notchedOutline {
+    display: none !important;
+}
+
+.emby-input:focus,
+.emby-select:focus,
+.emby-textarea:focus,
+.MuiFilledInput-root.Mui-focused,
+.MuiOutlinedInput-root.Mui-focused {
+    border-color: var(--noir-accent) !important;
+    box-shadow: 0 0 0 1px var(--noir-accent) !important;
+    outline: none !important;
+}
+
+/* Item detail page: dramatic drop into the mat */
+.detailPagePrimaryContainer {
+    background: linear-gradient(180deg,
+            transparent 0%,
+            rgba(14, 10, 7, 0.6) 50%,
+            var(--noir-bg) 100%) !important;
+    padding-top: 24vh !important;
+    padding-bottom: 4em !important;
+}
+
+.itemBackdrop {
+    height: 85vh !important;
+    position: relative !important;
+    filter: sepia(0.3) saturate(0.85) brightness(0.6) contrast(1.1) !important;
+}
+
+.itemBackdrop::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg,
+            transparent 0%,
+            transparent 45%,
+            var(--noir-bg) 100%);
+}
+
+.parentName {
+    margin-bottom: 1em !important;
+}
+
+.overview {
+    font-family: var(--noir-font-display) !important;
+    font-size: 1.15rem !important;
+    line-height: 1.6 !important;
+    color: var(--noir-text) !important;
+    max-width: 62ch !important;
+    font-weight: 400 !important;
+}
+
+/* Player OSD: thin brass hairline bar, no glass */
+.videoOsdBottom.videoOsdBottom-maincontrols {
+    background: rgba(14, 10, 7, 0.9) !important;
+    border: 1px solid var(--noir-rule) !important;
+    border-radius: 0 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: var(--noir-shadow) !important;
+}
+
+.sliderContainer .mdl-slider-background-lower,
+.mdl-slider-background-lower {
+    background-color: var(--noir-accent) !important;
+}
+
+.mdl-slider-background-upper {
+    background-color: rgba(244, 235, 216, 0.15) !important;
+}
+
+.mdl-slider::-webkit-slider-thumb {
+    background: var(--noir-accent) !important;
+    border-radius: 0 !important;
+    width: 12px !important;
+    height: 12px !important;
+}
+
+/* Subtitles — serif italic for a projection-booth feel */
+.subtitles span,
+.videoSubtitles span,
+.videoSubtitlesInner span,
+::cue {
+    font-family: var(--noir-font-display) !important;
+    font-style: italic !important;
+    font-weight: 400 !important;
+    color: var(--noir-text) !important;
+    background: rgba(0, 0, 0, 0.6) !important;
+    padding: 0.15em 0.5em !important;
+    border-radius: 0 !important;
+}
+
+/* TV layout bumps */
+.layout-tv {
+    font-size: 1.25em !important;
+}
+
+.layout-tv .sectionTitle {
+    font-size: 2.4rem !important;
+}
+
+.layout-tv .itemName {
+    font-size: 6rem !important;
+}
+
+.layout-tv .card:focus,
+.layout-tv .card:hover {
+    transform: scale(1.1) rotate(-1.5deg) !important;
+}
+
+.layout-tv .cardText {
+    font-size: 1.3rem !important;
+}
+
+.layout-tv .emby-tab-button,
+.layout-tv .MuiTab-root {
+    font-size: 1.8em !important;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+    width: 4px !important;
+    height: 4px !important;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--noir-rule) !important;
+    border-radius: 0 !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--noir-accent) !important;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}

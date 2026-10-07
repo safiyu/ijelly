@@ -208,22 +208,16 @@ header .logo svg {
     overflow: hidden !important;
 }
 
+/* Single source of truth for tab-button active state (keyboard + pointer) */
 .emby-tab-button:focus,
+.emby-tab-button:hover,
 .tab-button:focus,
-.nav-tab-button:focus {
+.tab-button:hover,
+.nav-tab-button:focus,
+.nav-tab-button:hover {
     color: var(--apple-text) !important;
     background: var(--apple-glass) !important;
     transform: scale(1.05) !important;
-}
-
-@media (hover: hover) {
-    .emby-tab-button:hover,
-    .tab-button:hover,
-    .nav-tab-button:hover {
-        color: var(--apple-text) !important;
-        background: var(--apple-glass) !important;
-        transform: scale(1.05) !important;
-    }
 }
 
 .emby-tab-button:active,
@@ -257,7 +251,7 @@ header .logo svg {
     display: none !important;
 }
 
-.emby-select,
+/* Surface panels: panel chrome only, no scroll/overflow (bleeds carets, shadows) */
 .actionSheet,
 .action-sheet,
 .dialog,
@@ -265,17 +259,11 @@ header .logo svg {
 .dialogContainer,
 .menu,
 .context-menu,
-.paperList,
-.paper-list,
-.emby-input,
-.select-container,
 .formDialog {
     background-color: rgba(15, 15, 15, 0.9) !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
     border-radius: var(--apple-radius) !important;
     color: white !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
     isolation: isolate !important;
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
@@ -284,6 +272,29 @@ header .logo svg {
     font-weight: 500 !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
+}
+
+/* Scroll host: only the inner list scrolls, so .menu doesn't double up */
+.paperList {
+    overflow-y: auto !important;
+    color: white !important;
+}
+
+/* Form controls: inputs/selects need chrome but NOT text-shadow or isolation */
+.emby-input,
+.emby-select {
+    background-color: rgba(15, 15, 15, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: var(--apple-radius) !important;
+    color: white !important;
+    font-weight: 500 !important;
+}
+
+/* Drawer scroll pane: transparent so .mainDrawer's panel chrome shows through */
+.mainDrawer-scrollContainer {
+    background-color: transparent !important;
+    color: white !important;
+    overflow-y: auto !important;
 }
 
 .emby-textarea {
@@ -460,7 +471,8 @@ header .logo svg {
     -webkit-backdrop-filter: var(--apple-blur) !important;
 }
 
-.card:focus {
+.card:focus,
+.card:hover {
     transform: scale(1.06) !important;
     box-shadow: var(--apple-shadow) !important;
     z-index: 100 !important;
@@ -468,15 +480,6 @@ header .logo svg {
     border: none !important;
 }
 
-@media (hover: hover) {
-    .card:hover {
-        transform: scale(1.06) !important;
-        box-shadow: var(--apple-shadow) !important;
-        z-index: 100 !important;
-        outline: none !important;
-        border: none !important;
-    }
-}
 
 .card,
 .cardContent,
@@ -714,12 +717,11 @@ h2.sectionTitle,
     transition: all 0.2s ease !important;
 }
 
-@media (hover: hover) {
-    .emby-button.raised:hover {
-        background: var(--apple-text) !important;
-        color: #000 !important;
-        transform: scale(1.05) !important;
-    }
+.emby-button.raised:focus,
+.emby-button.raised:hover {
+    background: var(--apple-text) !important;
+    color: #000 !important;
+    transform: scale(1.05) !important;
 }
 
 .emby-button.raised:active {
@@ -885,16 +887,10 @@ body::after {
     transition: transform 0.2s var(--apple-spring-fast) !important;
 }
 
-.btnVideoOsdBack:focus {
+.btnVideoOsdBack:focus,
+.btnVideoOsdBack:hover {
     transform: scale(1.1) !important;
     background: rgba(255, 255, 255, 0.2) !important;
-}
-
-@media (hover: hover) {
-    .btnVideoOsdBack:hover {
-        transform: scale(1.1) !important;
-        background: rgba(255, 255, 255, 0.2) !important;
-    }
 }
 
 .osdControls .paper-icon-button-light {
@@ -903,11 +899,10 @@ body::after {
     transition: transform 0.2s ease, background 0.2s ease !important;
 }
 
-@media (hover: hover) {
-    .osdControls .paper-icon-button-light:hover {
-        background: rgba(255, 255, 255, 0.2) !important;
-        transform: scale(1.1) !important;
-    }
+.osdControls .paper-icon-button-light:focus,
+.osdControls .paper-icon-button-light:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    transform: scale(1.1) !important;
 }
 
 .osdControls .btnPlayPause {
@@ -932,13 +927,18 @@ body::after {
     background: rgba(255, 255, 255, 0.4) !important;
 }
 
-*:focus:not(:focus-visible) {
+/* Default: outline off. :not(:focus-visible) is invalid on Selectors-3
+   engines (older Tizen WebKit); the whole rule drops. Unconditional
+   suppression + @supports-gated re-enable keeps outlines sane everywhere. */
+*:focus {
     outline: none !important;
 }
 
-*:focus-visible {
-    outline: 2px solid var(--apple-accent) !important;
-    outline-offset: 2px !important;
+@supports selector(:focus-visible) {
+    *:focus-visible {
+        outline: 2px solid var(--apple-accent) !important;
+        outline-offset: 2px !important;
+    }
 }
 
 .content-loader {
@@ -1098,10 +1098,10 @@ body::after {
     transition: transform 0.25s var(--apple-spring-fast) !important;
 }
 
-html:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
-html:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
-html:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent,
-html:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container,
+/* Lift subtitles when OSD visible. transform:translateY is GPU-accelerated and
+   doesn't trigger layout. Body-class fallbacks run everywhere; :has() is wrapped
+   in @supports and scoped to .videoPlayerContainer so subtitle-cue mutations
+   don't thrash the whole page (and older Tizen drops it cleanly). */
 .videoOsd-visible .videoSubtitlesInner,
 .videoOsd-visible .subtitle-container,
 .videoOsd-visible .libassjs-canvas-parent,
@@ -1113,10 +1113,15 @@ html:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container,
     transform: translateY(-11rem) !important;
 }
 
-html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
-html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
-html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent,
-html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container,
+@supports selector(:has(*)) {
+    .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
+    .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
+    .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent,
+    .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
+        transform: translateY(-11rem) !important;
+    }
+}
+
 .layout-tv.videoOsd-visible .videoSubtitlesInner,
 .layout-tv.videoOsd-visible .subtitle-container,
 .layout-tv.videoOsd-visible .libassjs-canvas-parent,
@@ -1126,6 +1131,15 @@ html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-cont
 .layout-tv.showing-osd .libassjs-canvas-parent,
 .layout-tv.showing-osd .shaka-text-container {
     transform: translateY(-14.5rem) !important;
+}
+
+@supports selector(:has(*)) {
+    .layout-tv .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
+    .layout-tv .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
+    .layout-tv .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent,
+    .layout-tv .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
+        transform: translateY(-14.5rem) !important;
+    }
 }
 
 .subtitles span,
@@ -1161,9 +1175,10 @@ html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-cont
 @media (max-width: 1000px) {
     :root {
         /* Backdrop-filter is expensive on low-power mobile GPUs and causes
-           UI freezes; disable it globally and re-enable it only for the
-           handful of elements below where the visual payoff is worth it. */
+           UI freezes; disable it globally and re-enable only via the
+           --apple-blur-strong token on exception surfaces below. */
         --apple-blur: none;
+        --apple-blur-strong: blur(10px);
     }
 
     .portraitCard,
@@ -1207,8 +1222,8 @@ html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-cont
     .mainDrawer,
     .dialog,
     .emby-tab-button.emby-tab-button-active {
-        backdrop-filter: blur(10px) !important;
-        -webkit-backdrop-filter: blur(10px) !important;
+        backdrop-filter: var(--apple-blur-strong) !important;
+        -webkit-backdrop-filter: var(--apple-blur-strong) !important;
     }
 
     .skinHeader .headerLeft img,
@@ -1264,6 +1279,41 @@ html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-cont
         display: none !important;
     }
 
+    /* Mobile OSD stacks into two rows: slider + buttons. Total height
+       (padding 1em x 2 + two ~2.5em rows + 0.75em gap + 1.5em bottom)
+       sits well above 8em, so lift subtitles higher to actually clear it. */
+    body.videoOsd-visible .subtitles,
+    body.videoOsd-visible .videoSubtitles,
+    body.videoOsd-visible .videoSubtitlesInner,
+    body.videoOsd-visible .subtitle-container,
+    body.videoOsd-visible .libassjs-canvas-parent,
+    body.videoOsd-visible .shaka-text-container,
+    body.osd-visible .subtitles,
+    body.osd-visible .videoSubtitles,
+    body.osd-visible .videoSubtitlesInner,
+    body.osd-visible .subtitle-container,
+    body.osd-visible .libassjs-canvas-parent,
+    body.osd-visible .shaka-text-container,
+    body.showing-osd .subtitles,
+    body.showing-osd .videoSubtitles,
+    body.showing-osd .videoSubtitlesInner,
+    body.showing-osd .subtitle-container,
+    body.showing-osd .libassjs-canvas-parent,
+    body.showing-osd .shaka-text-container {
+        bottom: 12em !important;
+    }
+
+    @supports selector(:has(*)) {
+        .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitles,
+        .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitles,
+        .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
+        .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
+        .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent,
+        .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
+            bottom: 12em !important;
+        }
+    }
+
     .view,
     .mainAnimatedPages,
     .skinBody,
@@ -1309,7 +1359,6 @@ html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-cont
     z-index: 900 !important;
 }
 
-
 /* Glass tags for metadata badges */
 .mediaInfoItem,
 .starRatingContainer,
@@ -1329,57 +1378,115 @@ html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-cont
     gap: 0.3em !important;
 }
 
-/* ═══════════════════════════════════════════════════
-   Jellyfin 12.0 "Modern" Layout Compatibility
-   ═══════════════════════════════════════════════════
-   JF 12 merged the library toolbar into the app bar and
-   switched to MUI components.  The selectors below
-   target the new class names so the theme works on
-   both "Modern" (default) and "Legacy" display modes.
-   ═══════════════════════════════════════════════════ */
+/* ========================================================================
+   MODERN LAYOUT (Jellyfin 12+, React/MUI chrome)
+   Dual selectors: direct .MuiX-root plus [class*="X-root"] handle MUI's
+   dynamically-hashed class names on both Modern (default) and Legacy modes.
+   ======================================================================== */
 
-/* Modern app bar / toolbar — transparent + no border */
+/* App bar / toolbar — transparent with blurred glass */
 .MuiAppBar-root,
 .MuiToolbar-root,
 [class*="AppBar-root"],
 [class*="Toolbar-root"] {
     background-color: transparent !important;
-    background: transparent !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
+    background-image: none !important;
+    backdrop-filter: var(--apple-blur) !important;
+    -webkit-backdrop-filter: var(--apple-blur) !important;
     box-shadow: none !important;
-    border: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: var(--apple-text) !important;
 }
 
-/* MUI Drawer (side nav) — glass treatment */
+/* Drawer — side nav / user menu */
 .MuiDrawer-paper,
 [class*="Drawer-paper"] {
     background-color: rgba(10, 10, 10, 0.85) !important;
+    background-image: none !important;
     backdrop-filter: var(--apple-blur) !important;
     -webkit-backdrop-filter: var(--apple-blur) !important;
     border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 0 var(--apple-radius) var(--apple-radius) 0 !important;
+    color: var(--apple-text) !important;
     box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5) !important;
 }
 
-/* MUI Dialog / Menu — frosted glass */
+/* Dialogs / menus / popovers */
 .MuiDialog-paper,
 .MuiMenu-paper,
+.MuiPopover-paper,
+.MuiAutocomplete-paper,
 .MuiPaper-root,
 [class*="Dialog-paper"],
 [class*="Menu-paper"] {
     background-color: rgba(15, 15, 15, 0.9) !important;
+    background-image: none !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
     border-radius: var(--apple-radius) !important;
-    color: white !important;
+    color: var(--apple-text) !important;
+    backdrop-filter: var(--apple-blur) !important;
+    -webkit-backdrop-filter: var(--apple-blur) !important;
+    box-shadow: var(--apple-shadow) !important;
 }
 
-/* MUI Buttons — ijelly styling */
+.MuiDialogTitle-root {
+    color: var(--apple-text) !important;
+    font-weight: 700 !important;
+}
+
+/* Menu items */
+.MuiMenuItem-root,
+.MuiListItemButton-root {
+    color: var(--apple-text) !important;
+    border-radius: 8px !important;
+    margin: 0.1em 0.4em !important;
+    transition: background 0.15s ease !important;
+}
+
+.MuiMenuItem-root:focus,
+.MuiMenuItem-root:hover,
+.MuiListItemButton-root:focus,
+.MuiListItemButton-root:hover,
+.MuiMenuItem-root.Mui-selected {
+    background: var(--apple-glass) !important;
+}
+
+/* Buttons: generic + contained vs text variants */
 .MuiButton-root,
 .MuiIconButton-root,
 [class*="Button-root"],
 [class*="IconButton-root"] {
+    font-family: var(--apple-font) !important;
     border-radius: 30px !important;
+    text-transform: none !important;
+    font-weight: 600 !important;
     transition: all 0.2s var(--apple-spring-fast) !important;
+}
+
+.MuiButton-contained {
+    background: var(--apple-glass-heavy) !important;
+    color: var(--apple-text) !important;
+    backdrop-filter: var(--apple-blur) !important;
+    -webkit-backdrop-filter: var(--apple-blur) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: none !important;
+}
+
+.MuiButton-contained:focus,
+.MuiButton-contained:hover {
+    background: var(--apple-text) !important;
+    color: #000 !important;
+    transform: scale(1.05) !important;
+}
+
+.MuiButton-text {
+    color: var(--apple-text) !important;
+}
+
+.MuiButton-text:focus,
+.MuiButton-text:hover {
+    background: var(--apple-glass) !important;
+    border-radius: var(--apple-radius) !important;
 }
 
 .MuiButton-root:active,
@@ -1387,14 +1494,38 @@ html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-cont
     transform: scale(0.95) !important;
 }
 
-/* MUI Tabs — pill navigation */
+/* Icon buttons */
+.MuiIconButton-root {
+    color: var(--apple-text) !important;
+    border-radius: 50% !important;
+}
+
+.MuiIconButton-root:focus,
+.MuiIconButton-root:hover {
+    background: var(--apple-glass) !important;
+    transform: scale(1.1) !important;
+}
+
+/* Tabs */
 .MuiTab-root,
 [class*="Tab-root"] {
+    font-family: var(--apple-font) !important;
     font-weight: 600 !important;
     color: var(--apple-text-dim) !important;
     border-radius: 40px !important;
-    transition: all 0.4s var(--apple-spring-fast) !important;
+    margin: 0 0.25em !important;
+    padding: 0.6em 1.5em !important;
+    min-height: unset !important;
+    min-width: unset !important;
     text-transform: none !important;
+    transition: all 0.4s var(--apple-spring-fast) !important;
+}
+
+.MuiTab-root:focus,
+.MuiTab-root:hover {
+    color: var(--apple-text) !important;
+    background: var(--apple-glass) !important;
+    transform: scale(1.05) !important;
 }
 
 .MuiTab-root.Mui-selected,
@@ -1405,13 +1536,12 @@ html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-cont
                 0 2px 8px rgba(0, 0, 0, 0.3) !important;
 }
 
-/* Hide MUI tab indicator in favour of pill background */
 .MuiTabs-indicator,
 [class*="Tabs-indicator"] {
     display: none !important;
 }
 
-/* MUI Cards — rounded + spring animation */
+/* Cards */
 .MuiCard-root,
 .MuiCardMedia-root,
 [class*="Card-root"],
@@ -1421,7 +1551,7 @@ html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-cont
     transition: transform 0.5s var(--apple-spring-bouncy), box-shadow 0.3s ease !important;
 }
 
-/* Sticky library header (12.0 merged bar) */
+/* Sticky library header (JF12 merged bar) */
 .stickyLibraryHeader,
 [class*="stickyLibraryHeader"],
 [class*="libraryHeader"] {
@@ -1430,7 +1560,7 @@ html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-cont
     -webkit-backdrop-filter: none !important;
 }
 
-/* MUI Scrollbar override for JF12 surfaces */
+/* MUI scrollbar override for JF12 surfaces */
 .MuiPaper-root,
 [class*="Paper-root"] {
     scrollbar-width: thin !important;
@@ -1443,28 +1573,79 @@ html.layout-tv:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-cont
     background-image: none !important;
 }
 
-/* JF12 filled inputs — glass treatment */
+/* Form controls */
 .MuiFilledInput-root,
+.MuiOutlinedInput-root,
+.MuiInputBase-root,
 [class*="FilledInput-root"] {
     background-color: var(--apple-glass) !important;
     border-radius: var(--apple-radius) !important;
+    color: var(--apple-text) !important;
+    font-family: var(--apple-font) !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
+.MuiFilledInput-root::before,
+.MuiFilledInput-root::after,
+.MuiOutlinedInput-notchedOutline {
+    display: none !important;
+}
+
 .MuiFilledInput-root.Mui-focused,
+.MuiOutlinedInput-root.Mui-focused,
 [class*="FilledInput-root"][class*="focused"] {
     border-color: var(--apple-accent) !important;
     box-shadow: 0 0 0 2px rgba(0, 122, 255, 0.3) !important;
 }
 
+.MuiSelect-select,
+.MuiInputBase-input {
+    color: var(--apple-text) !important;
+}
+
+.MuiInputLabel-root {
+    color: var(--apple-text-dim) !important;
+}
+
+/* Dividers — replaces .listItem-border */
+.MuiDivider-root {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Typography defaults */
+.MuiTypography-root {
+    font-family: var(--apple-font) !important;
+}
+
+/* TV layout bumps on Modern chrome */
+.layout-tv .MuiTab-root {
+    font-size: 1.6em !important;
+    padding: 0.7em 2em !important;
+    margin: 0 0.5em !important;
+}
+
+.layout-tv .MuiButton-root {
+    font-size: 1.2em !important;
+    padding: 0.7em 1.8em !important;
+}
+
+.layout-tv .MuiIconButton-root {
+    padding: 0.6em !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
 
+    /* Shorten animations/transitions only; keep iteration-count so infinite
+       loaders (spinners) still cycle, otherwise they freeze mid-draw. */
     *,
     *::before,
     *::after {
         animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+    }
+
+    /* scroll-behavior only applies to scrollable boxes; pseudo-elements can't scroll */
+    html {
         scroll-behavior: auto !important;
     }
 }

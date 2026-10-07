@@ -1,0 +1,553 @@
+/* ijelly Gallery — MoMA-wall minimalism. Charcoal, cream mat, gold hairline frames */
+/* Vast whitespace, museum wall-tag captions, zero animation chrome */
+
+:root {
+    --gl-bg: #1a1a1a;
+    --gl-bg-elev: #202020;
+    --gl-bg-raised: #262626;
+    --gl-mat: #f3ede1;
+    --gl-mat-dim: #d9d2c3;
+    --gl-frame: #c9a978;
+    --gl-frame-dim: rgba(201, 169, 120, 0.4);
+    --gl-text: #e5e2db;
+    --gl-text-dim: rgba(229, 226, 219, 0.55);
+    --gl-text-faint: rgba(229, 226, 219, 0.3);
+    --gl-accent: #c9a978;
+    --gl-rule: rgba(229, 226, 219, 0.1);
+    --gl-shadow: 0 1px 0 rgba(201, 169, 120, 0.2);
+    --gl-font-display: 'Cormorant Garamond', 'EB Garamond', 'Playfair Display', 'Didot', Georgia, serif;
+    --gl-font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    --gl-font-tag: 'JetBrains Mono', 'SF Mono', ui-monospace, Menlo, monospace;
+    --gl-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+html,
+body {
+    background-color: var(--gl-bg) !important;
+    color: var(--gl-text) !important;
+    font-family: var(--gl-font-body) !important;
+    -webkit-font-smoothing: antialiased;
+}
+
+.backgroundContainer,
+.skinBody,
+.mainAnimatedPage,
+.pageContainer,
+#itemDetailPage,
+#searchPage {
+    background-color: var(--gl-bg) !important;
+}
+
+/* Backdrop barely there — the gallery wall is the primary surface */
+.backdropContainer {
+    filter: grayscale(0.6) brightness(0.3) !important;
+    opacity: 0.3 !important;
+}
+
+::selection {
+    background: var(--gl-accent);
+    color: var(--gl-bg);
+}
+
+/* Typography — classical serif for everything display */
+h1,
+h2,
+h3,
+.sectionTitle,
+.pageTitle,
+.itemName,
+.MuiTypography-h1,
+.MuiTypography-h2,
+.MuiTypography-h3 {
+    font-family: var(--gl-font-display) !important;
+    color: var(--gl-text) !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.01em !important;
+}
+
+.sectionTitle,
+.sectionTitleTextButton {
+    font-family: var(--gl-font-display) !important;
+    font-size: 2.2rem !important;
+    font-weight: 300 !important;
+    font-style: italic !important;
+    letter-spacing: 0.02em !important;
+    color: var(--gl-text) !important;
+    text-transform: none !important;
+    text-align: center !important;
+}
+
+.sectionTitleContainer {
+    text-align: center !important;
+    padding: 2rem 0 1rem !important;
+    margin-bottom: 3rem !important;
+}
+
+.itemName,
+.itemName.parentNameLast {
+    font-family: var(--gl-font-display) !important;
+    font-size: 4rem !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.02em !important;
+    line-height: 1.1 !important;
+}
+
+/* Museum wall-tag metadata — tiny mono uppercase */
+.mediaInfoItem,
+.listItemBodyText.secondary,
+.parentName,
+.cardText-secondary {
+    font-family: var(--gl-font-tag) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.22em !important;
+    font-size: 0.62rem !important;
+    color: var(--gl-text-dim) !important;
+    font-weight: 400 !important;
+}
+
+.parentName {
+    color: var(--gl-accent) !important;
+    margin-bottom: 1.2em !important;
+}
+
+/* Header: nearly invisible, just a hairline */
+.skinHeader,
+.MuiAppBar-root {
+    background: var(--gl-bg) !important;
+    background-color: var(--gl-bg) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-bottom: 1px solid var(--gl-rule) !important;
+    box-shadow: none !important;
+    padding: 1.5rem 2rem !important;
+}
+
+.pageTitle {
+    font-family: var(--gl-font-display) !important;
+    font-style: italic !important;
+    font-weight: 300 !important;
+    letter-spacing: 0.02em !important;
+}
+
+/* Tabs: classical italic, gold hairline underline when active */
+.emby-tab-button,
+.MuiTab-root {
+    font-family: var(--gl-font-display) !important;
+    text-transform: none !important;
+    font-style: italic !important;
+    font-size: 1.15rem !important;
+    font-weight: 400 !important;
+    color: var(--gl-text-dim) !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    padding: 0.5em 1em !important;
+    margin: 0 1.2em !important;
+    border-bottom: 1px solid transparent !important;
+    transition: all 0.6s var(--gl-ease) !important;
+    min-height: unset !important;
+    letter-spacing: 0.02em !important;
+}
+
+.emby-tab-button:focus,
+.emby-tab-button:hover,
+.MuiTab-root:focus,
+.MuiTab-root:hover {
+    color: var(--gl-text) !important;
+    background: transparent !important;
+}
+
+.emby-tab-button.emby-tab-button-active,
+.MuiTab-root.Mui-selected {
+    color: var(--gl-accent) !important;
+    border-bottom-color: var(--gl-accent) !important;
+}
+
+.MuiTabs-indicator,
+.emby-tabs-selectionbar {
+    display: none !important;
+}
+
+/* Drawer */
+.mainDrawer,
+.MuiDrawer-paper {
+    background-color: var(--gl-bg-elev) !important;
+    background-image: none !important;
+    border-right: 1px solid var(--gl-rule) !important;
+    color: var(--gl-text) !important;
+    padding: 2rem 0 !important;
+}
+
+.navMenuOption {
+    color: var(--gl-text-dim) !important;
+    border-radius: 0 !important;
+    padding: 1.2em 2em !important;
+    font-family: var(--gl-font-display) !important;
+    font-style: italic !important;
+    font-size: 1.1rem !important;
+}
+
+.navMenuOption:focus,
+.navMenuOption:hover,
+.navMenuOption-selected {
+    color: var(--gl-accent) !important;
+    background: transparent !important;
+}
+
+/* Shelves — vast whitespace between items (museum spacing) */
+.itemsContainer,
+.scrollSlider {
+    padding: 0 4rem !important;
+    gap: 0 !important;
+}
+
+.verticalSection {
+    padding: 4rem 0 !important;
+}
+
+/* Cards: THE signature — gold hairline frame + cream mat around image */
+.card,
+.portraitCard,
+.squareCard,
+.backdropCard,
+.scalableCard {
+    overflow: visible !important;
+    background: transparent !important;
+    margin: 2em 2em !important;
+    transition: opacity 0.8s var(--gl-ease) !important;
+}
+
+/* The frame itself — gold hairline, cream mat padding, no shadow */
+.cardBox,
+.cardScalable {
+    background: var(--gl-mat) !important;
+    padding: 14px 14px 14px !important;
+    border: 1px solid var(--gl-frame) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+}
+
+.cardImageContainer,
+.cardContent,
+.cardPadder {
+    border-radius: 0 !important;
+    background-color: transparent !important;
+}
+
+/* No scale on focus — just opacity attention. Museum pieces don't jiggle */
+.card:focus,
+.card:hover {
+    transform: none !important;
+    outline: none !important;
+    z-index: 100 !important;
+}
+
+.card:focus .cardBox,
+.card:hover .cardBox {
+    border-color: var(--gl-accent) !important;
+    border-width: 1px !important;
+    box-shadow: 0 0 0 1px var(--gl-accent) !important;
+}
+
+/* Spotlight: non-focused dim to 0.4 (slow 800ms fade) */
+@media (hover: hover) and (pointer: fine) {
+
+    .itemsContainer:hover .card:not(:hover),
+    .scrollSlider:hover .card:not(:hover) {
+        opacity: 0.35;
+    }
+}
+
+/* Caption below frame — museum wall-tag */
+.cardText {
+    font-family: var(--gl-font-display) !important;
+    font-style: italic !important;
+    font-size: 0.95rem !important;
+    font-weight: 400 !important;
+    color: var(--gl-text) !important;
+    margin-top: 1.2em !important;
+    text-align: center !important;
+    letter-spacing: 0.01em !important;
+    padding: 0 !important;
+}
+
+.cardText-secondary,
+.cardText.cardText-secondary {
+    font-family: var(--gl-font-tag) !important;
+    font-style: normal !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.22em !important;
+    font-size: 0.6rem !important;
+    color: var(--gl-text-faint) !important;
+    margin-top: 0.4em !important;
+}
+
+/* Buttons: hairline frames, serif italic, no fill */
+.emby-button.raised,
+.button-submit,
+.MuiButton-root,
+.MuiButton-contained {
+    font-family: var(--gl-font-display) !important;
+    text-transform: none !important;
+    font-style: italic !important;
+    font-size: 1.05rem !important;
+    font-weight: 400 !important;
+    background: transparent !important;
+    color: var(--gl-text) !important;
+    border: 1px solid var(--gl-text-dim) !important;
+    border-radius: 0 !important;
+    padding: 0.9em 2.2em !important;
+    letter-spacing: 0.03em !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    transition: all 0.5s var(--gl-ease) !important;
+}
+
+.emby-button.raised:focus,
+.emby-button.raised:hover,
+.MuiButton-root:focus,
+.MuiButton-root:hover,
+.button-submit:focus,
+.button-submit:hover {
+    background: transparent !important;
+    color: var(--gl-accent) !important;
+    border-color: var(--gl-accent) !important;
+    transform: none !important;
+}
+
+/* Primary play: gold-outlined, swap to filled on hover */
+.btnPlay,
+.mainDetailButtons .raised.button-submit:first-child {
+    border-color: var(--gl-accent) !important;
+    color: var(--gl-accent) !important;
+}
+
+.btnPlay:focus,
+.btnPlay:hover {
+    background: var(--gl-accent) !important;
+    color: var(--gl-bg) !important;
+}
+
+.paper-icon-button-light,
+.MuiIconButton-root {
+    color: var(--gl-text-dim) !important;
+    border-radius: 0 !important;
+    transition: color 0.3s var(--gl-ease) !important;
+}
+
+.paper-icon-button-light:focus,
+.paper-icon-button-light:hover,
+.MuiIconButton-root:focus,
+.MuiIconButton-root:hover {
+    color: var(--gl-accent) !important;
+    background: transparent !important;
+}
+
+/* Surfaces: cream matted plaques */
+.dialog,
+.menu,
+.actionSheet,
+.MuiDialog-paper,
+.MuiMenu-paper,
+.MuiPopover-paper,
+.MuiAutocomplete-paper {
+    background-color: var(--gl-mat) !important;
+    background-image: none !important;
+    border: 1px solid var(--gl-frame) !important;
+    border-radius: 0 !important;
+    color: var(--gl-bg) !important;
+    font-family: var(--gl-font-display) !important;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+.paperList {
+    background: transparent !important;
+    color: var(--gl-bg) !important;
+    overflow-y: auto !important;
+}
+
+.MuiMenuItem-root,
+.MuiListItemButton-root,
+.actionSheetMenuItem {
+    color: var(--gl-bg) !important;
+    border-radius: 0 !important;
+    font-family: var(--gl-font-display) !important;
+    font-style: italic !important;
+    font-size: 1.05rem !important;
+    padding: 0.8em 1.5em !important;
+}
+
+.MuiMenuItem-root:focus,
+.MuiMenuItem-root:hover,
+.MuiListItemButton-root:focus,
+.MuiListItemButton-root:hover,
+.actionSheetMenuItem:focus,
+.actionSheetMenuItem:hover {
+    background: var(--gl-mat-dim) !important;
+    color: var(--gl-bg) !important;
+}
+
+/* Form controls — gold underline, serif */
+.emby-input,
+.emby-select,
+.emby-textarea,
+.MuiFilledInput-root,
+.MuiOutlinedInput-root,
+.MuiInputBase-root {
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid var(--gl-text-dim) !important;
+    border-radius: 0 !important;
+    color: var(--gl-text) !important;
+    font-family: var(--gl-font-display) !important;
+    font-style: italic !important;
+    font-size: 1.15rem !important;
+    padding: 0.5em 0 !important;
+}
+
+.MuiFilledInput-root::before,
+.MuiFilledInput-root::after,
+.MuiOutlinedInput-notchedOutline {
+    display: none !important;
+}
+
+.emby-input:focus,
+.MuiFilledInput-root.Mui-focused,
+.MuiOutlinedInput-root.Mui-focused {
+    border-bottom-color: var(--gl-accent) !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Detail page */
+.detailPagePrimaryContainer {
+    background: linear-gradient(180deg,
+            transparent 0%,
+            rgba(26, 26, 26, 0.7) 50%,
+            var(--gl-bg) 100%) !important;
+    padding-top: 24vh !important;
+    padding-bottom: 5em !important;
+}
+
+.itemBackdrop {
+    height: 85vh !important;
+    position: relative !important;
+    filter: grayscale(0.5) brightness(0.4) !important;
+}
+
+.itemBackdrop::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg,
+            transparent 0%,
+            transparent 45%,
+            var(--gl-bg) 100%);
+}
+
+/* Overview — reads like a museum card */
+.overview {
+    font-family: var(--gl-font-display) !important;
+    font-size: 1.2rem !important;
+    line-height: 1.65 !important;
+    color: var(--gl-text) !important;
+    max-width: 56ch !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.005em !important;
+}
+
+/* Player OSD: hairline strip, minimal */
+.videoOsdBottom.videoOsdBottom-maincontrols {
+    background: var(--gl-bg) !important;
+    border: 1px solid var(--gl-rule) !important;
+    border-radius: 0 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7) !important;
+}
+
+.sliderContainer .mdl-slider-background-lower,
+.mdl-slider-background-lower {
+    background-color: var(--gl-accent) !important;
+}
+
+.mdl-slider-background-upper {
+    background-color: var(--gl-rule) !important;
+}
+
+.mdl-slider::-webkit-slider-thumb {
+    background: var(--gl-accent) !important;
+    border-radius: 50% !important;
+    width: 10px !important;
+    height: 10px !important;
+}
+
+/* Subtitles */
+.subtitles span,
+.videoSubtitles span,
+::cue {
+    font-family: var(--gl-font-display) !important;
+    font-style: italic !important;
+    color: var(--gl-text) !important;
+    background: rgba(26, 26, 26, 0.75) !important;
+    padding: 0.2em 0.6em !important;
+    border-radius: 0 !important;
+    font-weight: 400 !important;
+}
+
+/* TV layout */
+.layout-tv {
+    font-size: 1.25em !important;
+}
+
+.layout-tv .itemName {
+    font-size: 5.5rem !important;
+}
+
+.layout-tv .sectionTitle {
+    font-size: 2.8rem !important;
+}
+
+.layout-tv .cardText {
+    font-size: 1.3rem !important;
+}
+
+.layout-tv .emby-tab-button,
+.layout-tv .MuiTab-root {
+    font-size: 1.6rem !important;
+}
+
+/* Scrollbars — minimal */
+::-webkit-scrollbar {
+    width: 3px !important;
+    height: 3px !important;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gl-text-faint) !important;
+    border-radius: 0 !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gl-accent) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}

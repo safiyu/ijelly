@@ -1,0 +1,582 @@
+/* ijelly Blueprint × Ember — kontexta.dev dark palette for Jellyfin */
+/* Deep navy-black, ember amber, square corners, mono annotations */
+
+:root {
+    --kxta-bg: #060A12;
+    --kxta-bg-elev: #0D1119;
+    --kxta-bg-raised: #10141F;
+    --kxta-text: #E8EDF5;
+    --kxta-text-dim: #C4B49A;
+    --kxta-muted: #A89880;
+    --kxta-border: rgba(224, 144, 48, 0.3);
+    --kxta-border-dim: rgba(224, 144, 48, 0.12);
+    --kxta-accent: #E09030;
+    --kxta-accent-soft: rgba(224, 144, 48, 0.14);
+    --kxta-accent-hover: #F0A040;
+    --kxta-grid: rgba(224, 144, 48, 0.05);
+    --kxta-font-title: 'Saira', 'Inter Display', -apple-system, system-ui, sans-serif;
+    --kxta-font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
+    --kxta-font-mono: 'JetBrains Mono', 'SF Mono', ui-monospace, Menlo, monospace;
+    --kxta-ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Saira:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+html,
+body {
+    background-color: var(--kxta-bg) !important;
+    color: var(--kxta-text) !important;
+    font-family: var(--kxta-font-body) !important;
+    -webkit-font-smoothing: antialiased;
+}
+
+.backgroundContainer,
+.skinBody,
+.mainAnimatedPage,
+.pageContainer,
+#itemDetailPage,
+#searchPage {
+    background-color: var(--kxta-bg) !important;
+}
+
+/* Blueprint grid texture — subtle amber grid, every 22px */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image:
+        linear-gradient(var(--kxta-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--kxta-grid) 1px, transparent 1px);
+    background-size: 22px 22px;
+    opacity: 0.6;
+}
+
+.backdropContainer {
+    filter: brightness(0.4) contrast(1.1) hue-rotate(-10deg) !important;
+    opacity: 0.7 !important;
+}
+
+::selection {
+    background: var(--kxta-accent);
+    color: var(--kxta-bg);
+}
+
+/* Square corners everywhere — Blueprint signature */
+.card,
+.cardBox,
+.cardScalable,
+.cardContent,
+.cardImageContainer,
+.cardPadder,
+.cardPadder-portrait,
+.cardPadder-backdrop,
+.cardPadder-square,
+.dialog,
+.menu,
+.actionSheet,
+.emby-input,
+.emby-select,
+.emby-textarea,
+.emby-button,
+.emby-button.raised,
+.emby-tab-button,
+.MuiButton-root,
+.MuiButton-contained,
+.MuiTab-root,
+.MuiDialog-paper,
+.MuiMenu-paper,
+.MuiPopover-paper,
+.MuiFilledInput-root,
+.MuiOutlinedInput-root,
+.MuiInputBase-root,
+.MuiDrawer-paper,
+.MuiAppBar-root,
+.searchBar,
+.mainDrawer {
+    border-radius: 0 !important;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+.sectionTitle,
+.pageTitle,
+.itemName,
+.MuiTypography-h1,
+.MuiTypography-h2,
+.MuiTypography-h3 {
+    font-family: var(--kxta-font-title) !important;
+    letter-spacing: -0.02em !important;
+    color: var(--kxta-text) !important;
+    font-weight: 600 !important;
+}
+
+.sectionTitle,
+.sectionTitleTextButton {
+    font-size: 1.4rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.08em !important;
+    color: var(--kxta-text) !important;
+}
+
+.itemName,
+.itemName.parentNameLast {
+    font-size: 3.5rem !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.03em !important;
+}
+
+/* Mono uppercase annotations — Blueprint signature */
+.mediaInfoItem,
+.listItemBodyText.secondary,
+.parentName,
+.cardText-secondary {
+    font-family: var(--kxta-font-mono) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.12em !important;
+    font-size: 0.7rem !important;
+    color: var(--kxta-text-dim) !important;
+    font-weight: 400 !important;
+}
+
+.parentName {
+    color: var(--kxta-accent) !important;
+}
+
+/* Header: translucent, amber hairline */
+.skinHeader,
+.MuiAppBar-root {
+    background: rgba(6, 10, 18, 0.75) !important;
+    background-color: rgba(6, 10, 18, 0.75) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border-bottom: 1px solid var(--kxta-border) !important;
+    box-shadow: none !important;
+    color: var(--kxta-text) !important;
+}
+
+.skinHeader .headerLogo,
+.skinHeader .logo {
+    filter: brightness(1.1) !important;
+}
+
+/* Tabs: Blueprint style — mono, uppercase, dashed-underline active */
+.emby-tab-button,
+.MuiTab-root {
+    font-family: var(--kxta-font-mono) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.14em !important;
+    font-size: 0.75rem !important;
+    font-weight: 500 !important;
+    color: var(--kxta-text-dim) !important;
+    background: transparent !important;
+    padding: 0.7em 1.2em !important;
+    margin: 0 0.3em !important;
+    border: 1px dashed transparent !important;
+    transition: all 0.2s var(--kxta-ease) !important;
+    min-height: unset !important;
+}
+
+.emby-tab-button:focus,
+.emby-tab-button:hover,
+.MuiTab-root:focus,
+.MuiTab-root:hover {
+    color: var(--kxta-accent) !important;
+    background: var(--kxta-accent-soft) !important;
+    border-color: var(--kxta-border-dim) !important;
+}
+
+.emby-tab-button.emby-tab-button-active,
+.MuiTab-root.Mui-selected {
+    color: var(--kxta-accent) !important;
+    background: var(--kxta-accent-soft) !important;
+    border: 1px dashed var(--kxta-accent) !important;
+}
+
+.MuiTabs-indicator,
+.emby-tabs-selectionbar {
+    display: none !important;
+}
+
+/* Drawer */
+.mainDrawer,
+.MuiDrawer-paper {
+    background-color: var(--kxta-bg-elev) !important;
+    background-image: none !important;
+    border-right: 1px solid var(--kxta-border) !important;
+    color: var(--kxta-text) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+.mainDrawer-scrollContainer {
+    background-color: transparent !important;
+    color: var(--kxta-text) !important;
+}
+
+.navMenuOption {
+    color: var(--kxta-text-dim) !important;
+    border-radius: 0 !important;
+    transition: all 0.15s var(--kxta-ease) !important;
+}
+
+.navMenuOption:focus,
+.navMenuOption:hover,
+.navMenuOption-selected {
+    color: var(--kxta-accent) !important;
+    background: var(--kxta-accent-soft) !important;
+    border-left: 2px solid var(--kxta-accent) !important;
+}
+
+/* Cards: thin amber hairline, no radius, cross-hair hover */
+.card,
+.portraitCard,
+.squareCard,
+.backdropCard,
+.scalableCard {
+    overflow: visible !important;
+    background: transparent !important;
+    margin: 1em !important;
+    transition: transform 0.25s var(--kxta-ease) !important;
+    position: relative !important;
+}
+
+.cardBox,
+.cardScalable {
+    background: var(--kxta-bg-elev) !important;
+    border: 1px solid var(--kxta-border-dim) !important;
+    box-shadow: none !important;
+}
+
+.cardImageContainer,
+.cardContent {
+    background-color: transparent !important;
+}
+
+.card:focus,
+.card:hover {
+    transform: scale(1.04) !important;
+    z-index: 100 !important;
+    outline: none !important;
+}
+
+.card:focus .cardBox,
+.card:hover .cardBox {
+    border: 1px solid var(--kxta-accent) !important;
+    box-shadow:
+        0 0 0 1px var(--kxta-accent),
+        0 20px 50px rgba(0, 0, 0, 0.7),
+        0 0 30px var(--kxta-accent-soft) !important;
+}
+
+/* Corner tick marks on focus — Blueprint crosshair */
+.card:focus::before,
+.card:focus::after,
+.card:hover::before,
+.card:hover::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 1px solid var(--kxta-accent);
+    z-index: 101;
+    pointer-events: none;
+}
+
+.card:focus::before,
+.card:hover::before {
+    top: -6px;
+    left: -6px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.card:focus::after,
+.card:hover::after {
+    bottom: -6px;
+    right: -6px;
+    border-left: none;
+    border-top: none;
+}
+
+.cardText {
+    font-family: var(--kxta-font-body) !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    color: var(--kxta-text) !important;
+    margin-top: 0.6em !important;
+    padding: 0 0.2em !important;
+}
+
+/* Buttons: outlined ember, Blueprint style */
+.emby-button.raised,
+.button-submit,
+.MuiButton-root,
+.MuiButton-contained {
+    font-family: var(--kxta-font-mono) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.14em !important;
+    font-size: 0.75rem !important;
+    font-weight: 500 !important;
+    background: transparent !important;
+    color: var(--kxta-accent) !important;
+    border: 1px solid var(--kxta-accent) !important;
+    padding: 0.8em 1.8em !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    transition: all 0.2s var(--kxta-ease) !important;
+}
+
+.emby-button.raised:focus,
+.emby-button.raised:hover,
+.MuiButton-root:focus,
+.MuiButton-root:hover,
+.MuiButton-contained:focus,
+.MuiButton-contained:hover,
+.button-submit:focus,
+.button-submit:hover {
+    background: var(--kxta-accent) !important;
+    color: var(--kxta-bg) !important;
+    transform: none !important;
+    box-shadow: 0 0 20px var(--kxta-accent-soft) !important;
+}
+
+/* Primary play button: filled ember */
+.btnPlay,
+.mainDetailButtons .raised.button-submit:first-child {
+    background: var(--kxta-accent) !important;
+    color: var(--kxta-bg) !important;
+}
+
+.btnPlay:focus,
+.btnPlay:hover {
+    background: var(--kxta-accent-hover) !important;
+    color: var(--kxta-bg) !important;
+}
+
+.paper-icon-button-light,
+.MuiIconButton-root,
+.headerButton {
+    color: var(--kxta-text) !important;
+    border-radius: 0 !important;
+    transition: color 0.15s var(--kxta-ease) !important;
+}
+
+.paper-icon-button-light:focus,
+.paper-icon-button-light:hover,
+.MuiIconButton-root:focus,
+.MuiIconButton-root:hover,
+.headerButton:focus,
+.headerButton:hover {
+    color: var(--kxta-accent) !important;
+    background: var(--kxta-accent-soft) !important;
+}
+
+/* Surfaces: dialogs, menus — dashed amber frame */
+.dialog,
+.menu,
+.actionSheet,
+.MuiDialog-paper,
+.MuiMenu-paper,
+.MuiPopover-paper,
+.MuiAutocomplete-paper {
+    background-color: var(--kxta-bg-elev) !important;
+    background-image: none !important;
+    border: 1px dashed var(--kxta-border) !important;
+    color: var(--kxta-text) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7) !important;
+}
+
+.paperList {
+    background: transparent !important;
+    color: var(--kxta-text) !important;
+    overflow-y: auto !important;
+}
+
+.MuiMenuItem-root,
+.MuiListItemButton-root,
+.actionSheetMenuItem {
+    color: var(--kxta-text) !important;
+    border-radius: 0 !important;
+    font-family: var(--kxta-font-body) !important;
+}
+
+.MuiMenuItem-root:focus,
+.MuiMenuItem-root:hover,
+.MuiListItemButton-root:focus,
+.MuiListItemButton-root:hover,
+.actionSheetMenuItem:focus,
+.actionSheetMenuItem:hover {
+    background: var(--kxta-accent-soft) !important;
+    color: var(--kxta-accent) !important;
+    border-left: 2px solid var(--kxta-accent) !important;
+}
+
+/* Form controls */
+.emby-input,
+.emby-select,
+.emby-textarea,
+.MuiFilledInput-root,
+.MuiOutlinedInput-root,
+.MuiInputBase-root {
+    background-color: var(--kxta-bg-raised) !important;
+    border: 1px solid var(--kxta-border-dim) !important;
+    color: var(--kxta-text) !important;
+    font-family: var(--kxta-font-mono) !important;
+    padding: 0.7em 0.9em !important;
+    font-size: 0.9rem !important;
+}
+
+.MuiFilledInput-root::before,
+.MuiFilledInput-root::after,
+.MuiOutlinedInput-notchedOutline {
+    display: none !important;
+}
+
+.emby-input:focus,
+.emby-select:focus,
+.emby-textarea:focus,
+.MuiFilledInput-root.Mui-focused,
+.MuiOutlinedInput-root.Mui-focused {
+    border-color: var(--kxta-accent) !important;
+    box-shadow: 0 0 0 1px var(--kxta-accent), 0 0 20px var(--kxta-accent-soft) !important;
+    outline: none !important;
+}
+
+/* Detail page */
+.detailPagePrimaryContainer {
+    background: linear-gradient(180deg,
+            transparent 0%,
+            rgba(6, 10, 18, 0.7) 50%,
+            var(--kxta-bg) 100%) !important;
+    padding-top: 22vh !important;
+    padding-bottom: 4em !important;
+}
+
+.itemBackdrop {
+    height: 85vh !important;
+    position: relative !important;
+    filter: brightness(0.5) contrast(1.05) !important;
+}
+
+.itemBackdrop::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg,
+            transparent 0%,
+            transparent 50%,
+            var(--kxta-bg) 100%);
+}
+
+.overview {
+    font-family: var(--kxta-font-body) !important;
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+    color: var(--kxta-text-dim) !important;
+    max-width: 65ch !important;
+}
+
+/* Search */
+.searchBar {
+    background: var(--kxta-bg-elev) !important;
+    border: 1px dashed var(--kxta-border) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* Player OSD: Blueprint hairline */
+.videoOsdBottom.videoOsdBottom-maincontrols {
+    background: rgba(6, 10, 18, 0.9) !important;
+    border: 1px solid var(--kxta-border) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+}
+
+.sliderContainer .mdl-slider-background-lower,
+.mdl-slider-background-lower {
+    background-color: var(--kxta-accent) !important;
+}
+
+.mdl-slider-background-upper {
+    background-color: rgba(224, 144, 48, 0.15) !important;
+}
+
+.mdl-slider::-webkit-slider-thumb {
+    background: var(--kxta-accent) !important;
+    border-radius: 0 !important;
+    width: 10px !important;
+    height: 14px !important;
+}
+
+/* Subtitles */
+.subtitles span,
+.videoSubtitles span,
+::cue {
+    font-family: var(--kxta-font-body) !important;
+    color: var(--kxta-text) !important;
+    background: rgba(6, 10, 18, 0.7) !important;
+    padding: 0.15em 0.5em !important;
+    border-radius: 0 !important;
+    font-weight: 500 !important;
+}
+
+/* TV layout */
+.layout-tv {
+    font-size: 1.25em !important;
+}
+
+.layout-tv .sectionTitle {
+    font-size: 1.8rem !important;
+}
+
+.layout-tv .itemName {
+    font-size: 5rem !important;
+}
+
+.layout-tv .cardText {
+    font-size: 1.2rem !important;
+}
+
+.layout-tv .emby-tab-button,
+.layout-tv .MuiTab-root {
+    font-size: 1rem !important;
+    padding: 0.9em 1.6em !important;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+    width: 6px !important;
+    height: 6px !important;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--kxta-bg-elev) !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--kxta-muted) !important;
+    border-radius: 0 !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--kxta-accent) !important;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
