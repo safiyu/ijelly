@@ -1,96 +1,106 @@
 # ijelly
 
-Six themes for Jellyfin — from Apple TV glass to museum gallery to editorial print. Target Jellyfin Web 10.9+ and 12+ (both Legacy and the new Modern / React-MUI chrome). Tuned for desktop and Samsung Tizen TVs.
+Six themes for Jellyfin. Covers everything from Apple TV glass to museum gallery to editorial print. Targets Jellyfin Web **10.9+** and **12+**, both the Legacy and the new Modern / React-MUI chrome. Tuned for desktop and Samsung Tizen TVs.
 
----
+## Contents
+
+1. [Themes](#themes)
+2. [Installation](#installation)
+3. [Preview locally](#preview-locally)
+4. [Compatibility](#compatibility)
+5. [Customising](#customising)
+6. [License](#license)
 
 ## Themes
 
 | Theme | File | Direction |
-|---|---|---|
-| Apple TV | `ijelly.css` | Dark glass, pill nav, spring-physics cards, white primary accents — the native tvOS feel. |
-| Cinematheque Noir | `ijelly_noir.css` | Warm sepia, Didone serif titles, brass hairline poster frames, film-grain overlay, italic lowercase sections. |
-| Editorial | `ijelly_editorial.css` | Letterboxd × New Yorker. Deep ink, cream, ink-red accent. Serif display, byline metadata, asymmetric first-card-double-wide shelves, pull-quote synopsis. |
-| Gallery | `ijelly_gallery.css` | MoMA-wall minimalism. Charcoal walls, cream-matted posters inside gold hairline frames, museum wall-tag captions, opacity-only focus. |
-| Blueprint | `ijelly_blueprint.css` | Deep navy-black, ember amber accent, square corners, mono uppercase annotations, dashed borders, blueprint grid overlay. Based on the kontexta.dev dark palette. |
-| Poster-Tinted | `ijelly_tinted.css` + `ijelly_tinted.js` | Base dark theme that re-tints the UI accent to the dominant color of the currently focused poster. Needs the companion JS. |
-
----
+| :--- | :--- | :--- |
+| **Apple TV** | `ijelly.css` | Dark glass, pill navigation, spring-physics cards, white primary accents. The native tvOS feel. |
+| **Cinematheque Noir** | `ijelly_noir.css` | Warm sepia, Didone serif titles, brass hairline poster frames, film-grain overlay, italic lowercase sections. |
+| **Editorial** | `ijelly_editorial.css` | Letterboxd meets The New Yorker. Deep ink, cream, ink-red accent. Serif display, byline metadata, asymmetric shelves, pull-quote synopsis. |
+| **Gallery** | `ijelly_gallery.css` | MoMA-wall minimalism. Charcoal walls, cream-matted posters inside gold hairline frames, museum wall-tag captions, opacity-only focus. |
+| **Blueprint** | `ijelly_blueprint.css` | Deep navy-black, ember amber accent, square corners, mono uppercase annotations, dashed borders, blueprint grid overlay. Based on the kontexta.dev dark palette. |
+| **Poster-Tinted** | `ijelly_tinted.css` + `ijelly_tinted.js` | Base dark theme that re-tints the UI accent to the dominant color of the currently focused poster. Needs the companion script. |
 
 ## Installation
 
-Dashboard → General → Custom CSS. Pick one of the imports below.
+Open **Dashboard › General › Custom CSS** and paste one of the imports below. Save, then enable **Settings › Display › Backdrops**.
+
+The `@2` version pin tracks the latest `2.x` release tag, so patch updates ship without a surprise major change.
 
 ### Apple TV
+
 ```css
 @import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@2/ijelly.css');
 ```
 
 ### Cinematheque Noir
+
 ```css
 @import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@2/ijelly_noir.css');
 ```
 
 ### Editorial
+
 ```css
 @import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@2/ijelly_editorial.css');
 ```
 
 ### Gallery
+
 ```css
 @import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@2/ijelly_gallery.css');
 ```
 
 ### Blueprint
+
 ```css
 @import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@2/ijelly_blueprint.css');
 ```
 
 ### Poster-Tinted
-CSS in Dashboard → Custom CSS:
+
+Two parts. First, paste the CSS into **Custom CSS** as above:
+
 ```css
 @import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@2/ijelly_tinted.css');
 ```
-Companion JS (install via a Tampermonkey userscript, a Jellyfin plugin that permits inline JS, or a reverse-proxy injection). The script reads the dominant color from focused posters and sets `--pt-accent` on `:root`:
+
+Then install the companion script, which samples the dominant color from the focused poster and writes it to `--pt-accent` on `:root`. Load it via a Tampermonkey userscript, a Jellyfin plugin that permits inline JS, or a reverse-proxy injection:
+
 ```
 https://cdn.jsdelivr.net/gh/safiyu/ijelly@2/ijelly_tinted.js
 ```
-If the JS isn't loaded, the CSS still works — accent stays white.
 
-After saving CSS, go to Settings → Display and enable Backdrops.
+Without the script the CSS still applies, but the accent stays white instead of adapting.
 
-The `@2` pin tracks the latest `2.x` release tag. See Releases for the changelog.
+## Preview locally
 
----
-
-## Preview
-
-Two demo pages ship with the repo: `demo.html` (library home) and `movie.html` (item detail). Clone the repo and serve the directory, then open either page in a browser:
+Two demo pages ship with the repo: `demo.html` for the library home and `movie.html` for the item detail. Clone the repo, serve the directory, then open either page in a browser:
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Open http://localhost:8000/demo.html — switch themes top-right, swap Home/Movie views top-left.
-
----
+Open `http://localhost:8000/demo.html`. Switch themes from the top-right chip bar, swap between Home and Movie from the top-left chip bar.
 
 ## Compatibility
 
-- Jellyfin Web 10.9+ with Legacy layout: all six themes work.
-- Jellyfin Web 12+ with Modern (React/MUI) layout: each theme targets the MUI app bar, drawer, dialog, tab, button, and input components alongside the Legacy rules, so chrome and content both re-skin without a mode toggle. The Apple TV theme additionally maps its tokens onto Jellyfin 12's native `--jf-palette-*` / `--mui-palette-*` variables.
-- Samsung Tizen TV app: subtitle OSD lift uses body-class fallbacks + `:has()` as progressive enhancement, so older Tizen firmware degrades gracefully.
-- Mobile/tablet (≤1000px width) reduces or disables backdrop blur to avoid GPU stalls on low-power devices.
-- Apple TV uses system fonts only. Noir, Editorial, Gallery, Blueprint pull Google Fonts (Playfair Display, Fraunces, Cormorant Garamond, Saira, JetBrains Mono) over `@import`. On offline/LAN-only servers the system fonts take over — the themes still look right, just less distinct.
+| Platform | Status |
+| :--- | :--- |
+| Jellyfin Web 10.9+ (Legacy) | All six themes work. |
+| Jellyfin Web 12+ (Modern / React-MUI) | Chrome and content both re-skin without a mode toggle. Each theme targets the MUI app bar, drawer, dialog, tab, button, and input components alongside the Legacy rules. The Apple TV theme additionally maps its tokens onto Jellyfin 12's native `--jf-palette-*` and `--mui-palette-*` variables. |
+| Samsung Tizen TV app | Subtitle OSD lift uses body-class fallbacks and `:has()` as a progressive enhancement, so older Tizen firmware degrades gracefully. |
+| Mobile and tablet (≤ 1000 px) | Backdrop blur is reduced or disabled to avoid GPU stalls on low-power devices. |
 
----
+**Fonts:** The Apple TV theme uses the OS system font stack and makes no network requests. Noir, Editorial, Gallery, and Blueprint pull Google Fonts (**Playfair Display**, **Fraunces**, **Cormorant Garamond**, **Saira**, **JetBrains Mono**) over `@import`. On offline or LAN-only servers the system fonts take over automatically. The themes still read correctly, just less distinctive.
 
 ## Customising
 
-Each theme exposes its design tokens as CSS custom properties on `:root`. Override them in your own Custom CSS block, after the `@import`.
+Each theme exposes its design tokens as CSS custom properties on `:root`. Override them in your own Custom CSS block, placed after the `@import`.
 
 | Theme | Token prefix |
-|---|---|
+| :--- | :--- |
 | Apple TV | `--apple-*` |
 | Cinematheque Noir | `--noir-*` |
 | Editorial | `--ed-*` |
@@ -98,14 +108,13 @@ Each theme exposes its design tokens as CSS custom properties on `:root`. Overri
 | Blueprint | `--kxta-*` |
 | Poster-Tinted | `--pt-*` |
 
-Example — swap Apple TV's accent:
+Example. Swap the Apple TV accent for hot pink:
+
 ```css
 :root {
     --apple-accent: #ff375f;
 }
 ```
-
----
 
 ## License
 
