@@ -250,18 +250,13 @@ h3,
     font-size: 0.95rem !important;
     border-radius: var(--pt-r-pill) !important;
     padding: 0.75em 1.6em !important;
-    backdrop-filter: blur(16px) !important;
-    -webkit-backdrop-filter: blur(16px) !important;
-    box-shadow: none !important;
-    transition: all 0.2s var(--pt-ease) !important;
-}
-
-.emby-button.raised,
-.MuiButton-root,
-.MuiButton-contained {
-    background: var(--pt-glass-strong) !important;
+    background: transparent !important;
     color: var(--pt-text) !important;
     border: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+    transition: all 0.2s var(--pt-ease) !important;
 }
 
 .emby-button.raised:focus,
@@ -269,12 +264,15 @@ h3,
 .MuiButton-root:focus,
 .MuiButton-root:hover,
 .MuiButton-contained:focus,
-.MuiButton-contained:hover {
+.MuiButton-contained:hover,
+.button-submit:focus,
+.button-submit:hover {
     background: var(--pt-accent) !important;
     color: #000 !important;
     transform: scale(1.04) !important;
     box-shadow: 0 0 30px var(--pt-accent-glow) !important;
 }
+
 
 /* Primary play: filled with the accent, tinted shadow */
 .btnPlay,
@@ -302,9 +300,10 @@ h3,
 .paper-icon-button-light:hover,
 .MuiIconButton-root:focus,
 .MuiIconButton-root:hover {
-    background: var(--pt-glass-strong) !important;
+    background: transparent !important;
     color: var(--pt-accent) !important;
 }
+
 
 /* Surfaces */
 .dialog,
