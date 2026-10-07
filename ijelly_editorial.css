@@ -112,15 +112,28 @@ h3,
     margin-bottom: 0.75rem !important;
 }
 
-/* Header: hairline rule, no chrome */
+/* Header: hairline rule, no chrome — absolute so it scrolls away instead of staying fixed */
 .skinHeader,
 .MuiAppBar-root {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
     background: var(--ed-bg) !important;
     background-color: var(--ed-bg) !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     border-bottom: 1px solid var(--ed-rule) !important;
     box-shadow: none !important;
+    z-index: 1000 !important;
+}
+
+.headroom--unpinned {
+    transform: translateY(-100%) !important;
+}
+
+.headroom--pinned {
+    transform: translateY(0) !important;
 }
 
 .pageTitle {
@@ -410,30 +423,102 @@ h3,
 }
 
 /* Detail page — editorial feature article */
+#itemDetailPage {
+    background-color: transparent !important;
+}
+
+.detailRibbon {
+    background: rgba(32, 32, 32, 0.8) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+}
+
+.layout-desktop .detailRibbon {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    z-index: 2 !important;
+}
+
+.layout-desktop .detailRibbon .mainDetailButtons {
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.6em !important;
+    z-index: 2 !important;
+}
+
+.layout-desktop .detailRibbon .infoWrapper {
+    position: absolute !important;
+    top: 100% !important;
+    left: 32.45vw !important;
+    right: 3.3% !important;
+    width: calc(100% - 32.45vw - 3.3%) !important;
+    padding-top: 1.2em !important;
+    z-index: 2 !important;
+}
+
+.layout-desktop [dir=rtl] .detailRibbon .infoWrapper {
+    left: 3.3% !important;
+    right: 32.45vw !important;
+}
+
+.layout-desktop .detailPagePrimaryContent {
+    padding-top: 13.5em !important;
+}
+
 .detailPagePrimaryContainer {
     background: linear-gradient(180deg,
-            transparent 0%,
-            rgba(13, 13, 14, 0.6) 50%,
-            var(--ed-bg) 100%) !important;
-    padding-top: 24vh !important;
+            rgba(13, 13, 14, 0.4) 0%,
+            var(--ed-bg) 90%) !important;
+    padding-top: 2em !important;
     padding-bottom: 4em !important;
 }
 
-.itemBackdrop {
-    height: 90vh !important;
-    position: relative !important;
-    filter: grayscale(0.5) contrast(1.1) brightness(0.6) !important;
+.detailPageWrapperContainer {
+    padding-top: 1em !important;
 }
 
-.itemBackdrop::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background: linear-gradient(180deg,
-            transparent 0%,
-            transparent 50%,
-            var(--ed-bg) 100%);
+.itemBackdrop {
+    height: 50vh !important;
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%) !important;
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%) !important;
+    filter: grayscale(0.5) contrast(1.1) brightness(0.6) !important;
+    opacity: 0.8 !important;
+}
+
+.detailPagePrimaryContainer .card,
+.detailImageContainer .card {
+    width: 360px !important;
+    transform: none !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Movie Logo in Media Bar / Details */
+.detailPagePrimaryContainer .logo,
+.itemName .logo,
+.nameContainer .logo,
+.logo.high-quality {
+    height: 120px !important;
+    width: auto !important;
+    max-width: 50% !important;
+    object-fit: contain !important;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.5)) !important;
+    margin-bottom: 1em !important;
+    transform: none !important;
+    min-width: unset !important;
+    display: block !important;
+}
+
+.layout-tv .detailPagePrimaryContainer .logo,
+.layout-tv .itemName .logo,
+.layout-tv .nameContainer .logo {
+    height: 200px !important;
+    margin-bottom: 1.5em !important;
+}
+
+.layout-tv .detailImageContainer .card {
+    width: 480px !important;
 }
 
 /* Overview — pull-quote treatment */
@@ -453,14 +538,167 @@ h3,
     content: '';
 }
 
-/* Player OSD */
+/* ==========================================================================
+   Video Playback & OSD
+   ========================================================================== */
+
+/* Video transparency: unblock hardware video stream underneath */
+html.transparentDocument,
+body.transparentDocument,
+.transparentDocument .backgroundContainer,
+.transparentDocument .skinBody,
+.transparentDocument .mainAnimatedPage,
+.transparentDocument .pageContainer,
+.transparentDocument #videoOsdPage,
+#videoOsdPage,
+.videoOsdPage,
+.videoOsdPage .pageContent,
+#videoOsdPage .pageContent,
+body:has(#videoOsdPage),
+body:has(#videoOsdPage) .backgroundContainer,
+body:has(#videoOsdPage) .mainAnimatedPage,
+body:has(#videoOsdPage) .pageContainer,
+body:has(#videoOsdPage) .skinBody,
+body:has(.htmlvideoplayer),
+body:has(.htmlvideoplayer) .backgroundContainer,
+body:has(.htmlvideoplayer) .mainAnimatedPage,
+body:has(.htmlvideoplayer) .pageContainer,
+body:has(.htmlvideoplayer) .skinBody {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+.videoPlayerContainer {
+    background-color: #000 !important;
+    z-index: 0 !important;
+}
+
+.htmlvideoplayer {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Video OSD Header: slim, borderless, subtle vignette */
+.osdHeader,
+.videoOsdHeader,
+#videoOsdPage .skinHeader,
+body:has(#videoOsdPage) .skinHeader,
+body.transparentDocument .skinHeader {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    background: linear-gradient(to bottom, rgba(13, 13, 14, 0.85) 0%, rgba(13, 13, 14, 0.4) 60%, transparent 100%) !important;
+    padding: 0.35rem 1.25rem !important;
+    min-height: unset !important;
+    height: auto !important;
+    z-index: 1001 !important;
+    transition: transform 0.25s var(--ed-ease), opacity 0.25s var(--ed-ease) !important;
+}
+
+.osdHeader.osdHeader-hidden,
+.videoOsdHeader.videoOsdHeader-hidden,
+#videoOsdPage .skinHeader.osdHeader-hidden {
+    transform: translateY(-100%) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+.osdHeader .headerLeft,
+.videoOsdHeader .headerLeft,
+#videoOsdPage .headerLeft,
+body:has(#videoOsdPage) .headerLeft {
+    font-size: 0.95rem !important;
+    font-family: var(--ed-font-body) !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.02em !important;
+    color: var(--ed-text) !important;
+}
+
+.btnVideoOsdBack {
+    padding: 0.25em !important;
+    margin-right: 0.5em !important;
+    background: transparent !important;
+    border-radius: 50% !important;
+    color: var(--ed-text) !important;
+    transition: transform 0.2s var(--ed-ease), background 0.2s var(--ed-ease) !important;
+}
+
+.btnVideoOsdBack:hover,
+.btnVideoOsdBack:focus {
+    background: rgba(232, 228, 220, 0.15) !important;
+    transform: scale(1.08) !important;
+}
+
+/* Player OSD: compact Editorial hairline bottom dock */
+.videoOsdBottom .osdMainTextContainer,
+.videoOsdBottom .osdSecondaryMediaInfo,
+.videoOsdBottom .osdTitle,
+.videoOsdBottom .videoOsdText,
+.videoOsdBottom-maincontrols .osdTextContainer {
+    display: none !important;
+}
+
 .videoOsdBottom.videoOsdBottom-maincontrols {
-    background: var(--ed-bg) !important;
-    border: 1px solid var(--ed-rule-strong) !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: unset !important;
+    padding: 0.25rem 1.25rem 0.45rem !important;
+    box-sizing: border-box !important;
+    background: linear-gradient(to top, rgba(13, 13, 14, 0.95) 0%, rgba(13, 13, 14, 0.6) 70%, transparent 100%) !important;
+    border: none !important;
+    border-top: 1px solid var(--ed-rule-strong) !important;
     border-radius: 0 !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-    box-shadow: var(--ed-shadow) !important;
+    box-shadow: none !important;
+    z-index: 1000 !important;
+    transition: transform 0.25s var(--ed-ease), opacity 0.25s var(--ed-ease) !important;
+}
+
+.videoOsdBottom.videoOsdBottom-hidden {
+    transform: translateY(100%) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+.videoOsdBottom .osdControls {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0.15rem !important;
+}
+
+.videoOsdBottom .osdControls > .flex.flex-direction-row {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0.75rem !important;
+}
+
+.videoOsdBottom .sliderContainer {
+    flex-grow: 1 !important;
+    height: 4px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    transition: height 0.2s var(--ed-ease) !important;
+}
+
+.videoOsdBottom .sliderContainer:hover {
+    height: 6px !important;
 }
 
 .sliderContainer .mdl-slider-background-lower,
@@ -470,6 +708,89 @@ h3,
 
 .mdl-slider-background-upper {
     background-color: var(--ed-rule-strong) !important;
+}
+
+.mdl-slider::-webkit-slider-thumb {
+    background: var(--ed-accent) !important;
+    border-radius: 50% !important;
+    width: 12px !important;
+    height: 12px !important;
+}
+
+.videoOsdBottom .osdTimeText,
+.videoOsdBottom .endsAtText {
+    font-family: var(--ed-font-body) !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.05em !important;
+    color: var(--ed-text-dim) !important;
+    white-space: nowrap !important;
+    padding: 0 !important;
+    margin: 0 0.25rem !important;
+}
+
+.videoOsdBottom .osdControls > .buttons {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.videoOsdBottom .osdControls > .buttons > div {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 0.35rem !important;
+}
+
+.videoOsdBottom .buttons .paper-icon-button-light {
+    padding: 0.3em !important;
+    margin: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    color: var(--ed-text) !important;
+    transition: transform 0.2s var(--ed-ease), color 0.2s var(--ed-ease) !important;
+}
+
+.videoOsdBottom .buttons .paper-icon-button-light:hover,
+.videoOsdBottom .buttons .paper-icon-button-light:focus {
+    color: var(--ed-accent) !important;
+    transform: scale(1.1) !important;
+}
+
+.videoOsdBottom .btnPlayPause {
+    transform: scale(1.15) !important;
+    color: var(--ed-accent) !important;
+}
+
+.videoOsdBottom .btnPlayPause:hover,
+.videoOsdBottom .btnPlayPause:focus {
+    transform: scale(1.25) !important;
+}
+
+.videoOsdBottom .volumeButtons {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 0.25rem !important;
+}
+
+.videoOsdBottom .osdVolumeSliderContainer {
+    width: 70px !important;
+}
+
+/* Subtitles position when OSD is visible */
+.videoOsd-visible .videoSubtitlesInner,
+.videoOsd-visible .subtitle-container,
+.videoOsd-visible .libassjs-canvas-parent,
+.videoOsd-visible .shaka-text-container,
+body:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
+body:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
+body:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent,
+body:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
+    bottom: 5.5em !important;
 }
 
 /* Subtitles */

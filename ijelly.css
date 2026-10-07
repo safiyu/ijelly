@@ -108,15 +108,13 @@ header,
 header.semiTransparent,
 header.withBackground,
 header.header-scrolled,
-.headroom--not-top,
-.headroom--pinned,
-.headroom--unpinned {
+.MuiAppBar-root {
     background-color: transparent !important;
     background: transparent !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     overflow: visible !important;
-    position: fixed !important;
+    position: absolute !important;
     top: 0 !important;
     width: 100% !important;
     z-index: 1000 !important;
@@ -125,6 +123,14 @@ header.header-scrolled,
     min-height: 4em !important;
     border: none !important;
     box-shadow: none !important;
+}
+
+.headroom--unpinned {
+    transform: translateY(-100%) !important;
+}
+
+.headroom--pinned {
+    transform: translateY(0) !important;
 }
 
 .headerTop,
@@ -873,10 +879,80 @@ body::after {
     display: none !important;
 }
 
-.videoOsdHeader {
-    display: flex !important;
-    padding: 2em !important;
+/* Video transparency: unblock hardware video stream underneath */
+html.transparentDocument,
+body.transparentDocument,
+.transparentDocument .backgroundContainer,
+.transparentDocument .skinBody,
+.transparentDocument .mainAnimatedPage,
+.transparentDocument .pageContainer,
+.transparentDocument #videoOsdPage,
+#videoOsdPage,
+.videoOsdPage,
+.videoOsdPage .pageContent,
+#videoOsdPage .pageContent,
+body:has(#videoOsdPage),
+body:has(#videoOsdPage) .backgroundContainer,
+body:has(#videoOsdPage) .mainAnimatedPage,
+body:has(#videoOsdPage) .pageContainer,
+body:has(#videoOsdPage) .skinBody,
+body:has(.htmlvideoplayer),
+body:has(.htmlvideoplayer) .backgroundContainer,
+body:has(.htmlvideoplayer) .mainAnimatedPage,
+body:has(.htmlvideoplayer) .pageContainer,
+body:has(.htmlvideoplayer) .skinBody {
     background: transparent !important;
+    background-color: transparent !important;
+}
+
+.videoPlayerContainer {
+    background-color: #000 !important;
+    z-index: 0 !important;
+}
+
+.htmlvideoplayer {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Video OSD Header: slim, borderless, subtle vignette */
+.osdHeader,
+.videoOsdHeader,
+#videoOsdPage .skinHeader,
+body:has(#videoOsdPage) .skinHeader,
+body.transparentDocument .skinHeader {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    display: flex !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%) !important;
+    padding: 0.35rem 1.25rem !important;
+    min-height: unset !important;
+    height: auto !important;
+    z-index: 1001 !important;
+    transition: transform 0.25s var(--apple-spring-fast), opacity 0.25s var(--apple-spring-fast) !important;
+}
+
+.osdHeader.osdHeader-hidden,
+.videoOsdHeader.videoOsdHeader-hidden,
+#videoOsdPage .skinHeader.osdHeader-hidden {
+    transform: translateY(-100%) !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+.osdHeader .headerLeft,
+.videoOsdHeader .headerLeft,
+#videoOsdPage .headerLeft,
+body:has(#videoOsdPage) .headerLeft {
+    font-size: 0.95rem !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.01em !important;
+    color: var(--apple-text) !important;
 }
 
 .btnVideoOsdBack {

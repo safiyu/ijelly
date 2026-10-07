@@ -84,7 +84,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 1rem 6rem;
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             right: 0;
@@ -134,15 +134,22 @@
             padding-top: 4rem;
         }
 
-        /* Hero backdrop — richer, more cinematic */
+        /* Hero backdrop — matches Jellyfin 50vh masked backdrop */
         .itemBackdrop {
             width: 100%;
-            height: 90vh;
+            height: 50vh;
             background:
                 radial-gradient(ellipse at 20% 30%, rgba(220, 120, 60, 0.6) 0%, transparent 50%),
                 radial-gradient(ellipse at 80% 60%, rgba(80, 50, 120, 0.6) 0%, transparent 55%),
                 linear-gradient(180deg, #3a2010 0%, #000814 100%);
-            position: relative;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         #itemDetailPage {
@@ -151,8 +158,7 @@
 
         .detailPageWrapperContainer {
             position: relative;
-            margin-top: -55vh;
-            padding: 0 6rem;
+            padding: 3rem 6rem;
             display: grid;
             grid-template-columns: 320px 1fr;
             gap: 3rem;
@@ -171,10 +177,8 @@
         }
 
         .detailPagePrimaryContainer {
-            padding: 0 !important;
-            margin: 0 !important;
-            background: none !important;
-            padding-top: 25vh !important;
+            padding: 0;
+            margin: 0;
         }
 
         .parentName {
