@@ -10,8 +10,8 @@
     --gl-frame: #c9a978;
     --gl-frame-dim: rgba(201, 169, 120, 0.4);
     --gl-text: #e5e2db;
-    --gl-text-dim: rgba(229, 226, 219, 0.55);
-    --gl-text-faint: rgba(229, 226, 219, 0.3);
+    --gl-text-dim: rgba(229, 226, 219, 0.78);
+    --gl-text-faint: rgba(229, 226, 219, 0.6);
     --gl-accent: #c9a978;
     --gl-rule: rgba(229, 226, 219, 0.1);
     --gl-shadow: 0 1px 0 rgba(201, 169, 120, 0.2);
@@ -26,6 +26,7 @@
 @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 400; font-display: swap; src: url('https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5/files/cormorant-garamond-latin-400-normal.woff2') format('woff2'), url('https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5/files/cormorant-garamond-latin-400-normal.woff') format('woff'); }
 @font-face { font-family: 'Cormorant Garamond'; font-style: normal; font-weight: 500; font-display: swap; src: url('https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5/files/cormorant-garamond-latin-500-normal.woff2') format('woff2'), url('https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5/files/cormorant-garamond-latin-500-normal.woff') format('woff'); }
 @font-face { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 400; font-display: swap; src: url('https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5/files/cormorant-garamond-latin-400-italic.woff2') format('woff2'), url('https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5/files/cormorant-garamond-latin-400-italic.woff') format('woff'); }
+@font-face { font-family: 'Cormorant Garamond'; font-style: italic; font-weight: 500; font-display: swap; src: url('https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5/files/cormorant-garamond-latin-500-italic.woff2') format('woff2'), url('https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5/files/cormorant-garamond-latin-500-italic.woff') format('woff'); }
 @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 400; font-display: swap; src: url('https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5/files/jetbrains-mono-latin-400-normal.woff2') format('woff2'), url('https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5/files/jetbrains-mono-latin-400-normal.woff') format('woff'); }
 @font-face { font-family: 'JetBrains Mono'; font-style: normal; font-weight: 500; font-display: swap; src: url('https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5/files/jetbrains-mono-latin-500-normal.woff2') format('woff2'), url('https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5/files/jetbrains-mono-latin-500-normal.woff') format('woff'); }
 
@@ -79,7 +80,7 @@ h3,
 .MuiTypography-h3 {
     font-family: var(--gl-font-display) !important;
     color: var(--gl-text) !important;
-    font-weight: 300 !important;
+    font-weight: 500 !important;
     letter-spacing: 0.01em !important;
 }
 
@@ -87,7 +88,7 @@ h3,
 .sectionTitleTextButton {
     font-family: var(--gl-font-display) !important;
     font-size: 2.2rem !important;
-    font-weight: 300 !important;
+    font-weight: 500 !important;
     font-style: italic !important;
     letter-spacing: 0.02em !important;
     color: var(--gl-text) !important;
@@ -105,7 +106,7 @@ h3,
 .itemName.parentNameLast {
     font-family: var(--gl-font-display) !important;
     font-size: 2.2rem !important;
-    font-weight: 300 !important;
+    font-weight: 500 !important;
     letter-spacing: 0.02em !important;
     line-height: 1.15 !important;
     word-break: normal !important;
@@ -120,10 +121,10 @@ h3,
 .cardText-secondary {
     font-family: var(--gl-font-tag) !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.22em !important;
-    font-size: 0.62rem !important;
+    letter-spacing: 0.12em !important;
+    font-size: 0.78rem !important;
     color: var(--gl-text-dim) !important;
-    font-weight: 400 !important;
+    font-weight: 500 !important;
 }
 
 .parentName {
@@ -172,7 +173,7 @@ h3,
 .pageTitle {
     font-family: var(--gl-font-display) !important;
     font-style: italic !important;
-    font-weight: 300 !important;
+    font-weight: 500 !important;
     letter-spacing: 0.02em !important;
 }
 
@@ -182,8 +183,8 @@ h3,
     font-family: var(--gl-font-display) !important;
     text-transform: none !important;
     font-style: italic !important;
-    font-size: 1.15rem !important;
-    font-weight: 400 !important;
+    font-size: 1.25rem !important;
+    font-weight: 500 !important;
     color: var(--gl-text-dim) !important;
     background: transparent !important;
     border-radius: 0 !important;
@@ -230,7 +231,8 @@ h3,
     padding: 1.2em 2em !important;
     font-family: var(--gl-font-display) !important;
     font-style: italic !important;
-    font-size: 1.1rem !important;
+    font-size: 1.2rem !important;
+    font-weight: 500 !important;
 }
 
 .navMenuOption:focus,
@@ -315,8 +317,8 @@ h3,
 .cardText {
     font-family: var(--gl-font-display) !important;
     font-style: italic !important;
-    font-size: 0.95rem !important;
-    font-weight: 400 !important;
+    font-size: 1.05rem !important;
+    font-weight: 500 !important;
     color: var(--gl-text) !important;
     margin-top: 1.2em !important;
     text-align: center !important;
@@ -329,8 +331,8 @@ h3,
     font-family: var(--gl-font-tag) !important;
     font-style: normal !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.22em !important;
-    font-size: 0.6rem !important;
+    letter-spacing: 0.14em !important;
+    font-size: 0.72rem !important;
     color: var(--gl-text-faint) !important;
     margin-top: 0.4em !important;
 }
@@ -429,6 +431,30 @@ h3,
     background: transparent !important;
     color: var(--gl-bg) !important;
     overflow-y: auto !important;
+}
+
+/* Text inside the cream surfaces must be dark ink: the global light and dimmed text colors vanish on cream */
+:is(.dialog, .menu, .actionSheet, .MuiDialog-paper, .MuiMenu-paper, .MuiPopover-paper, .MuiAutocomplete-paper) :is(h1, h2, h3, h4, h5, h6, p, span, label, a, li, div, .sectionTitle, .actionSheetTitle, .listItemBodyText, .actionSheetItemText, .inputLabel, .MuiTypography-root, .MuiListItemText-primary, .MuiFormLabel-root, .material-icons, .MuiSvgIcon-root) {
+    color: #2b2620 !important;
+    text-shadow: none !important;
+}
+
+:is(.dialog, .menu, .actionSheet, .MuiDialog-paper, .MuiMenu-paper, .MuiPopover-paper, .MuiAutocomplete-paper) :is(.secondary, .listItemBodyText.secondary, .fieldDescription, .actionSheetItemAsideText, .mediaInfoItem, .cardText-secondary, .MuiListItemText-secondary, .MuiFormHelperText-root, .MuiTypography-body2, small) {
+    color: rgba(43, 38, 32, 0.78) !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+}
+
+:is(.dialog, .menu, .actionSheet, .MuiDialog-paper, .MuiMenu-paper, .MuiPopover-paper, .MuiAutocomplete-paper) :is(.emby-input, .emby-select, .emby-textarea, .MuiInputBase-root, input, select, textarea) {
+    color: #2b2620 !important;
+    border-bottom-color: rgba(43, 38, 32, 0.5) !important;
+}
+
+select option,
+select optgroup,
+.emby-select option {
+    background-color: var(--gl-mat) !important;
+    color: #2b2620 !important;
 }
 
 .MuiMenuItem-root,
@@ -596,7 +622,7 @@ h3,
 
 .detailPagePrimaryContainer .card,
 .detailImageContainer .card {
-    width: 360px !important;
+    width: min(360px, 19vw) !important;
     transform: none !important;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8) !important;
 }
@@ -654,11 +680,11 @@ h3,
 /* Overview — reads like a museum card */
 .overview {
     font-family: var(--gl-font-display) !important;
-    font-size: 1.2rem !important;
+    font-size: 1.3rem !important;
     line-height: 1.65 !important;
     color: var(--gl-text) !important;
     max-width: 56ch !important;
-    font-weight: 400 !important;
+    font-weight: 500 !important;
     letter-spacing: 0.005em !important;
 }
 
@@ -844,7 +870,7 @@ body:has(#videoOsdPage) .headerLeft {
 .videoOsdBottom .osdTimeText,
 .videoOsdBottom .endsAtText {
     font-family: var(--gl-font-tag) !important;
-    font-size: 0.75rem !important;
+    font-size: 0.85rem !important;
     letter-spacing: 0.05em !important;
     color: var(--gl-text-dim) !important;
     white-space: nowrap !important;

@@ -595,7 +595,7 @@ h3,
 
 .detailPagePrimaryContainer .card,
 .detailImageContainer .card {
-    width: 360px !important;
+    width: min(360px, 19vw) !important;
     transform: none !important;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8) !important;
 }
