@@ -1029,3 +1029,72 @@ body:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
     font-size: 0.9rem !important;
     opacity: 0.7;
 }
+
+/* TV player controls: seek bar on the top row, one packed cluster of controls below */
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 1.6vh !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .flex.flex-direction-row {
+    order: 1 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 1.2vw !important;
+}
+
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdPositionText,
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdDurationText {
+    display: block !important;
+    font-size: 1.1rem !important;
+    white-space: nowrap !important;
+}
+
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons {
+    order: 2 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    gap: 1.6vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons > div {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 1.2vw !important;
+}
+
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons .osdTimeText {
+    order: 10 !important;
+    margin: 0 0 0 1vw !important;
+}
+
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls .paper-icon-button-light {
+    margin: 0 !important;
+}
+
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .volumeButtons {
+    margin: 0 !important;
+    gap: 0.6vw !important;
+}
+
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdVolumeSliderContainer {
+    flex: 0 0 8vw !important;
+    width: 8vw !important;
+}
+
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols {
+    padding: 2.4vh var(--tv-pad) 3.6vh !important;
+}

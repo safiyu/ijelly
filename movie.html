@@ -745,7 +745,6 @@
         };
         const link = document.getElementById('theme-link');
         const buttons = document.querySelectorAll('.demo-switcher button');
-        let tintedScript = null;
 
         buttons.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -753,12 +752,6 @@
                 buttons.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 link.href = themes[theme] + '?t=' + Date.now();
-
-                if (theme === 'tinted' && !tintedScript) {
-                    tintedScript = document.createElement('script');
-                    tintedScript.src = 'ijelly_tinted.js';
-                    document.body.appendChild(tintedScript);
-                }
             });
         });
     </script>

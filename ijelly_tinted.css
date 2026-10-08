@@ -1,5 +1,4 @@
-/* ijelly Poster-Tinted — accent color derived from focused poster art */
-/* Pair with ijelly_tinted.js (userscript or Jellyfin plugin) */
+/* ijelly Poster-Tinted — the UI takes its color from the current art, with CSS only (no script) */
 
 :root {
     --pt-bg: #000000;
@@ -46,22 +45,16 @@ body:has(#itemDetailPage) .backgroundContainer {
     background-color: transparent !important;
 }
 
-/* The entire page bg gets a radial tint from the accent — the drama */
-body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    background: radial-gradient(ellipse at top,
-            var(--pt-accent-soft) 0%,
-            transparent 60%);
-    transition: background 1.2s var(--pt-ease);
+/* Tint without JS: a blurred, saturated copy of the current backdrop washes the page with its dominant colors */
+.backdropContainer {
+    overflow: hidden !important;
+    opacity: 0.9 !important;
 }
 
-.backdropContainer {
-    filter: brightness(0.45) saturate(1.2) !important;
-    opacity: 0.6 !important;
+.backdropImage {
+    filter: blur(36px) saturate(2) brightness(0.6) !important;
+    -webkit-filter: blur(36px) saturate(2) brightness(0.6) !important;
+    transform: scale(1.2) !important;
 }
 
 ::selection {
@@ -122,10 +115,10 @@ h3,
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
-    background: rgba(13, 15, 20, 0.85) !important;
-    background-color: rgba(13, 15, 20, 0.85) !important;
-    backdrop-filter: blur(20px) !important;
-    -webkit-backdrop-filter: blur(20px) !important;
+    background: rgba(13, 15, 20, 0.5) !important;
+    background-color: rgba(13, 15, 20, 0.5) !important;
+    backdrop-filter: blur(30px) saturate(1.6) !important;
+    -webkit-backdrop-filter: blur(30px) saturate(1.6) !important;
     border-bottom: 1px solid var(--pt-accent-soft) !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
     z-index: 1000 !important;
@@ -227,8 +220,37 @@ h3,
 .card:hover .cardBox {
     box-shadow:
         0 25px 60px rgba(0, 0, 0, 0.65),
-        0 0 0 2px var(--pt-accent),
-        0 0 40px var(--pt-accent-glow) !important;
+        0 0 0 2px var(--pt-accent) !important;
+}
+
+/* Poster halo: a blurred copy of the poster itself, so the glow always matches the art */
+.card:focus,
+.card:hover,
+.detailImageContainer .card {
+    contain: none !important;
+}
+
+.card:focus .cardImageContainer,
+.card:hover .cardImageContainer,
+.detailImageContainer .card .cardImageContainer {
+    overflow: visible !important;
+    contain: none !important;
+}
+
+.card:focus .cardImageContainer::before,
+.card:hover .cardImageContainer::before,
+.detailImageContainer .card .cardImageContainer::before {
+    content: '';
+    position: absolute;
+    inset: -4%;
+    z-index: -1;
+    background-image: inherit;
+    background-size: cover;
+    background-position: center;
+    border-radius: inherit;
+    filter: blur(32px) saturate(2.2);
+    opacity: 0.8;
+    pointer-events: none;
 }
 
 .cardText {
@@ -998,4 +1020,73 @@ body:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
 .layout-tv .cardText-secondary {
     font-size: 0.9rem !important;
     opacity: 0.7;
+}
+
+/* TV player controls: seek bar on the top row, one packed cluster of controls below */
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 1.6vh !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .flex.flex-direction-row {
+    order: 1 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 1.2vw !important;
+}
+
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdPositionText,
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdDurationText {
+    display: block !important;
+    font-size: 1.1rem !important;
+    white-space: nowrap !important;
+}
+
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons {
+    order: 2 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    gap: 1.6vw !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons > div {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    gap: 1.2vw !important;
+}
+
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons .osdTimeText {
+    order: 10 !important;
+    margin: 0 0 0 1vw !important;
+}
+
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls .paper-icon-button-light {
+    margin: 0 !important;
+}
+
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .volumeButtons {
+    margin: 0 !important;
+    gap: 0.6vw !important;
+}
+
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdVolumeSliderContainer {
+    flex: 0 0 8vw !important;
+    width: 8vw !important;
+}
+
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols {
+    padding: 2.4vh var(--tv-pad) 3.6vh !important;
 }

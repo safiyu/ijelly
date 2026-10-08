@@ -20,7 +20,7 @@ Six themes for Jellyfin. Covers everything from Apple TV glass to museum gallery
 | **Editorial** | `ijelly_editorial.css` | Letterboxd meets The New Yorker. Deep ink, cream, ink-red accent. Serif display, byline metadata, asymmetric shelves, pull-quote synopsis. |
 | **Gallery** | `ijelly_gallery.css` | MoMA-wall minimalism. Charcoal walls, cream-matted posters inside gold hairline frames, museum wall-tag captions, opacity-only focus. |
 | **Blueprint** | `ijelly_blueprint.css` | Deep navy-black, ember amber accent, square corners, mono uppercase annotations, dashed borders, blueprint grid overlay. Based on the kontexta.dev dark palette. |
-| **Poster-Tinted** | `ijelly_tinted.css` + `ijelly_tinted.js` | Base dark theme that re-tints the UI accent to the dominant color of the currently focused poster. Needs the companion script. |
+| **Poster-Tinted** | `ijelly_tinted.css` | Dark base where the page takes the colors of the current art. A blurred copy of the backdrop washes the UI, and focused posters get a halo made from their own image. CSS only, so it works on TV apps. |
 
 ## Installation
 
@@ -60,19 +60,11 @@ The `@latest` tag automatically tracks the newest release, so you always get the
 
 ### Poster-Tinted
 
-Two parts. First, paste the CSS into **Custom CSS** as above:
-
 ```css
 @import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@latest/ijelly_tinted.css');
 ```
 
-Then install the companion script, which samples the dominant color from the focused poster and writes it to `--pt-accent` on `:root`. Load it via a Tampermonkey userscript, a Jellyfin plugin that permits inline JS, or a reverse-proxy injection:
-
-```
-https://cdn.jsdelivr.net/gh/safiyu/ijelly@latest/ijelly_tinted.js
-```
-
-Without the script the CSS still applies, but the accent stays white instead of adapting.
+No script needed. CSS cannot read pixel colors, so the tint comes from blurred copies of the art itself: the backdrop washes the page and each focused poster glows in its own colors. The accent color stays white.
 
 ## Preview locally
 
