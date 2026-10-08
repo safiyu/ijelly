@@ -19,7 +19,11 @@
     --noir-ease: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+/* Self-hosted static fonts (no Google Fonts, no variable fonts) so older Tizen engines render them */
+@font-face { font-family: 'Playfair Display'; font-style: normal; font-weight: 400; font-display: swap; src: url('https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/files/playfair-display-latin-400-normal.woff2') format('woff2'), url('https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/files/playfair-display-latin-400-normal.woff') format('woff'); }
+@font-face { font-family: 'Playfair Display'; font-style: normal; font-weight: 600; font-display: swap; src: url('https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/files/playfair-display-latin-600-normal.woff2') format('woff2'), url('https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/files/playfair-display-latin-600-normal.woff') format('woff'); }
+@font-face { font-family: 'Playfair Display'; font-style: italic; font-weight: 400; font-display: swap; src: url('https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/files/playfair-display-latin-400-italic.woff2') format('woff2'), url('https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/files/playfair-display-latin-400-italic.woff') format('woff'); }
+@font-face { font-family: 'Playfair Display'; font-style: italic; font-weight: 600; font-display: swap; src: url('https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/files/playfair-display-latin-600-italic.woff2') format('woff2'), url('https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/files/playfair-display-latin-600-italic.woff') format('woff'); }
 
 html,
 body {
@@ -501,6 +505,13 @@ h3,
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8) !important;
 }
 
+/* Jellyfin 12 floats the poster, which pushes the flex ribbon right on tall posters */
+.layout-desktop .detailPagePrimaryContainer > .detailImageContainer {
+    position: absolute !important;
+    width: 100% !important;
+    height: 0 !important;
+}
+
 /* Movie Logo in Media Bar / Details */
 .detailPagePrimaryContainer .logo,
 .itemName .logo,
@@ -524,17 +535,65 @@ h3,
     margin-bottom: 1.5em !important;
 }
 
-.layout-tv .detailImageContainer .card {
-    width: 480px !important;
+/* TV detail (Jellyfin 12): poster left, info right, whole hero inside the first 1080p screen */
+.layout-tv {
+    --tv-pad: 5vw;
+    --tv-gap: 4vw;
+    --tv-poster-w: min(24vw, 44vh);
 }
 
-.layout-tv #itemDetailPage .detailPageWrapperContainer,
 .layout-tv .detailPagePrimaryContainer {
-    padding-top: 25vh !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    gap: var(--tv-gap) !important;
+    padding: 6vh var(--tv-pad) 4vh !important;
+    min-height: 70vh !important;
+}
+
+.layout-tv .detailPagePrimaryContainer > .detailImageContainer {
+    flex: 0 0 var(--tv-poster-w) !important;
+}
+
+.layout-tv .detailImageContainer .card {
+    position: relative !important;
+    float: none !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: var(--tv-poster-w) !important;
+    max-width: none !important;
+    max-height: none !important;
+    margin: 0 !important;
 }
 
 .layout-tv .detailRibbon {
-    margin-top: 20vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    align-items: flex-start !important;
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+.layout-tv .detailRibbon .infoWrapper {
+    flex: 0 1 auto !important;
+}
+
+.layout-tv .mainDetailButtons {
+    margin: 2.5vh 0 0 !important;
+    gap: 0.6em !important;
+}
+
+.layout-tv .detailPagePrimaryContent {
+    padding-left: calc(var(--tv-pad) + var(--tv-poster-w) + var(--tv-gap)) !important;
+    padding-right: var(--tv-pad) !important;
 }
 
 .parentName {
@@ -882,4 +941,91 @@ body:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
         animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
     }
+}
+
+/* TV layout (Jellyfin 12): safe margins, viewport-fluid cards, compact card text */
+.layout-tv {
+    --tv-pad: 5vw;
+    --tv-gap: 1.4vw;
+    --tv-card-w: calc((100vw - 2 * var(--tv-pad) - 5 * var(--tv-gap)) / 6);
+    --tv-wide-w: calc((100vw - 2 * var(--tv-pad) - 3 * var(--tv-gap)) / 4);
+}
+
+.layout-tv .headerTop,
+.layout-tv .headerTabs {
+    padding-left: var(--tv-pad) !important;
+    padding-right: var(--tv-pad) !important;
+}
+
+.layout-tv .emby-tab-button,
+.layout-tv .MuiTab-root {
+    font-size: 1.1em !important;
+    margin: 0 0.3em !important;
+    padding: 0.6em 1.4em !important;
+}
+
+.layout-tv .padded-left {
+    padding-left: var(--tv-pad);
+}
+
+.layout-tv .padded-right {
+    padding-right: var(--tv-pad);
+}
+
+.layout-tv .sectionTitleContainer,
+.layout-tv .sectionTitle {
+    text-align: left !important;
+}
+
+.layout-tv .sectionTitleContainer {
+    padding-left: var(--tv-pad) !important;
+    margin-bottom: 1.6vh !important;
+}
+
+.layout-tv .verticalSection {
+    margin-bottom: 3vh !important;
+}
+
+.layout-tv .itemsContainer {
+    gap: 3vh var(--tv-gap) !important;
+}
+
+.layout-tv .itemsContainer.scrollSlider {
+    padding-left: var(--tv-pad) !important;
+    padding-right: var(--tv-pad) !important;
+}
+
+.layout-tv .itemsContainer.vertical-wrap {
+    padding-left: var(--tv-pad) !important;
+    padding-right: var(--tv-pad) !important;
+}
+
+.layout-tv .card {
+    margin: 0 !important;
+}
+
+.layout-tv .portraitCard,
+.layout-tv .overflowPortraitCard,
+.layout-tv .squareCard,
+.layout-tv .overflowSquareCard {
+    width: var(--tv-card-w) !important;
+}
+
+.layout-tv .backdropCard,
+.layout-tv .overflowBackdropCard {
+    width: var(--tv-wide-w) !important;
+}
+
+.layout-tv .cardText {
+    font-size: 1.05rem !important;
+    line-height: 1.35 !important;
+    margin-top: 0.35em !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.layout-tv .cardText-secondary {
+    font-size: 0.9rem !important;
+    opacity: 0.7;
 }
