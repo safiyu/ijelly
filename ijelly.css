@@ -737,7 +737,7 @@ h2.sectionTitle,
 
 .layout-tv #castCollapsible .emby-scroller,
 .layout-tv #guestCastCollapsible .emby-scroller {
-    margin-left: -20em !important;
+    margin-left: 0 !important;
 }
 
 .layout-tv #castCollapsible .sectionTitle,
@@ -745,11 +745,11 @@ h2.sectionTitle,
 .layout-tv #peopleHeader,
 .layout-tv #scenesCollapsible .sectionTitle,
 .layout-tv #similarCollapsible .sectionTitle {
-    margin-left: -16em !important;
+    margin-left: calc(-1 * var(--tv-pad)) !important;
     background: rgba(0, 0, 0, 0.4) !important;
     backdrop-filter: var(--apple-blur) !important;
     -webkit-backdrop-filter: var(--apple-blur) !important;
-    padding: 0.2em 1.5em 0.2em 1em !important;
+    padding: 0.2em 1.5em 0.2em var(--tv-pad) !important;
     border-radius: 0 50px 50px 0 !important;
     width: fit-content !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
@@ -1916,6 +1916,10 @@ body:has(#videoOsdPage) .headerLeft {
 .layout-tv .itemsContainer.scrollSlider {
     padding-left: var(--tv-pad) !important;
     padding-right: var(--tv-pad) !important;
+}
+
+.layout-tv .detailVerticalSection .itemsContainer.scrollSlider {
+    padding-left: 0 !important;
 }
 
 .layout-tv .itemsContainer.vertical-wrap {

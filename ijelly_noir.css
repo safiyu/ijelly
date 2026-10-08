@@ -960,6 +960,10 @@ body:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
     padding-right: var(--tv-pad) !important;
 }
 
+.layout-tv .detailVerticalSection .itemsContainer.scrollSlider {
+    padding-left: 0 !important;
+}
+
 .layout-tv .itemsContainer.vertical-wrap {
     padding-left: var(--tv-pad) !important;
     padding-right: var(--tv-pad) !important;
