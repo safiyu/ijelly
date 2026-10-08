@@ -93,13 +93,22 @@ h3,
     letter-spacing: 0.02em !important;
     color: var(--gl-text) !important;
     text-transform: none !important;
-    text-align: center !important;
+    text-align: left !important;
 }
 
 .sectionTitleContainer {
-    text-align: center !important;
+    text-align: left !important;
     padding: 2rem 0 1rem !important;
     margin-bottom: 3rem !important;
+}
+
+/* Start the title where the first frame starts: 3.3% page margin + 4rem row padding + 2em frame margin */
+.layout-desktop .sectionTitleContainer {
+    padding-left: calc(3.3% + 6rem) !important;
+}
+
+.layout-desktop .detailVerticalSection > .sectionTitle {
+    padding-left: 6rem !important;
 }
 
 .itemName,

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ijelly launch sheet</title>
+<meta name="robots" content="noindex">
+<style>
+@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-400-normal.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-400-normal.woff') format('woff')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-500-normal.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-500-normal.woff') format('woff')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-600-normal.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-600-normal.woff') format('woff')}
+@font-face{font-family:'Playfair Display';font-style:italic;font-weight:400;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/files/playfair-display-latin-400-italic.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/files/playfair-display-latin-400-italic.woff') format('woff')}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:600;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/files/playfair-display-latin-600-normal.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/files/playfair-display-latin-600-normal.woff') format('woff')}
+@font-face{font-family:'Fraunces';font-style:normal;font-weight:600;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/fraunces@5/files/fraunces-latin-600-normal.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/fraunces@5/files/fraunces-latin-600-normal.woff') format('woff')}
+@font-face{font-family:'Fraunces';font-style:normal;font-weight:400;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/fraunces@5/files/fraunces-latin-400-normal.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/fraunces@5/files/fraunces-latin-400-normal.woff') format('woff')}
+@font-face{font-family:'Cormorant Garamond';font-style:italic;font-weight:500;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5/files/cormorant-garamond-latin-500-italic.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5/files/cormorant-garamond-latin-500-italic.woff') format('woff')}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:500;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5/files/cormorant-garamond-latin-500-normal.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5/files/cormorant-garamond-latin-500-normal.woff') format('woff')}
+@font-face{font-family:'Saira';font-style:normal;font-weight:500;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/saira@5/files/saira-latin-500-normal.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/saira@5/files/saira-latin-500-normal.woff') format('woff')}
+@font-face{font-family:'Saira';font-style:normal;font-weight:600;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/saira@5/files/saira-latin-600-normal.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/saira@5/files/saira-latin-600-normal.woff') format('woff')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5/files/jetbrains-mono-latin-400-normal.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5/files/jetbrains-mono-latin-400-normal.woff') format('woff')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5/files/jetbrains-mono-latin-500-normal.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5/files/jetbrains-mono-latin-500-normal.woff') format('woff')}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;background:#101114}
+body{font:400 16px/1.5 'Inter',system-ui,-apple-system,sans-serif;color:#ecebe6;-webkit-font-smoothing:antialiased}
+img{display:block;width:100%;height:auto}
+#sheet{width:2400px;padding:112px 112px 120px;transform-origin:top left;background:#101114}
+.head{display:grid;grid-template-columns:1fr 760px;gap:96px;align-items:end;margin-bottom:96px}
+.head h1{margin:0;font-weight:600;font-size:132px;line-height:.98;letter-spacing:-.05em;max-width:15ch}
+.head p{margin:0 0 14px;font-size:38px;line-height:1.45;color:rgba(236,235,230,.7)}
+.head .url{display:block;margin-top:28px;font:500 30px 'JetBrains Mono',ui-monospace,Menlo,monospace;color:#ecebe6}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.t-apple{--bg:#0a0a0c;--fg:#f5f5f7;--mute:rgba(245,245,247,.66);--accent:#fff;--line:rgba(255,255,255,.16);--code:rgba(255,255,255,.08);--display:-apple-system,BlinkMacSystemFont,'SF Pro Display','Inter',system-ui,sans-serif;--dweight:600;--dstyle:normal;--radius:18px;--track:-.03em}
+.t-noir{--bg:#0e0a07;--fg:#f4ebd8;--mute:rgba(244,235,216,.66);--accent:#c9a45c;--line:rgba(201,164,92,.38);--code:rgba(244,235,216,.07);--display:'Playfair Display',Georgia,serif;--dweight:400;--dstyle:italic;--radius:0;--track:-.01em}
+.t-editorial{--bg:#0d0c0b;--fg:#f1ece2;--mute:rgba(241,236,226,.66);--accent:#e0524a;--line:rgba(241,236,226,.2);--code:rgba(241,236,226,.07);--display:'Fraunces',Georgia,serif;--dweight:600;--dstyle:normal;--radius:0;--track:-.02em}
+.t-gallery{--bg:#1a1a1a;--fg:#e8e5de;--mute:rgba(232,229,222,.72);--accent:#c9a978;--line:rgba(201,169,120,.42);--code:rgba(232,229,222,.08);--display:'Cormorant Garamond',Georgia,serif;--dweight:500;--dstyle:italic;--radius:0;--track:.01em}
+.t-blueprint{--bg:#070b12;--fg:#dbe4ee;--mute:rgba(219,228,238,.68);--accent:#ec9a36;--line:rgba(236,154,54,.38);--code:rgba(236,154,54,.09);--display:'Saira',system-ui,sans-serif;--dweight:600;--dstyle:normal;--radius:0;--track:.01em}
+.t-tinted{--bg:#040406;--fg:#f2f2f4;--mute:rgba(242,242,244,.7);--accent:#fff;--line:rgba(255,255,255,.2);--code:rgba(255,255,255,.1);--display:'Inter',system-ui,sans-serif;--dweight:600;--dstyle:normal;--radius:16px;--track:-.03em}
+
+
+.tile{background:var(--bg);color:var(--fg);border:2px solid var(--line);border-radius:calc(var(--radius) * 1.6);padding:48px 48px 40px}
+.t-tinted.tile{background:radial-gradient(60% 50% at 10% 5%,rgba(30,130,120,.5),transparent 70%),radial-gradient(55% 45% at 95% 80%,rgba(200,125,30,.38),transparent 70%),var(--bg)}
+.t-blueprint.tile{background-image:linear-gradient(rgba(236,154,54,.05) 2px,transparent 2px),linear-gradient(90deg,rgba(236,154,54,.05) 2px,transparent 2px);background-size:40px 40px}
+.tile h2{margin:0 0 36px;font-family:var(--display);font-weight:var(--dweight);font-style:var(--dstyle);font-size:84px;line-height:1;letter-spacing:var(--track)}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.pair figure{margin:0}
+.pair img{aspect-ratio:1600/764;object-fit:cover;object-position:top left;border:2px solid var(--line);border-radius:var(--radius);box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.pair figcaption{margin-top:16px;font-size:28px;color:var(--mute)}
+</style>
+</head>
+<body>
+<main id="sheet">
+  <header class="head">
+    <h1>Six looks for your Jellyfin library</h1>
+    <div>
+      <p>One line of CSS changes your library, detail pages and video player. Built for Jellyfin 12, on desktop and on TV.</p>
+      <span class="url">github.com/safiyu/ijelly</span>
+    </div>
+  </header>
+  <div class="grid">
+<section class="tile t-apple"><h2>Apple TV</h2><div class="pair"><figure><img src="screenshots/web/apple-library.jpg" width="1600" height="741" alt="Apple TV theme: library"><figcaption>Library</figcaption></figure><figure><img src="screenshots/web/apple-detail.jpg" width="1600" height="764" alt="Apple TV theme: detail page"><figcaption>Detail page</figcaption></figure></div></section>
+<section class="tile t-noir"><h2>Cinematheque Noir</h2><div class="pair"><figure><img src="screenshots/web/noir-library.jpg" width="1600" height="741" alt="Cinematheque Noir theme: library"><figcaption>Library</figcaption></figure><figure><img src="screenshots/web/noir-detail.jpg" width="1600" height="764" alt="Cinematheque Noir theme: detail page"><figcaption>Detail page</figcaption></figure></div></section>
+<section class="tile t-editorial"><h2>Editorial</h2><div class="pair"><figure><img src="screenshots/web/editorial-library.jpg" width="1600" height="764" alt="Editorial theme: library"><figcaption>Library</figcaption></figure><figure><img src="screenshots/web/editorial-detail.jpg" width="1600" height="764" alt="Editorial theme: detail page"><figcaption>Detail page</figcaption></figure></div></section>
+<section class="tile t-gallery"><h2>Gallery</h2><div class="pair"><figure><img src="screenshots/web/gallery-library.jpg" width="1600" height="741" alt="Gallery theme: library"><figcaption>Library</figcaption></figure><figure><img src="screenshots/web/gallery-detail.jpg" width="1600" height="764" alt="Gallery theme: detail page"><figcaption>Detail page</figcaption></figure></div></section>
+<section class="tile t-blueprint"><h2>Blueprint</h2><div class="pair"><figure><img src="screenshots/web/blueprint-library.jpg" width="1600" height="741" alt="Blueprint theme: library"><figcaption>Library</figcaption></figure><figure><img src="screenshots/web/blueprint-detail.jpg" width="1600" height="764" alt="Blueprint theme: detail page"><figcaption>Detail page</figcaption></figure></div></section>
+<section class="tile t-tinted"><h2>Poster-Tinted</h2><div class="pair"><figure><img src="screenshots/web/tinted-library.jpg" width="1600" height="764" alt="Poster-Tinted theme: library"><figcaption>Library</figcaption></figure><figure><img src="screenshots/web/tinted-player.jpg" width="1600" height="764" alt="Poster-Tinted theme: player"><figcaption>Player</figcaption></figure></div></section>
+  </div>
+</main>
+<script>
+(function(){
+  var sheet=document.getElementById('sheet');
+  var full=/[?&]full\b/.test(location.search);
+  function fit(){
+    var s=full?1:Math.min(1,window.innerWidth/2400);
+    sheet.style.transform='scale('+s+')';
+    document.body.style.height=Math.ceil(sheet.offsetHeight*s)+'px';
+    document.body.style.overflowX=full?'auto':'hidden';
+    document.documentElement.setAttribute('data-sheet-height',sheet.offsetHeight);
+  }
+  window.addEventListener('resize',fit);
+  window.addEventListener('load',fit);
+  fit();
+})();
+</script>
+</body>
+</html>

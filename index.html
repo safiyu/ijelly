@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ijelly: six themes for Jellyfin</title>
+<meta name="description" content="Six themes for Jellyfin 12. Paste one line of CSS and your library, detail pages and video player get a new design, on desktop and TV.">
+<meta property="og:title" content="ijelly: six themes for Jellyfin">
+<meta property="og:description" content="Six themes for Jellyfin 12. One line of CSS, on desktop and TV.">
+<meta property="og:image" content="screenshots/web/gallery-library.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23101114'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='21' font-style='italic' text-anchor='middle' fill='%23ecebe6'%3Ei%3C/text%3E%3C/svg%3E">
+<style>
+@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-400-normal.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-400-normal.woff') format('woff')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-500-normal.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-500-normal.woff') format('woff')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-600-normal.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-600-normal.woff') format('woff')}
+@font-face{font-family:'Playfair Display';font-style:italic;font-weight:400;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/files/playfair-display-latin-400-italic.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/files/playfair-display-latin-400-italic.woff') format('woff')}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:600;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/files/playfair-display-latin-600-normal.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/playfair-display@5/files/playfair-display-latin-600-normal.woff') format('woff')}
+@font-face{font-family:'Fraunces';font-style:normal;font-weight:600;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/fraunces@5/files/fraunces-latin-600-normal.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/fraunces@5/files/fraunces-latin-600-normal.woff') format('woff')}
+@font-face{font-family:'Fraunces';font-style:normal;font-weight:400;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/fraunces@5/files/fraunces-latin-400-normal.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/fraunces@5/files/fraunces-latin-400-normal.woff') format('woff')}
+@font-face{font-family:'Cormorant Garamond';font-style:italic;font-weight:500;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5/files/cormorant-garamond-latin-500-italic.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5/files/cormorant-garamond-latin-500-italic.woff') format('woff')}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:500;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5/files/cormorant-garamond-latin-500-normal.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5/files/cormorant-garamond-latin-500-normal.woff') format('woff')}
+@font-face{font-family:'Saira';font-style:normal;font-weight:500;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/saira@5/files/saira-latin-500-normal.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/saira@5/files/saira-latin-500-normal.woff') format('woff')}
+@font-face{font-family:'Saira';font-style:normal;font-weight:600;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/saira@5/files/saira-latin-600-normal.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/saira@5/files/saira-latin-600-normal.woff') format('woff')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:400;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5/files/jetbrains-mono-latin-400-normal.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5/files/jetbrains-mono-latin-400-normal.woff') format('woff')}
+@font-face{font-family:'JetBrains Mono';font-style:normal;font-weight:500;font-display:swap;src:url('https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5/files/jetbrains-mono-latin-500-normal.woff2') format('woff2'),url('https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5/files/jetbrains-mono-latin-500-normal.woff') format('woff')}
+
+:root{--ink:#101114;--chalk:#ecebe6;--chalk-mute:rgba(236,235,230,.66);--chalk-line:rgba(236,235,230,.16)}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--ink);color:var(--chalk);font:400 1rem/1.6 'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent,#fff);outline-offset:3px}
+.wrap{width:min(1320px,100% - clamp(40px,8vw,112px));margin-inline:auto}
+
+/* top bar */
+.bar{display:flex;justify-content:space-between;align-items:center;padding-block:28px}
+.mark{font-weight:600;font-size:1.3rem;letter-spacing:-.03em;text-decoration:none}
+.bar a.gh{font-size:.95rem;color:var(--chalk-mute);text-underline-offset:4px}
+.bar a.gh:hover{color:var(--chalk)}
+
+/* intro */
+.intro{padding-block:clamp(40px,8vw,104px) clamp(48px,7vw,88px)}
+.intro h1{margin:0;font-weight:600;font-size:clamp(2.6rem,7.2vw,6rem);line-height:1;letter-spacing:-.045em;max-width:15ch}
+.intro p{margin:28px 0 0;max-width:52ch;font-size:clamp(1.05rem,1.6vw,1.25rem);line-height:1.55;color:var(--chalk-mute)}
+.picks{display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(10px,1.4vw,20px);margin-top:clamp(40px,6vw,72px)}
+.pick{display:flex;flex-direction:column;text-decoration:none;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.pick:hover .pick-name{text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:5px;text-decoration-thickness:2px}
+.pick img{width:100%;aspect-ratio:560/270;object-fit:cover;object-position:top left}
+.pick-name{padding:12px 14px 14px;font-family:var(--display);font-weight:var(--dweight);font-style:var(--dstyle);font-size:1.2rem;letter-spacing:var(--track);line-height:1.2}
+
+/* theme worlds: each room borrows that theme's palette and typeface */
+.t-apple{--bg:#0a0a0c;--fg:#f5f5f7;--mute:rgba(245,245,247,.66);--accent:#fff;--line:rgba(255,255,255,.16);--code:rgba(255,255,255,.08);--display:-apple-system,BlinkMacSystemFont,'SF Pro Display','Inter',system-ui,sans-serif;--dweight:600;--dstyle:normal;--radius:18px;--track:-.03em}
+.t-noir{--bg:#0e0a07;--fg:#f4ebd8;--mute:rgba(244,235,216,.66);--accent:#c9a45c;--line:rgba(201,164,92,.38);--code:rgba(244,235,216,.07);--display:'Playfair Display',Georgia,serif;--dweight:400;--dstyle:italic;--radius:0;--track:-.01em}
+.t-editorial{--bg:#0d0c0b;--fg:#f1ece2;--mute:rgba(241,236,226,.66);--accent:#e0524a;--line:rgba(241,236,226,.2);--code:rgba(241,236,226,.07);--display:'Fraunces',Georgia,serif;--dweight:600;--dstyle:normal;--radius:0;--track:-.02em}
+.t-gallery{--bg:#1a1a1a;--fg:#e8e5de;--mute:rgba(232,229,222,.72);--accent:#c9a978;--line:rgba(201,169,120,.42);--code:rgba(232,229,222,.08);--display:'Cormorant Garamond',Georgia,serif;--dweight:500;--dstyle:italic;--radius:0;--track:.01em}
+.t-blueprint{--bg:#070b12;--fg:#dbe4ee;--mute:rgba(219,228,238,.68);--accent:#ec9a36;--line:rgba(236,154,54,.38);--code:rgba(236,154,54,.09);--display:'Saira',system-ui,sans-serif;--dweight:600;--dstyle:normal;--radius:0;--track:.01em}
+.t-tinted{--bg:#040406;--fg:#f2f2f4;--mute:rgba(242,242,244,.7);--accent:#fff;--line:rgba(255,255,255,.2);--code:rgba(255,255,255,.1);--display:'Inter',system-ui,sans-serif;--dweight:600;--dstyle:normal;--radius:16px;--track:-.03em}
+
+.room{background:var(--bg);color:var(--fg);padding-block:clamp(64px,9vw,128px);border-top:1px solid var(--line)}
+.t-tinted{background:radial-gradient(60% 45% at 12% 8%,rgba(30,130,120,.5),transparent 70%),radial-gradient(55% 45% at 90% 62%,rgba(200,125,30,.38),transparent 70%),var(--bg)}
+.t-blueprint{background-image:linear-gradient(rgba(236,154,54,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(236,154,54,.05) 1px,transparent 1px);background-size:32px 32px}
+.room-grid{display:grid;grid-template-columns:minmax(260px,360px) 1fr;gap:clamp(32px,6vw,88px);align-items:start}
+.room-copy{position:sticky;top:32px}
+.room h2{margin:0;font-family:var(--display);font-weight:var(--dweight);font-style:var(--dstyle);font-size:clamp(2.4rem,5vw,4.2rem);line-height:1.02;letter-spacing:var(--track)}
+.room-copy p{margin:22px 0 0;max-width:36ch;color:var(--mute);line-height:1.62;font-size:1.04rem}
+.t-gallery .room-copy p,.t-noir .room-copy p{font-size:1.1rem}
+.install{margin-top:32px;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.install code{display:block;width:100%;padding:14px 16px;background:var(--code);border:1px solid var(--line);border-radius:min(var(--radius),12px);font:500 .78rem/1.55 'JetBrains Mono',ui-monospace,Menlo,monospace;color:var(--fg);overflow-wrap:break-word;user-select:all}
+.copy{font:600 .92rem/1 'Inter',system-ui,sans-serif;padding:11px 18px;background:var(--accent);color:var(--bg);border:0;border-radius:min(var(--radius),12px);cursor:pointer}
+.copy:hover{filter:brightness(1.08)}
+.copy[data-done="true"]{background:transparent;color:var(--fg);box-shadow:inset 0 0 0 1px var(--accent)}
+
+.shots{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,26px)}
+.shots figure{margin:0}
+.shots figure:first-child,.shots figure:last-child:nth-child(even){grid-column:1/-1}
+.shot{display:block;width:100%;padding:0;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--bg);cursor:zoom-in;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.shot img{width:100%}
+.shots figcaption{margin-top:10px;font-size:.9rem;color:var(--mute)}
+
+/* install and TV: back to the neutral palette */
+.plain{padding-block:clamp(64px,9vw,120px);border-top:1px solid var(--chalk-line)}
+.plain-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,112px)}
+.plain h2{margin:0 0 24px;font-weight:600;font-size:clamp(1.8rem,3.4vw,2.6rem);letter-spacing:-.035em;line-height:1.08}
+.plain ol,.plain ul{margin:0;padding-left:1.25em;max-width:48ch}
+.plain li{margin-bottom:12px;line-height:1.6}
+.plain p{max-width:52ch;color:var(--chalk-mute);margin:20px 0 0}
+.plain code{font:500 .86em 'JetBrains Mono',ui-monospace,Menlo,monospace;background:rgba(236,235,230,.09);padding:2px 6px;border-radius:5px;color:var(--chalk)}
+footer{padding-block:40px 64px;border-top:1px solid var(--chalk-line);color:var(--chalk-mute);font-size:.92rem}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* lightbox */
+dialog.lightbox{padding:0;border:0;background:transparent;max-width:min(96vw,1700px);max-height:94vh;width:96vw;overflow:visible}
+dialog.lightbox::backdrop{background:rgba(6,6,8,.9)}
+dialog.lightbox img{width:100%;max-height:88vh;object-fit:contain;border-radius:6px}
+dialog.lightbox button{position:absolute;top:-44px;right:0;font:600 .92rem 'Inter',system-ui,sans-serif;color:#fff;background:transparent;border:1px solid rgba(255,255,255,.5);border-radius:8px;padding:8px 14px;cursor:pointer}
+
+@media (max-width:980px){
+  .picks{grid-template-columns:repeat(3,1fr)}
+  .room-grid{grid-template-columns:1fr}
+  .room-copy{position:static}
+  .plain-grid{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .picks{grid-template-columns:repeat(2,1fr)}
+  .shots{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header class="wrap bar">
+  <a class="mark" href="#top">ijelly</a>
+  <a class="gh" href="https://github.com/safiyu/ijelly">GitHub</a>
+</header>
+
+<main id="top">
+  <div class="wrap intro">
+    <h1>Six looks for your Jellyfin library</h1>
+    <p>Paste one line of CSS into the Jellyfin dashboard and your library, detail pages and video player take on a new design. Built for Jellyfin 12, on desktop and on TV.</p>
+    <nav class="picks" aria-label="Themes">
+<a class="pick t-apple" href="#apple"><img src="screenshots/web/apple-library-thumb.jpg" width="560" height="259" alt="" loading="eager"><span class="pick-name">Apple TV</span></a>
+<a class="pick t-noir" href="#noir"><img src="screenshots/web/noir-library-thumb.jpg" width="560" height="259" alt="" loading="eager"><span class="pick-name">Cinematheque Noir</span></a>
+<a class="pick t-editorial" href="#editorial"><img src="screenshots/web/editorial-library-thumb.jpg" width="560" height="267" alt="" loading="eager"><span class="pick-name">Editorial</span></a>
+<a class="pick t-gallery" href="#gallery"><img src="screenshots/web/gallery-library-thumb.jpg" width="560" height="259" alt="" loading="eager"><span class="pick-name">Gallery</span></a>
+<a class="pick t-blueprint" href="#blueprint"><img src="screenshots/web/blueprint-library-thumb.jpg" width="560" height="259" alt="" loading="eager"><span class="pick-name">Blueprint</span></a>
+<a class="pick t-tinted" href="#tinted"><img src="screenshots/web/tinted-library-thumb.jpg" width="560" height="267" alt="" loading="eager"><span class="pick-name">Poster-Tinted</span></a>
+    </nav>
+  </div>
+
+<section class="room t-apple" id="apple" aria-labelledby="h-apple">
+  <div class="wrap room-grid">
+    <div class="room-copy">
+      <h2 id="h-apple">Apple TV</h2>
+      <p>Dark glass bars, pill navigation and rounded cards, with a floating two-row player bar. Modeled on the tvOS look.</p>
+      <div class="install">
+        <code>@import url('https:/<wbr>/<wbr>cdn.jsdelivr.net/<wbr>gh/<wbr>safiyu/<wbr>ijelly@latest/<wbr>ijelly.css');</code>
+        <button class="copy" type="button" data-copy="@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@latest/ijelly.css');">Copy import</button>
+      </div>
+    </div>
+    <div class="shots">
+<figure><button class="shot" type="button" data-full="screenshots/web/apple-library.jpg" data-alt="Apple TV theme: movie library on dark glass with a pill navigation bar" aria-label="Enlarge: Apple TV theme: movie library on dark glass with a pill navigation bar"><img src="screenshots/web/apple-library.jpg" width="1600" height="741" alt="Apple TV theme: movie library on dark glass with a pill navigation bar" loading="lazy" decoding="async"></button><figcaption>Library</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/apple-detail.jpg" data-alt="Apple TV theme: movie detail page with a rounded play button and meta chips" aria-label="Enlarge: Apple TV theme: movie detail page with a rounded play button and meta chips"><img src="screenshots/web/apple-detail.jpg" width="1600" height="764" alt="Apple TV theme: movie detail page with a rounded play button and meta chips" loading="lazy" decoding="async"></button><figcaption>Detail page</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/apple-player.jpg" data-alt="Apple TV theme: video player with a floating glass control bar" aria-label="Enlarge: Apple TV theme: video player with a floating glass control bar"><img src="screenshots/web/apple-player.jpg" width="1600" height="764" alt="Apple TV theme: video player with a floating glass control bar" loading="lazy" decoding="async"></button><figcaption>Player</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="room t-noir" id="noir" aria-labelledby="h-noir">
+  <div class="wrap room-grid">
+    <div class="room-copy">
+      <h2 id="h-noir">Cinematheque Noir</h2>
+      <p>Warm sepia, serif titles and a brass frame around every poster. Section names are set in lowercase italics.</p>
+      <div class="install">
+        <code>@import url('https:/<wbr>/<wbr>cdn.jsdelivr.net/<wbr>gh/<wbr>safiyu/<wbr>ijelly@latest/<wbr>ijelly_noir.css');</code>
+        <button class="copy" type="button" data-copy="@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@latest/ijelly_noir.css');">Copy import</button>
+      </div>
+    </div>
+    <div class="shots">
+<figure><button class="shot" type="button" data-full="screenshots/web/noir-library.jpg" data-alt="Noir theme: movie library with brass-framed posters on a sepia background" aria-label="Enlarge: Noir theme: movie library with brass-framed posters on a sepia background"><img src="screenshots/web/noir-library.jpg" width="1600" height="741" alt="Noir theme: movie library with brass-framed posters on a sepia background" loading="lazy" decoding="async"></button><figcaption>Library</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/noir-detail.jpg" data-alt="Noir theme: movie detail page with a serif title and a brass-framed poster" aria-label="Enlarge: Noir theme: movie detail page with a serif title and a brass-framed poster"><img src="screenshots/web/noir-detail.jpg" width="1600" height="764" alt="Noir theme: movie detail page with a serif title and a brass-framed poster" loading="lazy" decoding="async"></button><figcaption>Detail page</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="room t-editorial" id="editorial" aria-labelledby="h-editorial">
+  <div class="wrap room-grid">
+    <div class="room-copy">
+      <h2 id="h-editorial">Editorial</h2>
+      <p>Deep ink and cream type with a red accent. The first poster on each shelf is set larger, like a magazine spread.</p>
+      <div class="install">
+        <code>@import url('https:/<wbr>/<wbr>cdn.jsdelivr.net/<wbr>gh/<wbr>safiyu/<wbr>ijelly@latest/<wbr>ijelly_editorial.css');</code>
+        <button class="copy" type="button" data-copy="@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@latest/ijelly_editorial.css');">Copy import</button>
+      </div>
+    </div>
+    <div class="shots">
+<figure><button class="shot" type="button" data-full="screenshots/web/editorial-library.jpg" data-alt="Editorial theme: movie library with an oversized first poster" aria-label="Enlarge: Editorial theme: movie library with an oversized first poster"><img src="screenshots/web/editorial-library.jpg" width="1600" height="764" alt="Editorial theme: movie library with an oversized first poster" loading="lazy" decoding="async"></button><figcaption>Library</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/editorial-detail.jpg" data-alt="Editorial theme: movie detail page with a red play button and a pull-quote synopsis" aria-label="Enlarge: Editorial theme: movie detail page with a red play button and a pull-quote synopsis"><img src="screenshots/web/editorial-detail.jpg" width="1600" height="764" alt="Editorial theme: movie detail page with a red play button and a pull-quote synopsis" loading="lazy" decoding="async"></button><figcaption>Detail page</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="room t-gallery" id="gallery" aria-labelledby="h-gallery">
+  <div class="wrap room-grid">
+    <div class="room-copy">
+      <h2 id="h-gallery">Gallery</h2>
+      <p>Posters sit on cream mats in gold frames against a charcoal wall, with small museum-style captions.</p>
+      <div class="install">
+        <code>@import url('https:/<wbr>/<wbr>cdn.jsdelivr.net/<wbr>gh/<wbr>safiyu/<wbr>ijelly@latest/<wbr>ijelly_gallery.css');</code>
+        <button class="copy" type="button" data-copy="@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@latest/ijelly_gallery.css');">Copy import</button>
+      </div>
+    </div>
+    <div class="shots">
+<figure><button class="shot" type="button" data-full="screenshots/web/gallery-library.jpg" data-alt="Gallery theme: movie library with cream-matted posters in gold frames" aria-label="Enlarge: Gallery theme: movie library with cream-matted posters in gold frames"><img src="screenshots/web/gallery-library.jpg" width="1600" height="741" alt="Gallery theme: movie library with cream-matted posters in gold frames" loading="lazy" decoding="async"></button><figcaption>Library</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/gallery-detail.jpg" data-alt="Gallery theme: movie detail page with a matted poster and serif text" aria-label="Enlarge: Gallery theme: movie detail page with a matted poster and serif text"><img src="screenshots/web/gallery-detail.jpg" width="1600" height="764" alt="Gallery theme: movie detail page with a matted poster and serif text" loading="lazy" decoding="async"></button><figcaption>Detail page</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="room t-blueprint" id="blueprint" aria-labelledby="h-blueprint">
+  <div class="wrap room-grid">
+    <div class="room-copy">
+      <h2 id="h-blueprint">Blueprint</h2>
+      <p>Navy-black with an amber accent, square corners and monospaced labels over a faint drafting grid.</p>
+      <div class="install">
+        <code>@import url('https:/<wbr>/<wbr>cdn.jsdelivr.net/<wbr>gh/<wbr>safiyu/<wbr>ijelly@latest/<wbr>ijelly_blueprint.css');</code>
+        <button class="copy" type="button" data-copy="@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@latest/ijelly_blueprint.css');">Copy import</button>
+      </div>
+    </div>
+    <div class="shots">
+<figure><button class="shot" type="button" data-full="screenshots/web/blueprint-library.jpg" data-alt="Blueprint theme: movie library with square amber-outlined cards" aria-label="Enlarge: Blueprint theme: movie library with square amber-outlined cards"><img src="screenshots/web/blueprint-library.jpg" width="1600" height="741" alt="Blueprint theme: movie library with square amber-outlined cards" loading="lazy" decoding="async"></button><figcaption>Library</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/blueprint-detail.jpg" data-alt="Blueprint theme: movie detail page with an amber play button" aria-label="Enlarge: Blueprint theme: movie detail page with an amber play button"><img src="screenshots/web/blueprint-detail.jpg" width="1600" height="764" alt="Blueprint theme: movie detail page with an amber play button" loading="lazy" decoding="async"></button><figcaption>Detail page</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/blueprint-cast.jpg" data-alt="Blueprint theme: cast and crew row with square portrait cards" aria-label="Enlarge: Blueprint theme: cast and crew row with square portrait cards"><img src="screenshots/web/blueprint-cast.jpg" width="1600" height="741" alt="Blueprint theme: cast and crew row with square portrait cards" loading="lazy" decoding="async"></button><figcaption>Cast and crew</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/blueprint-player.jpg" data-alt="Blueprint theme: video player with a full-width amber seek bar" aria-label="Enlarge: Blueprint theme: video player with a full-width amber seek bar"><img src="screenshots/web/blueprint-player.jpg" width="1600" height="764" alt="Blueprint theme: video player with a full-width amber seek bar" loading="lazy" decoding="async"></button><figcaption>Player</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="room t-tinted" id="tinted" aria-labelledby="h-tinted">
+  <div class="wrap room-grid">
+    <div class="room-copy">
+      <h2 id="h-tinted">Poster-Tinted</h2>
+      <p>The page takes its colors from whatever you are looking at. A blurred copy of the backdrop washes the screen, and the poster you focus glows in its own colors. CSS only, so it works on TV.</p>
+      <div class="install">
+        <code>@import url('https:/<wbr>/<wbr>cdn.jsdelivr.net/<wbr>gh/<wbr>safiyu/<wbr>ijelly@latest/<wbr>ijelly_tinted.css');</code>
+        <button class="copy" type="button" data-copy="@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@latest/ijelly_tinted.css');">Copy import</button>
+      </div>
+    </div>
+    <div class="shots">
+<figure><button class="shot" type="button" data-full="screenshots/web/tinted-library.jpg" data-alt="Poster-Tinted theme: movie library with a color wash from the backdrop" aria-label="Enlarge: Poster-Tinted theme: movie library with a color wash from the backdrop"><img src="screenshots/web/tinted-library.jpg" width="1600" height="764" alt="Poster-Tinted theme: movie library with a color wash from the backdrop" loading="lazy" decoding="async"></button><figcaption>Library</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/tinted-player.jpg" data-alt="Poster-Tinted theme: video player tinted by the video" aria-label="Enlarge: Poster-Tinted theme: video player tinted by the video"><img src="screenshots/web/tinted-player.jpg" width="1600" height="764" alt="Poster-Tinted theme: video player tinted by the video" loading="lazy" decoding="async"></button><figcaption>Player</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+  <section class="plain" id="install" aria-labelledby="h-install">
+    <div class="wrap plain-grid">
+      <div>
+        <h2 id="h-install">Install in three steps</h2>
+        <ol>
+          <li>In Jellyfin, open Dashboard, General, then Custom CSS.</li>
+          <li>Paste the import line for the theme you want.</li>
+          <li>Save, then turn on Backdrops under Settings, Display.</li>
+        </ol>
+        <p>The <code>@latest</code> tag follows the newest release, but jsDelivr caches it. To stay on one version, replace <code>@latest</code> with a release tag such as <code>@2.0.13</code>.</p>
+      </div>
+      <div id="tv">
+        <h2>On the TV too</h2>
+        <ul>
+          <li>Pages use the same layout as desktop: backdrop banner, poster, buttons, then the description.</li>
+          <li>Home rows and library grids fit the screen with safe margins.</li>
+          <li>The player puts the seek bar on its own row, with the controls packed together underneath.</li>
+        </ul>
+        <p>Tested on the Samsung Tizen app. Keep the Jellyfin app on your TV up to date.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>ijelly is open source under the MIT license.</span>
+    <a href="https://github.com/safiyu/ijelly">Source on GitHub</a>
+  </div>
+</footer>
+
+<dialog class="lightbox" id="lb" aria-label="Screenshot">
+  <img alt="">
+  <button type="button" id="lb-close">Close</button>
+</dialog>
+
+<script>
+(function(){
+  var dlg=document.getElementById('lb'),big=dlg.querySelector('img');
+  document.querySelectorAll('.shot').forEach(function(b){
+    b.addEventListener('click',function(){big.src=b.dataset.full;big.alt=b.dataset.alt;dlg.showModal();});
+  });
+  document.getElementById('lb-close').addEventListener('click',function(){dlg.close();});
+  dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close();});
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var text=btn.dataset.copy;
+      function done(){btn.textContent='Copied';btn.dataset.done='true';setTimeout(function(){btn.textContent='Copy import';btn.dataset.done='';},1600);}
+      if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,function(){fallback(text);done();});}
+      else{fallback(text);done();}
+    });
+  });
+  function fallback(text){var t=document.createElement('textarea');t.value=text;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(t);}
+})();
+</script>
+</body>
+</html>
