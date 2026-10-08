@@ -638,7 +638,6 @@ h3,
 
 .layout-tv .detailRibbon {
     margin-top: -7.2em !important;
-    height: 7.2em !important;
 }
 
 .layout-tv .detailImageContainer .card {
@@ -1046,8 +1045,15 @@ body:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
     padding-right: 0 !important;
 }
 
-.layout-tv .detailVerticalSection .itemsContainer.scrollSlider {
+.layout-tv .detailPageSecondaryContainer {
+    padding-left: 3.3% !important;
+}
+
+.layout-tv .detailVerticalSection .emby-scroller,
+.layout-tv .detailVerticalSection .itemsContainer,
+.layout-tv .detailVerticalSection .scrollSlider {
     padding-left: 0 !important;
+    margin-left: 0 !important;
 }
 
 .layout-tv .itemsContainer.vertical-wrap {
@@ -1152,4 +1158,66 @@ body:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
 
 .layout-tv .videoOsdBottom.videoOsdBottom-maincontrols {
     padding: 2.4vh var(--tv-pad) 3.6vh !important;
+}
+
+/* Detail header: the title block sits in normal flow under the buttons, so the ribbon grows with it (original titles, series names)
+   and the content below is pushed down instead of being overlapped. The band look is drawn on ::before behind the button strip only. */
+.layout-desktop .detailRibbon.detailRibbon,
+.layout-tv .detailRibbon.detailRibbon {
+    flex-wrap: wrap !important;
+    align-content: flex-start !important;
+    align-items: flex-start !important;
+    height: auto !important;
+    background: none !important;
+    background-color: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+.layout-desktop .detailRibbon.detailRibbon::before,
+.layout-tv .detailRibbon.detailRibbon::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 7.2em;
+    z-index: -1;
+    pointer-events: none;
+    background: rgba(10, 12, 14, 0.88) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-top: 1px solid var(--kxta-rule) !important;
+    border-bottom: 1px solid var(--kxta-rule) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+.layout-desktop .detailRibbon.detailRibbon .mainDetailButtons,
+.layout-tv .detailRibbon.detailRibbon .mainDetailButtons {
+    order: 1 !important;
+    width: 100% !important;
+    height: 7.2em !important;
+    box-sizing: border-box !important;
+}
+
+.layout-desktop .detailRibbon.detailRibbon .infoWrapper,
+.layout-tv .detailRibbon.detailRibbon .infoWrapper {
+    position: static !important;
+    order: 2 !important;
+    flex: 0 0 100% !important;
+    width: auto !important;
+    max-width: 100% !important;
+    padding: 0.8em 3.3% 0.4em 0 !important;
+}
+
+.layout-desktop .detailPagePrimaryContainer.detailPagePrimaryContainer,
+.layout-tv .detailPagePrimaryContainer.detailPagePrimaryContainer {
+    padding-bottom: 0.5em !important;
+}
+
+.layout-desktop .detailPagePrimaryContent.detailPagePrimaryContent,
+.layout-tv .detailPagePrimaryContent.detailPagePrimaryContent {
+    padding-top: 1.25em !important;
 }
