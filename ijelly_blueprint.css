@@ -1041,6 +1041,11 @@ body:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
     padding-right: var(--tv-pad) !important;
 }
 
+.layout-tv .emby-scroller {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
 .layout-tv .detailVerticalSection .itemsContainer.scrollSlider {
     padding-left: 0 !important;
 }
