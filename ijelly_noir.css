@@ -412,7 +412,9 @@ h3,
 }
 
 .layout-desktop .detailRibbon,
-.layout-desktop [dir=ltr] .detailRibbon {
+.layout-desktop [dir=ltr] .detailRibbon,
+.layout-tv .detailRibbon,
+.layout-tv [dir=ltr] .detailRibbon {
     position: relative !important;
     display: flex !important;
     align-items: center !important;
@@ -428,7 +430,8 @@ h3,
     justify-content: flex-start !important;
 }
 
-.layout-desktop .detailRibbon .mainDetailButtons {
+.layout-desktop .detailRibbon .mainDetailButtons,
+.layout-tv .detailRibbon .mainDetailButtons {
     margin: 0 !important;
     display: flex !important;
     align-items: center !important;
@@ -436,7 +439,8 @@ h3,
     z-index: 2 !important;
 }
 
-.layout-desktop .detailRibbon .infoWrapper {
+.layout-desktop .detailRibbon .infoWrapper,
+.layout-tv .detailRibbon .infoWrapper {
     position: absolute !important;
     top: 100% !important;
     left: 25vw !important;
@@ -452,7 +456,9 @@ h3,
 }
 
 .layout-desktop .detailPagePrimaryContent,
-.layout-desktop [dir=ltr] .detailPagePrimaryContent {
+.layout-desktop [dir=ltr] .detailPagePrimaryContent,
+.layout-tv .detailPagePrimaryContent,
+.layout-tv [dir=ltr] .detailPagePrimaryContent {
     padding-left: 25vw !important;
     padding-top: 6.5em !important;
 }
@@ -506,7 +512,8 @@ h3,
 }
 
 /* Jellyfin 12 floats the poster, which pushes the flex ribbon right on tall posters */
-.layout-desktop .detailPagePrimaryContainer > .detailImageContainer {
+.layout-desktop .detailPagePrimaryContainer > .detailImageContainer,
+.layout-tv .detailPagePrimaryContainer > .detailImageContainer {
     position: absolute !important;
     width: 100% !important;
     height: 0 !important;
@@ -535,65 +542,23 @@ h3,
     margin-bottom: 1.5em !important;
 }
 
-/* TV detail (Jellyfin 12): poster left, info right, whole hero inside the first 1080p screen */
-.layout-tv {
-    --tv-pad: 5vw;
-    --tv-gap: 4vw;
-    --tv-poster-w: min(24vw, 44vh);
-}
-
-.layout-tv .detailPagePrimaryContainer {
-    display: flex !important;
-    align-items: flex-end !important;
-    gap: var(--tv-gap) !important;
-    padding: 6vh var(--tv-pad) 4vh !important;
-    min-height: 70vh !important;
-}
-
-.layout-tv .detailPagePrimaryContainer > .detailImageContainer {
-    flex: 0 0 var(--tv-poster-w) !important;
-}
-
-.layout-tv .detailImageContainer .card {
-    position: relative !important;
-    float: none !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: var(--tv-poster-w) !important;
-    max-width: none !important;
-    max-height: none !important;
-    margin: 0 !important;
+/* TV detail (Jellyfin 12): same layout as desktop, scaled up. Native TV styles differ, so restore the desktop geometry. */
+.layout-tv .itemBackdrop {
+    display: block !important;
 }
 
 .layout-tv .detailRibbon {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: flex-end !important;
-    align-items: flex-start !important;
-    flex: 1 1 0 !important;
-    min-width: 0 !important;
-    height: auto !important;
+    margin-top: -7.2em !important;
+    height: 7.2em !important;
+}
+
+.layout-tv .detailImageContainer .card {
+    left: 3.3% !important;
+    top: -12.96em !important;
     margin: 0 !important;
-    padding: 0 !important;
-    background: none !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-}
-
-.layout-tv .detailRibbon .infoWrapper {
-    flex: 0 1 auto !important;
-}
-
-.layout-tv .mainDetailButtons {
-    margin: 2.5vh 0 0 !important;
-    gap: 0.6em !important;
-}
-
-.layout-tv .detailPagePrimaryContent {
-    padding-left: calc(var(--tv-pad) + var(--tv-poster-w) + var(--tv-gap)) !important;
-    padding-right: var(--tv-pad) !important;
+    width: 19vw !important;
+    max-width: none !important;
+    max-height: none !important;
 }
 
 .parentName {
