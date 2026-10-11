@@ -16,6 +16,35 @@
     --ed-font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
     --ed-font-meta: 'Fraunces', Georgia, serif;
     --ed-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    /* ── Jellyfin 12.0 MUI / Native Variable Bridge ── */
+    --jf-palette-background-default: var(--ed-bg);
+    --jf-palette-background-defaultImage: none;
+    --jf-palette-background-paper: var(--ed-bg-elev);
+    --jf-palette-primary-main: var(--ed-accent);
+    --jf-palette-primary-dark: #980d23;
+    --jf-palette-primary-light: #e02f4a;
+    --jf-palette-secondary-main: var(--ed-accent);
+    --jf-palette-text-primary: var(--ed-text);
+    --jf-palette-text-secondary: var(--ed-text-dim);
+    --jf-palette-divider: var(--ed-rule);
+    --jf-palette-action-focus: var(--ed-accent-dim);
+    --jf-palette-action-hover: rgba(232, 228, 220, 0.06);
+    --jf-palette-AppBar-defaultBg: transparent;
+    --jf-palette-AppBar-transparentBg: transparent;
+    --jf-palette-AppBar-gradient: none;
+    --jf-card-borderRadius: 0px;
+
+    /* MUI CSS-vars mode (Jellyfin 12 builds with @mui/material v6+) */
+    --mui-palette-background-default: var(--ed-bg);
+    --mui-palette-background-paper: var(--ed-bg-elev);
+    --mui-palette-primary-main: var(--ed-accent);
+    --mui-palette-secondary-main: var(--ed-accent);
+    --mui-palette-text-primary: var(--ed-text);
+    --mui-palette-text-secondary: var(--ed-text-dim);
+    --mui-palette-divider: var(--ed-rule);
+    --mui-palette-AppBar-defaultBg: transparent;
+    --mui-shape-borderRadius: 0px;
 }
 
 /* Self-hosted static fonts (no Google Fonts, no variable fonts) so older Tizen engines render them */
@@ -150,6 +179,15 @@ h3,
     z-index: 1000 !important;
 }
 
+/* Sticky library header (JF12 merged bar) */
+.stickyLibraryHeader,
+[class*="stickyLibraryHeader"],
+[class*="libraryHeader"] {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
 .headroom--unpinned {
     transform: translateY(-100%) !important;
 }
@@ -232,6 +270,8 @@ h3,
 
 /* Cards: no frames, just the image + serif caption + swash hover */
 .card,
+.MuiCard-root,
+[class*="Card-root"],
 .portraitCard,
 .squareCard,
 .backdropCard,

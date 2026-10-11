@@ -17,6 +17,35 @@
     --noir-font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
     --noir-font-mono: 'JetBrains Mono', 'SF Mono', ui-monospace, Menlo, monospace;
     --noir-ease: cubic-bezier(0.32, 0.72, 0, 1);
+
+    /* ── Jellyfin 12.0 MUI / Native Variable Bridge ── */
+    --jf-palette-background-default: var(--noir-bg);
+    --jf-palette-background-defaultImage: none;
+    --jf-palette-background-paper: var(--noir-bg-raised);
+    --jf-palette-primary-main: var(--noir-accent);
+    --jf-palette-primary-dark: #a4823f;
+    --jf-palette-primary-light: #dac184;
+    --jf-palette-secondary-main: var(--noir-accent);
+    --jf-palette-text-primary: var(--noir-text);
+    --jf-palette-text-secondary: var(--noir-text-dim);
+    --jf-palette-divider: var(--noir-rule);
+    --jf-palette-action-focus: var(--noir-accent-dim);
+    --jf-palette-action-hover: rgba(244, 235, 216, 0.06);
+    --jf-palette-AppBar-defaultBg: transparent;
+    --jf-palette-AppBar-transparentBg: transparent;
+    --jf-palette-AppBar-gradient: none;
+    --jf-card-borderRadius: 0px;
+
+    /* MUI CSS-vars mode (Jellyfin 12 builds with @mui/material v6+) */
+    --mui-palette-background-default: var(--noir-bg);
+    --mui-palette-background-paper: var(--noir-bg-raised);
+    --mui-palette-primary-main: var(--noir-accent);
+    --mui-palette-secondary-main: var(--noir-accent);
+    --mui-palette-text-primary: var(--noir-text);
+    --mui-palette-text-secondary: var(--noir-text-dim);
+    --mui-palette-divider: var(--noir-rule);
+    --mui-palette-AppBar-defaultBg: transparent;
+    --mui-shape-borderRadius: 0px;
 }
 
 /* Self-hosted static fonts (no Google Fonts, no variable fonts) so older Tizen engines render them */
@@ -141,6 +170,15 @@ h3,
     z-index: 1000 !important;
 }
 
+/* Sticky library header (JF12 merged bar) */
+.stickyLibraryHeader,
+[class*="stickyLibraryHeader"],
+[class*="libraryHeader"] {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
 .headroom--unpinned {
     transform: translateY(-100%) !important;
 }
@@ -205,6 +243,8 @@ h3,
 
 /* Cards: brass hairline frame + cream mat around each poster */
 .card,
+.MuiCard-root,
+[class*="Card-root"],
 .portraitCard,
 .squareCard,
 .backdropCard,

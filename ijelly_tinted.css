@@ -15,6 +15,36 @@
     --pt-r-pill: 999px;
     --pt-ease: cubic-bezier(0.32, 0.72, 0, 1);
     --pt-font: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif;
+    --pt-border: var(--pt-accent-soft);
+
+    /* ── Jellyfin 12.0 MUI / Native Variable Bridge ── */
+    --jf-palette-background-default: var(--pt-bg);
+    --jf-palette-background-defaultImage: none;
+    --jf-palette-background-paper: var(--pt-bg-elev);
+    --jf-palette-primary-main: var(--pt-accent);
+    --jf-palette-primary-dark: #cccccc;
+    --jf-palette-primary-light: #ffffff;
+    --jf-palette-secondary-main: var(--pt-accent);
+    --jf-palette-text-primary: var(--pt-text);
+    --jf-palette-text-secondary: var(--pt-text-dim);
+    --jf-palette-divider: var(--pt-accent-soft);
+    --jf-palette-action-focus: var(--pt-accent-soft);
+    --jf-palette-action-hover: rgba(255, 255, 255, 0.08);
+    --jf-palette-AppBar-defaultBg: transparent;
+    --jf-palette-AppBar-transparentBg: transparent;
+    --jf-palette-AppBar-gradient: none;
+    --jf-card-borderRadius: var(--pt-r);
+
+    /* MUI CSS-vars mode (Jellyfin 12 builds with @mui/material v6+) */
+    --mui-palette-background-default: var(--pt-bg);
+    --mui-palette-background-paper: var(--pt-bg-elev);
+    --mui-palette-primary-main: var(--pt-accent);
+    --mui-palette-secondary-main: var(--pt-accent);
+    --mui-palette-text-primary: var(--pt-text);
+    --mui-palette-text-secondary: var(--pt-text-dim);
+    --mui-palette-divider: var(--pt-accent-soft);
+    --mui-palette-AppBar-defaultBg: transparent;
+    --mui-shape-borderRadius: var(--pt-r);
 }
 
 html,
@@ -124,6 +154,15 @@ h3,
     z-index: 1000 !important;
 }
 
+/* Sticky library header (JF12 merged bar) */
+.stickyLibraryHeader,
+[class*="stickyLibraryHeader"],
+[class*="libraryHeader"] {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
 .headroom--unpinned {
     transform: translateY(-100%) !important;
 }
@@ -180,6 +219,8 @@ h3,
 
 /* Cards */
 .card,
+.MuiCard-root,
+[class*="Card-root"],
 .portraitCard,
 .squareCard,
 .backdropCard,
@@ -407,8 +448,8 @@ h3,
     background: rgba(18, 21, 28, 0.88) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
-    border-top: 1px solid var(--pt-border) !important;
-    border-bottom: 1px solid var(--pt-border) !important;
+    border-top: 1px solid var(--pt-accent-soft) !important;
+    border-bottom: 1px solid var(--pt-accent-soft) !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
 }
 
@@ -1100,8 +1141,8 @@ body:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
     background: rgba(18, 21, 28, 0.88) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
-    border-top: 1px solid var(--pt-border) !important;
-    border-bottom: 1px solid var(--pt-border) !important;
+    border-top: 1px solid var(--pt-accent-soft) !important;
+    border-bottom: 1px solid var(--pt-accent-soft) !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
 }
 

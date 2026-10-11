@@ -14,11 +14,41 @@
     --gl-text-faint: rgba(229, 226, 219, 0.6);
     --gl-accent: #c9a978;
     --gl-rule: rgba(229, 226, 219, 0.1);
+    --gl-border: var(--gl-rule);
     --gl-shadow: 0 1px 0 rgba(201, 169, 120, 0.2);
     --gl-font-display: 'Cormorant Garamond', 'EB Garamond', 'Playfair Display', 'Didot', Georgia, serif;
     --gl-font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
     --gl-font-tag: 'JetBrains Mono', 'SF Mono', ui-monospace, Menlo, monospace;
     --gl-ease: cubic-bezier(0.25, 0.1, 0.25, 1);
+
+    /* ── Jellyfin 12.0 MUI / Native Variable Bridge ── */
+    --jf-palette-background-default: var(--gl-bg);
+    --jf-palette-background-defaultImage: none;
+    --jf-palette-background-paper: var(--gl-bg-raised);
+    --jf-palette-primary-main: var(--gl-accent);
+    --jf-palette-primary-dark: #a88755;
+    --jf-palette-primary-light: #d8bc92;
+    --jf-palette-secondary-main: var(--gl-accent);
+    --jf-palette-text-primary: var(--gl-text);
+    --jf-palette-text-secondary: var(--gl-text-dim);
+    --jf-palette-divider: var(--gl-rule);
+    --jf-palette-action-focus: var(--gl-frame-dim);
+    --jf-palette-action-hover: rgba(201, 169, 120, 0.08);
+    --jf-palette-AppBar-defaultBg: transparent;
+    --jf-palette-AppBar-transparentBg: transparent;
+    --jf-palette-AppBar-gradient: none;
+    --jf-card-borderRadius: 0px;
+
+    /* MUI CSS-vars mode (Jellyfin 12 builds with @mui/material v6+) */
+    --mui-palette-background-default: var(--gl-bg);
+    --mui-palette-background-paper: var(--gl-bg-raised);
+    --mui-palette-primary-main: var(--gl-accent);
+    --mui-palette-secondary-main: var(--gl-accent);
+    --mui-palette-text-primary: var(--gl-text);
+    --mui-palette-text-secondary: var(--gl-text-dim);
+    --mui-palette-divider: var(--gl-rule);
+    --mui-palette-AppBar-defaultBg: transparent;
+    --mui-shape-borderRadius: 0px;
 }
 
 /* Self-hosted static fonts (no Google Fonts, no variable fonts) so older Tizen engines render them */
@@ -171,6 +201,15 @@ h3,
     padding-right: 2rem !important;
 }
 
+/* Sticky library header (JF12 merged bar) */
+.stickyLibraryHeader,
+[class*="stickyLibraryHeader"],
+[class*="libraryHeader"] {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
 .headroom--unpinned {
     transform: translateY(-100%) !important;
 }
@@ -277,6 +316,8 @@ h3,
 
 /* Cards: THE signature — gold hairline frame + cream mat around image */
 .card,
+.MuiCard-root,
+[class*="Card-root"],
 .portraitCard,
 .squareCard,
 .backdropCard,
@@ -443,7 +484,7 @@ h3,
 }
 
 /* Text inside the cream surfaces must be dark ink: the global light and dimmed text colors vanish on cream */
-:is(.dialog, .menu, .actionSheet, .MuiDialog-paper, .MuiMenu-paper, .MuiPopover-paper, .MuiAutocomplete-paper) :is(h1, h2, h3, h4, h5, h6, p, span, label, a, li, div, .sectionTitle, .actionSheetTitle, .listItemBodyText, .actionSheetItemText, .inputLabel, .MuiTypography-root, .MuiListItemText-primary, .MuiFormLabel-root, .material-icons, .MuiSvgIcon-root) {
+:is(.dialog, .menu, .actionSheet, .MuiDialog-paper, .MuiMenu-paper, .MuiPopover-paper, .MuiAutocomplete-paper) :is(h1, h2, h3, h4, h5, h6, p, span, label, a, li, div, button, .emby-button, .MuiButton-root, .sectionTitle, .actionSheetTitle, .listItemBodyText, .actionSheetItemText, .inputLabel, .MuiTypography-root, .MuiListItemText-primary, .MuiFormLabel-root, .material-icons, .MuiSvgIcon-root) {
     color: #2b2620 !important;
     text-shadow: none !important;
 }
@@ -530,8 +571,8 @@ select optgroup,
     background: rgba(16, 16, 18, 0.88) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
-    border-top: 1px solid var(--gl-border) !important;
-    border-bottom: 1px solid var(--gl-border) !important;
+    border-top: 1px solid var(--gl-rule) !important;
+    border-bottom: 1px solid var(--gl-rule) !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
 }
 
@@ -1219,8 +1260,8 @@ body:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
     background: rgba(16, 16, 18, 0.88) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
-    border-top: 1px solid var(--gl-border) !important;
-    border-bottom: 1px solid var(--gl-border) !important;
+    border-top: 1px solid var(--gl-rule) !important;
+    border-bottom: 1px solid var(--gl-rule) !important;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
 }
 
