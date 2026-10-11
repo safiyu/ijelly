@@ -350,7 +350,9 @@ h3,
 }
 
 .paper-icon-button-light,
-.MuiIconButton-root {
+.MuiIconButton-root,
+[class*="IconButton-root"],
+.headerButton {
     color: var(--noir-text) !important;
     border-radius: 0 !important;
     transition: color 0.2s var(--noir-ease) !important;
@@ -359,9 +361,30 @@ h3,
 .paper-icon-button-light:focus,
 .paper-icon-button-light:hover,
 .MuiIconButton-root:focus,
-.MuiIconButton-root:hover {
+.MuiIconButton-root:hover,
+[class*="IconButton-root"]:focus,
+[class*="IconButton-root"]:hover,
+.headerButton:focus,
+.headerButton:hover {
     color: var(--noir-accent) !important;
     background: transparent !important;
+}
+
+/* User profile button — circular avatar with matching circular hover highlight */
+.headerUserButton,
+.headerUserButtonRound,
+.headerButton.headerUserButton {
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    aspect-ratio: 1 / 1 !important;
+}
+
+.headerUserButton:focus,
+.headerUserButton:hover,
+.headerButton.headerUserButton:focus,
+.headerButton.headerUserButton:hover {
+    border-radius: 50% !important;
+    background: rgba(201, 164, 92, 0.18) !important;
 }
 
 /* Surfaces: dialogs, menus, sheets — thin brass frames, no blur */

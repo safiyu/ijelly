@@ -353,18 +353,41 @@ h3,
 
 .paper-icon-button-light,
 .MuiIconButton-root,
+[class*="IconButton-root"],
 .headerButton {
     color: var(--pt-text) !important;
-    border-radius: var(--pt-r-pill) !important;
+    border-radius: 50% !important;
     transition: all 0.2s var(--pt-ease) !important;
 }
 
 .paper-icon-button-light:focus,
 .paper-icon-button-light:hover,
 .MuiIconButton-root:focus,
-.MuiIconButton-root:hover {
-    background: transparent !important;
+.MuiIconButton-root:hover,
+[class*="IconButton-root"]:focus,
+[class*="IconButton-root"]:hover,
+.headerButton:focus,
+.headerButton:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-radius: 50% !important;
     color: var(--pt-accent) !important;
+}
+
+/* User profile button — circular avatar with matching circular hover highlight */
+.headerUserButton,
+.headerUserButtonRound,
+.headerButton.headerUserButton {
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    aspect-ratio: 1 / 1 !important;
+}
+
+.headerUserButton:focus,
+.headerUserButton:hover,
+.headerButton.headerUserButton:focus,
+.headerButton.headerUserButton:hover {
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.15) !important;
 }
 
 

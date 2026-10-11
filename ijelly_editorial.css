@@ -387,7 +387,9 @@ h3,
 }
 
 .paper-icon-button-light,
-.MuiIconButton-root {
+.MuiIconButton-root,
+[class*="IconButton-root"],
+.headerButton {
     color: var(--ed-text) !important;
     border-radius: 0 !important;
 }
@@ -395,9 +397,30 @@ h3,
 .paper-icon-button-light:focus,
 .paper-icon-button-light:hover,
 .MuiIconButton-root:focus,
-.MuiIconButton-root:hover {
+.MuiIconButton-root:hover,
+[class*="IconButton-root"]:focus,
+[class*="IconButton-root"]:hover,
+.headerButton:focus,
+.headerButton:hover {
     color: var(--ed-accent) !important;
     background: transparent !important;
+}
+
+/* User profile button — circular avatar with matching circular hover highlight */
+.headerUserButton,
+.headerUserButtonRound,
+.headerButton.headerUserButton {
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    aspect-ratio: 1 / 1 !important;
+}
+
+.headerUserButton:focus,
+.headerUserButton:hover,
+.headerButton.headerUserButton:focus,
+.headerButton.headerUserButton:hover {
+    border-radius: 50% !important;
+    background: rgba(232, 228, 220, 0.1) !important;
 }
 
 /* Surfaces */

@@ -436,6 +436,7 @@ h3,
 
 .paper-icon-button-light,
 .MuiIconButton-root,
+[class*="IconButton-root"],
 .headerButton {
     color: var(--kxta-text) !important;
     border-radius: 0 !important;
@@ -446,9 +447,28 @@ h3,
 .paper-icon-button-light:hover,
 .MuiIconButton-root:focus,
 .MuiIconButton-root:hover,
+[class*="IconButton-root"]:focus,
+[class*="IconButton-root"]:hover,
 .headerButton:focus,
 .headerButton:hover {
     color: var(--kxta-accent) !important;
+    background: var(--kxta-accent-soft) !important;
+}
+
+/* User profile button — circular avatar with matching circular hover highlight */
+.headerUserButton,
+.headerUserButtonRound,
+.headerButton.headerUserButton {
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    aspect-ratio: 1 / 1 !important;
+}
+
+.headerUserButton:focus,
+.headerUserButton:hover,
+.headerButton.headerUserButton:focus,
+.headerButton.headerUserButton:hover {
+    border-radius: 50% !important;
     background: var(--kxta-accent-soft) !important;
 }
 

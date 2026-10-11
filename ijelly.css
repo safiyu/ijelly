@@ -1556,9 +1556,7 @@ body:has(#videoOsdPage) .headerLeft {
 
 /* Buttons: generic + contained vs text variants */
 .MuiButton-root,
-.MuiIconButton-root,
-[class*="Button-root"],
-[class*="IconButton-root"] {
+[class*="Button-root"] {
     font-family: var(--apple-font) !important;
     border-radius: 30px !important;
     text-transform: none !important;
@@ -1597,16 +1595,37 @@ body:has(#videoOsdPage) .headerLeft {
     transform: scale(0.95) !important;
 }
 
-/* Icon buttons */
-.MuiIconButton-root {
+/* Icon buttons — profile avatar, header actions, and circular icons */
+.paper-icon-button-light,
+.headerButton,
+.headerUserButton,
+.MuiIconButton-root,
+[class*="IconButton-root"] {
     color: var(--apple-text) !important;
     border-radius: 50% !important;
 }
 
+.paper-icon-button-light:focus,
+.paper-icon-button-light:hover,
+.headerButton:focus,
+.headerButton:hover,
+.headerUserButton:focus,
+.headerUserButton:hover,
 .MuiIconButton-root:focus,
-.MuiIconButton-root:hover {
+.MuiIconButton-root:hover,
+[class*="IconButton-root"]:focus,
+[class*="IconButton-root"]:hover {
     background: var(--apple-glass) !important;
+    border-radius: 50% !important;
     transform: scale(1.1) !important;
+}
+
+.headerUserButton,
+.headerUserButtonRound,
+.headerButton.headerUserButton {
+    border-radius: 50% !important;
+    overflow: hidden !important;
+    aspect-ratio: 1 / 1 !important;
 }
 
 /* Tabs */
