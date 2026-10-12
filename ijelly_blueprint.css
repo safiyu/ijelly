@@ -829,8 +829,7 @@ body.transparentDocument .htmlvideoplayer {
 .osdHeader,
 .videoOsdHeader,
 #videoOsdPage .skinHeader,
-body:has(#videoOsdPage) .skinHeader,
-body.transparentDocument .skinHeader {
+body:has(#videoOsdPage) .skinHeader {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
@@ -1157,12 +1156,6 @@ body:has(#videoOsdPage) .headerLeft {
     font-size: 1.2rem !important;
 }
 
-.layout-tv .emby-tab-button,
-.layout-tv .MuiTab-root {
-    font-size: 1rem !important;
-    padding: 0.9em 1.6em !important;
-}
-
 /* Scrollbars */
 ::-webkit-scrollbar {
     width: 6px !important;
@@ -1201,17 +1194,61 @@ body:has(#videoOsdPage) .headerLeft {
     --tv-wide-w: calc((100vw - 2 * var(--tv-pad) - 3 * var(--tv-gap)) / 4);
 }
 
-.layout-tv .headerTop,
-.layout-tv .headerTabs {
+.layout-tv .skinHeader,
+.layout-tv .skinHeader-withBackground,
+.layout-tv .skinHeader.semiTransparent,
+.layout-tv .MuiAppBar-root {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    height: auto !important;
+    min-height: unset !important;
+    overflow: visible !important;
+    contain: none !important;
+}
+
+.layout-tv .headerTop {
+    padding-top: 0.8em !important;
+    padding-bottom: 0.4em !important;
     padding-left: var(--tv-pad) !important;
     padding-right: var(--tv-pad) !important;
+    overflow: visible !important;
+    contain: none !important;
+}
+
+.layout-tv .headerTabs,
+.layout-tv .sectionTabs {
+    padding-top: 0.2em !important;
+    padding-bottom: 0.8em !important;
+    padding-left: var(--tv-pad) !important;
+    padding-right: var(--tv-pad) !important;
+    overflow: visible !important;
+    contain: none !important;
+    height: auto !important;
+    max-height: none !important;
+}
+
+.layout-tv .emby-tabs-slider,
+.layout-tv .emby-tabs-scroll-container,
+.layout-tv .MuiTabs-root,
+.layout-tv .MuiTabs-scroller {
+    overflow: visible !important;
+    contain: none !important;
+    height: auto !important;
+    max-height: none !important;
 }
 
 .layout-tv .emby-tab-button,
 .layout-tv .MuiTab-root {
-    font-size: 1.1em !important;
-    margin: 0 0.3em !important;
-    padding: 0.6em 1.4em !important;
+    font-size: 1.05em !important;
+    margin: 0 0.35em !important;
+    padding: 0.55em 1.3em !important;
+    height: auto !important;
+    min-height: unset !important;
+    line-height: 1.4 !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
 }
 
 .layout-tv .padded-left {
