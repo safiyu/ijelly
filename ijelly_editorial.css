@@ -687,31 +687,53 @@ h3,
 /* Video transparency: unblock hardware video stream underneath */
 html.transparentDocument,
 body.transparentDocument,
+.transparentDocument,
 .transparentDocument .backgroundContainer,
 .transparentDocument .skinBody,
 .transparentDocument .mainAnimatedPage,
 .transparentDocument .pageContainer,
 .transparentDocument #videoOsdPage,
+.transparentDocument .videoPlayerContainer,
 #videoOsdPage,
 .videoOsdPage,
 .videoOsdPage .pageContent,
 #videoOsdPage .pageContent,
+.videoPlayerContainer,
 body:has(#videoOsdPage),
 body:has(#videoOsdPage) .backgroundContainer,
 body:has(#videoOsdPage) .mainAnimatedPage,
 body:has(#videoOsdPage) .pageContainer,
 body:has(#videoOsdPage) .skinBody,
+body:has(#videoOsdPage) .videoPlayerContainer,
 body:has(.htmlvideoplayer),
 body:has(.htmlvideoplayer) .backgroundContainer,
 body:has(.htmlvideoplayer) .mainAnimatedPage,
 body:has(.htmlvideoplayer) .pageContainer,
-body:has(.htmlvideoplayer) .skinBody {
+body:has(.htmlvideoplayer) .skinBody,
+body:has(.htmlvideoplayer) .videoPlayerContainer {
     background: transparent !important;
     background-color: transparent !important;
 }
 
+/* Suppress body pseudo-elements during video playback / transparent mode */
+html.transparentDocument body::before,
+html.transparentDocument body::after,
+body.transparentDocument::before,
+body.transparentDocument::after,
+.transparentDocument::before,
+.transparentDocument::after,
+body:has(#videoOsdPage)::before,
+body:has(#videoOsdPage)::after,
+body:has(.htmlvideoplayer)::before,
+body:has(.htmlvideoplayer)::after,
+body:has(.videoPlayerContainer)::before,
+body:has(.videoPlayerContainer)::after {
+    display: none !important;
+}
+
 .videoPlayerContainer {
-    background-color: #000 !important;
+    background: transparent !important;
+    background-color: transparent !important;
     z-index: 0 !important;
 }
 
@@ -719,6 +741,15 @@ body:has(.htmlvideoplayer) .skinBody {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
+    background-color: #000 !important;
+}
+
+.transparentDocument .htmlvideoplayer,
+html.transparentDocument .htmlvideoplayer,
+body.transparentDocument .htmlvideoplayer {
+    display: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
 }
 
 /* Video OSD Header: slim, borderless, subtle vignette */
