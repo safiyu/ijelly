@@ -970,21 +970,92 @@ body:has(#videoOsdPage) .headerLeft {
     width: 70px !important;
 }
 
-/* Subtitles position when OSD is visible */
+/* Subtitles */
+.subtitles,
+.videoSubtitles,
+.libassjs-canvas-parent,
+.JASSUB,
+.shaka-text-container {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: none !important;
+    z-index: 9999 !important;
+}
+
+.videoSubtitlesInner,
+.subtitle-container {
+    position: absolute !important;
+    bottom: max(6rem, var(--subtitle-bottom, 6rem)) !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    text-align: center !important;
+    pointer-events: none !important;
+    transition: transform 0.25s var(--kxta-ease) !important;
+}
+
+.libassjs-canvas-parent,
+.JASSUB {
+    transform: translateY(-4rem) !important;
+    transition: transform 0.25s var(--kxta-ease) !important;
+}
+
+/* Lift subtitles when OSD visible */
 .videoOsd-visible .videoSubtitlesInner,
 .videoOsd-visible .subtitle-container,
 .videoOsd-visible .libassjs-canvas-parent,
+.videoOsd-visible .JASSUB,
 .videoOsd-visible .shaka-text-container,
-body:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
-body:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
-body:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent,
-body:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
-    bottom: 5.5em !important;
+.showing-osd .videoSubtitlesInner,
+.showing-osd .subtitle-container,
+.showing-osd .libassjs-canvas-parent,
+.showing-osd .JASSUB,
+.showing-osd .shaka-text-container {
+    transform: translateY(-11rem) !important;
 }
 
-/* Subtitles */
+@supports selector(:has(*)) {
+    .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
+    .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
+    .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent,
+    .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .JASSUB,
+    .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
+        transform: translateY(-11rem) !important;
+    }
+}
+
+.layout-tv.videoOsd-visible .videoSubtitlesInner,
+.layout-tv.videoOsd-visible .subtitle-container,
+.layout-tv.videoOsd-visible .libassjs-canvas-parent,
+.layout-tv.videoOsd-visible .JASSUB,
+.layout-tv.videoOsd-visible .shaka-text-container,
+.layout-tv.showing-osd .videoSubtitlesInner,
+.layout-tv.showing-osd .subtitle-container,
+.layout-tv.showing-osd .libassjs-canvas-parent,
+.layout-tv.showing-osd .JASSUB,
+.layout-tv.showing-osd .shaka-text-container {
+    transform: translateY(-14.5rem) !important;
+}
+
+@supports selector(:has(*)) {
+    .layout-tv .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
+    .layout-tv .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
+    .layout-tv .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent,
+    .layout-tv .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .JASSUB,
+    .layout-tv .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
+        transform: translateY(-14.5rem) !important;
+    }
+}
+
 .subtitles span,
 .videoSubtitles span,
+.videoSubtitlesInner span,
+.subtitle-container span,
 ::cue {
     font-family: var(--kxta-font-body) !important;
     color: var(--kxta-text) !important;
@@ -992,6 +1063,22 @@ body:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
     padding: 0.15em 0.5em !important;
     border-radius: 0 !important;
     font-weight: 500 !important;
+    display: inline-block !important;
+    vertical-align: bottom !important;
+    margin: 0 auto !important;
+    box-decoration-break: clone !important;
+    -webkit-box-decoration-break: clone !important;
+}
+
+.subtitles div,
+.videoSubtitles div,
+.videoSubtitlesInner div,
+.subtitle-container div {
+    background-color: transparent !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 /* TV layout */

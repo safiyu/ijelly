@@ -203,7 +203,8 @@ Still respected by some Jellyfin builds. Less reliable in 12.0:
 | `.videoSubtitles` | Subtitle container |
 | `.videoSubtitlesInner` | Inner subtitle text wrapper |
 | `.subtitle-container` | Alternative subtitle wrapper |
-| `.libassjs-canvas-parent` | ASS/SSA subtitle canvas |
+| `.libassjs-canvas-parent` | ASS/SSA subtitle canvas (SubtitlesOctopus) |
+| `.JASSUB` | ASS/SSA subtitle canvas (JASSUB / Jellyfin 10.9+) |
 | `.shaka-text-container` | Shaka-player text |
 
 ### Layout Modes

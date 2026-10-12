@@ -1155,6 +1155,7 @@ body:has(#videoOsdPage) .headerLeft {
 .subtitles,
 .videoSubtitles,
 .libassjs-canvas-parent,
+.JASSUB,
 .shaka-text-container {
     position: absolute !important;
     top: 0 !important;
@@ -1179,7 +1180,8 @@ body:has(#videoOsdPage) .headerLeft {
     transition: transform 0.25s var(--apple-spring-fast) !important;
 }
 
-.libassjs-canvas-parent {
+.libassjs-canvas-parent,
+.JASSUB {
     transform: translateY(-4rem) !important;
     transition: transform 0.25s var(--apple-spring-fast) !important;
 }
@@ -1191,10 +1193,12 @@ body:has(#videoOsdPage) .headerLeft {
 .videoOsd-visible .videoSubtitlesInner,
 .videoOsd-visible .subtitle-container,
 .videoOsd-visible .libassjs-canvas-parent,
+.videoOsd-visible .JASSUB,
 .videoOsd-visible .shaka-text-container,
 .showing-osd .videoSubtitlesInner,
 .showing-osd .subtitle-container,
 .showing-osd .libassjs-canvas-parent,
+.showing-osd .JASSUB,
 .showing-osd .shaka-text-container {
     transform: translateY(-11rem) !important;
 }
@@ -1203,6 +1207,7 @@ body:has(#videoOsdPage) .headerLeft {
     .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
     .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
     .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent,
+    .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .JASSUB,
     .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
         transform: translateY(-11rem) !important;
     }
@@ -1211,10 +1216,12 @@ body:has(#videoOsdPage) .headerLeft {
 .layout-tv.videoOsd-visible .videoSubtitlesInner,
 .layout-tv.videoOsd-visible .subtitle-container,
 .layout-tv.videoOsd-visible .libassjs-canvas-parent,
+.layout-tv.videoOsd-visible .JASSUB,
 .layout-tv.videoOsd-visible .shaka-text-container,
 .layout-tv.showing-osd .videoSubtitlesInner,
 .layout-tv.showing-osd .subtitle-container,
 .layout-tv.showing-osd .libassjs-canvas-parent,
+.layout-tv.showing-osd .JASSUB,
 .layout-tv.showing-osd .shaka-text-container {
     transform: translateY(-14.5rem) !important;
 }
@@ -1223,6 +1230,7 @@ body:has(#videoOsdPage) .headerLeft {
     .layout-tv .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
     .layout-tv .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
     .layout-tv .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent,
+    .layout-tv .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .JASSUB,
     .layout-tv .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
         transform: translateY(-14.5rem) !important;
     }
@@ -1368,35 +1376,33 @@ body:has(#videoOsdPage) .headerLeft {
     /* Mobile OSD stacks into two rows: slider + buttons. Total height
        (padding 1em x 2 + two ~2.5em rows + 0.75em gap + 1.5em bottom)
        sits well above 8em, so lift subtitles higher to actually clear it. */
-    body.videoOsd-visible .subtitles,
-    body.videoOsd-visible .videoSubtitles,
     body.videoOsd-visible .videoSubtitlesInner,
     body.videoOsd-visible .subtitle-container,
-    body.videoOsd-visible .libassjs-canvas-parent,
-    body.videoOsd-visible .shaka-text-container,
-    body.osd-visible .subtitles,
-    body.osd-visible .videoSubtitles,
     body.osd-visible .videoSubtitlesInner,
     body.osd-visible .subtitle-container,
-    body.osd-visible .libassjs-canvas-parent,
-    body.osd-visible .shaka-text-container,
-    body.showing-osd .subtitles,
-    body.showing-osd .videoSubtitles,
     body.showing-osd .videoSubtitlesInner,
-    body.showing-osd .subtitle-container,
-    body.showing-osd .libassjs-canvas-parent,
-    body.showing-osd .shaka-text-container {
+    body.showing-osd .subtitle-container {
         bottom: 12em !important;
     }
 
+    body.videoOsd-visible .libassjs-canvas-parent,
+    body.videoOsd-visible .JASSUB,
+    body.osd-visible .libassjs-canvas-parent,
+    body.osd-visible .JASSUB,
+    body.showing-osd .libassjs-canvas-parent,
+    body.showing-osd .JASSUB {
+        transform: translateY(-13rem) !important;
+    }
+
     @supports selector(:has(*)) {
-        .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitles,
-        .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitles,
         .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
-        .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
-        .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent,
-        .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
+        .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container {
             bottom: 12em !important;
+        }
+
+        .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent,
+        .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .JASSUB {
+            transform: translateY(-13rem) !important;
         }
     }
 
