@@ -688,47 +688,73 @@ h3,
 html.transparentDocument,
 body.transparentDocument,
 .transparentDocument,
+.transparentDocument body,
 .transparentDocument .backgroundContainer,
 .transparentDocument .skinBody,
 .transparentDocument .mainAnimatedPage,
 .transparentDocument .pageContainer,
 .transparentDocument #videoOsdPage,
 .transparentDocument .videoPlayerContainer,
+.backgroundContainer-transparent,
 #videoOsdPage,
 .videoOsdPage,
 .videoOsdPage .pageContent,
 #videoOsdPage .pageContent,
-.videoPlayerContainer,
-body:has(#videoOsdPage),
-body:has(#videoOsdPage) .backgroundContainer,
-body:has(#videoOsdPage) .mainAnimatedPage,
-body:has(#videoOsdPage) .pageContainer,
-body:has(#videoOsdPage) .skinBody,
-body:has(#videoOsdPage) .videoPlayerContainer,
-body:has(.htmlvideoplayer),
-body:has(.htmlvideoplayer) .backgroundContainer,
-body:has(.htmlvideoplayer) .mainAnimatedPage,
-body:has(.htmlvideoplayer) .pageContainer,
-body:has(.htmlvideoplayer) .skinBody,
-body:has(.htmlvideoplayer) .videoPlayerContainer {
+.videoPlayerContainer {
     background: transparent !important;
     background-color: transparent !important;
 }
 
-/* Suppress body pseudo-elements during video playback / transparent mode */
+/* Suppress body overlays/pseudo-elements during video playback / transparent mode */
 html.transparentDocument body::before,
 html.transparentDocument body::after,
+html.transparentDocument::before,
+html.transparentDocument::after,
 body.transparentDocument::before,
 body.transparentDocument::after,
 .transparentDocument::before,
 .transparentDocument::after,
-body:has(#videoOsdPage)::before,
-body:has(#videoOsdPage)::after,
-body:has(.htmlvideoplayer)::before,
-body:has(.htmlvideoplayer)::after,
-body:has(.videoPlayerContainer)::before,
-body:has(.videoPlayerContainer)::after {
+.transparentDocument body::before,
+.transparentDocument body::after,
+.backgroundContainer-transparent::before,
+.backgroundContainer-transparent::after {
     display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+@supports selector(:has(*)) {
+    body:has(#videoOsdPage),
+    body:has(#videoOsdPage) .backgroundContainer,
+    body:has(#videoOsdPage) .mainAnimatedPage,
+    body:has(#videoOsdPage) .pageContainer,
+    body:has(#videoOsdPage) .skinBody,
+    body:has(#videoOsdPage) .videoPlayerContainer,
+    body:has(.videoPlayerContainer),
+    body:has(.videoPlayerContainer) .backgroundContainer,
+    body:has(.videoPlayerContainer) .skinBody,
+    body:has(.htmlvideoplayer),
+    body:has(.htmlvideoplayer) .backgroundContainer,
+    body:has(.htmlvideoplayer) .mainAnimatedPage,
+    body:has(.htmlvideoplayer) .pageContainer,
+    body:has(.htmlvideoplayer) .skinBody,
+    body:has(.htmlvideoplayer) .videoPlayerContainer {
+        background: transparent !important;
+        background-color: transparent !important;
+    }
+
+    body:has(#videoOsdPage)::before,
+    body:has(#videoOsdPage)::after,
+    body:has(.videoPlayerContainer)::before,
+    body:has(.videoPlayerContainer)::after,
+    body:has(.htmlvideoplayer)::before,
+    body:has(.htmlvideoplayer)::after,
+    body:has(.osdHeader)::before,
+    body:has(.osdHeader)::after {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
 }
 
 .videoPlayerContainer {
