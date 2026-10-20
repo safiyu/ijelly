@@ -765,11 +765,8 @@ select optgroup,
    Video Playback & OSD
    ========================================================================== */
 
-/* Video transparency: unblock hardware video stream underneath */
-html.transparentDocument,
-body.transparentDocument,
-.transparentDocument,
-.transparentDocument body,
+/* 1. Keep inner UI wrappers transparent so they don't cover the video,
+      but NEVER make html/body transparent on web (prevents white canvas bleed) */
 .transparentDocument .backgroundContainer,
 .transparentDocument .skinBody,
 .transparentDocument .mainAnimatedPage,
@@ -786,7 +783,13 @@ body.transparentDocument,
     background-color: transparent !important;
 }
 
-/* Suppress body overlays/pseudo-elements during video playback / transparent mode */
+/* Force root canvas to pure black during video playback */
+html.transparentDocument,
+body.transparentDocument {
+    background-color: #000 !important;
+}
+
+/* 2. Suppress body overlays/pseudo-elements during video playback / transparent mode */
 html.transparentDocument body::before,
 html.transparentDocument body::after,
 html.transparentDocument::before,
@@ -806,15 +809,25 @@ body.transparentDocument::after,
 
 @supports selector(:has(*)) {
     body:has(#videoOsdPage),
+    body:has(.videoPlayerContainer),
+    body:has(.htmlvideoplayer) {
+        background-color: #000 !important;
+    }
+
+    /* Native player overlay support (Tizen / WebOS / JMP): keep root transparent only when htmlvideoplayer is absent */
+    html.transparentDocument:not(:has(.htmlvideoplayer)),
+    body.transparentDocument:not(:has(.htmlvideoplayer)) {
+        background: transparent !important;
+        background-color: transparent !important;
+    }
+
     body:has(#videoOsdPage) .backgroundContainer,
     body:has(#videoOsdPage) .mainAnimatedPage,
     body:has(#videoOsdPage) .pageContainer,
     body:has(#videoOsdPage) .skinBody,
     body:has(#videoOsdPage) .videoPlayerContainer,
-    body:has(.videoPlayerContainer),
     body:has(.videoPlayerContainer) .backgroundContainer,
     body:has(.videoPlayerContainer) .skinBody,
-    body:has(.htmlvideoplayer),
     body:has(.htmlvideoplayer) .backgroundContainer,
     body:has(.htmlvideoplayer) .mainAnimatedPage,
     body:has(.htmlvideoplayer) .pageContainer,
@@ -844,19 +857,12 @@ body.transparentDocument::after,
     z-index: 0 !important;
 }
 
+/* 3. Always keep the HTML5 video player visible */
 .htmlvideoplayer {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
     background-color: #000 !important;
-}
-
-.transparentDocument .htmlvideoplayer,
-html.transparentDocument .htmlvideoplayer,
-body.transparentDocument .htmlvideoplayer {
-    display: none !important;
-    background: transparent !important;
-    background-color: transparent !important;
 }
 
 /* Video OSD Header: slim, borderless, subtle vignette */
