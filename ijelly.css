@@ -1066,20 +1066,31 @@ body.transparentDocument::after,
         background-color: transparent !important;
     }
 
+    /* Page chrome: make the shell transparent so the video shows through,
+       but keep it VISIBLE (the OSD header lives inside mainAnimatedPage).
+       Never set opacity: 0 here — that hides the video and the OSD. */
     body:has(#videoOsdPage) .backgroundContainer,
     body:has(#videoOsdPage) .mainAnimatedPage,
     body:has(#videoOsdPage) .pageContainer,
     body:has(#videoOsdPage) .skinBody,
     body:has(#videoOsdPage) .videoPlayerContainer,
-    body:has(#videoOsdPage) .backdropContainer,
-    body:has(#videoOsdPage) .backdropImage,
     body:has(.videoPlayerContainer) .backgroundContainer,
     body:has(.videoPlayerContainer) .skinBody,
     body:has(.htmlvideoplayer) .backgroundContainer,
     body:has(.htmlvideoplayer) .mainAnimatedPage,
     body:has(.htmlvideoplayer) .pageContainer,
     body:has(.htmlvideoplayer) .skinBody,
-    body:has(.htmlvideoplayer) .videoPlayerContainer,
+    body:has(.htmlvideoplayer) .videoPlayerContainer {
+        background: transparent !important;
+        background-color: transparent !important;
+    }
+
+    /* Backdrop overlay: fully hide it during playback (this is the only
+       element that is safe to blank out). */
+    body:has(#videoOsdPage) .backdropContainer,
+    body:has(#videoOsdPage) .backdropImage,
+    body:has(.videoPlayerContainer) .backdropContainer,
+    body:has(.videoPlayerContainer) .backdropImage,
     body:has(.htmlvideoplayer) .backdropContainer,
     body:has(.htmlvideoplayer) .backdropImage {
         background: transparent !important;
