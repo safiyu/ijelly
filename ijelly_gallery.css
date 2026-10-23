@@ -773,6 +773,8 @@ select optgroup,
 .transparentDocument .pageContainer,
 .transparentDocument #videoOsdPage,
 .transparentDocument .videoPlayerContainer,
+.transparentDocument .backdropContainer,
+.transparentDocument .backdropImage,
 .backgroundContainer-transparent,
 #videoOsdPage,
 .videoOsdPage,
@@ -800,6 +802,8 @@ body.transparentDocument::after,
 .transparentDocument::after,
 .transparentDocument body::before,
 .transparentDocument body::after,
+.transparentDocument .backdropContainer,
+.transparentDocument .backdropImage,
 .backgroundContainer-transparent::before,
 .backgroundContainer-transparent::after {
     display: none !important;
@@ -826,15 +830,22 @@ body.transparentDocument::after,
     body:has(#videoOsdPage) .pageContainer,
     body:has(#videoOsdPage) .skinBody,
     body:has(#videoOsdPage) .videoPlayerContainer,
+    body:has(#videoOsdPage) .backdropContainer,
+    body:has(#videoOsdPage) .backdropImage,
     body:has(.videoPlayerContainer) .backgroundContainer,
     body:has(.videoPlayerContainer) .skinBody,
     body:has(.htmlvideoplayer) .backgroundContainer,
     body:has(.htmlvideoplayer) .mainAnimatedPage,
     body:has(.htmlvideoplayer) .pageContainer,
     body:has(.htmlvideoplayer) .skinBody,
-    body:has(.htmlvideoplayer) .videoPlayerContainer {
+    body:has(.htmlvideoplayer) .videoPlayerContainer,
+    body:has(.htmlvideoplayer) .backdropContainer,
+    body:has(.htmlvideoplayer) .backdropImage {
         background: transparent !important;
         background-color: transparent !important;
+        opacity: 0 !important;
+        filter: none !important;
+        -webkit-filter: none !important;
     }
 
     body:has(#videoOsdPage)::before,
