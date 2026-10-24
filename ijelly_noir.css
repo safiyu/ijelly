@@ -640,8 +640,14 @@ h3,
    Video Playback & OSD
    ========================================================================== */
 
-/* 1. Keep inner UI wrappers transparent so they don't cover the video,
-      but NEVER make html/body transparent on web (prevents white canvas bleed) */
+/* 1. Native player overlay support (Desktop JMP / WebOS / Tizen):
+      Hardware video stream (MPV) renders underneath the webview, so html, body,
+      and all inner UI wrappers MUST be completely transparent. */
+html.transparentDocument,
+html.transparentDocument body,
+body.transparentDocument,
+.transparentDocument,
+.transparentDocument body,
 .transparentDocument .backgroundContainer,
 .transparentDocument .skinBody,
 .transparentDocument .mainAnimatedPage,
@@ -658,12 +664,6 @@ h3,
 .videoPlayerContainer {
     background: transparent !important;
     background-color: transparent !important;
-}
-
-/* Force root canvas to pure black during video playback */
-html.transparentDocument,
-body.transparentDocument {
-    background-color: #000 !important;
 }
 
 /* 2. Suppress body overlays/pseudo-elements during video playback / transparent mode */
@@ -687,15 +687,29 @@ body.transparentDocument::after,
 }
 
 @supports selector(:has(*)) {
-    body:has(#videoOsdPage),
-    body:has(.videoPlayerContainer),
-    body:has(.htmlvideoplayer) {
+    /* Web playback canvas: pure black during video playback (prevents white canvas bleed on browsers).
+       Excluded when transparentDocument is present so Desktop JMP / native players are never blanked out */
+    html:not(.transparentDocument):not(:has(.transparentDocument)):has(#videoOsdPage),
+    html:not(.transparentDocument):not(:has(.transparentDocument)):has(.videoPlayerContainer),
+    html:not(.transparentDocument):not(:has(.transparentDocument)):has(.htmlvideoplayer),
+    body:not(.transparentDocument):has(#videoOsdPage),
+    body:not(.transparentDocument):has(.videoPlayerContainer),
+    body:not(.transparentDocument):has(.htmlvideoplayer) {
         background-color: #000 !important;
     }
 
-    /* Native player overlay support (Tizen / WebOS / JMP): keep root transparent only when htmlvideoplayer is absent */
-    html.transparentDocument:not(:has(.htmlvideoplayer)),
-    body.transparentDocument:not(:has(.htmlvideoplayer)) {
+    /* Native player overlay support (Desktop JMP / WebOS / Tizen):
+       Keep root and shell explicitly transparent even when :has() selectors match */
+    html.transparentDocument,
+    html.transparentDocument body,
+    body.transparentDocument,
+    html:has(.transparentDocument),
+    html:has(.transparentDocument) body,
+    html.transparentDocument:has(#videoOsdPage),
+    html.transparentDocument body:has(#videoOsdPage),
+    body.transparentDocument:has(#videoOsdPage),
+    body.transparentDocument:has(.videoPlayerContainer),
+    body.transparentDocument:has(.htmlvideoplayer) {
         background: transparent !important;
         background-color: transparent !important;
     }
@@ -754,12 +768,19 @@ body.transparentDocument::after,
     z-index: 0 !important;
 }
 
-/* 3. Always keep the HTML5 video player visible */
+/* 3. HTML5 video player element (web) vs native transparent player (desktop JMP) */
 .htmlvideoplayer {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
     background-color: #000 !important;
+}
+
+.transparentDocument .htmlvideoplayer,
+html.transparentDocument .htmlvideoplayer,
+body.transparentDocument .htmlvideoplayer {
+    background: transparent !important;
+    background-color: transparent !important;
 }
 
 /* Video OSD Header: slim, borderless, subtle vignette */
