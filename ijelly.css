@@ -2758,15 +2758,17 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 
 /* Boot splash logo ambient halo */
 .splashLogo {
-    filter: drop-shadow(0 0 28px rgba(0, 122, 255, 0.35)) !important;
+    width: 60vh !important;
+    height: 60vh !important;
+    filter: drop-shadow(0 0 4vh rgba(0, 122, 255, 0.35)) !important;
     animation: ijellySplashPulse 2.4s var(--apple-spring-fast) infinite !important;
 }
 
 /* Apple TV — Liquid Glass Orbital Pod */
 .docspinner.mdlSpinnerActive {
     display: block !important;
-    width: 88px !important;
-    height: 88px !important;
+    width: 60vh !important;
+    height: 60vh !important;
     left: 50% !important;
     top: 50% !important;
     margin: 0 !important;
@@ -2776,15 +2778,15 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     overflow: visible !important;
     pointer-events: none !important;
     z-index: 9999999 !important;
-    border-radius: 26px !important;
+    border-radius: 16vh !important;
     background: rgba(16, 16, 22, 0.72) !important;
     backdrop-filter: blur(32px) saturate(190%) !important;
     -webkit-backdrop-filter: blur(32px) saturate(190%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.22) !important;
     box-shadow:
-        0 24px 64px rgba(0, 0, 0, 0.75),
-        0 0 42px rgba(0, 122, 255, 0.25),
-        inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+        0 4vh 12vh rgba(0, 0, 0, 0.78),
+        0 0 8vh rgba(0, 122, 255, 0.28),
+        inset 0 1px 0 rgba(255, 255, 255, 0.28) !important;
 }
 
 .docspinner .mdl-spinner__circle-clipper,
@@ -2802,43 +2804,43 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 }
 
 .docspinner.mdlSpinnerActive .mdl-spinner__layer-1 {
-    inset: 14px !important;
+    inset: 16% !important;
     background: conic-gradient(from 0deg, transparent 0deg, var(--apple-accent) 280deg, #ffffff 360deg) !important;
-    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.5px)) !important;
-    mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.5px)) !important;
-    filter: drop-shadow(0 0 8px var(--apple-accent)) !important;
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 1.4vh), #000 calc(100% - 1.2vh)) !important;
+    mask: radial-gradient(farthest-side, transparent calc(100% - 1.4vh), #000 calc(100% - 1.2vh)) !important;
+    filter: drop-shadow(0 0 1.5vh var(--apple-accent)) !important;
     animation: ijellySpinCW 1.15s linear infinite !important;
 }
 
 .docspinner.mdlSpinnerActive .mdl-spinner__layer-2 {
-    inset: 24px !important;
-    border: 1.5px solid rgba(255, 255, 255, 0.16) !important;
-    border-top-color: rgba(255, 255, 255, 0.85) !important;
+    inset: 27% !important;
+    border: 0.45vh solid rgba(255, 255, 255, 0.16) !important;
+    border-top-color: rgba(255, 255, 255, 0.88) !important;
     animation: ijellySpinCCW 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
 }
 
 .docspinner.mdlSpinnerActive .mdl-spinner__layer-3 {
-    inset: 14px !important;
+    inset: 16% !important;
     animation: ijellySpinCW 1.15s linear infinite !important;
 }
 
 .docspinner.mdlSpinnerActive .mdl-spinner__layer-3::after {
     content: "" !important;
     position: absolute !important;
-    top: -1.5px !important;
+    top: -0.7vh !important;
     left: 50% !important;
-    width: 6px !important;
-    height: 6px !important;
-    margin-left: -3px !important;
+    width: 2.6vh !important;
+    height: 2.6vh !important;
+    margin-left: -1.3vh !important;
     border-radius: 50% !important;
     background: #ffffff !important;
-    box-shadow: 0 0 10px #ffffff, 0 0 18px var(--apple-accent) !important;
+    box-shadow: 0 0 2vh #ffffff, 0 0 3.5vh var(--apple-accent) !important;
 }
 
 .docspinner.mdlSpinnerActive .mdl-spinner__layer-4 {
-    inset: 36px !important;
+    inset: 41% !important;
     background: radial-gradient(circle, #ffffff 0%, var(--apple-accent) 70%) !important;
-    box-shadow: 0 0 18px var(--apple-accent) !important;
+    box-shadow: 0 0 4vh var(--apple-accent) !important;
     animation: ijellyPulseCore 1.6s ease-in-out infinite !important;
 }
 

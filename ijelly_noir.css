@@ -2090,15 +2090,17 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 }
 
 .splashLogo {
-    filter: drop-shadow(0 0 28px rgba(212, 162, 76, 0.35)) !important;
+    width: 60vh !important;
+    height: 60vh !important;
+    filter: drop-shadow(0 0 4vh rgba(212, 162, 76, 0.35)) !important;
     animation: ijellySplashPulse 2.4s var(--noir-ease) infinite !important;
 }
 
 /* Cinematheque Noir — 35mm Projector Reel & Warm Brass Aperture */
 .docspinner.mdlSpinnerActive {
     display: block !important;
-    width: 90px !important;
-    height: 90px !important;
+    width: 60vh !important;
+    height: 60vh !important;
     left: 50% !important;
     top: 50% !important;
     margin: 0 !important;
@@ -2110,10 +2112,10 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     z-index: 9999999 !important;
     border-radius: 0 !important;
     background: radial-gradient(circle, #1c1611 0%, #0e0a07 78%) !important;
-    border: 1px solid var(--noir-accent) !important;
+    border: 2px solid var(--noir-accent) !important;
     outline: 1px solid var(--noir-rule) !important;
-    outline-offset: 4px !important;
-    box-shadow: var(--noir-shadow), 0 0 36px rgba(212, 162, 76, 0.2) !important;
+    outline-offset: 1.2vh !important;
+    box-shadow: var(--noir-shadow), 0 0 7vh rgba(212, 162, 76, 0.25) !important;
 }
 
 .docspinner .mdl-spinner__circle-clipper,
@@ -2131,33 +2133,33 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 }
 
 .docspinner.mdlSpinnerActive .mdl-spinner__layer-1 {
-    inset: 12px !important;
+    inset: 13.5% !important;
     background: repeating-conic-gradient(from 0deg, var(--noir-accent) 0deg 18deg, transparent 18deg 30deg) !important;
-    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.5px)) !important;
-    mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.5px)) !important;
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 1.5vh), #000 calc(100% - 1.3vh)) !important;
+    mask: radial-gradient(farthest-side, transparent calc(100% - 1.5vh), #000 calc(100% - 1.3vh)) !important;
     animation: ijellySpinCW 2.6s linear infinite !important;
 }
 
 .docspinner.mdlSpinnerActive .mdl-spinner__layer-2 {
-    inset: 18px !important;
+    inset: 20% !important;
     background: conic-gradient(from 0deg, transparent 0deg, rgba(212, 162, 76, 0.35) 300deg, var(--noir-text) 360deg) !important;
-    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1.5px)) !important;
-    mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1.5px)) !important;
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 0.9vh), #000 calc(100% - 0.7vh)) !important;
+    mask: radial-gradient(farthest-side, transparent calc(100% - 0.9vh), #000 calc(100% - 0.7vh)) !important;
     animation: ijellySpinCW 1.25s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite !important;
 }
 
 .docspinner.mdlSpinnerActive .mdl-spinner__layer-3 {
-    inset: 27px !important;
-    border: 1px solid var(--noir-rule) !important;
+    inset: 30% !important;
+    border: 0.35vh solid var(--noir-rule) !important;
     border-top-color: var(--noir-accent) !important;
     border-bottom-color: var(--noir-accent) !important;
     animation: ijellySpinCCW 1.8s linear infinite !important;
 }
 
 .docspinner.mdlSpinnerActive .mdl-spinner__layer-4 {
-    inset: 38px !important;
+    inset: 42% !important;
     background: var(--noir-accent) !important;
-    box-shadow: 0 0 20px var(--noir-accent) !important;
+    box-shadow: 0 0 4.5vh var(--noir-accent) !important;
     animation: ijellyPulseCore 1.5s ease-in-out infinite !important;
 }
 
