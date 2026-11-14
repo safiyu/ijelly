@@ -85,7 +85,7 @@ The page takes its colors from the current art. No script needed.
 
 Open **Dashboard › General › Custom CSS** and paste one of the imports below. Save, then enable **Settings › Display › Backdrops**.
 
-The `@latest` tag tracks the newest release. jsDelivr caches it, so a new release can take a while to show up. To pin a version, replace `@latest` with a release tag such as `@2.0.26`. A pinned tag never changes and is never stale.
+The `@latest` tag tracks the newest release. jsDelivr caches it, so a new release can take a while to show up. To pin a version, replace `@latest` with a release tag such as `@3.0.0`. A pinned tag never changes and is never stale.
 
 ### Apple TV
 
@@ -168,7 +168,9 @@ Older Jellyfin versions are not tested.
 
 ## Customising
 
-Each theme exposes its design tokens as CSS custom properties on `:root`. Override them in your own Custom CSS block, placed after the `@import`.
+Every theme styles Jellyfin 12 libraries, detail pages, player OSDs, **Skip Intro / Skip Credits**, **Up Next** cards, **Trickplay / Chapter** scrubber bubbles, login & profile pickers, the bottom **Music player bar**, and the **Search** view cleanly out of the box using pure CSS.
+
+Each theme also exposes its design tokens and feature toggles as CSS custom properties on `:root`. Override any of them in your own Custom CSS block, placed after the `@import`.
 
 | Theme | Token prefix |
 | :--- | :--- |
@@ -179,13 +181,29 @@ Each theme exposes its design tokens as CSS custom properties on `:root`. Overri
 | Blueprint | `--kxta-*` |
 | Poster-Tinted | `--pt-*` |
 
-Example. Swap the Apple TV accent for hot pink:
+### Feature toggles (`:root`)
+
+| Property | Default | Example override | What it does |
+| :--- | :--- | :--- | :--- |
+| `--spoiler-blur` | `0px` | `16px` | Blurs unwatched episode thumbnails; hovers reveal, watched episodes stay sharp |
+| `--card-labels` | `block` | `none` | Hides titles beneath library cards for a poster wall (keeps login profile names visible) |
+| `--sub-size` | `100%` | `120%` | Scales HTML & WebVTT subtitle text size relative to player base |
+| `--sub-color` | Theme text | `#ffeb85` | Sets subtitle text color (`::cue` and HTML subtitle spans) |
+| `--sub-bg` | Theme dark tint | `rgba(0, 0, 0, 0.75)` | Sets subtitle caption background |
+| `--sub-offset` | `0px` | `-1.5rem` | Fine-tunes subtitle vertical position; composes cleanly with OSD lift animations |
+
+Example. Swap the Apple TV accent for hot pink, blur unwatched episode spoilers, and nudge subtitles higher:
 
 ```css
 :root {
     --apple-accent: #ff375f;
+    --spoiler-blur: 16px;
+    --sub-size: 115%;
+    --sub-offset: -1.5rem;
 }
 ```
+
+Or use the interactive builder on the [showcase page](https://safiyu.github.io/ijelly/#customize) to generate and copy your snippet.
 
 ## License
 

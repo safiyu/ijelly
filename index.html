@@ -67,7 +67,7 @@ a{color:inherit}
 .room-copy p{margin:22px 0 0;max-width:36ch;color:var(--mute);line-height:1.62;font-size:1.04rem}
 .t-gallery .room-copy p,.t-noir .room-copy p{font-size:1.1rem}
 .install{margin-top:32px;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
-.install code{display:block;width:100%;padding:14px 16px;background:var(--code);border:1px solid var(--line);border-radius:min(var(--radius),12px);font:500 .78rem/1.55 'JetBrains Mono',ui-monospace,Menlo,monospace;color:var(--fg);overflow-wrap:break-word;user-select:all}
+.install code{display:block;width:100%;padding:14px 16px;background:var(--code);border:1px solid var(--line);border-radius:min(var(--radius),12px);font:500 .78rem/1.55 'JetBrains Mono',ui-monospace,Menlo,monospace;color:var(--fg);white-space:pre-wrap;overflow-wrap:break-word;user-select:all}
 .copy{font:600 .92rem/1 'Inter',system-ui,sans-serif;padding:11px 18px;background:var(--accent);color:var(--bg);border:0;border-radius:min(var(--radius),12px);cursor:pointer}
 .copy:hover{filter:brightness(1.08)}
 .copy[data-done="true"]{background:transparent;color:var(--fg);box-shadow:inset 0 0 0 1px var(--accent)}
@@ -95,6 +95,41 @@ dialog.lightbox{padding:0;border:0;background:transparent;max-width:min(96vw,170
 dialog.lightbox::backdrop{background:rgba(6,6,8,.9)}
 dialog.lightbox img{width:100%;max-height:88vh;object-fit:contain;border-radius:6px}
 dialog.lightbox button{position:absolute;top:-44px;right:0;font:600 .92rem 'Inter',system-ui,sans-serif;color:#fff;background:transparent;border:1px solid rgba(255,255,255,.5);border-radius:8px;padding:8px 14px;cursor:pointer}
+
+/* comparison slider */
+.cmp{padding-block:clamp(48px,6vw,88px);border-top:1px solid var(--chalk-line)}
+.cmp-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:24px}
+.cmp-head h2{margin:0;font-weight:600;font-size:clamp(1.6rem,3vw,2.3rem);letter-spacing:-.035em;line-height:1.1}
+.cmp-head p{margin:8px 0 0;color:var(--chalk-mute);font-size:.98rem;max-width:48ch}
+.cmp-tabs{display:flex;flex-wrap:wrap;gap:8px}
+.cmp-tab{font:500 .86rem/1 'Inter',system-ui,sans-serif;padding:9px 14px;border:1px solid var(--chalk-line);border-radius:999px;background:transparent;color:var(--chalk-mute);cursor:pointer}
+.cmp-tab:hover{color:var(--chalk);border-color:rgba(236,235,230,.4)}
+.cmp-tab.is-active{background:var(--chalk);color:var(--ink);border-color:var(--chalk)}
+.cmp-stage{--pos:55%;position:relative;aspect-ratio:1600/764;border-radius:14px;overflow:hidden;border:1px solid var(--chalk-line);background:#000;user-select:none}
+.cmp-after,.cmp-before{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.cmp-before{clip-path:inset(0 calc(100% - var(--pos)) 0 0)}
+.cmp-tag{position:absolute;top:14px;padding:5px 10px;border-radius:999px;background:rgba(16,17,20,.78);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.16);font:500 .78rem/1 'JetBrains Mono',ui-monospace,Menlo,monospace;color:#fff;z-index:2;pointer-events:none}
+.cmp-tag.before{left:14px}
+.cmp-tag.after{right:14px}
+.cmp-line{position:absolute;top:0;bottom:0;left:var(--pos);width:2px;background:#fff;transform:translateX(-1px);box-shadow:0 0 14px rgba(0,0,0,.75);z-index:3;pointer-events:none}
+.cmp-knob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);padding:7px 11px;border-radius:999px;background:#fff;color:#101114;font:600 .8rem/1 'Inter',system-ui,sans-serif;letter-spacing:.04em;box-shadow:0 4px 16px rgba(0,0,0,.5)}
+.cmp-range{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;z-index:4}
+
+/* snippet customizer */
+.cust-controls{display:flex;flex-direction:column;gap:16px}
+.cust-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 14px;border:1px solid var(--chalk-line);border-radius:10px;background:rgba(255,255,255,.02)}
+.cust-row label{font-size:.95rem;color:var(--chalk);cursor:pointer;display:flex;align-items:center;gap:10px;flex:1}
+.cust-row small{display:block;color:var(--chalk-mute);font:400 .78rem/1.35 'JetBrains Mono',ui-monospace,Menlo,monospace}
+.cust-color-wrap{display:flex;align-items:center;gap:8px}
+.cust-color-wrap input[type="color"]{width:34px;height:28px;padding:0;border:1px solid var(--chalk-line);border-radius:6px;background:transparent;cursor:pointer}
+.cust-mini-btn{font:500 .8rem/1 'Inter',system-ui,sans-serif;padding:7px 10px;border:1px solid var(--chalk-line);border-radius:6px;background:transparent;color:var(--chalk-mute);cursor:pointer}
+.cust-mini-btn:hover{color:var(--chalk);border-color:rgba(236,235,230,.4)}
+.cust-select{font:500 .86rem/1.2 'Inter',system-ui,sans-serif;padding:7px 10px;border:1px solid var(--chalk-line);border-radius:6px;background:#181a1f;color:var(--chalk)}
+.cust-output{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.cust-output-head{display:flex;align-items:center;justify-content:space-between;width:100%;gap:12px}
+.cust-code{display:block;width:100%;padding:16px;margin:0;background:rgba(255,255,255,.04);border:1px solid var(--chalk-line);border-radius:10px;font:500 .8rem/1.6 'JetBrains Mono',ui-monospace,Menlo,monospace;color:var(--chalk);white-space:pre-wrap;overflow-wrap:break-word;user-select:all}
+.cust-output .copy{background:var(--chalk);color:var(--ink)}
+.cust-output .copy[data-done="true"]{background:transparent;color:var(--chalk);box-shadow:inset 0 0 0 1px var(--chalk)}
 
 @media (max-width:980px){
   .picks{grid-template-columns:repeat(3,1fr)}
@@ -127,6 +162,33 @@ dialog.lightbox button{position:absolute;top:-44px;right:0;font:600 .92rem 'Inte
 <a class="pick t-tinted" href="#tinted"><img src="screenshots/web/tinted-library-thumb.jpg" width="560" height="267" alt="" loading="eager"><span class="pick-name">Poster-Tinted</span></a>
     </nav>
   </div>
+
+  <section class="cmp" id="compare" aria-labelledby="h-compare">
+    <div class="wrap">
+      <div class="cmp-head">
+        <div>
+          <h2 id="h-compare">Stock Jellyfin vs. ijelly</h2>
+          <p>Drag across the frame to compare a stock detail page against each theme.</p>
+        </div>
+        <div class="cmp-tabs" role="tablist" aria-label="Comparison theme">
+          <button class="cmp-tab is-active" type="button" data-img="screenshots/web/apple-detail.jpg" data-label="Apple TV" aria-pressed="true">Apple TV</button>
+          <button class="cmp-tab" type="button" data-img="screenshots/web/noir-detail.jpg" data-label="Cinematheque Noir" aria-pressed="false">Cinematheque Noir</button>
+          <button class="cmp-tab" type="button" data-img="screenshots/web/editorial-detail.jpg" data-label="Editorial" aria-pressed="false">Editorial</button>
+          <button class="cmp-tab" type="button" data-img="screenshots/web/gallery-detail.jpg" data-label="Gallery" aria-pressed="false">Gallery</button>
+          <button class="cmp-tab" type="button" data-img="screenshots/web/blueprint-detail.jpg" data-label="Blueprint" aria-pressed="false">Blueprint</button>
+          <button class="cmp-tab" type="button" data-img="screenshots/web/tinted-library.jpg" data-label="Poster-Tinted (Library)" aria-pressed="false">Poster-Tinted</button>
+        </div>
+      </div>
+      <div class="cmp-stage" id="cmp-stage">
+        <img class="cmp-after" id="cmp-after" src="screenshots/web/apple-detail.jpg" width="1600" height="764" alt="Apple TV theme detail page">
+        <img class="cmp-before" src="screenshots/web/stock-detail.jpg" width="1600" height="764" alt="Stock Jellyfin detail page">
+        <span class="cmp-tag before">Stock Jellyfin</span>
+        <span class="cmp-tag after" id="cmp-after-label">Apple TV</span>
+        <div class="cmp-line" aria-hidden="true"><span class="cmp-knob">&#8596;</span></div>
+        <input class="cmp-range" id="cmp-range" type="range" min="0" max="100" value="55" aria-label="Before and after comparison position">
+      </div>
+    </div>
+  </section>
 
 <section class="room t-apple" id="apple" aria-labelledby="h-apple">
   <div class="wrap room-grid">
@@ -233,6 +295,63 @@ dialog.lightbox button{position:absolute;top:-44px;right:0;font:600 .92rem 'Inte
   </div>
 </section>
 
+  <section class="plain" id="customize" aria-labelledby="h-customize">
+    <div class="wrap plain-grid">
+      <div>
+        <h2 id="h-customize">Build your custom snippet</h2>
+        <p style="margin-top:0;margin-bottom:20px">Optional <code>:root</code> toggles let you tweak accents, blur unwatched episodes, hide card labels, or nudge subtitles without touching the theme source. Changes update every install box above too.</p>
+        <div class="cust-controls">
+          <div class="cust-row">
+            <div><label for="cust-color">Accent color</label><small id="cust-accent-var">Theme default (--apple-accent)</small></div>
+            <div class="cust-color-wrap">
+              <input type="color" id="cust-color" value="#007aff" aria-label="Custom accent color">
+              <button type="button" class="cust-mini-btn" id="cust-color-reset">Default</button>
+            </div>
+          </div>
+          <div class="cust-row">
+            <label for="cust-spoiler"><input type="checkbox" id="cust-spoiler"><span>Blur unwatched episode thumbnails<small>--spoiler-blur: 16px (hover to reveal)</small></span></label>
+          </div>
+          <div class="cust-row">
+            <label for="cust-labels"><input type="checkbox" id="cust-labels"><span>Hide card titles on library grids<small>--card-labels: none (keeps login profiles visible)</small></span></label>
+          </div>
+          <div class="cust-row">
+            <div><label for="cust-sub-size">Subtitle size</label><small>--sub-size</small></div>
+            <select id="cust-sub-size" class="cust-select">
+              <option value="100%">100% (default)</option>
+              <option value="85%">85% (compact)</option>
+              <option value="115%">115% (large)</option>
+              <option value="130%">130% (TV distance)</option>
+            </select>
+          </div>
+          <div class="cust-row">
+            <div><label for="cust-sub-offset">Subtitle vertical offset</label><small>--sub-offset</small></div>
+            <select id="cust-sub-offset" class="cust-select">
+              <option value="0px">0px (default)</option>
+              <option value="-1.5rem">-1.5rem (higher)</option>
+              <option value="-3rem">-3rem (much higher)</option>
+              <option value="1.2rem">1.2rem (lower)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="cust-output">
+        <div class="cust-output-head">
+          <strong style="font-weight:600">Preview Custom CSS</strong>
+          <select id="cust-theme" class="cust-select" aria-label="Target theme">
+            <option value="t-apple">Apple TV</option>
+            <option value="t-noir">Cinematheque Noir</option>
+            <option value="t-editorial">Editorial</option>
+            <option value="t-gallery">Gallery</option>
+            <option value="t-blueprint">Blueprint</option>
+            <option value="t-tinted">Poster-Tinted</option>
+          </select>
+        </div>
+        <pre class="cust-code" id="cust-code">@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@latest/ijelly.css');</pre>
+        <button class="copy" id="cust-copy" type="button" data-copy="@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@latest/ijelly.css');" data-reset="Copy snippet">Copy snippet</button>
+      </div>
+    </div>
+  </section>
+
   <section class="plain" id="install" aria-labelledby="h-install">
     <div class="wrap plain-grid">
       <div>
@@ -242,7 +361,7 @@ dialog.lightbox button{position:absolute;top:-44px;right:0;font:600 .92rem 'Inte
           <li>Paste the import line for the theme you want.</li>
           <li>Save, then turn on Backdrops under Settings, Display.</li>
         </ol>
-        <p>The <code>@latest</code> tag follows the newest release, but jsDelivr caches it. To stay on one version, replace <code>@latest</code> with a release tag such as <code>@2.0.26</code>.</p>
+        <p>The <code>@latest</code> tag follows the newest release, but jsDelivr caches it. To stay on one version, replace <code>@latest</code> with a release tag such as <code>@3.0.0</code>.</p>
       </div>
       <div id="tv">
         <h2>On the TV too</h2>
@@ -280,12 +399,74 @@ dialog.lightbox button{position:absolute;top:-44px;right:0;font:600 .92rem 'Inte
   document.querySelectorAll('.copy').forEach(function(btn){
     btn.addEventListener('click',function(){
       var text=btn.dataset.copy;
-      function done(){btn.textContent='Copied';btn.dataset.done='true';setTimeout(function(){btn.textContent='Copy import';btn.dataset.done='';},1600);}
+      function done(){btn.textContent='Copied';btn.dataset.done='true';setTimeout(function(){btn.textContent=btn.dataset.reset||'Copy import';btn.dataset.done='';},1600);}
       if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,function(){fallback(text);done();});}
       else{fallback(text);done();}
     });
   });
   function fallback(text){var t=document.createElement('textarea');t.value=text;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');}catch(e){}document.body.removeChild(t);}
+
+  var cmpStage=document.getElementById('cmp-stage'),cmpAfter=document.getElementById('cmp-after'),cmpLabel=document.getElementById('cmp-after-label'),cmpRange=document.getElementById('cmp-range');
+  if(cmpStage&&cmpRange){
+    cmpRange.addEventListener('input',function(){cmpStage.style.setProperty('--pos',cmpRange.value+'%');});
+    document.querySelectorAll('.cmp-tab').forEach(function(tab){
+      tab.addEventListener('click',function(){
+        document.querySelectorAll('.cmp-tab').forEach(function(b){b.classList.remove('is-active');b.setAttribute('aria-pressed','false');});
+        tab.classList.add('is-active');
+        tab.setAttribute('aria-pressed','true');
+        cmpAfter.src=tab.dataset.img;
+        cmpAfter.alt=tab.dataset.label+' theme';
+        cmpLabel.textContent=tab.dataset.label;
+      });
+    });
+  }
+
+  var themes={'t-apple':{varName:'--apple-accent',def:'#007aff'},'t-noir':{varName:'--noir-accent',def:'#d4a24c'},'t-editorial':{varName:'--ed-accent',def:'#c8102e'},'t-gallery':{varName:'--gl-accent',def:'#c9a978'},'t-blueprint':{varName:'--kxta-accent',def:'#E09030'},'t-tinted':{varName:'--pt-accent',def:'#ffffff'}};
+  var roomInstalls=[];
+  document.querySelectorAll('.room').forEach(function(room){
+    var cls=Object.keys(themes).find(function(k){return room.classList.contains(k);});
+    var code=room.querySelector('.install code'),btn=room.querySelector('.install .copy');
+    if(cls&&code&&btn){
+      btn.dataset.baseCopy=btn.dataset.copy;
+      code.dataset.baseHtml=code.innerHTML;
+      roomInstalls.push({cls:cls,code:code,btn:btn});
+    }
+  });
+
+  var accentChanged=false,cColor=document.getElementById('cust-color'),cReset=document.getElementById('cust-color-reset'),cSpoiler=document.getElementById('cust-spoiler'),cLabels=document.getElementById('cust-labels'),cSubSize=document.getElementById('cust-sub-size'),cSubOffset=document.getElementById('cust-sub-offset'),cTheme=document.getElementById('cust-theme'),cCode=document.getElementById('cust-code'),cCopy=document.getElementById('cust-copy'),cAccentHint=document.getElementById('cust-accent-var');
+  function buildCss(baseImport,themeCls){
+    var lines=[],meta=themes[themeCls];
+    if(accentChanged&&meta)lines.push('    '+meta.varName+': '+cColor.value+';');
+    if(cSpoiler.checked)lines.push('    --spoiler-blur: 16px;');
+    if(cLabels.checked)lines.push('    --card-labels: none;');
+    if(cSubSize.value!=='100%')lines.push('    --sub-size: '+cSubSize.value+';');
+    if(cSubOffset.value!=='0px')lines.push('    --sub-offset: '+cSubOffset.value+';');
+    if(!lines.length)return baseImport;
+    return baseImport+'\n\n:root {\n'+lines.join('\n')+'\n}';
+  }
+  function updateCustom(){
+    var selMeta=themes[cTheme.value];
+    if(!accentChanged&&selMeta){cColor.value=selMeta.def.toLowerCase();}
+    cAccentHint.textContent=accentChanged?('Custom '+selMeta.varName+': '+cColor.value):('Theme default ('+selMeta.varName+')');
+    roomInstalls.forEach(function(item){
+      var css=buildCss(item.btn.dataset.baseCopy,item.cls);
+      item.btn.dataset.copy=css;
+      if(css===item.btn.dataset.baseCopy){item.code.innerHTML=item.code.dataset.baseHtml;}
+      else{item.code.textContent=css;}
+    });
+    var target=roomInstalls.find(function(i){return i.cls===cTheme.value;});
+    if(target){
+      var previewCss=buildCss(target.btn.dataset.baseCopy,target.cls);
+      cCode.textContent=previewCss;
+      cCopy.dataset.copy=previewCss;
+    }
+  }
+  if(cColor){
+    cColor.addEventListener('input',function(){accentChanged=true;updateCustom();});
+    cReset.addEventListener('click',function(){accentChanged=false;updateCustom();});
+    [cSpoiler,cLabels,cSubSize,cSubOffset,cTheme].forEach(function(el){el.addEventListener('change',updateCustom);});
+    updateCustom();
+  }
 })();
 </script>
 </body>

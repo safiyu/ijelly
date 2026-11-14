@@ -45,6 +45,14 @@
     --mui-palette-divider: var(--ed-rule);
     --mui-palette-AppBar-defaultBg: transparent;
     --mui-shape-borderRadius: 0px;
+
+    /* ── Opt-In Theme Feature Toggles ── */
+    --spoiler-blur: 0px;
+    --card-labels: block;
+    --sub-size: 100%;
+    --sub-color: var(--ed-text);
+    --sub-bg: rgba(13, 13, 14, 0.7);
+    --sub-offset: 0px;
 }
 
 /* Self-hosted static fonts (no Google Fonts, no variable fonts) so older Tizen engines render them */
@@ -1086,22 +1094,26 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     width: 100% !important;
     text-align: center !important;
     pointer-events: none !important;
-    transition: transform 0.25s var(--ed-ease) !important;
+    translate: 0 var(--sub-offset, 0px) !important;
+    transition: transform 0.25s var(--ed-ease), translate 0.25s var(--ed-ease) !important;
 }
 
 .libassjs-canvas-parent,
 .JASSUB {
     transform: none !important;
+    translate: none !important;
 }
 
 .libassjs-canvas,
 .JASSUB canvas,
 .videoPlayerContainer > canvas {
-    transition: transform 0.25s var(--ed-ease) !important;
+    translate: 0 var(--sub-offset, 0px) !important;
+    transition: transform 0.25s var(--ed-ease), translate 0.25s var(--ed-ease) !important;
 }
 
 .htmlvideoplayer::-webkit-media-text-track-container {
-    transition: transform 0.25s var(--ed-ease) !important;
+    translate: 0 var(--sub-offset, 0px) !important;
+    transition: transform 0.25s var(--ed-ease), translate 0.25s var(--ed-ease) !important;
 }
 
 /* Lift subtitles when OSD visible */
@@ -1196,11 +1208,13 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
 .subtitles span,
 .videoSubtitles span,
 .videoSubtitlesInner span,
+.videoSecondarySubtitlesInner span,
 .subtitle-container span,
 ::cue {
     font-family: var(--ed-font-display) !important;
-    color: var(--ed-text) !important;
-    background: rgba(13, 13, 14, 0.7) !important;
+    color: var(--sub-color, var(--ed-text, #e8e4dc)) !important;
+    background: var(--sub-bg, rgba(13, 13, 14, 0.7)) !important;
+    font-size: var(--sub-size, 100%) !important;
     padding: 0.15em 0.6em !important;
     border-radius: 0 !important;
     font-weight: 400 !important;
@@ -1209,6 +1223,14 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     margin: 0 auto !important;
     box-decoration-break: clone !important;
     -webkit-box-decoration-break: clone !important;
+}
+
+.subtitles span span,
+.videoSubtitles span span,
+.videoSubtitlesInner span span,
+.videoSecondarySubtitlesInner span span,
+.subtitle-container span span {
+    font-size: inherit !important;
 }
 
 .subtitles div,
@@ -1687,4 +1709,370 @@ select optgroup {
     body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .htmlvideoplayer::-webkit-media-text-track-container {
         transform: translateY(-13rem) !important;
     }
+}
+
+/* ============================================================================
+ * 1. IN-PLAYER EXPERIENCE (Skip Intro, Up Next, Trickplay & Chapter Bubble)
+ * ============================================================================ */
+
+/* Skip Intro / Credits — editorial masthead tag with crimson stripe */
+.skip-button-container {
+    bottom: 5.5rem !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 10002 !important;
+    transition: transform 0.25s var(--ed-ease), opacity 0.25s ease !important;
+}
+
+.skip-button {
+    margin-left: auto !important;
+    margin-right: 3rem !important;
+    padding: 0.65rem 1.3rem !important;
+    border-radius: 0 !important;
+    background: var(--ed-bg-elev) !important;
+    border: 1px solid var(--ed-rule-strong) !important;
+    border-left: 3px solid var(--ed-accent) !important;
+    color: var(--ed-text) !important;
+    font-family: var(--ed-font-body) !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    box-shadow: var(--ed-shadow) !important;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease !important;
+}
+
+.skip-button:hover,
+.skip-button:focus-visible {
+    background: var(--ed-accent) !important;
+    border-color: var(--ed-accent) !important;
+    color: #ffffff !important;
+}
+
+.skip-button-hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+body.videoOsd-visible .skip-button-container,
+body.osd-visible .skip-button-container,
+body.showing-osd .skip-button-container,
+body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .skip-button-container {
+    transform: translateY(-4.5rem) !important;
+}
+
+/* Up Next card — print-editorial plate with hairline borders */
+.upNextContainer {
+    background: var(--ed-bg-elev) !important;
+    border: 1px solid var(--ed-rule) !important;
+    border-top: 2px solid var(--ed-accent) !important;
+    border-radius: 0 !important;
+    box-shadow: var(--ed-shadow) !important;
+    color: var(--ed-text) !important;
+    font-family: var(--ed-font-body) !important;
+    padding: 1.25rem 1.4rem !important;
+    max-width: calc(100vw - 3rem) !important;
+    box-sizing: border-box !important;
+    z-index: 10002 !important;
+    transition: opacity 0.3s ease, transform 0.25s var(--ed-ease) !important;
+}
+
+.upNextDialog-nextVideoText {
+    font-family: var(--ed-font-body) !important;
+    font-size: 0.72rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.14em !important;
+    text-transform: uppercase !important;
+    color: var(--ed-text-dim) !important;
+    margin-bottom: 0.3rem !important;
+}
+
+.upNextDialog-countdownText {
+    color: var(--ed-accent) !important;
+    font-weight: 700 !important;
+}
+
+.upNextDialog-title {
+    font-family: var(--ed-font-display) !important;
+    font-size: 1.35rem !important;
+    font-weight: 400 !important;
+    color: var(--ed-text) !important;
+    max-width: 100% !important;
+    width: auto !important;
+    margin: 0.15rem 0 0.45rem !important;
+}
+
+.upNextDialog-mediainfo {
+    font-family: var(--ed-font-meta) !important;
+    font-style: italic !important;
+    color: var(--ed-text-dim) !important;
+    font-size: 0.85rem !important;
+}
+
+.upNextDialog-buttons {
+    margin-top: 1rem !important;
+    gap: 0.55rem !important;
+    max-width: 100% !important;
+    width: auto !important;
+}
+
+.upNextDialog-button {
+    border-radius: 0 !important;
+    font-family: var(--ed-font-body) !important;
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    padding: 0.55rem 1.15rem !important;
+    border: 1px solid var(--ed-rule-strong) !important;
+}
+
+.upNextDialog-button.btnStartNow {
+    background: var(--ed-accent) !important;
+    color: #ffffff !important;
+    border-color: var(--ed-accent) !important;
+}
+
+.upNextDialog-button.btnHide {
+    background: transparent !important;
+    color: var(--ed-text) !important;
+}
+
+body.videoOsd-visible .upNextContainer:not(.hide),
+body.osd-visible .upNextContainer:not(.hide),
+body.showing-osd .upNextContainer:not(.hide),
+body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .upNextContainer:not(.hide) {
+    transform: translateY(-9rem) !important;
+}
+
+/* Scrubber Trickplay & Chapter Preview Bubble */
+.sliderBubble {
+    background: var(--ed-bg-elev) !important;
+    border: 1px solid var(--ed-rule-strong) !important;
+    border-radius: 0 !important;
+    box-shadow: var(--ed-shadow) !important;
+    color: var(--ed-text) !important;
+    padding: 0.3rem !important;
+}
+
+.sliderBubbleText {
+    font-family: var(--ed-font-body) !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    font-variant-numeric: tabular-nums !important;
+    color: var(--ed-text) !important;
+    margin: 0.2rem 0.5rem !important;
+}
+
+.chapterThumbContainer {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border: 1px solid var(--ed-rule) !important;
+}
+
+.chapterThumbTextContainer {
+    background: linear-gradient(to top, rgba(13, 13, 14, 0.92) 0%, transparent 100%) !important;
+}
+
+.chapterThumbText {
+    font-family: var(--ed-font-meta) !important;
+    font-style: italic !important;
+    font-size: 0.88rem !important;
+    color: var(--ed-text) !important;
+}
+
+@media (hover: none) and (pointer: coarse), (max-width: 768px) {
+    body.videoOsd-visible .skip-button-container,
+    body.osd-visible .skip-button-container,
+    body.showing-osd .skip-button-container,
+    body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .skip-button-container {
+        transform: translateY(-5.5rem) !important;
+    }
+
+    .skip-button {
+        margin-right: 1.5rem !important;
+    }
+}
+
+.layout-tv .skip-button-container {
+    bottom: 6.5rem !important;
+}
+
+.layout-tv .videoOsd-visible .skip-button-container,
+.layout-tv .osd-visible .skip-button-container,
+.layout-tv .showing-osd .skip-button-container,
+.layout-tv.videoOsd-visible .skip-button-container,
+.layout-tv.osd-visible .skip-button-container,
+.layout-tv.showing-osd .skip-button-container,
+.layout-tv:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .skip-button-container {
+    transform: translateY(-6rem) !important;
+}
+
+/* ============================================================================
+ * 2. UNSTYLED JELLYFIN VIEWS (Login, Audio Player Bar, Spotlight Search)
+ * ============================================================================ */
+
+/* Login & Profile Switcher */
+#loginPage .manualLoginForm {
+    max-width: 440px !important;
+    margin: 2.5rem auto !important;
+    padding: 2.25rem !important;
+    border-radius: 0 !important;
+    background: var(--ed-bg-elev) !important;
+    border: 1px solid var(--ed-rule) !important;
+    border-top: 2px solid var(--ed-accent) !important;
+    box-shadow: var(--ed-shadow) !important;
+}
+
+#loginPage .visualLoginForm h1 {
+    font-family: var(--ed-font-display) !important;
+    font-weight: 400 !important;
+    color: var(--ed-text) !important;
+}
+
+#divUsers .squareCard .cardBox {
+    background: var(--ed-bg-elev) !important;
+    border: 1px solid var(--ed-rule) !important;
+    border-radius: 0 !important;
+}
+
+#divUsers .squareCard:hover .cardBox,
+#divUsers .squareCard:focus .cardBox {
+    border-color: var(--ed-accent) !important;
+    box-shadow: 0 0 0 1px var(--ed-accent) !important;
+}
+
+#divUsers .cardText {
+    font-family: var(--ed-font-display) !important;
+    font-size: 1.05rem !important;
+}
+
+#loginPage .readOnlyContent {
+    max-width: 440px !important;
+    margin: 1rem auto !important;
+}
+
+/* Music & Audio Player Bar */
+.appfooter {
+    background: rgba(13, 13, 14, 0.94) !important;
+    border-top: 1px solid var(--ed-rule-strong) !important;
+    color: var(--ed-text) !important;
+}
+
+.nowPlayingBar {
+    background: transparent !important;
+}
+
+.nowPlayingBar .nowPlayingImage {
+    border-radius: 0 !important;
+    border: 1px solid var(--ed-rule) !important;
+}
+
+.nowPlayingBarText {
+    font-family: var(--ed-font-display) !important;
+    color: var(--ed-text) !important;
+}
+
+.nowPlayingBarSecondaryText {
+    font-family: var(--ed-font-meta) !important;
+    font-style: italic !important;
+    color: var(--ed-text-dim) !important;
+}
+
+.nowPlayingPageImage {
+    border-radius: 0 !important;
+    border: 1px solid var(--ed-rule-strong) !important;
+    box-shadow: var(--ed-shadow) !important;
+}
+
+/* Spotlight Search Bar */
+#searchPage .searchFields {
+    margin: 1rem auto 1.5rem !important;
+}
+
+#searchPage .searchFieldsInner {
+    max-width: 46rem !important;
+    background: var(--ed-bg-elev) !important;
+    border: 1px solid var(--ed-rule-strong) !important;
+    border-radius: 0 !important;
+    padding: 0.45rem 1.1rem !important;
+    box-shadow: var(--ed-shadow) !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+#searchPage .searchFieldsInner:focus-within {
+    border-color: var(--ed-accent) !important;
+    box-shadow: 0 0 0 1px var(--ed-accent), var(--ed-shadow) !important;
+}
+
+#searchPage .searchFieldsInner .inputContainer {
+    margin: 0 !important;
+    flex: 1 !important;
+}
+
+#searchPage .searchfields-icon {
+    align-self: center !important;
+    margin: 0 0.75rem 0 0.15rem !important;
+    font-size: 1.4rem !important;
+    color: var(--ed-accent) !important;
+}
+
+#searchPage #searchTextInput.searchfields-txtSearch {
+    background: transparent !important;
+    border: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    font-family: var(--ed-font-display) !important;
+    color: var(--ed-text) !important;
+    font-size: 1.15rem !important;
+    padding: 0.35rem 0 !important;
+}
+
+.searchSuggestionsList .button-link {
+    display: inline-block !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    border: 1px solid var(--ed-rule-strong) !important;
+    font-family: var(--ed-font-body) !important;
+    font-size: 0.85rem !important;
+    color: var(--ed-text) !important;
+    padding: 0.4rem 0.95rem !important;
+    margin: 0.3rem !important;
+    text-decoration: none !important;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease !important;
+}
+
+.searchSuggestionsList .button-link:hover,
+.searchSuggestionsList .button-link:focus-visible {
+    background: var(--ed-accent) !important;
+    border-color: var(--ed-accent) !important;
+    color: #ffffff !important;
+}
+
+/* ============================================================================
+ * 3. OPT-IN FEATURE TOGGLES (:root --spoiler-blur & --card-labels)
+ * ============================================================================ */
+
+/* Unwatched episode spoiler blur (--spoiler-blur: 16px to enable) */
+.card[data-type="Episode"]:not(:has(.playedIndicator)) .cardImageContainer,
+.listItem[data-type="Episode"]:not(:has(.playedIndicator)) .listItemImage {
+    filter: blur(var(--spoiler-blur, 0px));
+    transition: filter 0.3s ease;
+}
+
+.card[data-type="Episode"]:hover .cardImageContainer,
+.card[data-type="Episode"]:focus-within .cardImageContainer,
+.listItem[data-type="Episode"]:hover .listItemImage {
+    filter: blur(0px);
+}
+
+/* Compact poster wall mode (--card-labels: none to enable) */
+.cardText {
+    display: var(--card-labels, block) !important;
+}
+
+#divUsers .cardText,
+.visualLoginForm .cardText {
+    display: block !important;
 }

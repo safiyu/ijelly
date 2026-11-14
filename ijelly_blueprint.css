@@ -48,6 +48,14 @@
     --mui-palette-divider: var(--kxta-border);
     --mui-palette-AppBar-defaultBg: transparent;
     --mui-shape-borderRadius: 0px;
+
+    /* ── Opt-In Theme Feature Toggles ── */
+    --spoiler-blur: 0px;
+    --card-labels: block;
+    --sub-size: 100%;
+    --sub-color: var(--kxta-text);
+    --sub-bg: rgba(6, 10, 18, 0.7);
+    --sub-offset: 0px;
 }
 
 /* Self-hosted static fonts (no Google Fonts, no variable fonts) so older Tizen engines render them */
@@ -1136,22 +1144,26 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     width: 100% !important;
     text-align: center !important;
     pointer-events: none !important;
-    transition: transform 0.25s var(--kxta-ease) !important;
+    translate: 0 var(--sub-offset, 0px) !important;
+    transition: transform 0.25s var(--kxta-ease), translate 0.25s var(--kxta-ease) !important;
 }
 
 .libassjs-canvas-parent,
 .JASSUB {
     transform: none !important;
+    translate: none !important;
 }
 
 .libassjs-canvas,
 .JASSUB canvas,
 .videoPlayerContainer > canvas {
-    transition: transform 0.25s var(--kxta-ease) !important;
+    translate: 0 var(--sub-offset, 0px) !important;
+    transition: transform 0.25s var(--kxta-ease), translate 0.25s var(--kxta-ease) !important;
 }
 
 .htmlvideoplayer::-webkit-media-text-track-container {
-    transition: transform 0.25s var(--kxta-ease) !important;
+    translate: 0 var(--sub-offset, 0px) !important;
+    transition: transform 0.25s var(--kxta-ease), translate 0.25s var(--kxta-ease) !important;
 }
 
 /* Lift subtitles when OSD visible (libass/JASSUB outer wrapper stays untransformed) */
@@ -1246,11 +1258,13 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
 .subtitles span,
 .videoSubtitles span,
 .videoSubtitlesInner span,
+.videoSecondarySubtitlesInner span,
 .subtitle-container span,
 ::cue {
     font-family: var(--kxta-font-body) !important;
-    color: var(--kxta-text) !important;
-    background: rgba(6, 10, 18, 0.7) !important;
+    color: var(--sub-color, var(--kxta-text, #E8EDF5)) !important;
+    background: var(--sub-bg, rgba(6, 10, 18, 0.7)) !important;
+    font-size: var(--sub-size, 100%) !important;
     padding: 0.15em 0.5em !important;
     border-radius: 0 !important;
     font-weight: 500 !important;
@@ -1259,6 +1273,14 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     margin: 0 auto !important;
     box-decoration-break: clone !important;
     -webkit-box-decoration-break: clone !important;
+}
+
+.subtitles span span,
+.videoSubtitles span span,
+.videoSubtitlesInner span span,
+.videoSecondarySubtitlesInner span span,
+.subtitle-container span span {
+    font-size: inherit !important;
 }
 
 .subtitles div,
@@ -1768,4 +1790,366 @@ select option,
             transform: translateY(-13rem) !important;
         }
     }
+}
+
+/* ============================================================================
+ * 1. IN-PLAYER EXPERIENCE (Skip Intro, Up Next, Trickplay & Chapter Bubble)
+ * ============================================================================ */
+
+/* Skip Intro / Credits — square monospace technical tag */
+.skip-button-container {
+    bottom: 5.5rem !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 10002 !important;
+    transition: transform 0.25s var(--kxta-ease), opacity 0.25s ease !important;
+}
+
+.skip-button {
+    margin-left: auto !important;
+    margin-right: 3rem !important;
+    padding: 0.65rem 1.25rem !important;
+    border-radius: 0 !important;
+    background: rgba(13, 17, 25, 0.92) !important;
+    border: 1px solid var(--kxta-accent) !important;
+    color: var(--kxta-accent) !important;
+    font-family: var(--kxta-font-mono) !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.65) !important;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease !important;
+}
+
+.skip-button:hover,
+.skip-button:focus-visible {
+    background: var(--kxta-accent) !important;
+    color: var(--kxta-bg) !important;
+    border-color: var(--kxta-accent-hover) !important;
+}
+
+.skip-button-hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+body.videoOsd-visible .skip-button-container,
+body.osd-visible .skip-button-container,
+body.showing-osd .skip-button-container,
+body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .skip-button-container {
+    transform: translateY(-4.5rem) !important;
+}
+
+/* Up Next card — schematic navy surface with amber grid border */
+.upNextContainer {
+    background: var(--kxta-bg-elev) !important;
+    border: 1px solid var(--kxta-border) !important;
+    border-left: 3px solid var(--kxta-accent) !important;
+    border-radius: 0 !important;
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.75) !important;
+    color: var(--kxta-text) !important;
+    font-family: var(--kxta-font-body) !important;
+    padding: 1.2rem 1.35rem !important;
+    max-width: calc(100vw - 3rem) !important;
+    box-sizing: border-box !important;
+    z-index: 10002 !important;
+    transition: opacity 0.3s ease, transform 0.25s var(--kxta-ease) !important;
+}
+
+.upNextDialog-nextVideoText {
+    font-family: var(--kxta-font-mono) !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    color: var(--kxta-text-dim) !important;
+    margin-bottom: 0.3rem !important;
+}
+
+.upNextDialog-countdownText {
+    color: var(--kxta-accent) !important;
+    font-weight: 700 !important;
+}
+
+.upNextDialog-title {
+    font-family: var(--kxta-font-title) !important;
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
+    color: var(--kxta-text) !important;
+    max-width: 100% !important;
+    width: auto !important;
+    margin: 0.15rem 0 0.45rem !important;
+}
+
+.upNextDialog-mediainfo {
+    font-family: var(--kxta-font-mono) !important;
+    color: var(--kxta-text-dim) !important;
+    font-size: 0.8rem !important;
+}
+
+.upNextDialog-buttons {
+    margin-top: 1rem !important;
+    gap: 0.5rem !important;
+    max-width: 100% !important;
+    width: auto !important;
+}
+
+.upNextDialog-button {
+    border-radius: 0 !important;
+    font-family: var(--kxta-font-mono) !important;
+    font-size: 0.8rem !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    padding: 0.5rem 1.1rem !important;
+    border: 1px solid var(--kxta-border) !important;
+}
+
+.upNextDialog-button.btnStartNow {
+    background: var(--kxta-accent) !important;
+    color: var(--kxta-bg) !important;
+    border-color: var(--kxta-accent) !important;
+    font-weight: 700 !important;
+}
+
+.upNextDialog-button.btnHide {
+    background: var(--kxta-bg-raised) !important;
+    color: var(--kxta-text) !important;
+}
+
+body.videoOsd-visible .upNextContainer:not(.hide),
+body.osd-visible .upNextContainer:not(.hide),
+body.showing-osd .upNextContainer:not(.hide),
+body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .upNextContainer:not(.hide) {
+    transform: translateY(-9rem) !important;
+}
+
+/* Scrubber Trickplay & Chapter Preview Bubble */
+.sliderBubble {
+    background: var(--kxta-bg-elev) !important;
+    border: 1px solid var(--kxta-border) !important;
+    border-radius: 0 !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.75) !important;
+    color: var(--kxta-text) !important;
+    padding: 0.25rem !important;
+}
+
+.sliderBubbleText {
+    font-family: var(--kxta-font-mono) !important;
+    font-size: 0.85rem !important;
+    color: var(--kxta-accent) !important;
+    margin: 0.2rem 0.5rem !important;
+}
+
+.chapterThumbContainer {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border: 1px solid var(--kxta-border-dim) !important;
+}
+
+.chapterThumbTextContainer {
+    background: rgba(6, 10, 18, 0.86) !important;
+    border-top: 1px solid var(--kxta-border-dim) !important;
+}
+
+.chapterThumbText {
+    font-family: var(--kxta-font-mono) !important;
+    font-size: 0.78rem !important;
+    color: var(--kxta-text) !important;
+}
+
+@media (hover: none) and (pointer: coarse), (max-width: 768px) {
+    body.videoOsd-visible .skip-button-container,
+    body.osd-visible .skip-button-container,
+    body.showing-osd .skip-button-container,
+    body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .skip-button-container {
+        transform: translateY(-5.5rem) !important;
+    }
+
+    .skip-button {
+        margin-right: 1.5rem !important;
+    }
+}
+
+.layout-tv .skip-button-container {
+    bottom: 6.5rem !important;
+}
+
+.layout-tv .videoOsd-visible .skip-button-container,
+.layout-tv .osd-visible .skip-button-container,
+.layout-tv .showing-osd .skip-button-container,
+.layout-tv.videoOsd-visible .skip-button-container,
+.layout-tv.osd-visible .skip-button-container,
+.layout-tv.showing-osd .skip-button-container,
+.layout-tv:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .skip-button-container {
+    transform: translateY(-6rem) !important;
+}
+
+/* ============================================================================
+ * 2. UNSTYLED JELLYFIN VIEWS (Login, Audio Player Bar, Spotlight Search)
+ * ============================================================================ */
+
+/* Login & Profile Switcher */
+#loginPage .manualLoginForm {
+    max-width: 440px !important;
+    margin: 2.5rem auto !important;
+    padding: 2.25rem !important;
+    border-radius: 0 !important;
+    background: var(--kxta-bg-elev) !important;
+    border: 1px solid var(--kxta-border) !important;
+    border-top: 2px solid var(--kxta-accent) !important;
+    box-shadow: 0 20px 54px rgba(0, 0, 0, 0.7) !important;
+}
+
+#loginPage .visualLoginForm h1 {
+    font-family: var(--kxta-font-mono) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    color: var(--kxta-text) !important;
+}
+
+#divUsers .squareCard .cardBox {
+    background: var(--kxta-bg-elev) !important;
+    border: 1px solid var(--kxta-border) !important;
+    border-radius: 0 !important;
+}
+
+#divUsers .squareCard:hover .cardBox,
+#divUsers .squareCard:focus .cardBox {
+    border-color: var(--kxta-accent) !important;
+    box-shadow: 0 0 0 1px var(--kxta-accent) !important;
+}
+
+#divUsers .cardText {
+    font-family: var(--kxta-font-mono) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.06em !important;
+}
+
+#loginPage .readOnlyContent {
+    max-width: 440px !important;
+    margin: 1rem auto !important;
+}
+
+/* Music & Audio Player Bar */
+.appfooter {
+    background: rgba(6, 10, 18, 0.94) !important;
+    border-top: 1px solid var(--kxta-border) !important;
+    color: var(--kxta-text) !important;
+}
+
+.nowPlayingBar {
+    background: transparent !important;
+}
+
+.nowPlayingBar .nowPlayingImage {
+    border-radius: 0 !important;
+    border: 1px solid var(--kxta-border) !important;
+}
+
+.nowPlayingBarText {
+    font-family: var(--kxta-font-title) !important;
+    color: var(--kxta-text) !important;
+}
+
+.nowPlayingBarSecondaryText {
+    font-family: var(--kxta-font-mono) !important;
+    color: var(--kxta-text-dim) !important;
+}
+
+.nowPlayingPageImage {
+    border-radius: 0 !important;
+    border: 1px solid var(--kxta-border) !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75) !important;
+}
+
+/* Spotlight Search Bar */
+#searchPage .searchFields {
+    margin: 1rem auto 1.5rem !important;
+}
+
+#searchPage .searchFieldsInner {
+    max-width: 48rem !important;
+    background: var(--kxta-bg-elev) !important;
+    border: 1px solid var(--kxta-border) !important;
+    border-radius: 0 !important;
+    padding: 0.4rem 1rem !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+#searchPage .searchFieldsInner:focus-within {
+    border-color: var(--kxta-accent) !important;
+    box-shadow: 0 0 0 1px var(--kxta-accent), 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+#searchPage .searchFieldsInner .inputContainer {
+    margin: 0 !important;
+    flex: 1 !important;
+}
+
+#searchPage .searchfields-icon {
+    align-self: center !important;
+    margin: 0 0.75rem 0 0.15rem !important;
+    font-size: 1.4rem !important;
+    color: var(--kxta-accent) !important;
+}
+
+#searchPage #searchTextInput.searchfields-txtSearch {
+    background: transparent !important;
+    border: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    font-family: var(--kxta-font-mono) !important;
+    color: var(--kxta-text) !important;
+    font-size: 1rem !important;
+    padding: 0.35rem 0 !important;
+}
+
+.searchSuggestionsList .button-link {
+    display: inline-block !important;
+    border-radius: 0 !important;
+    background: var(--kxta-bg-elev) !important;
+    border: 1px solid var(--kxta-border) !important;
+    font-family: var(--kxta-font-mono) !important;
+    font-size: 0.85rem !important;
+    color: var(--kxta-text) !important;
+    padding: 0.4rem 0.9rem !important;
+    margin: 0.3rem !important;
+    text-decoration: none !important;
+    transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease !important;
+}
+
+.searchSuggestionsList .button-link:hover,
+.searchSuggestionsList .button-link:focus-visible {
+    background: var(--kxta-accent) !important;
+    border-color: var(--kxta-accent) !important;
+    color: var(--kxta-bg) !important;
+}
+
+/* ============================================================================
+ * 3. OPT-IN FEATURE TOGGLES (:root --spoiler-blur & --card-labels)
+ * ============================================================================ */
+
+/* Unwatched episode spoiler blur (--spoiler-blur: 16px to enable) */
+.card[data-type="Episode"]:not(:has(.playedIndicator)) .cardImageContainer,
+.listItem[data-type="Episode"]:not(:has(.playedIndicator)) .listItemImage {
+    filter: blur(var(--spoiler-blur, 0px));
+    transition: filter 0.3s ease;
+}
+
+.card[data-type="Episode"]:hover .cardImageContainer,
+.card[data-type="Episode"]:focus-within .cardImageContainer,
+.listItem[data-type="Episode"]:hover .listItemImage {
+    filter: blur(0px);
+}
+
+/* Compact poster wall mode (--card-labels: none to enable) */
+.cardText {
+    display: var(--card-labels, block) !important;
+}
+
+#divUsers .cardText,
+.visualLoginForm .cardText {
+    display: block !important;
 }

@@ -45,6 +45,14 @@
     --mui-palette-divider: var(--pt-accent-soft);
     --mui-palette-AppBar-defaultBg: transparent;
     --mui-shape-borderRadius: var(--pt-r);
+
+    /* ── Opt-In Theme Feature Toggles ── */
+    --spoiler-blur: 0px;
+    --card-labels: block;
+    --sub-size: 100%;
+    --sub-color: var(--pt-text);
+    --sub-bg: rgba(0, 0, 0, 0.5);
+    --sub-offset: 0px;
 }
 
 @font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-400-normal.woff2') format('woff2'), url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-400-normal.woff') format('woff'); }
@@ -1099,22 +1107,26 @@ body:has(#videoOsdPage:not(.hide)) .headerLeft {
     width: 100% !important;
     text-align: center !important;
     pointer-events: none !important;
-    transition: transform 0.25s var(--pt-ease) !important;
+    translate: 0 var(--sub-offset, 0px) !important;
+    transition: transform 0.25s var(--pt-ease), translate 0.25s var(--pt-ease) !important;
 }
 
 .libassjs-canvas-parent,
 .JASSUB {
     transform: none !important;
+    translate: none !important;
 }
 
 .libassjs-canvas,
 .JASSUB canvas,
 .videoPlayerContainer > canvas {
-    transition: transform 0.25s var(--pt-ease) !important;
+    translate: 0 var(--sub-offset, 0px) !important;
+    transition: transform 0.25s var(--pt-ease), translate 0.25s var(--pt-ease) !important;
 }
 
 .htmlvideoplayer::-webkit-media-text-track-container {
-    transition: transform 0.25s var(--pt-ease) !important;
+    translate: 0 var(--sub-offset, 0px) !important;
+    transition: transform 0.25s var(--pt-ease), translate 0.25s var(--pt-ease) !important;
 }
 
 /* Lift subtitles when OSD visible */
@@ -1209,10 +1221,12 @@ body:has(#videoOsdPage:not(.hide)) .headerLeft {
 .subtitles span,
 .videoSubtitles span,
 .videoSubtitlesInner span,
+.videoSecondarySubtitlesInner span,
 .subtitle-container span,
 ::cue {
-    color: var(--pt-text) !important;
-    background: rgba(0, 0, 0, 0.5) !important;
+    color: var(--sub-color, var(--pt-text, #ffffff)) !important;
+    background: var(--sub-bg, rgba(0, 0, 0, 0.5)) !important;
+    font-size: var(--sub-size, 100%) !important;
     padding: 0.15em 0.5em !important;
     border-radius: 4px !important;
     font-weight: 500 !important;
@@ -1221,6 +1235,14 @@ body:has(#videoOsdPage:not(.hide)) .headerLeft {
     margin: 0 auto !important;
     box-decoration-break: clone !important;
     -webkit-box-decoration-break: clone !important;
+}
+
+.subtitles span span,
+.videoSubtitles span span,
+.videoSubtitlesInner span span,
+.videoSecondarySubtitlesInner span span,
+.subtitle-container span span {
+    font-size: inherit !important;
 }
 
 .subtitles div,
@@ -1700,4 +1722,378 @@ select optgroup {
     body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .htmlvideoplayer::-webkit-media-text-track-container {
         transform: translateY(-13rem) !important;
     }
+}
+
+/* ============================================================================
+ * 1. IN-PLAYER EXPERIENCE (Skip Intro, Up Next, Trickplay & Chapter Bubble)
+ * ============================================================================ */
+
+/* Skip Intro / Credits — frosted pill tinted by artwork accent */
+.skip-button-container {
+    bottom: 5.5rem !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 10002 !important;
+    transition: transform 0.25s var(--pt-ease), opacity 0.25s ease !important;
+}
+
+.skip-button {
+    margin-left: auto !important;
+    margin-right: 3rem !important;
+    padding: 0.68rem 1.35rem !important;
+    border-radius: var(--pt-r-pill) !important;
+    background: rgba(10, 10, 10, 0.72) !important;
+    backdrop-filter: blur(28px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+    border: 1px solid var(--pt-accent) !important;
+    color: var(--pt-text) !important;
+    font-family: var(--pt-font) !important;
+    font-size: 0.92rem !important;
+    font-weight: 600 !important;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6) !important;
+    transition: transform 0.2s var(--pt-ease), background 0.2s ease, border-color 0.2s ease !important;
+}
+
+.skip-button:hover,
+.skip-button:focus-visible {
+    background: var(--pt-glass-strong) !important;
+    border-color: var(--pt-accent) !important;
+    transform: scale(1.03) !important;
+}
+
+.skip-button-hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+body.videoOsd-visible .skip-button-container,
+body.osd-visible .skip-button-container,
+body.showing-osd .skip-button-container,
+body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .skip-button-container {
+    transform: translateY(-4.5rem) !important;
+}
+
+/* Up Next card — pure black obsidian pill-accented glass */
+.upNextContainer {
+    background: rgba(10, 10, 10, 0.82) !important;
+    backdrop-filter: blur(36px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(36px) saturate(180%) !important;
+    border: 1px solid var(--pt-border) !important;
+    border-radius: var(--pt-r) !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75) !important;
+    color: var(--pt-text) !important;
+    font-family: var(--pt-font) !important;
+    padding: 1.25rem 1.4rem !important;
+    max-width: calc(100vw - 3rem) !important;
+    box-sizing: border-box !important;
+    z-index: 10002 !important;
+    transition: opacity 0.3s ease, transform 0.28s var(--pt-ease) !important;
+}
+
+.upNextDialog-nextVideoText {
+    font-size: 0.75rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    color: var(--pt-text-dim) !important;
+    margin-bottom: 0.25rem !important;
+}
+
+.upNextDialog-countdownText {
+    color: var(--pt-accent) !important;
+    font-weight: 700 !important;
+}
+
+.upNextDialog-title {
+    font-size: 1.2rem !important;
+    font-weight: 700 !important;
+    color: var(--pt-text) !important;
+    max-width: 100% !important;
+    width: auto !important;
+    margin: 0.15rem 0 0.45rem !important;
+}
+
+.upNextDialog-mediainfo {
+    color: var(--pt-text-dim) !important;
+    font-size: 0.85rem !important;
+}
+
+.upNextDialog-buttons {
+    margin-top: 1rem !important;
+    gap: 0.6rem !important;
+    max-width: 100% !important;
+    width: auto !important;
+}
+
+.upNextDialog-button {
+    border-radius: var(--pt-r-pill) !important;
+    padding: 0.55rem 1.2rem !important;
+    font-weight: 600 !important;
+    border: 1px solid var(--pt-border) !important;
+    transition: transform 0.18s var(--pt-ease), background 0.18s ease !important;
+}
+
+.upNextDialog-button.btnStartNow {
+    background: var(--pt-glass-strong) !important;
+    border-color: var(--pt-accent) !important;
+    color: var(--pt-text) !important;
+}
+
+.upNextDialog-button.btnHide {
+    background: var(--pt-glass) !important;
+    color: var(--pt-text-dim) !important;
+}
+
+.upNextDialog-button:hover,
+.upNextDialog-button:focus-visible {
+    transform: scale(1.03) !important;
+}
+
+body.videoOsd-visible .upNextContainer:not(.hide),
+body.osd-visible .upNextContainer:not(.hide),
+body.showing-osd .upNextContainer:not(.hide),
+body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .upNextContainer:not(.hide) {
+    transform: translateY(-9rem) !important;
+}
+
+/* Scrubber Trickplay & Chapter Preview Bubble */
+.sliderBubble {
+    background: rgba(10, 10, 10, 0.86) !important;
+    backdrop-filter: blur(28px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+    border: 1px solid var(--pt-border) !important;
+    border-radius: var(--pt-r) !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7) !important;
+    color: var(--pt-text) !important;
+    overflow: hidden !important;
+    padding: 0.35rem !important;
+}
+
+.sliderBubbleText {
+    font-family: var(--pt-font) !important;
+    font-size: 0.88rem !important;
+    font-weight: 600 !important;
+    font-variant-numeric: tabular-nums !important;
+    color: var(--pt-text) !important;
+    margin: 0.2rem 0.5rem !important;
+}
+
+.chapterThumbContainer {
+    border-radius: calc(var(--pt-r) - 4px) !important;
+    overflow: hidden !important;
+    box-shadow: none !important;
+}
+
+.chapterThumbTextContainer {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, transparent 100%) !important;
+}
+
+.chapterThumbText {
+    font-family: var(--pt-font) !important;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    color: var(--pt-text) !important;
+}
+
+@media (hover: none) and (pointer: coarse), (max-width: 768px) {
+    body.videoOsd-visible .skip-button-container,
+    body.osd-visible .skip-button-container,
+    body.showing-osd .skip-button-container,
+    body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .skip-button-container {
+        transform: translateY(-5.5rem) !important;
+    }
+
+    .skip-button {
+        margin-right: 1.5rem !important;
+    }
+}
+
+.layout-tv .skip-button-container {
+    bottom: 6.5rem !important;
+}
+
+.layout-tv .videoOsd-visible .skip-button-container,
+.layout-tv .osd-visible .skip-button-container,
+.layout-tv .showing-osd .skip-button-container,
+.layout-tv.videoOsd-visible .skip-button-container,
+.layout-tv.osd-visible .skip-button-container,
+.layout-tv.showing-osd .skip-button-container,
+.layout-tv:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .skip-button-container {
+    transform: translateY(-6rem) !important;
+}
+
+/* ============================================================================
+ * 2. UNSTYLED JELLYFIN VIEWS (Login, Audio Player Bar, Spotlight Search)
+ * ============================================================================ */
+
+/* Login & Profile Switcher */
+#loginPage .manualLoginForm {
+    max-width: 440px !important;
+    margin: 2.5rem auto !important;
+    padding: 2.25rem !important;
+    border-radius: var(--pt-r) !important;
+    background: var(--pt-bg-elev) !important;
+    border: 1px solid var(--pt-border) !important;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.75) !important;
+}
+
+#loginPage .visualLoginForm h1 {
+    font-family: var(--pt-font) !important;
+    font-weight: 700 !important;
+    color: var(--pt-text) !important;
+}
+
+#divUsers .squareCard .cardScalable,
+#divUsers .squareCard .cardContent,
+#divUsers .squareCard .cardImageContainer {
+    border-radius: var(--pt-r) !important;
+}
+
+#divUsers .squareCard .cardBox {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+#divUsers .squareCard .cardScalable {
+    border: 1px solid var(--pt-border) !important;
+    transition: transform 0.22s var(--pt-ease), border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+#divUsers .squareCard:hover .cardScalable,
+#divUsers .squareCard:focus .cardScalable {
+    transform: scale(1.04) !important;
+    border-color: var(--pt-accent) !important;
+    box-shadow: 0 0 0 2px var(--pt-accent) !important;
+}
+
+#loginPage .readOnlyContent {
+    max-width: 440px !important;
+    margin: 1rem auto !important;
+}
+
+/* Music & Audio Player Bar */
+.appfooter {
+    background: rgba(5, 5, 5, 0.9) !important;
+    backdrop-filter: blur(32px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(32px) saturate(180%) !important;
+    border-top: 1px solid var(--pt-border) !important;
+    color: var(--pt-text) !important;
+}
+
+.nowPlayingBar {
+    background: transparent !important;
+}
+
+.nowPlayingBar .nowPlayingImage {
+    border-radius: calc(var(--pt-r) - 6px) !important;
+    overflow: hidden !important;
+    border: 1px solid var(--pt-border) !important;
+}
+
+.nowPlayingBarText {
+    color: var(--pt-text) !important;
+    font-weight: 600 !important;
+}
+
+.nowPlayingBarSecondaryText {
+    color: var(--pt-text-dim) !important;
+}
+
+.nowPlayingPageImage {
+    border-radius: var(--pt-r) !important;
+    border: 1px solid var(--pt-border) !important;
+    box-shadow: 0 28px 64px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Spotlight Search Bar */
+#searchPage .searchFields {
+    margin: 1rem auto 1.5rem !important;
+}
+
+#searchPage .searchFieldsInner {
+    max-width: 46rem !important;
+    background: var(--pt-glass) !important;
+    backdrop-filter: blur(28px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+    border: 1px solid var(--pt-border) !important;
+    border-radius: var(--pt-r-pill) !important;
+    padding: 0.45rem 1.25rem !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important;
+}
+
+#searchPage .searchFieldsInner:focus-within {
+    background: var(--pt-glass-strong) !important;
+    border-color: var(--pt-accent) !important;
+    box-shadow: 0 0 0 2px var(--pt-accent) !important;
+}
+
+#searchPage .searchFieldsInner .inputContainer {
+    margin: 0 !important;
+    flex: 1 !important;
+}
+
+#searchPage .searchfields-icon {
+    align-self: center !important;
+    margin: 0 0.75rem 0 0.15rem !important;
+    font-size: 1.4rem !important;
+    color: var(--pt-accent) !important;
+}
+
+#searchPage #searchTextInput.searchfields-txtSearch {
+    background: transparent !important;
+    border: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    font-family: var(--pt-font) !important;
+    color: var(--pt-text) !important;
+    font-size: 1.05rem !important;
+    padding: 0.35rem 0 !important;
+}
+
+.searchSuggestionsList .button-link {
+    display: inline-block !important;
+    border-radius: var(--pt-r-pill) !important;
+    background: var(--pt-glass) !important;
+    border: 1px solid var(--pt-border) !important;
+    color: var(--pt-text) !important;
+    padding: 0.4rem 0.95rem !important;
+    margin: 0.3rem !important;
+    text-decoration: none !important;
+    transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s var(--pt-ease) !important;
+}
+
+.searchSuggestionsList .button-link:hover,
+.searchSuggestionsList .button-link:focus-visible {
+    background: var(--pt-glass-strong) !important;
+    border-color: var(--pt-accent) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* ============================================================================
+ * 3. OPT-IN FEATURE TOGGLES (:root --spoiler-blur & --card-labels)
+ * ============================================================================ */
+
+/* Unwatched episode spoiler blur (--spoiler-blur: 16px to enable) */
+.card[data-type="Episode"]:not(:has(.playedIndicator)) .cardImageContainer,
+.listItem[data-type="Episode"]:not(:has(.playedIndicator)) .listItemImage {
+    filter: blur(var(--spoiler-blur, 0px));
+    transition: filter 0.3s ease;
+}
+
+.card[data-type="Episode"]:hover .cardImageContainer,
+.card[data-type="Episode"]:focus-within .cardImageContainer,
+.listItem[data-type="Episode"]:hover .listItemImage {
+    filter: blur(0px);
+}
+
+/* Compact poster wall mode (--card-labels: none to enable) */
+.cardText {
+    display: var(--card-labels, block) !important;
+}
+
+#divUsers .cardText,
+.visualLoginForm .cardText {
+    display: block !important;
 }

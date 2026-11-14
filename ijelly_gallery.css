@@ -49,6 +49,14 @@
     --mui-palette-divider: var(--gl-rule);
     --mui-palette-AppBar-defaultBg: transparent;
     --mui-shape-borderRadius: 0px;
+
+    /* ── Opt-In Theme Feature Toggles ── */
+    --spoiler-blur: 0px;
+    --card-labels: block;
+    --sub-size: 100%;
+    --sub-color: var(--gl-text);
+    --sub-bg: rgba(26, 26, 26, 0.75);
+    --sub-offset: 0px;
 }
 
 /* Self-hosted static fonts (no Google Fonts, no variable fonts) so older Tizen engines render them */
@@ -1185,22 +1193,26 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     width: 100% !important;
     text-align: center !important;
     pointer-events: none !important;
-    transition: transform 0.25s var(--gl-ease) !important;
+    translate: 0 var(--sub-offset, 0px) !important;
+    transition: transform 0.25s var(--gl-ease), translate 0.25s var(--gl-ease) !important;
 }
 
 .libassjs-canvas-parent,
 .JASSUB {
     transform: none !important;
+    translate: none !important;
 }
 
 .libassjs-canvas,
 .JASSUB canvas,
 .videoPlayerContainer > canvas {
-    transition: transform 0.25s var(--gl-ease) !important;
+    translate: 0 var(--sub-offset, 0px) !important;
+    transition: transform 0.25s var(--gl-ease), translate 0.25s var(--gl-ease) !important;
 }
 
 .htmlvideoplayer::-webkit-media-text-track-container {
-    transition: transform 0.25s var(--gl-ease) !important;
+    translate: 0 var(--sub-offset, 0px) !important;
+    transition: transform 0.25s var(--gl-ease), translate 0.25s var(--gl-ease) !important;
 }
 
 /* Lift subtitles when OSD visible (libass/JASSUB outer wrapper stays untransformed) */
@@ -1295,12 +1307,14 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
 .subtitles span,
 .videoSubtitles span,
 .videoSubtitlesInner span,
+.videoSecondarySubtitlesInner span,
 .subtitle-container span,
 ::cue {
     font-family: var(--gl-font-display) !important;
     font-style: italic !important;
-    color: var(--gl-text) !important;
-    background: rgba(26, 26, 26, 0.75) !important;
+    color: var(--sub-color, var(--gl-text, #e5e2db)) !important;
+    background: var(--sub-bg, rgba(26, 26, 26, 0.75)) !important;
+    font-size: var(--sub-size, 100%) !important;
     padding: 0.2em 0.6em !important;
     border-radius: 0 !important;
     font-weight: 400 !important;
@@ -1309,6 +1323,14 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     margin: 0 auto !important;
     box-decoration-break: clone !important;
     -webkit-box-decoration-break: clone !important;
+}
+
+.subtitles span span,
+.videoSubtitles span span,
+.videoSubtitlesInner span span,
+.videoSecondarySubtitlesInner span span,
+.subtitle-container span span {
+    font-size: inherit !important;
 }
 
 .subtitles div,
@@ -1827,4 +1849,364 @@ select option,
             transform: translateY(-13rem) !important;
         }
     }
+}
+
+/* ============================================================================
+ * 1. IN-PLAYER EXPERIENCE (Skip Intro, Up Next, Trickplay & Chapter Bubble)
+ * ============================================================================ */
+
+/* Skip Intro / Credits — museum placard with gold hairline frame */
+.skip-button-container {
+    bottom: 5.5rem !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 10002 !important;
+    transition: transform 0.25s var(--gl-ease), opacity 0.25s ease !important;
+}
+
+.skip-button {
+    margin-left: auto !important;
+    margin-right: 3rem !important;
+    padding: 0.65rem 1.3rem !important;
+    border-radius: 0 !important;
+    background: var(--gl-bg-elev) !important;
+    border: 1px solid var(--gl-accent) !important;
+    color: var(--gl-accent) !important;
+    font-family: var(--gl-font-tag) !important;
+    font-size: 0.82rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55) !important;
+    transition: background 0.18s ease, color 0.18s ease !important;
+}
+
+.skip-button:hover,
+.skip-button:focus-visible {
+    background: var(--gl-accent) !important;
+    color: var(--gl-bg) !important;
+}
+
+.skip-button-hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+body.videoOsd-visible .skip-button-container,
+body.osd-visible .skip-button-container,
+body.showing-osd .skip-button-container,
+body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .skip-button-container {
+    transform: translateY(-4.5rem) !important;
+}
+
+/* Up Next card — gallery wall-label mat & gold hairline */
+.upNextContainer {
+    background: var(--gl-bg-elev) !important;
+    border: 1px solid var(--gl-frame-dim) !important;
+    border-radius: 0 !important;
+    box-shadow: 0 20px 54px rgba(0, 0, 0, 0.65) !important;
+    color: var(--gl-text) !important;
+    font-family: var(--gl-font-body) !important;
+    padding: 1.25rem 1.4rem !important;
+    max-width: calc(100vw - 3rem) !important;
+    box-sizing: border-box !important;
+    z-index: 10002 !important;
+    transition: opacity 0.3s ease, transform 0.25s var(--gl-ease) !important;
+}
+
+.upNextDialog-nextVideoText {
+    font-family: var(--gl-font-tag) !important;
+    font-size: 0.72rem !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    color: var(--gl-text-dim) !important;
+    margin-bottom: 0.3rem !important;
+}
+
+.upNextDialog-countdownText {
+    color: var(--gl-accent) !important;
+    font-weight: 700 !important;
+}
+
+.upNextDialog-title {
+    font-family: var(--gl-font-display) !important;
+    font-size: 1.4rem !important;
+    font-weight: 400 !important;
+    color: var(--gl-text) !important;
+    max-width: 100% !important;
+    width: auto !important;
+    margin: 0.15rem 0 0.45rem !important;
+}
+
+.upNextDialog-mediainfo {
+    font-family: var(--gl-font-tag) !important;
+    color: var(--gl-text-dim) !important;
+    font-size: 0.8rem !important;
+}
+
+.upNextDialog-buttons {
+    margin-top: 1rem !important;
+    gap: 0.55rem !important;
+    max-width: 100% !important;
+    width: auto !important;
+}
+
+.upNextDialog-button {
+    border-radius: 0 !important;
+    font-family: var(--gl-font-tag) !important;
+    font-size: 0.78rem !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    padding: 0.5rem 1.15rem !important;
+    border: 1px solid var(--gl-frame-dim) !important;
+}
+
+.upNextDialog-button.btnStartNow {
+    background: var(--gl-accent) !important;
+    color: var(--gl-bg) !important;
+    border-color: var(--gl-accent) !important;
+    font-weight: 600 !important;
+}
+
+.upNextDialog-button.btnHide {
+    background: var(--gl-bg-raised) !important;
+    color: var(--gl-text) !important;
+}
+
+body.videoOsd-visible .upNextContainer:not(.hide),
+body.osd-visible .upNextContainer:not(.hide),
+body.showing-osd .upNextContainer:not(.hide),
+body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .upNextContainer:not(.hide) {
+    transform: translateY(-9rem) !important;
+}
+
+/* Scrubber Trickplay & Chapter Preview Bubble */
+.sliderBubble {
+    background: var(--gl-bg-elev) !important;
+    border: 1px solid var(--gl-frame-dim) !important;
+    border-radius: 0 !important;
+    box-shadow: 0 12px 34px rgba(0, 0, 0, 0.65) !important;
+    color: var(--gl-text) !important;
+    padding: 0.35rem !important;
+}
+
+.sliderBubbleText {
+    font-family: var(--gl-font-tag) !important;
+    font-size: 0.82rem !important;
+    color: var(--gl-accent) !important;
+    margin: 0.2rem 0.5rem !important;
+}
+
+.chapterThumbContainer {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border: 1px solid var(--gl-rule) !important;
+}
+
+.chapterThumbTextContainer {
+    background: linear-gradient(to top, rgba(26, 26, 26, 0.9) 0%, transparent 100%) !important;
+}
+
+.chapterThumbText {
+    font-family: var(--gl-font-display) !important;
+    font-style: italic !important;
+    font-size: 0.92rem !important;
+    color: var(--gl-text) !important;
+}
+
+@media (hover: none) and (pointer: coarse), (max-width: 768px) {
+    body.videoOsd-visible .skip-button-container,
+    body.osd-visible .skip-button-container,
+    body.showing-osd .skip-button-container,
+    body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .skip-button-container {
+        transform: translateY(-5.5rem) !important;
+    }
+
+    .skip-button {
+        margin-right: 1.5rem !important;
+    }
+}
+
+.layout-tv .skip-button-container {
+    bottom: 6.5rem !important;
+}
+
+.layout-tv .videoOsd-visible .skip-button-container,
+.layout-tv .osd-visible .skip-button-container,
+.layout-tv .showing-osd .skip-button-container,
+.layout-tv.videoOsd-visible .skip-button-container,
+.layout-tv.osd-visible .skip-button-container,
+.layout-tv.showing-osd .skip-button-container,
+.layout-tv:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .skip-button-container {
+    transform: translateY(-6rem) !important;
+}
+
+/* ============================================================================
+ * 2. UNSTYLED JELLYFIN VIEWS (Login, Audio Player Bar, Spotlight Search)
+ * ============================================================================ */
+
+/* Login & Profile Switcher */
+#loginPage .manualLoginForm {
+    max-width: 440px !important;
+    margin: 2.5rem auto !important;
+    padding: 2.25rem !important;
+    border-radius: 0 !important;
+    background: var(--gl-bg-elev) !important;
+    border: 1px solid var(--gl-frame-dim) !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55) !important;
+}
+
+#loginPage .visualLoginForm h1 {
+    font-family: var(--gl-font-display) !important;
+    font-weight: 400 !important;
+    color: var(--gl-text) !important;
+}
+
+#divUsers .squareCard .cardBox {
+    background: var(--gl-bg-elev) !important;
+    border: 1px solid var(--gl-frame-dim) !important;
+    border-radius: 0 !important;
+    padding: 8px !important;
+}
+
+#divUsers .squareCard:hover .cardBox,
+#divUsers .squareCard:focus .cardBox {
+    border-color: var(--gl-accent) !important;
+    box-shadow: 0 0 0 1px var(--gl-accent) !important;
+}
+
+#divUsers .cardText {
+    font-family: var(--gl-font-tag) !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+}
+
+#loginPage .readOnlyContent {
+    max-width: 440px !important;
+    margin: 1rem auto !important;
+}
+
+/* Music & Audio Player Bar */
+.appfooter {
+    background: rgba(26, 26, 26, 0.94) !important;
+    border-top: 1px solid var(--gl-frame-dim) !important;
+    color: var(--gl-text) !important;
+}
+
+.nowPlayingBar {
+    background: transparent !important;
+}
+
+.nowPlayingBar .nowPlayingImage {
+    border-radius: 0 !important;
+    border: 1px solid var(--gl-frame-dim) !important;
+}
+
+.nowPlayingBarText {
+    font-family: var(--gl-font-display) !important;
+    font-size: 1.05rem !important;
+    color: var(--gl-text) !important;
+}
+
+.nowPlayingBarSecondaryText {
+    font-family: var(--gl-font-tag) !important;
+    color: var(--gl-text-dim) !important;
+}
+
+.nowPlayingPageImage {
+    border-radius: 0 !important;
+    border: 1px solid var(--gl-accent) !important;
+    box-shadow: 0 20px 54px rgba(0, 0, 0, 0.65) !important;
+}
+
+/* Spotlight Search Bar */
+#searchPage .searchFields {
+    margin: 1rem auto 1.5rem !important;
+}
+
+#searchPage .searchFieldsInner {
+    max-width: 46rem !important;
+    background: var(--gl-bg-elev) !important;
+    border: 1px solid var(--gl-frame-dim) !important;
+    border-radius: 0 !important;
+    padding: 0.45rem 1.1rem !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+#searchPage .searchFieldsInner:focus-within {
+    border-color: var(--gl-accent) !important;
+    box-shadow: 0 0 0 1px var(--gl-accent) !important;
+}
+
+#searchPage .searchFieldsInner .inputContainer {
+    margin: 0 !important;
+    flex: 1 !important;
+}
+
+#searchPage .searchfields-icon {
+    align-self: center !important;
+    margin: 0 0.75rem 0 0.15rem !important;
+    font-size: 1.4rem !important;
+    color: var(--gl-accent) !important;
+}
+
+#searchPage #searchTextInput.searchfields-txtSearch {
+    background: transparent !important;
+    border: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    font-family: var(--gl-font-display) !important;
+    color: var(--gl-text) !important;
+    font-size: 1.15rem !important;
+    padding: 0.35rem 0 !important;
+}
+
+.searchSuggestionsList .button-link {
+    display: inline-block !important;
+    border-radius: 0 !important;
+    background: var(--gl-bg-elev) !important;
+    border: 1px solid var(--gl-frame-dim) !important;
+    font-family: var(--gl-font-tag) !important;
+    font-size: 0.82rem !important;
+    letter-spacing: 0.05em !important;
+    color: var(--gl-text) !important;
+    padding: 0.4rem 0.95rem !important;
+    margin: 0.3rem !important;
+    text-decoration: none !important;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease !important;
+}
+
+.searchSuggestionsList .button-link:hover,
+.searchSuggestionsList .button-link:focus-visible {
+    background: var(--gl-accent) !important;
+    border-color: var(--gl-accent) !important;
+    color: var(--gl-bg) !important;
+}
+
+/* ============================================================================
+ * 3. OPT-IN FEATURE TOGGLES (:root --spoiler-blur & --card-labels)
+ * ============================================================================ */
+
+/* Unwatched episode spoiler blur (--spoiler-blur: 16px to enable) */
+.card[data-type="Episode"]:not(:has(.playedIndicator)) .cardImageContainer,
+.listItem[data-type="Episode"]:not(:has(.playedIndicator)) .listItemImage {
+    filter: blur(var(--spoiler-blur, 0px));
+    transition: filter 0.3s ease;
+}
+
+.card[data-type="Episode"]:hover .cardImageContainer,
+.card[data-type="Episode"]:focus-within .cardImageContainer,
+.listItem[data-type="Episode"]:hover .listItemImage {
+    filter: blur(0px);
+}
+
+/* Compact poster wall mode (--card-labels: none to enable) */
+.cardText {
+    display: var(--card-labels, block) !important;
+}
+
+#divUsers .cardText,
+.visualLoginForm .cardText {
+    display: block !important;
 }
