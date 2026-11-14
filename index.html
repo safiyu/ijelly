@@ -141,50 +141,55 @@ dialog.lightbox button{position:absolute;top:-44px;right:0;font:600 .92rem 'Inte
 .ldr-meta{margin-top:18px;text-align:center}
 .ldr-name{display:block;font-weight:600;font-size:.9rem;color:var(--chalk)}
 .ldr-sub{display:block;font-size:.76rem;color:var(--chalk-mute);margin-top:2px}
-.ldr-pod{position:relative;width:88px;height:88px;flex:none}
+.ldr-pod{position:relative;width:96px;height:96px;flex:none;border-radius:50%;overflow:hidden;border:none;background:radial-gradient(circle,rgba(10,10,18,.92) 0%,rgba(6,6,12,.4) 68%,transparent 100%)}
 .ldr-pod span{position:absolute;box-sizing:border-box;border-radius:50%}
 @keyframes lSpinCW{to{transform:rotate(360deg)}}
-@keyframes lSpinCCW{to{transform:rotate(-360deg)}}
-@keyframes lPulseCore{0%,100%{transform:scale(.82);opacity:.76}50%{transform:scale(1.12);opacity:1}}
-@keyframes lDiamond{0%,100%{transform:rotate(45deg) scale(.85);opacity:.78}50%{transform:rotate(45deg) scale(1.15);opacity:1}}
+@keyframes lRadiateCW{0%{transform:scale(.08) rotate(0deg);opacity:0}20%{opacity:.92}68%{opacity:.52}100%{transform:scale(1.15) rotate(240deg);opacity:0}}
+@keyframes lRadiateCCW{0%{transform:scale(.08) rotate(0deg);opacity:0}20%{opacity:.88}68%{opacity:.48}100%{transform:scale(1.15) rotate(-240deg);opacity:0}}
+@keyframes lPulseCore{0%,100%{transform:scale(.84);opacity:.82}50%{transform:scale(1.16);opacity:1}}
 
-.ldr-apple .ldr-pod{border-radius:26px;background:rgba(16,16,22,.78);border:1px solid rgba(255,255,255,.2);box-shadow:0 18px 42px rgba(0,0,0,.65),0 0 32px rgba(0,122,255,.25),inset 0 1px 0 rgba(255,255,255,.25)}
-.ldr-apple .l1{inset:14px;background:conic-gradient(from 0deg,transparent 0deg,#007aff 280deg,#fff 360deg);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2.5px));mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2.5px));filter:drop-shadow(0 0 8px #007aff);animation:lSpinCW 1.15s linear infinite}
-.ldr-apple .l2{inset:24px;border:1.5px solid rgba(255,255,255,.16);border-top-color:rgba(255,255,255,.85);animation:lSpinCCW 1.8s cubic-bezier(.4,0,.2,1) infinite}
-.ldr-apple .l3{inset:14px;animation:lSpinCW 1.15s linear infinite}
-.ldr-apple .l3::after{content:"";position:absolute;top:-1.5px;left:50%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:#fff;box-shadow:0 0 10px #fff,0 0 18px #007aff}
-.ldr-apple .l4{inset:36px;background:radial-gradient(circle,#fff 0%,#007aff 70%);box-shadow:0 0 18px #007aff;animation:lPulseCore 1.6s ease-in-out infinite}
+.ldr-pod .l1,.ldr-pod .l2,.ldr-pod .l3{inset:-10%;-webkit-mask:radial-gradient(circle,transparent 16%,rgba(0,0,0,.5) 34%,#000 48%,transparent 72%);mask:radial-gradient(circle,transparent 16%,rgba(0,0,0,.5) 34%,#000 48%,transparent 72%);filter:blur(7px)}
+.ldr-pod .l1{animation:lRadiateCW 3.3s cubic-bezier(.16,.68,.38,.98) infinite}
+.ldr-pod .l2{mix-blend-mode:screen;animation:lRadiateCCW 3.3s cubic-bezier(.16,.68,.38,.98) -1.1s infinite}
+.ldr-pod .l3{animation:lRadiateCW 3.3s cubic-bezier(.16,.68,.38,.98) -2.2s infinite}
+.ldr-pod .l4{inset:39%;animation:lPulseCore 1.8s ease-in-out infinite}
+.ldr-pod .l4::before{content:"";position:absolute;inset:-45%;border-radius:50%;-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1px));mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1px));animation:lSpinCW 1.25s linear infinite}
 
-.ldr-noir .ldr-pod{border-radius:0;background:radial-gradient(circle,#1c1611 0%,#0e0a07 78%);border:1px solid #d4a24c;outline:1px solid rgba(212,162,76,.3);outline-offset:4px;box-shadow:0 18px 42px rgba(0,0,0,.7),0 0 28px rgba(212,162,76,.18)}
-.ldr-noir .l1{inset:12px;background:repeating-conic-gradient(from 0deg,#d4a24c 0deg 18deg,transparent 18deg 30deg);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2.5px));mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2.5px));animation:lSpinCW 2.6s linear infinite}
-.ldr-noir .l2{inset:18px;background:conic-gradient(from 0deg,transparent 0deg,rgba(212,162,76,.35) 300deg,#f4ebd8 360deg);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1.5px));mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1.5px));animation:lSpinCW 1.25s cubic-bezier(.45,.05,.55,.95) infinite}
-.ldr-noir .l3{inset:27px;border:1px solid rgba(212,162,76,.3);border-top-color:#d4a24c;border-bottom-color:#d4a24c;animation:lSpinCCW 1.8s linear infinite}
-.ldr-noir .l4{inset:38px;background:#d4a24c;box-shadow:0 0 18px #d4a24c;animation:lPulseCore 1.5s ease-in-out infinite}
+.ldr-apple .l1{background:conic-gradient(from 0deg,#007aff,#38bdf8,transparent 42%,#007aff 68%,#6366f1 88%,#007aff)}
+.ldr-apple .l2{background:conic-gradient(from 120deg,transparent 10%,#38bdf8 42%,#fff 54%,#007aff 78%,transparent 95%)}
+.ldr-apple .l3{background:conic-gradient(from 240deg,#6366f1,#007aff 36%,transparent 56%,#38bdf8 82%,#fff 94%,#6366f1)}
+.ldr-apple .l4{background:radial-gradient(circle,#fff 0%,#38bdf8 34%,#007aff 62%,transparent 76%);box-shadow:0 0 18px #007aff}
+.ldr-apple .l4::before{background:conic-gradient(from 0deg,transparent 190deg,#007aff 305deg,#fff 356deg,transparent 360deg)}
 
-.ldr-editorial .ldr-pod{border-radius:0;background:#141416;border:1px solid rgba(232,228,220,.3);border-top:3px solid #c8102e;box-shadow:0 18px 42px rgba(0,0,0,.65)}
-.ldr-editorial .l1{inset:14px;background:conic-gradient(from 0deg,transparent 0deg,#c8102e 270deg,#e8e4dc 360deg);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 2.5px),#000 calc(100% - 2px));mask:radial-gradient(farthest-side,transparent calc(100% - 2.5px),#000 calc(100% - 2px));animation:lSpinCW 1.2s cubic-bezier(.5,.15,.35,.85) infinite}
-.ldr-editorial .l2{inset:23px;border:1px solid rgba(232,228,220,.3);border-left-color:#e8e4dc;animation:lSpinCCW 2s linear infinite}
-.ldr-editorial .l3{inset:16px;border-radius:0;background:linear-gradient(to right,transparent calc(50% - .5px),rgba(232,228,220,.15) calc(50% - .5px),rgba(232,228,220,.15) calc(50% + .5px),transparent calc(50% + .5px)),linear-gradient(to bottom,transparent calc(50% - .5px),rgba(232,228,220,.15) calc(50% - .5px),rgba(232,228,220,.15) calc(50% + .5px),transparent calc(50% + .5px))}
-.ldr-editorial .l4{inset:37px;background:#c8102e;box-shadow:0 0 14px #c8102e;animation:lPulseCore 1.5s ease-in-out infinite}
+.ldr-noir .l1{background:conic-gradient(from 0deg,#d4a24c,#f4ebd8,transparent 42%,#d4a24c 68%,#b45309 88%,#d4a24c)}
+.ldr-noir .l2{background:conic-gradient(from 120deg,transparent 10%,#f4ebd8 42%,#fff 54%,#d4a24c 78%,transparent 95%)}
+.ldr-noir .l3{background:conic-gradient(from 240deg,#b45309,#d4a24c 36%,transparent 56%,#f4ebd8 82%,#fff 94%,#b45309)}
+.ldr-noir .l4{background:radial-gradient(circle,#fff 0%,#f4ebd8 34%,#d4a24c 62%,transparent 76%);box-shadow:0 0 18px #d4a24c}
+.ldr-noir .l4::before{background:conic-gradient(from 0deg,transparent 190deg,#d4a24c 305deg,#fff 356deg,transparent 360deg)}
 
-.ldr-gallery .ldr-pod{border-radius:0;background:#202020;border:1px solid #c9a978;box-shadow:0 18px 42px rgba(0,0,0,.7)}
-.ldr-gallery .l1{inset:14px;background:conic-gradient(from 0deg,transparent 0deg,#c9a978 290deg,#f3ede1 360deg);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1.5px));mask:radial-gradient(farthest-side,transparent calc(100% - 2px),#000 calc(100% - 1.5px));animation:lSpinCW 1.8s linear infinite}
-.ldr-gallery .l2{inset:22px;border:1px solid rgba(201,169,120,.4);border-top-color:#f3ede1;transform-origin:46% 54%;animation:lSpinCCW 2.4s ease-in-out infinite}
-.ldr-gallery .l3{inset:28px;background:linear-gradient(90deg,transparent 48%,#c9a978 49%,#c9a978 51%,transparent 52%);animation:lSpinCW 3.6s linear infinite}
-.ldr-gallery .l4{inset:37px;background:#f3ede1;border:2px solid #c9a978;animation:lPulseCore 2.2s ease-in-out infinite}
+.ldr-editorial .l1{background:conic-gradient(from 0deg,#c8102e,#fb7185,transparent 42%,#c8102e 68%,#e8e4dc 88%,#c8102e)}
+.ldr-editorial .l2{background:conic-gradient(from 120deg,transparent 10%,#fb7185 42%,#fff 54%,#c8102e 78%,transparent 95%)}
+.ldr-editorial .l3{background:conic-gradient(from 240deg,#e8e4dc,#c8102e 36%,transparent 56%,#fb7185 82%,#fff 94%,#e8e4dc)}
+.ldr-editorial .l4{background:radial-gradient(circle,#fff 0%,#fb7185 34%,#c8102e 62%,transparent 76%);box-shadow:0 0 18px #c8102e}
+.ldr-editorial .l4::before{background:conic-gradient(from 0deg,transparent 190deg,#c8102e 305deg,#fff 356deg,transparent 360deg)}
 
-.ldr-blueprint .ldr-pod{border-radius:0;background:rgba(6,10,18,.94);border:1px solid #E09030;box-shadow:0 18px 42px rgba(0,0,0,.75),0 0 24px rgba(224,144,48,.18)}
-.ldr-blueprint .ldr-pod::before{content:"";position:absolute;inset:-6px;pointer-events:none;background:linear-gradient(to right,#E09030 10px,transparent 10px) 0 0/100% 2px no-repeat,linear-gradient(to bottom,#E09030 10px,transparent 10px) 0 0/2px 100% no-repeat,linear-gradient(to left,#E09030 10px,transparent 10px) 100% 0/100% 2px no-repeat,linear-gradient(to bottom,#E09030 10px,transparent 10px) 100% 0/2px 100% no-repeat,linear-gradient(to right,#E09030 10px,transparent 10px) 0 100%/100% 2px no-repeat,linear-gradient(to top,#E09030 10px,transparent 10px) 0 100%/2px 100% no-repeat,linear-gradient(to left,#E09030 10px,transparent 10px) 100% 100%/100% 2px no-repeat,linear-gradient(to top,#E09030 10px,transparent 10px) 100% 100%/2px 100% no-repeat}
-.ldr-blueprint .l1{inset:14px;background:conic-gradient(from 0deg,transparent 0deg,rgba(224,144,48,.04) 220deg,rgba(224,144,48,.45) 350deg,#E09030 360deg);border:1px solid rgba(224,144,48,.3);animation:lSpinCW 1.5s linear infinite}
-.ldr-blueprint .l2{inset:23px;border:1px dashed #E09030;animation:lSpinCCW 3s linear infinite}
-.ldr-blueprint .l3{inset:10px;border-radius:0;background:linear-gradient(to right,transparent calc(50% - .5px),rgba(224,144,48,.3) calc(50% - .5px),rgba(224,144,48,.3) calc(50% + .5px),transparent calc(50% + .5px)),linear-gradient(to bottom,transparent calc(50% - .5px),rgba(224,144,48,.3) calc(50% - .5px),rgba(224,144,48,.3) calc(50% + .5px),transparent calc(50% + .5px))}
-.ldr-blueprint .l4{inset:38px;border-radius:0;background:#E09030;box-shadow:0 0 12px #E09030;animation:lDiamond 1.4s ease-in-out infinite}
+.ldr-gallery .l1{background:conic-gradient(from 0deg,#c9a978,#f3ede1,transparent 42%,#c9a978 68%,#d6bc94 88%,#c9a978)}
+.ldr-gallery .l2{background:conic-gradient(from 120deg,transparent 10%,#f3ede1 42%,#fff 54%,#c9a978 78%,transparent 95%)}
+.ldr-gallery .l3{background:conic-gradient(from 240deg,#d6bc94,#c9a978 36%,transparent 56%,#f3ede1 82%,#fff 94%,#d6bc94)}
+.ldr-gallery .l4{background:radial-gradient(circle,#fff 0%,#f3ede1 34%,#c9a978 62%,transparent 76%);box-shadow:0 0 18px #c9a978}
+.ldr-gallery .l4::before{background:conic-gradient(from 0deg,transparent 190deg,#c9a978 305deg,#fff 356deg,transparent 360deg)}
 
-.ldr-tinted .ldr-pod{border-radius:50%;background:rgba(8,8,12,.8);border:1px solid rgba(255,255,255,.22);box-shadow:0 18px 42px rgba(0,0,0,.8),0 0 32px rgba(255,255,255,.15)}
-.ldr-tinted .l1{inset:10px;background:conic-gradient(from 0deg,#38bdf8,#a855f7,#f43f5e,#f59e0b,#10b981,#38bdf8);filter:blur(8px);opacity:.58;animation:lSpinCW 2s linear infinite}
-.ldr-tinted .l2{inset:14px;background:conic-gradient(from 0deg,transparent 0deg,rgba(255,255,255,.35) 180deg,#fff 360deg);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2.5px));mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 2.5px));animation:lSpinCW 1.1s linear infinite}
-.ldr-tinted .l3{inset:25px;border:1.5px solid rgba(255,255,255,.18);border-top-color:#fff;animation:lSpinCCW 1.6s cubic-bezier(.4,0,.2,1) infinite}
-.ldr-tinted .l4{inset:37px;background:#fff;box-shadow:0 0 18px #fff;animation:lPulseCore 1.5s ease-in-out infinite}
+.ldr-blueprint .l1{background:conic-gradient(from 0deg,#e09030,#fbbf24,transparent 42%,#e09030 68%,#f97316 88%,#e09030)}
+.ldr-blueprint .l2{background:conic-gradient(from 120deg,transparent 10%,#fbbf24 42%,#fff 54%,#e09030 78%,transparent 95%)}
+.ldr-blueprint .l3{background:conic-gradient(from 240deg,#f97316,#e09030 36%,transparent 56%,#fbbf24 82%,#fff 94%,#f97316)}
+.ldr-blueprint .l4{background:radial-gradient(circle,#fff 0%,#fbbf24 34%,#e09030 62%,transparent 76%);box-shadow:0 0 18px #e09030}
+.ldr-blueprint .l4::before{background:conic-gradient(from 0deg,transparent 190deg,#e09030 305deg,#fff 356deg,transparent 360deg)}
+
+.ldr-tinted .l1{background:conic-gradient(from 0deg,#38bdf8,#a855f7,#f43f5e,#f59e0b,#10b981,#38bdf8)}
+.ldr-tinted .l2{background:conic-gradient(from 120deg,transparent 10%,#38bdf8 42%,#fff 54%,#a855f7 78%,transparent 95%)}
+.ldr-tinted .l3{background:conic-gradient(from 240deg,#f43f5e,#a855f7 36%,transparent 56%,#38bdf8 82%,#fff 94%,#f43f5e)}
+.ldr-tinted .l4{background:radial-gradient(circle,#fff 0%,#38bdf8 34%,#a855f7 62%,transparent 76%);box-shadow:0 0 18px #a855f7}
+.ldr-tinted .l4::before{background:conic-gradient(from 0deg,transparent 190deg,#a855f7 305deg,#fff 356deg,transparent 360deg)}
 
 @media (max-width:980px){
   .picks,.ldr-grid{grid-template-columns:repeat(3,1fr)}
@@ -249,14 +254,14 @@ dialog.lightbox button{position:absolute;top:-44px;right:0;font:600 .92rem 'Inte
     <div class="wrap">
       <div class="loaders-head">
         <h2 id="h-loaders">Six signature loaders</h2>
-        <p>Pure CSS replacements for Jellyfin's stock buffering spinner, each built for its theme's material language.</p>
+        <p>Pure CSS fullscreen aurora vortexes replacing Jellyfin's stock buffering spinner, radiating outward in each theme's palette.</p>
       </div>
       <div class="ldr-grid">
-        <div class="ldr-card ldr-apple"><div class="ldr-pod" aria-hidden="true"><span class="l1"></span><span class="l2"></span><span class="l3"></span><span class="l4"></span></div><div class="ldr-meta"><span class="ldr-name">Apple TV</span><span class="ldr-sub">Orbital glass pod</span></div></div>
-        <div class="ldr-card ldr-noir"><div class="ldr-pod" aria-hidden="true"><span class="l1"></span><span class="l2"></span><span class="l3"></span><span class="l4"></span></div><div class="ldr-meta"><span class="ldr-name">Cinematheque Noir</span><span class="ldr-sub">35mm brass reel</span></div></div>
-        <div class="ldr-card ldr-editorial"><div class="ldr-pod" aria-hidden="true"><span class="l1"></span><span class="l2"></span><span class="l3"></span><span class="l4"></span></div><div class="ldr-meta"><span class="ldr-name">Editorial</span><span class="ldr-sub">Crimson colophon</span></div></div>
-        <div class="ldr-card ldr-gallery"><div class="ldr-pod" aria-hidden="true"><span class="l1"></span><span class="l2"></span><span class="l3"></span><span class="l4"></span></div><div class="ldr-meta"><span class="ldr-name">Gallery</span><span class="ldr-sub">Kinetic eclipse</span></div></div>
-        <div class="ldr-card ldr-blueprint"><div class="ldr-pod" aria-hidden="true"><span class="l1"></span><span class="l2"></span><span class="l3"></span><span class="l4"></span></div><div class="ldr-meta"><span class="ldr-name">Blueprint</span><span class="ldr-sub">HUD radar reticle</span></div></div>
+        <div class="ldr-card ldr-apple"><div class="ldr-pod" aria-hidden="true"><span class="l1"></span><span class="l2"></span><span class="l3"></span><span class="l4"></span></div><div class="ldr-meta"><span class="ldr-name">Apple TV</span><span class="ldr-sub">Cobalt aurora</span></div></div>
+        <div class="ldr-card ldr-noir"><div class="ldr-pod" aria-hidden="true"><span class="l1"></span><span class="l2"></span><span class="l3"></span><span class="l4"></span></div><div class="ldr-meta"><span class="ldr-name">Cinematheque Noir</span><span class="ldr-sub">Tungsten gold</span></div></div>
+        <div class="ldr-card ldr-editorial"><div class="ldr-pod" aria-hidden="true"><span class="l1"></span><span class="l2"></span><span class="l3"></span><span class="l4"></span></div><div class="ldr-meta"><span class="ldr-name">Editorial</span><span class="ldr-sub">Crimson aurora</span></div></div>
+        <div class="ldr-card ldr-gallery"><div class="ldr-pod" aria-hidden="true"><span class="l1"></span><span class="l2"></span><span class="l3"></span><span class="l4"></span></div><div class="ldr-meta"><span class="ldr-name">Gallery</span><span class="ldr-sub">Museum champagne</span></div></div>
+        <div class="ldr-card ldr-blueprint"><div class="ldr-pod" aria-hidden="true"><span class="l1"></span><span class="l2"></span><span class="l3"></span><span class="l4"></span></div><div class="ldr-meta"><span class="ldr-name">Blueprint</span><span class="ldr-sub">Tactical amber</span></div></div>
         <div class="ldr-card ldr-tinted"><div class="ldr-pod" aria-hidden="true"><span class="l1"></span><span class="l2"></span><span class="l3"></span><span class="l4"></span></div><div class="ldr-meta"><span class="ldr-name">Poster-Tinted</span><span class="ldr-sub">Prismatic aurora</span></div></div>
       </div>
     </div>
@@ -433,7 +438,7 @@ dialog.lightbox button{position:absolute;top:-44px;right:0;font:600 .92rem 'Inte
           <li>Paste the import line for the theme you want.</li>
           <li>Save, then turn on Backdrops under Settings, Display.</li>
         </ol>
-        <p>The <code>@latest</code> tag follows the newest release, but jsDelivr caches it. To stay on one version, replace <code>@latest</code> with a release tag such as <code>@3.0.2</code>.</p>
+        <p>The <code>@latest</code> tag follows the newest release, but jsDelivr caches it. To stay on one version, replace <code>@latest</code> with a release tag such as <code>@3.0.3</code>.</p>
       </div>
       <div id="tv">
         <h2>On the TV too</h2>

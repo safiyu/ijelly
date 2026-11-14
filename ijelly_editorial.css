@@ -2078,7 +2078,7 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 }
 
 /* ============================================================================
- * 4. SIGNATURE THEME LOADER (.docspinner, .mdl-spinner, .splashLogo)
+ * 4. SIGNATURE THEME LOADER — FULLSCREEN RADIATING AURORA VORTEX
  * ============================================================================ */
 
 @keyframes ijellySpinCW {
@@ -2089,9 +2089,43 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     to { transform: rotate(-360deg); }
 }
 
+@keyframes ijellyAuroraRadiateCW {
+    0% {
+        transform: scale(0.04) rotate(0deg);
+        opacity: 0;
+    }
+    18% {
+        opacity: 0.92;
+    }
+    65% {
+        opacity: 0.55;
+    }
+    100% {
+        transform: scale(1.18) rotate(240deg);
+        opacity: 0;
+    }
+}
+
+@keyframes ijellyAuroraRadiateCCW {
+    0% {
+        transform: scale(0.04) rotate(0deg);
+        opacity: 0;
+    }
+    18% {
+        opacity: 0.88;
+    }
+    65% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(1.18) rotate(-240deg);
+        opacity: 0;
+    }
+}
+
 @keyframes ijellyPulseCore {
-    0%, 100% { transform: scale(0.84); opacity: 0.78; }
-    50% { transform: scale(1.12); opacity: 1; }
+    0%, 100% { transform: scale(0.84); opacity: 0.82; }
+    50% { transform: scale(1.16); opacity: 1; }
 }
 
 @keyframes ijellySplashPulse {
@@ -2102,29 +2136,51 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 .splashLogo {
     width: 60vh !important;
     height: 60vh !important;
-    filter: drop-shadow(0 0 4vh rgba(200, 16, 46, 0.35)) !important;
+    filter: drop-shadow(0 0 4vh #c8102e) !important;
     animation: ijellySplashPulse 2.4s var(--ed-ease) infinite !important;
 }
 
-/* Editorial — Kinetic Print Colophon & Crimson Compass */
+/* Fullscreen borderless Aurora Vortex canvas */
 .docspinner.mdlSpinnerActive {
     display: block !important;
-    width: 60vh !important;
-    height: 60vh !important;
-    left: 50% !important;
-    top: 50% !important;
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
     margin: 0 !important;
-    transform: translate(-50%, -50%) !important;
+    transform: none !important;
     animation: none !important;
     contain: none !important;
-    overflow: visible !important;
+    overflow: hidden !important;
     pointer-events: none !important;
     z-index: 9999999 !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
     border-radius: 0 !important;
-    background: var(--ed-bg-elev) !important;
-    border: 1px solid var(--ed-rule-strong) !important;
-    border-top: 1.2vh solid var(--ed-accent) !important;
-    box-shadow: var(--ed-shadow) !important;
+    background: radial-gradient(circle at 50% 50%, rgba(6, 6, 12, 0.52) 0%, rgba(3, 3, 7, 0.88) 100%) !important;
+    backdrop-filter: blur(26px) saturate(165%) !important;
+    -webkit-backdrop-filter: blur(26px) saturate(165%) !important;
+}
+
+/* Ambient deep aurora field radiating from center */
+.docspinner.mdlSpinnerActive::before {
+    content: "" !important;
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    width: 130vmax !important;
+    height: 130vmax !important;
+    margin-left: -65vmax !important;
+    margin-top: -65vmax !important;
+    border-radius: 50% !important;
+    pointer-events: none !important;
+    background: conic-gradient(from 0deg, #c8102e, #fb7185, transparent 45%, #e8e4dc 75%, #c8102e) !important;
+    -webkit-mask: radial-gradient(circle, #000 0%, rgba(0, 0, 0, 0.5) 42%, transparent 70%) !important;
+    mask: radial-gradient(circle, #000 0%, rgba(0, 0, 0, 0.5) 42%, transparent 70%) !important;
+    filter: blur(80px) !important;
+    opacity: 0.38 !important;
+    animation: ijellySpinCW 14s linear infinite !important;
 }
 
 .docspinner .mdl-spinner__circle-clipper,
@@ -2134,44 +2190,66 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 
 .docspinner.mdlSpinnerActive .mdl-spinner__layer {
     opacity: 1 !important;
-    width: auto !important;
-    height: auto !important;
+    position: absolute !important;
+    inset: auto !important;
+    left: 50% !important;
+    top: 50% !important;
     border: none !important;
     box-sizing: border-box !important;
+    border-radius: 50% !important;
+    pointer-events: none !important;
+}
+
+/* Wave 1, 2, 3: Staggered aurora vortex waves radiating from center to outside */
+.docspinner.mdlSpinnerActive .mdl-spinner__layer-1,
+.docspinner.mdlSpinnerActive .mdl-spinner__layer-2,
+.docspinner.mdlSpinnerActive .mdl-spinner__layer-3 {
+    width: 110vmax !important;
+    height: 110vmax !important;
+    margin-left: -55vmax !important;
+    margin-top: -55vmax !important;
+    -webkit-mask: radial-gradient(circle, transparent 18%, rgba(0, 0, 0, 0.45) 32%, #000 46%, rgba(0, 0, 0, 0.45) 58%, transparent 70%) !important;
+    mask: radial-gradient(circle, transparent 18%, rgba(0, 0, 0, 0.45) 32%, #000 46%, rgba(0, 0, 0, 0.45) 58%, transparent 70%) !important;
+    filter: blur(26px) !important;
 }
 
 .docspinner.mdlSpinnerActive .mdl-spinner__layer-1 {
-    inset: 16% !important;
-    border-radius: 50% !important;
-    background: conic-gradient(from 0deg, transparent 0deg, var(--ed-accent) 270deg, var(--ed-text) 360deg) !important;
-    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 1.2vh), #000 calc(100% - 1vh)) !important;
-    mask: radial-gradient(farthest-side, transparent calc(100% - 1.2vh), #000 calc(100% - 1vh)) !important;
-    animation: ijellySpinCW 1.2s cubic-bezier(0.5, 0.15, 0.35, 0.85) infinite !important;
+    background: conic-gradient(from 0deg, #c8102e, #fb7185, transparent 42%, #c8102e 68%, #e8e4dc 88%, #c8102e) !important;
+    animation: ijellyAuroraRadiateCW 3.6s cubic-bezier(0.16, 0.68, 0.38, 0.98) infinite !important;
 }
 
 .docspinner.mdlSpinnerActive .mdl-spinner__layer-2 {
-    inset: 26% !important;
-    border-radius: 50% !important;
-    border: 0.35vh solid var(--ed-rule-strong) !important;
-    border-left-color: var(--ed-text) !important;
-    animation: ijellySpinCCW 2s linear infinite !important;
+    background: conic-gradient(from 120deg, transparent 10%, #fb7185 42%, #ffffff 54%, #c8102e 78%, transparent 95%) !important;
+    mix-blend-mode: screen !important;
+    animation: ijellyAuroraRadiateCCW 3.6s cubic-bezier(0.16, 0.68, 0.38, 0.98) -1.2s infinite !important;
 }
 
 .docspinner.mdlSpinnerActive .mdl-spinner__layer-3 {
-    inset: 18% !important;
-    border-radius: 0 !important;
-    background:
-        linear-gradient(to right, transparent calc(50% - 1px), var(--ed-rule) calc(50% - 1px), var(--ed-rule) calc(50% + 1px), transparent calc(50% + 1px)),
-        linear-gradient(to bottom, transparent calc(50% - 1px), var(--ed-rule) calc(50% - 1px), var(--ed-rule) calc(50% + 1px), transparent calc(50% + 1px)) !important;
-    animation: none !important;
+    background: conic-gradient(from 240deg, #e8e4dc, #c8102e 36%, transparent 56%, #fb7185 82%, #ffffff 94%, #e8e4dc) !important;
+    animation: ijellyAuroraRadiateCW 3.6s cubic-bezier(0.16, 0.68, 0.38, 0.98) -2.4s infinite !important;
 }
 
+/* Layer 4: Radiant center source core + crisp inner flare arc */
 .docspinner.mdlSpinnerActive .mdl-spinner__layer-4 {
-    inset: 42% !important;
+    width: 16vmin !important;
+    height: 16vmin !important;
+    margin-left: -8vmin !important;
+    margin-top: -8vmin !important;
+    background: radial-gradient(circle, #ffffff 0%, #fb7185 34%, #c8102e 62%, transparent 76%) !important;
+    box-shadow: 0 0 5vh #c8102e, 0 0 12vh #c8102e !important;
+    animation: ijellyPulseCore 1.8s ease-in-out infinite !important;
+}
+
+.docspinner.mdlSpinnerActive .mdl-spinner__layer-4::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: -45% !important;
     border-radius: 50% !important;
-    background: var(--ed-accent) !important;
-    box-shadow: 0 0 3.5vh var(--ed-accent) !important;
-    animation: ijellyPulseCore 1.5s ease-in-out infinite !important;
+    background: conic-gradient(from 0deg, transparent 0deg, transparent 190deg, #c8102e 305deg, #ffffff 356deg, transparent 360deg) !important;
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 1.5px)) !important;
+    mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 1.5px)) !important;
+    filter: drop-shadow(0 0 10px #c8102e) !important;
+    animation: ijellySpinCW 1.25s linear infinite !important;
 }
 
 /* Inline section spinners */
