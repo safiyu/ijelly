@@ -2733,3 +2733,141 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 .visualLoginForm .cardText {
     display: block !important;
 }
+
+/* ============================================================================
+ * 4. SIGNATURE THEME LOADER (.docspinner, .mdl-spinner, .splashLogo)
+ * ============================================================================ */
+
+@keyframes ijellySpinCW {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes ijellySpinCCW {
+    to { transform: rotate(-360deg); }
+}
+
+@keyframes ijellyPulseCore {
+    0%, 100% { transform: scale(0.82); opacity: 0.75; }
+    50% { transform: scale(1.12); opacity: 1; }
+}
+
+@keyframes ijellySplashPulse {
+    0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(0.98); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.02); }
+}
+
+/* Boot splash logo ambient halo */
+.splashLogo {
+    filter: drop-shadow(0 0 28px rgba(0, 122, 255, 0.35)) !important;
+    animation: ijellySplashPulse 2.4s var(--apple-spring-fast) infinite !important;
+}
+
+/* Apple TV — Liquid Glass Orbital Pod */
+.docspinner.mdlSpinnerActive {
+    display: block !important;
+    width: 88px !important;
+    height: 88px !important;
+    left: 50% !important;
+    top: 50% !important;
+    margin: 0 !important;
+    transform: translate(-50%, -50%) !important;
+    animation: none !important;
+    contain: none !important;
+    overflow: visible !important;
+    pointer-events: none !important;
+    z-index: 9999999 !important;
+    border-radius: 26px !important;
+    background: rgba(16, 16, 22, 0.72) !important;
+    backdrop-filter: blur(32px) saturate(190%) !important;
+    -webkit-backdrop-filter: blur(32px) saturate(190%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow:
+        0 24px 64px rgba(0, 0, 0, 0.75),
+        0 0 42px rgba(0, 122, 255, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+}
+
+.docspinner .mdl-spinner__circle-clipper,
+.docspinner .mdl-spinner__gap-patch {
+    display: none !important;
+}
+
+.docspinner.mdlSpinnerActive .mdl-spinner__layer {
+    opacity: 1 !important;
+    width: auto !important;
+    height: auto !important;
+    border: none !important;
+    box-sizing: border-box !important;
+    border-radius: 50% !important;
+}
+
+.docspinner.mdlSpinnerActive .mdl-spinner__layer-1 {
+    inset: 14px !important;
+    background: conic-gradient(from 0deg, transparent 0deg, var(--apple-accent) 280deg, #ffffff 360deg) !important;
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.5px)) !important;
+    mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.5px)) !important;
+    filter: drop-shadow(0 0 8px var(--apple-accent)) !important;
+    animation: ijellySpinCW 1.15s linear infinite !important;
+}
+
+.docspinner.mdlSpinnerActive .mdl-spinner__layer-2 {
+    inset: 24px !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.16) !important;
+    border-top-color: rgba(255, 255, 255, 0.85) !important;
+    animation: ijellySpinCCW 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
+}
+
+.docspinner.mdlSpinnerActive .mdl-spinner__layer-3 {
+    inset: 14px !important;
+    animation: ijellySpinCW 1.15s linear infinite !important;
+}
+
+.docspinner.mdlSpinnerActive .mdl-spinner__layer-3::after {
+    content: "" !important;
+    position: absolute !important;
+    top: -1.5px !important;
+    left: 50% !important;
+    width: 6px !important;
+    height: 6px !important;
+    margin-left: -3px !important;
+    border-radius: 50% !important;
+    background: #ffffff !important;
+    box-shadow: 0 0 10px #ffffff, 0 0 18px var(--apple-accent) !important;
+}
+
+.docspinner.mdlSpinnerActive .mdl-spinner__layer-4 {
+    inset: 36px !important;
+    background: radial-gradient(circle, #ffffff 0%, var(--apple-accent) 70%) !important;
+    box-shadow: 0 0 18px var(--apple-accent) !important;
+    animation: ijellyPulseCore 1.6s ease-in-out infinite !important;
+}
+
+/* Inline section spinners */
+.mdl-spinner.mdlSpinnerActive:not(.docspinner) {
+    position: relative !important;
+    animation: none !important;
+}
+
+.mdl-spinner.mdlSpinnerActive:not(.docspinner) .mdl-spinner__layer {
+    display: none !important;
+}
+
+.mdl-spinner.mdlSpinnerActive:not(.docspinner)::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    border-radius: 50% !important;
+    background: conic-gradient(from 0deg, transparent 0deg, var(--apple-accent) 290deg, #ffffff 360deg) !important;
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2px)) !important;
+    mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2px)) !important;
+    animation: ijellySpinCW 0.9s linear infinite !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .docspinner.mdlSpinnerActive .mdl-spinner__layer,
+    .docspinner.mdlSpinnerActive .mdl-spinner__layer-3::after,
+    .mdl-spinner.mdlSpinnerActive:not(.docspinner)::before,
+    .splashLogo {
+        animation-duration: 3s !important;
+    }
+}

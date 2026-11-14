@@ -2153,3 +2153,155 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 .visualLoginForm .cardText {
     display: block !important;
 }
+
+/* ============================================================================
+ * 4. SIGNATURE THEME LOADER (.docspinner, .mdl-spinner, .splashLogo)
+ * ============================================================================ */
+
+@keyframes ijellySpinCW {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes ijellySpinCCW {
+    to { transform: rotate(-360deg); }
+}
+
+@keyframes ijellyDiamondPulse {
+    0%, 100% { transform: rotate(45deg) scale(0.85); opacity: 0.78; }
+    50% { transform: rotate(45deg) scale(1.15); opacity: 1; }
+}
+
+@keyframes ijellySplashPulse {
+    0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(0.98); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.02); }
+}
+
+.splashLogo {
+    filter: drop-shadow(0 0 28px rgba(224, 144, 48, 0.35)) !important;
+    animation: ijellySplashPulse 2.4s var(--kxta-ease) infinite !important;
+}
+
+/* Blueprint — HUD Radar Reticle & Telemetry Sweep */
+.docspinner.mdlSpinnerActive {
+    display: block !important;
+    width: 92px !important;
+    height: 92px !important;
+    left: 50% !important;
+    top: 50% !important;
+    margin: 0 !important;
+    transform: translate(-50%, -50%) !important;
+    animation: none !important;
+    contain: none !important;
+    overflow: visible !important;
+    pointer-events: none !important;
+    z-index: 9999999 !important;
+    border-radius: 0 !important;
+    background: rgba(6, 10, 18, 0.92) !important;
+    border: 1px solid var(--kxta-accent) !important;
+    box-shadow: 0 20px 54px rgba(0, 0, 0, 0.8), 0 0 28px rgba(224, 144, 48, 0.18) !important;
+}
+
+.docspinner.mdlSpinnerActive::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: -6px !important;
+    pointer-events: none !important;
+    background:
+        linear-gradient(to right, var(--kxta-accent) 10px, transparent 10px) 0 0 / 100% 2px no-repeat,
+        linear-gradient(to bottom, var(--kxta-accent) 10px, transparent 10px) 0 0 / 2px 100% no-repeat,
+        linear-gradient(to left, var(--kxta-accent) 10px, transparent 10px) 100% 0 / 100% 2px no-repeat,
+        linear-gradient(to bottom, var(--kxta-accent) 10px, transparent 10px) 100% 0 / 2px 100% no-repeat,
+        linear-gradient(to right, var(--kxta-accent) 10px, transparent 10px) 0 100% / 100% 2px no-repeat,
+        linear-gradient(to top, var(--kxta-accent) 10px, transparent 10px) 0 100% / 2px 100% no-repeat,
+        linear-gradient(to left, var(--kxta-accent) 10px, transparent 10px) 100% 100% / 100% 2px no-repeat,
+        linear-gradient(to top, var(--kxta-accent) 10px, transparent 10px) 100% 100% / 2px 100% no-repeat !important;
+}
+
+.docspinner.mdlSpinnerActive::after {
+    content: "SYNC //" !important;
+    position: absolute !important;
+    left: 50% !important;
+    bottom: -22px !important;
+    transform: translateX(-50%) !important;
+    font-family: var(--kxta-font-mono) !important;
+    font-size: 9px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.16em !important;
+    color: var(--kxta-accent) !important;
+    white-space: nowrap !important;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9) !important;
+}
+
+.docspinner .mdl-spinner__circle-clipper,
+.docspinner .mdl-spinner__gap-patch {
+    display: none !important;
+}
+
+.docspinner.mdlSpinnerActive .mdl-spinner__layer {
+    opacity: 1 !important;
+    width: auto !important;
+    height: auto !important;
+    border: none !important;
+    box-sizing: border-box !important;
+}
+
+.docspinner.mdlSpinnerActive .mdl-spinner__layer-1 {
+    inset: 14px !important;
+    border-radius: 50% !important;
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(224, 144, 48, 0.04) 220deg, rgba(224, 144, 48, 0.45) 350deg, var(--kxta-accent) 360deg) !important;
+    border: 1px solid var(--kxta-border) !important;
+    animation: ijellySpinCW 1.5s linear infinite !important;
+}
+
+.docspinner.mdlSpinnerActive .mdl-spinner__layer-2 {
+    inset: 23px !important;
+    border-radius: 50% !important;
+    border: 1px dashed var(--kxta-accent) !important;
+    animation: ijellySpinCCW 3s linear infinite !important;
+}
+
+.docspinner.mdlSpinnerActive .mdl-spinner__layer-3 {
+    inset: 10px !important;
+    border-radius: 0 !important;
+    background:
+        linear-gradient(to right, transparent calc(50% - 0.5px), var(--kxta-border) calc(50% - 0.5px), var(--kxta-border) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+        linear-gradient(to bottom, transparent calc(50% - 0.5px), var(--kxta-border) calc(50% - 0.5px), var(--kxta-border) calc(50% + 0.5px), transparent calc(50% + 0.5px)) !important;
+    animation: none !important;
+}
+
+.docspinner.mdlSpinnerActive .mdl-spinner__layer-4 {
+    inset: 39px !important;
+    border-radius: 0 !important;
+    background: var(--kxta-accent) !important;
+    box-shadow: 0 0 14px var(--kxta-accent) !important;
+    animation: ijellyDiamondPulse 1.4s ease-in-out infinite !important;
+}
+
+/* Inline section spinners */
+.mdl-spinner.mdlSpinnerActive:not(.docspinner) {
+    position: relative !important;
+    animation: none !important;
+}
+
+.mdl-spinner.mdlSpinnerActive:not(.docspinner) .mdl-spinner__layer {
+    display: none !important;
+}
+
+.mdl-spinner.mdlSpinnerActive:not(.docspinner)::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    border-radius: 50% !important;
+    background: conic-gradient(from 0deg, transparent 0deg, var(--kxta-accent) 310deg, #ffffff 360deg) !important;
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2px)) !important;
+    mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2px)) !important;
+    animation: ijellySpinCW 0.9s linear infinite !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .docspinner.mdlSpinnerActive .mdl-spinner__layer,
+    .mdl-spinner.mdlSpinnerActive:not(.docspinner)::before,
+    .splashLogo {
+        animation-duration: 3s !important;
+    }
+}

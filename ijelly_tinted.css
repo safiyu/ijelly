@@ -2097,3 +2097,125 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 .visualLoginForm .cardText {
     display: block !important;
 }
+
+/* ============================================================================
+ * 4. SIGNATURE THEME LOADER (.docspinner, .mdl-spinner, .splashLogo)
+ * ============================================================================ */
+
+@keyframes ijellySpinCW {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes ijellySpinCCW {
+    to { transform: rotate(-360deg); }
+}
+
+@keyframes ijellyPulseCore {
+    0%, 100% { transform: scale(0.84); opacity: 0.78; }
+    50% { transform: scale(1.12); opacity: 1; }
+}
+
+@keyframes ijellySplashPulse {
+    0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(0.98); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.02); }
+}
+
+.splashLogo {
+    filter: drop-shadow(0 0 32px rgba(255, 255, 255, 0.3)) !important;
+    animation: ijellySplashPulse 2.4s var(--pt-ease) infinite !important;
+}
+
+/* Poster-Tinted — Prismatic Aurora Halo & Specular Ring */
+.docspinner.mdlSpinnerActive {
+    display: block !important;
+    width: 88px !important;
+    height: 88px !important;
+    left: 50% !important;
+    top: 50% !important;
+    margin: 0 !important;
+    transform: translate(-50%, -50%) !important;
+    animation: none !important;
+    contain: none !important;
+    overflow: visible !important;
+    pointer-events: none !important;
+    z-index: 9999999 !important;
+    border-radius: 50% !important;
+    background: rgba(8, 8, 12, 0.76) !important;
+    backdrop-filter: blur(32px) saturate(200%) !important;
+    -webkit-backdrop-filter: blur(32px) saturate(200%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.22) !important;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.85), 0 0 48px rgba(255, 255, 255, 0.16) !important;
+}
+
+.docspinner .mdl-spinner__circle-clipper,
+.docspinner .mdl-spinner__gap-patch {
+    display: none !important;
+}
+
+.docspinner.mdlSpinnerActive .mdl-spinner__layer {
+    opacity: 1 !important;
+    width: auto !important;
+    height: auto !important;
+    border: none !important;
+    box-sizing: border-box !important;
+    border-radius: 50% !important;
+}
+
+.docspinner.mdlSpinnerActive .mdl-spinner__layer-1 {
+    inset: 10px !important;
+    background: conic-gradient(from 0deg, #38bdf8, #a855f7, #f43f5e, #f59e0b, #10b981, #38bdf8) !important;
+    filter: blur(9px) !important;
+    opacity: 0.55 !important;
+    animation: ijellySpinCW 2s linear infinite !important;
+}
+
+.docspinner.mdlSpinnerActive .mdl-spinner__layer-2 {
+    inset: 14px !important;
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(255, 255, 255, 0.35) 180deg, var(--pt-accent) 360deg) !important;
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.5px)) !important;
+    mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.5px)) !important;
+    animation: ijellySpinCW 1.1s linear infinite !important;
+}
+
+.docspinner.mdlSpinnerActive .mdl-spinner__layer-3 {
+    inset: 25px !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.18) !important;
+    border-top-color: #ffffff !important;
+    animation: ijellySpinCCW 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite !important;
+}
+
+.docspinner.mdlSpinnerActive .mdl-spinner__layer-4 {
+    inset: 37px !important;
+    background: #ffffff !important;
+    box-shadow: 0 0 20px #ffffff !important;
+    animation: ijellyPulseCore 1.5s ease-in-out infinite !important;
+}
+
+/* Inline section spinners */
+.mdl-spinner.mdlSpinnerActive:not(.docspinner) {
+    position: relative !important;
+    animation: none !important;
+}
+
+.mdl-spinner.mdlSpinnerActive:not(.docspinner) .mdl-spinner__layer {
+    display: none !important;
+}
+
+.mdl-spinner.mdlSpinnerActive:not(.docspinner)::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    border-radius: 50% !important;
+    background: conic-gradient(from 0deg, transparent 0deg, rgba(255, 255, 255, 0.35) 180deg, var(--pt-accent) 360deg) !important;
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2px)) !important;
+    mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2px)) !important;
+    animation: ijellySpinCW 0.9s linear infinite !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .docspinner.mdlSpinnerActive .mdl-spinner__layer,
+    .mdl-spinner.mdlSpinnerActive:not(.docspinner)::before,
+    .splashLogo {
+        animation-duration: 3s !important;
+    }
+}

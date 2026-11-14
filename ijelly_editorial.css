@@ -2076,3 +2076,127 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 .visualLoginForm .cardText {
     display: block !important;
 }
+
+/* ============================================================================
+ * 4. SIGNATURE THEME LOADER (.docspinner, .mdl-spinner, .splashLogo)
+ * ============================================================================ */
+
+@keyframes ijellySpinCW {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes ijellySpinCCW {
+    to { transform: rotate(-360deg); }
+}
+
+@keyframes ijellyPulseCore {
+    0%, 100% { transform: scale(0.84); opacity: 0.78; }
+    50% { transform: scale(1.12); opacity: 1; }
+}
+
+@keyframes ijellySplashPulse {
+    0%, 100% { opacity: 0.8; transform: translate(-50%, -50%) scale(0.98); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.02); }
+}
+
+.splashLogo {
+    filter: drop-shadow(0 0 28px rgba(200, 16, 46, 0.35)) !important;
+    animation: ijellySplashPulse 2.4s var(--ed-ease) infinite !important;
+}
+
+/* Editorial — Kinetic Print Colophon & Crimson Compass */
+.docspinner.mdlSpinnerActive {
+    display: block !important;
+    width: 88px !important;
+    height: 88px !important;
+    left: 50% !important;
+    top: 50% !important;
+    margin: 0 !important;
+    transform: translate(-50%, -50%) !important;
+    animation: none !important;
+    contain: none !important;
+    overflow: visible !important;
+    pointer-events: none !important;
+    z-index: 9999999 !important;
+    border-radius: 0 !important;
+    background: var(--ed-bg-elev) !important;
+    border: 1px solid var(--ed-rule-strong) !important;
+    border-top: 3px solid var(--ed-accent) !important;
+    box-shadow: var(--ed-shadow) !important;
+}
+
+.docspinner .mdl-spinner__circle-clipper,
+.docspinner .mdl-spinner__gap-patch {
+    display: none !important;
+}
+
+.docspinner.mdlSpinnerActive .mdl-spinner__layer {
+    opacity: 1 !important;
+    width: auto !important;
+    height: auto !important;
+    border: none !important;
+    box-sizing: border-box !important;
+}
+
+.docspinner.mdlSpinnerActive .mdl-spinner__layer-1 {
+    inset: 14px !important;
+    border-radius: 50% !important;
+    background: conic-gradient(from 0deg, transparent 0deg, var(--ed-accent) 270deg, var(--ed-text) 360deg) !important;
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2px)) !important;
+    mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2px)) !important;
+    animation: ijellySpinCW 1.2s cubic-bezier(0.5, 0.15, 0.35, 0.85) infinite !important;
+}
+
+.docspinner.mdlSpinnerActive .mdl-spinner__layer-2 {
+    inset: 23px !important;
+    border-radius: 50% !important;
+    border: 1px solid var(--ed-rule-strong) !important;
+    border-left-color: var(--ed-text) !important;
+    animation: ijellySpinCCW 2s linear infinite !important;
+}
+
+.docspinner.mdlSpinnerActive .mdl-spinner__layer-3 {
+    inset: 16px !important;
+    border-radius: 0 !important;
+    background:
+        linear-gradient(to right, transparent calc(50% - 0.5px), var(--ed-rule) calc(50% - 0.5px), var(--ed-rule) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+        linear-gradient(to bottom, transparent calc(50% - 0.5px), var(--ed-rule) calc(50% - 0.5px), var(--ed-rule) calc(50% + 0.5px), transparent calc(50% + 0.5px)) !important;
+    animation: none !important;
+}
+
+.docspinner.mdlSpinnerActive .mdl-spinner__layer-4 {
+    inset: 37px !important;
+    border-radius: 50% !important;
+    background: var(--ed-accent) !important;
+    box-shadow: 0 0 14px var(--ed-accent) !important;
+    animation: ijellyPulseCore 1.5s ease-in-out infinite !important;
+}
+
+/* Inline section spinners */
+.mdl-spinner.mdlSpinnerActive:not(.docspinner) {
+    position: relative !important;
+    animation: none !important;
+}
+
+.mdl-spinner.mdlSpinnerActive:not(.docspinner) .mdl-spinner__layer {
+    display: none !important;
+}
+
+.mdl-spinner.mdlSpinnerActive:not(.docspinner)::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    border-radius: 50% !important;
+    background: conic-gradient(from 0deg, transparent 0deg, var(--ed-accent) 290deg, var(--ed-text) 360deg) !important;
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2px)) !important;
+    mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2px)) !important;
+    animation: ijellySpinCW 0.9s linear infinite !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .docspinner.mdlSpinnerActive .mdl-spinner__layer,
+    .mdl-spinner.mdlSpinnerActive:not(.docspinner)::before,
+    .splashLogo {
+        animation-duration: 3s !important;
+    }
+}
