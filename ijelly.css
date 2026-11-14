@@ -2409,8 +2409,16 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 }
 
 /* Up Next card — rounded frosted glass corner overlay */
-.upNextContainer,
-.upNextContainer.upNextDialog {
+.upNextContainer.hide,
+.upNextDialog.hide {
+    display: none !important;
+}
+
+.upNextContainer:not(.hide),
+.upNextContainer.upNextDialog:not(.hide) {
+    position: fixed !important;
+    bottom: 0 !important;
+    right: 0 !important;
     display: flex !important;
     flex-direction: column !important;
     background: rgba(16, 16, 20, 0.78) !important;
@@ -2892,7 +2900,7 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     min-width: 0 !important;
 }
 
-.actionSheetItemText {
+.actionSheetItemText:not(.hide) {
     display: block !important;
     min-width: 0 !important;
     max-width: 100% !important;
@@ -2938,8 +2946,8 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     overflow: hidden !important;
 }
 
-.osdHeader .headerTop,
-.videoOsdHeader .headerTop {
+.osdHeader .headerTop:not(.hide),
+.videoOsdHeader .headerTop:not(.hide) {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
@@ -2961,10 +2969,10 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     min-width: 0 !important;
 }
 
-.pageTitle:not(.pageTitleWithLogo):not(:has(img, svg, .logo, .headerLogo)),
-.osdHeader .pageTitle,
-.videoOsdHeader .pageTitle,
-.videoOsd-appBar .MuiTypography-root {
+.pageTitle:not(.hide):not(.pageTitleWithLogo):not(:has(img, svg, .logo, .headerLogo)),
+.osdHeader .pageTitle:not(.hide),
+.videoOsdHeader .pageTitle:not(.hide),
+.videoOsd-appBar .MuiTypography-root:not(.hide) {
     display: block !important;
     min-width: 0 !important;
     max-width: 100% !important;
@@ -2985,6 +2993,11 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     overflow: hidden !important;
     text-overflow: ellipsis !important;
     white-space: nowrap !important;
+}
+
+/* Ensure Jellyfin's utility .hide class always wins over theme display rules */
+.hide {
+    display: none !important;
 }
 
 /* ============================================================================
