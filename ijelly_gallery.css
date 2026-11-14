@@ -2425,6 +2425,15 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     overflow: hidden !important;
 }
 
+/* The OSD header is a flex column centred by the theme; stretch the MUI toolbar so title and buttons sit at the edges (left back/title, right cast/sync) */
+.osdHeader > .videoOsd-appBar,
+.videoOsdHeader > .videoOsd-appBar {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    flex: 0 0 auto !important;
+}
+
 .osdHeader .headerTop:not(.hide),
 .videoOsdHeader .headerTop:not(.hide) {
     width: 100% !important;
