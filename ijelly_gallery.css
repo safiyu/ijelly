@@ -1176,6 +1176,7 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
 }
 
 .videoSubtitlesInner,
+.videoSecondarySubtitlesInner,
 .subtitle-container {
     position: absolute !important;
     bottom: max(6rem, var(--subtitle-bottom, 6rem)) !important;
@@ -1192,37 +1193,101 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     transform: none !important;
 }
 
-/* Lift text subtitles when OSD visible (libass/JASSUB stay untransformed) */
+.libassjs-canvas,
+.JASSUB canvas,
+.videoPlayerContainer > canvas {
+    transition: transform 0.25s var(--gl-ease) !important;
+}
+
+.htmlvideoplayer::-webkit-media-text-track-container {
+    transition: transform 0.25s var(--gl-ease) !important;
+}
+
+/* Lift subtitles when OSD visible (libass/JASSUB outer wrapper stays untransformed) */
 .videoOsd-visible .videoSubtitlesInner,
+.videoOsd-visible .videoSecondarySubtitlesInner,
 .videoOsd-visible .subtitle-container,
 .videoOsd-visible .shaka-text-container,
 .showing-osd .videoSubtitlesInner,
+.showing-osd .videoSecondarySubtitlesInner,
 .showing-osd .subtitle-container,
 .showing-osd .shaka-text-container {
     transform: translateY(-11rem) !important;
 }
 
+.videoOsd-visible .libassjs-canvas,
+.videoOsd-visible .JASSUB canvas,
+.videoOsd-visible .videoPlayerContainer > canvas,
+.showing-osd .libassjs-canvas,
+.showing-osd .JASSUB canvas,
+.showing-osd .videoPlayerContainer > canvas {
+    transform: translateY(-12rem) !important;
+}
+
+.videoOsd-visible .htmlvideoplayer::-webkit-media-text-track-container,
+.showing-osd .htmlvideoplayer::-webkit-media-text-track-container {
+    transform: translateY(-12rem) !important;
+}
+
 @supports selector(:has(*)) {
     body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
+    body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSecondarySubtitlesInner,
     body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
     body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
         transform: translateY(-11rem) !important;
     }
+
+    body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas,
+    body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .JASSUB canvas,
+    body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .videoPlayerContainer > canvas {
+        transform: translateY(-12rem) !important;
+    }
+
+    body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .htmlvideoplayer::-webkit-media-text-track-container {
+        transform: translateY(-12rem) !important;
+    }
 }
 
 .layout-tv.videoOsd-visible .videoSubtitlesInner,
+.layout-tv.videoOsd-visible .videoSecondarySubtitlesInner,
 .layout-tv.videoOsd-visible .subtitle-container,
 .layout-tv.videoOsd-visible .shaka-text-container,
 .layout-tv.showing-osd .videoSubtitlesInner,
+.layout-tv.showing-osd .videoSecondarySubtitlesInner,
 .layout-tv.showing-osd .subtitle-container,
 .layout-tv.showing-osd .shaka-text-container {
     transform: translateY(-14.5rem) !important;
 }
 
+.layout-tv.videoOsd-visible .libassjs-canvas,
+.layout-tv.videoOsd-visible .JASSUB canvas,
+.layout-tv.videoOsd-visible .videoPlayerContainer > canvas,
+.layout-tv.showing-osd .libassjs-canvas,
+.layout-tv.showing-osd .JASSUB canvas,
+.layout-tv.showing-osd .videoPlayerContainer > canvas {
+    transform: translateY(-14.5rem) !important;
+}
+
+.layout-tv.videoOsd-visible .htmlvideoplayer::-webkit-media-text-track-container,
+.layout-tv.showing-osd .htmlvideoplayer::-webkit-media-text-track-container {
+    transform: translateY(-14.5rem) !important;
+}
+
 @supports selector(:has(*)) {
     .layout-tv:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
+    .layout-tv:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSecondarySubtitlesInner,
     .layout-tv:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
     .layout-tv:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
+        transform: translateY(-14.5rem) !important;
+    }
+
+    .layout-tv:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas,
+    .layout-tv:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .JASSUB canvas,
+    .layout-tv:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .videoPlayerContainer > canvas {
+        transform: translateY(-14.5rem) !important;
+    }
+
+    .layout-tv:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .htmlvideoplayer::-webkit-media-text-track-container {
         transform: translateY(-14.5rem) !important;
     }
 }
@@ -1715,18 +1780,50 @@ select option,
     }
 
     body.videoOsd-visible .videoSubtitlesInner,
+    body.videoOsd-visible .videoSecondarySubtitlesInner,
     body.videoOsd-visible .subtitle-container,
     body.osd-visible .videoSubtitlesInner,
+    body.osd-visible .videoSecondarySubtitlesInner,
     body.osd-visible .subtitle-container,
     body.showing-osd .videoSubtitlesInner,
+    body.showing-osd .videoSecondarySubtitlesInner,
     body.showing-osd .subtitle-container {
+        transform: translateY(-13rem) !important;
+    }
+
+    body.videoOsd-visible .libassjs-canvas,
+    body.videoOsd-visible .JASSUB canvas,
+    body.videoOsd-visible .videoPlayerContainer > canvas,
+    body.osd-visible .libassjs-canvas,
+    body.osd-visible .JASSUB canvas,
+    body.osd-visible .videoPlayerContainer > canvas,
+    body.showing-osd .libassjs-canvas,
+    body.showing-osd .JASSUB canvas,
+    body.showing-osd .videoPlayerContainer > canvas {
+        transform: translateY(-13rem) !important;
+    }
+
+    body.videoOsd-visible .htmlvideoplayer::-webkit-media-text-track-container,
+    body.osd-visible .htmlvideoplayer::-webkit-media-text-track-container,
+    body.showing-osd .htmlvideoplayer::-webkit-media-text-track-container {
         transform: translateY(-13rem) !important;
     }
 
     @supports selector(:has(*)) {
         body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
+        body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSecondarySubtitlesInner,
         body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
         body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
+            transform: translateY(-13rem) !important;
+        }
+
+        body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas,
+        body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .JASSUB canvas,
+        body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .videoPlayerContainer > canvas {
+            transform: translateY(-13rem) !important;
+        }
+
+        body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .htmlvideoplayer::-webkit-media-text-track-container {
             transform: translateY(-13rem) !important;
         }
     }
