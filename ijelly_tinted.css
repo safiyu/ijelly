@@ -47,6 +47,10 @@
     --mui-shape-borderRadius: var(--pt-r);
 }
 
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-400-normal.woff2') format('woff2'), url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-400-normal.woff') format('woff'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 500; font-display: swap; src: url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-500-normal.woff2') format('woff2'), url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-500-normal.woff') format('woff'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap; src: url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-600-normal.woff2') format('woff2'), url('https://cdn.jsdelivr.net/npm/@fontsource/inter@5/files/inter-latin-600-normal.woff') format('woff'); }
+
 html,
 body {
     background-color: var(--pt-bg);
@@ -61,7 +65,7 @@ body {
 }
 
 .backgroundContainer.withBackdrop,
-body:has(#itemDetailPage) .backgroundContainer {
+body:has(#itemDetailPage:not(.hide)) .backgroundContainer {
     background-color: transparent !important;
 }
 
@@ -231,7 +235,14 @@ h3,
     transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-.cardBox,
+.cardBox {
+    background: transparent !important;
+    border: none !important;
+    border-radius: var(--pt-r) !important;
+    overflow: visible !important;
+    box-shadow: none !important;
+}
+
 .cardScalable {
     background: transparent !important;
     border: none !important;
@@ -239,6 +250,26 @@ h3,
     overflow: visible !important;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
     transition: box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.cardOverlayButton {
+    background: rgba(10, 10, 10, 0.65) !important;
+    color: var(--pt-text) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+}
+
+.cardOverlayButton:hover,
+.cardOverlayButton:focus {
+    color: var(--pt-accent) !important;
+}
+
+.cardOverlayButton-br {
+    background: rgba(10, 10, 10, 0.65) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border-radius: var(--pt-r-pill) !important;
+    padding: 0.15em !important;
 }
 
 .cardImageContainer,
@@ -259,6 +290,11 @@ h3,
 
 .card:focus .cardBox,
 .card:hover .cardBox {
+    box-shadow: none !important;
+}
+
+.card:focus .cardScalable,
+.card:hover .cardScalable {
     box-shadow:
         0 25px 60px rgba(0, 0, 0, 0.65),
         0 0 0 2px var(--pt-accent) !important;
@@ -315,11 +351,20 @@ h3,
     padding: 0.75em 1.6em !important;
     background: transparent !important;
     color: var(--pt-text) !important;
-    border: none !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     box-shadow: none !important;
     transition: all 0.2s var(--pt-ease) !important;
+}
+
+.emby-button.raised:not(.detailButton),
+.button-submit:not(.detailButton),
+.MuiButton-contained,
+.MuiButton-outlined {
+    background: var(--pt-glass) !important;
+    border: 1px solid var(--pt-border) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
 }
 
 .emby-button.raised:focus,
@@ -331,6 +376,7 @@ h3,
 .button-submit:focus,
 .button-submit:hover {
     background: var(--pt-accent) !important;
+    border-color: var(--pt-accent) !important;
     color: #000 !important;
     transform: scale(1.04) !important;
     box-shadow: 0 0 30px var(--pt-accent-glow) !important;
@@ -489,7 +535,8 @@ h3,
     background: rgba(18, 21, 28, 0.88) !important;
 }
 
-.layout-desktop [dir=rtl] .detailRibbon {
+.layout-desktop [dir=rtl] .detailRibbon,
+.layout-tv [dir=rtl] .detailRibbon {
     padding-left: 0 !important;
     padding-right: 25vw !important;
     justify-content: flex-start !important;
@@ -504,22 +551,6 @@ h3,
     z-index: 2 !important;
 }
 
-.layout-desktop .detailRibbon .infoWrapper,
-.layout-tv .detailRibbon .infoWrapper {
-    position: absolute !important;
-    top: 100% !important;
-    left: 25vw !important;
-    right: 3.3% !important;
-    width: calc(100% - 25vw - 3.3%) !important;
-    padding-top: 0.8em !important;
-    z-index: 2 !important;
-}
-
-.layout-desktop [dir=rtl] .detailRibbon .infoWrapper {
-    left: 3.3% !important;
-    right: 25vw !important;
-}
-
 .layout-desktop .detailPagePrimaryContent,
 .layout-desktop [dir=ltr] .detailPagePrimaryContent,
 .layout-tv .detailPagePrimaryContent,
@@ -528,7 +559,8 @@ h3,
     padding-top: 6.5em !important;
 }
 
-.layout-desktop [dir=rtl] .detailPagePrimaryContent {
+.layout-desktop [dir=rtl] .detailPagePrimaryContent,
+.layout-tv [dir=rtl] .detailPagePrimaryContent {
     padding-left: 0 !important;
     padding-right: 25vw !important;
 }
@@ -543,7 +575,6 @@ h3,
 }
 
 .detailPageSecondaryContainer,
-#itemDetailPage .detailSection,
 #itemDetailPage .verticalSection {
     background: var(--pt-bg) !important;
     background-color: var(--pt-bg) !important;
@@ -687,57 +718,76 @@ body.transparentDocument::after,
     visibility: hidden !important;
 }
 
-@supports selector(:has(*)) {
-    /* Web playback canvas: pure black during video playback (prevents white canvas bleed on browsers).
-       Excluded when transparentDocument is present so Desktop JMP / native players are never blanked out */
-    html:not(.transparentDocument):not(:has(.transparentDocument)):has(#videoOsdPage),
-    html:not(.transparentDocument):not(:has(.transparentDocument)):has(.videoPlayerContainer),
-    html:not(.transparentDocument):not(:has(.transparentDocument)):has(.htmlvideoplayer),
-    body:not(.transparentDocument):has(#videoOsdPage),
-    body:not(.transparentDocument):has(.videoPlayerContainer),
-    body:not(.transparentDocument):has(.htmlvideoplayer) {
-        background-color: #000 !important;
+@supports not selector(:has(*)) {
+    html:not(.transparentDocument),
+    html:not(.transparentDocument) body,
+    body:not(.transparentDocument) {
+        background-color: #000000 !important;
     }
+}
 
-    /* Native player overlay support (Desktop JMP / WebOS / Tizen):
-       Keep root and shell explicitly transparent even when :has() selectors match */
-    html.transparentDocument,
-    html.transparentDocument body,
-    body.transparentDocument,
-    html:has(.transparentDocument),
-    html:has(.transparentDocument) body,
-    html.transparentDocument:has(#videoOsdPage),
-    html.transparentDocument body:has(#videoOsdPage),
-    body.transparentDocument:has(#videoOsdPage),
-    body.transparentDocument:has(.videoPlayerContainer),
-    body.transparentDocument:has(.htmlvideoplayer) {
+@supports selector(:has(*)) {
+    /* Native hardware-overlay players (Desktop JMP / WebOS / Tizen) without an HTML5 <video> layer */
+    html.transparentDocument:not(:has(.htmlvideoplayer)),
+    html.transparentDocument:not(:has(.htmlvideoplayer)) body,
+    body.transparentDocument:not(:has(.htmlvideoplayer)),
+    html:has(.transparentDocument):not(:has(.htmlvideoplayer)),
+    html:has(.transparentDocument):not(:has(.htmlvideoplayer)) body,
+    html.transparentDocument:has(#videoOsdPage:not(.hide)):not(:has(.htmlvideoplayer)),
+    html.transparentDocument body:has(#videoOsdPage:not(.hide)):not(:has(.htmlvideoplayer)),
+    body.transparentDocument:has(#videoOsdPage:not(.hide)):not(:has(.htmlvideoplayer)),
+    body.transparentDocument:has(.videoPlayerContainer):not(:has(.htmlvideoplayer)) {
         background: transparent !important;
         background-color: transparent !important;
+    }
+
+    /* Web playback canvas: pure black behind letterbox/pillarbox bars even if Jellyfin adds .transparentDocument */
+    html:not(.transparentDocument):not(:has(.transparentDocument)):has(#videoOsdPage:not(.hide)),
+    html:not(.transparentDocument):not(:has(.transparentDocument)):has(.videoPlayerContainer),
+    html:has(#videoOsdPage:not(.hide) .htmlvideoplayer),
+    html:has(.videoPlayerContainer .htmlvideoplayer),
+    html:has(.htmlvideoplayer),
+    html.transparentDocument:has(#videoOsdPage:not(.hide) .htmlvideoplayer),
+    html.transparentDocument:has(.videoPlayerContainer .htmlvideoplayer),
+    html.transparentDocument:has(.htmlvideoplayer),
+    body:not(.transparentDocument):has(#videoOsdPage:not(.hide)),
+    body:not(.transparentDocument):has(.videoPlayerContainer),
+    body:has(#videoOsdPage:not(.hide) .htmlvideoplayer),
+    body:has(.videoPlayerContainer .htmlvideoplayer),
+    body:has(.htmlvideoplayer),
+    body.transparentDocument:has(#videoOsdPage:not(.hide) .htmlvideoplayer),
+    body.transparentDocument:has(.videoPlayerContainer .htmlvideoplayer),
+    body.transparentDocument:has(.htmlvideoplayer),
+    html:has(.htmlvideoplayer) .videoPlayerContainer,
+    html.transparentDocument:has(.htmlvideoplayer) .videoPlayerContainer,
+    body:has(.htmlvideoplayer) .videoPlayerContainer,
+    .transparentDocument:has(.htmlvideoplayer) .videoPlayerContainer {
+        background: #000000 !important;
+        background-color: #000000 !important;
     }
 
     /* Page chrome: make the shell transparent so the video shows through,
        but keep it VISIBLE (the OSD header lives inside mainAnimatedPage).
        Never set opacity: 0 here — that hides the video and the OSD. */
-    body:has(#videoOsdPage) .backgroundContainer,
-    body:has(#videoOsdPage) .mainAnimatedPage,
-    body:has(#videoOsdPage) .pageContainer,
-    body:has(#videoOsdPage) .skinBody,
-    body:has(#videoOsdPage) .videoPlayerContainer,
+    body:has(#videoOsdPage:not(.hide)) .backgroundContainer,
+    body:has(#videoOsdPage:not(.hide)) .mainAnimatedPage,
+    body:has(#videoOsdPage:not(.hide)) .pageContainer,
+    body:has(#videoOsdPage:not(.hide)) .skinBody,
+    body:has(.videoPlayerContainer:not(:has(.htmlvideoplayer))) .videoPlayerContainer,
     body:has(.videoPlayerContainer) .backgroundContainer,
     body:has(.videoPlayerContainer) .skinBody,
     body:has(.htmlvideoplayer) .backgroundContainer,
     body:has(.htmlvideoplayer) .mainAnimatedPage,
     body:has(.htmlvideoplayer) .pageContainer,
-    body:has(.htmlvideoplayer) .skinBody,
-    body:has(.htmlvideoplayer) .videoPlayerContainer {
+    body:has(.htmlvideoplayer) .skinBody {
         background: transparent !important;
         background-color: transparent !important;
     }
 
     /* Backdrop overlay: fully hide it during playback (this is the only
        element that is safe to blank out). */
-    body:has(#videoOsdPage) .backdropContainer,
-    body:has(#videoOsdPage) .backdropImage,
+    body:has(#videoOsdPage:not(.hide)) .backdropContainer,
+    body:has(#videoOsdPage:not(.hide)) .backdropImage,
     body:has(.videoPlayerContainer) .backdropContainer,
     body:has(.videoPlayerContainer) .backdropImage,
     body:has(.htmlvideoplayer) .backdropContainer,
@@ -749,8 +799,8 @@ body.transparentDocument::after,
         -webkit-filter: none !important;
     }
 
-    body:has(#videoOsdPage)::before,
-    body:has(#videoOsdPage)::after,
+    body:has(#videoOsdPage:not(.hide))::before,
+    body:has(#videoOsdPage:not(.hide))::after,
     body:has(.videoPlayerContainer)::before,
     body:has(.videoPlayerContainer)::after,
     body:has(.htmlvideoplayer)::before,
@@ -769,32 +819,29 @@ body.transparentDocument::after,
     z-index: 0 !important;
 }
 
-/* 3. HTML5 video player element (web) vs native transparent player (desktop JMP) */
+/* 3. HTML5 video player element (web) */
 .htmlvideoplayer {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
-    background-color: #000 !important;
-}
-
-.transparentDocument .htmlvideoplayer,
-html.transparentDocument .htmlvideoplayer,
-body.transparentDocument .htmlvideoplayer {
-    background: transparent !important;
-    background-color: transparent !important;
+    background: #000000 !important;
+    background-color: #000000 !important;
 }
 
 /* Video OSD Header: slim, borderless, subtle vignette */
 .osdHeader,
 .videoOsdHeader,
-#videoOsdPage .skinHeader,
-body:has(#videoOsdPage) .skinHeader {
+.skinHeader.osdHeader,
+#videoOsdPage:not(.hide) .skinHeader,
+body:has(#videoOsdPage:not(.hide)) .skinHeader {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
     border-bottom: none !important;
     box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%) !important;
     padding: 0.35rem 1.25rem !important;
     min-height: unset !important;
@@ -805,7 +852,7 @@ body:has(#videoOsdPage) .skinHeader {
 
 .osdHeader.osdHeader-hidden,
 .videoOsdHeader.videoOsdHeader-hidden,
-#videoOsdPage .skinHeader.osdHeader-hidden {
+#videoOsdPage:not(.hide) .skinHeader.osdHeader-hidden {
     transform: translateY(-100%) !important;
     opacity: 0 !important;
     pointer-events: none !important;
@@ -813,8 +860,8 @@ body:has(#videoOsdPage) .skinHeader {
 
 .osdHeader .headerLeft,
 .videoOsdHeader .headerLeft,
-#videoOsdPage .headerLeft,
-body:has(#videoOsdPage) .headerLeft {
+#videoOsdPage:not(.hide) .headerLeft,
+body:has(#videoOsdPage:not(.hide)) .headerLeft {
     font-size: 0.95rem !important;
     font-family: var(--pt-font) !important;
     font-weight: 500 !important;
@@ -915,9 +962,47 @@ body:has(#videoOsdPage) .headerLeft {
     background-color: rgba(255, 255, 255, 0.2) !important;
 }
 
+.sliderMarker {
+    width: 2px !important;
+    height: 6px !important;
+    margin-left: -1px !important;
+    border-radius: 0 !important;
+}
+
+.sliderMarker.watched {
+    background-color: var(--pt-accent) !important;
+}
+
+.sliderMarker.unwatched {
+    background-color: rgba(255, 255, 255, 0.3) !important;
+}
+
 .mdl-slider::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    appearance: none !important;
     background: var(--pt-accent) !important;
+    border: none !important;
+    border-radius: 50% !important;
+    width: 12px !important;
+    height: 12px !important;
     box-shadow: 0 0 15px var(--pt-accent-glow) !important;
+}
+
+.mdl-slider:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 4px var(--pt-accent-soft), 0 0 15px var(--pt-accent-glow) !important;
+}
+
+.mdl-slider::-moz-range-thumb {
+    background: var(--pt-accent) !important;
+    border: none !important;
+    border-radius: 50% !important;
+    width: 12px !important;
+    height: 12px !important;
+    box-shadow: 0 0 15px var(--pt-accent-glow) !important;
+}
+
+.mdl-slider:focus::-moz-range-thumb {
+    box-shadow: 0 0 0 4px var(--pt-accent-soft), 0 0 15px var(--pt-accent-glow) !important;
 }
 
 .videoOsdBottom .osdTimeText,
@@ -963,13 +1048,16 @@ body:has(#videoOsdPage) .headerLeft {
     transform: scale(1.1) !important;
 }
 
-.videoOsdBottom .btnPlayPause {
+.videoOsdBottom .btnPlayPause,
+.videoOsdBottom .btnPause {
     transform: scale(1.15) !important;
     color: var(--pt-accent) !important;
 }
 
 .videoOsdBottom .btnPlayPause:hover,
-.videoOsdBottom .btnPlayPause:focus {
+.videoOsdBottom .btnPlayPause:focus,
+.videoOsdBottom .btnPause:hover,
+.videoOsdBottom .btnPause:focus {
     transform: scale(1.25) !important;
 }
 
@@ -998,7 +1086,7 @@ body:has(#videoOsdPage) .headerLeft {
     width: 100% !important;
     height: 100% !important;
     pointer-events: none !important;
-    z-index: 9999 !important;
+    z-index: 1 !important;
 }
 
 .videoSubtitlesInner,
@@ -1015,53 +1103,40 @@ body:has(#videoOsdPage) .headerLeft {
 
 .libassjs-canvas-parent,
 .JASSUB {
-    transform: translateY(-4rem) !important;
-    transition: transform 0.25s var(--pt-ease) !important;
+    transform: none !important;
 }
 
 /* Lift subtitles when OSD visible */
 .videoOsd-visible .videoSubtitlesInner,
 .videoOsd-visible .subtitle-container,
-.videoOsd-visible .libassjs-canvas-parent,
-.videoOsd-visible .JASSUB,
 .videoOsd-visible .shaka-text-container,
 .showing-osd .videoSubtitlesInner,
 .showing-osd .subtitle-container,
-.showing-osd .libassjs-canvas-parent,
-.showing-osd .JASSUB,
 .showing-osd .shaka-text-container {
     transform: translateY(-11rem) !important;
 }
 
 @supports selector(:has(*)) {
-    .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
-    .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
-    .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent,
-    .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .JASSUB,
-    .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
+    body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
+    body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
+    body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
         transform: translateY(-11rem) !important;
     }
 }
 
 .layout-tv.videoOsd-visible .videoSubtitlesInner,
 .layout-tv.videoOsd-visible .subtitle-container,
-.layout-tv.videoOsd-visible .libassjs-canvas-parent,
-.layout-tv.videoOsd-visible .JASSUB,
 .layout-tv.videoOsd-visible .shaka-text-container,
 .layout-tv.showing-osd .videoSubtitlesInner,
 .layout-tv.showing-osd .subtitle-container,
-.layout-tv.showing-osd .libassjs-canvas-parent,
-.layout-tv.showing-osd .JASSUB,
 .layout-tv.showing-osd .shaka-text-container {
     transform: translateY(-14.5rem) !important;
 }
 
 @supports selector(:has(*)) {
-    .layout-tv .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
-    .layout-tv .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
-    .layout-tv .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent,
-    .layout-tv .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .JASSUB,
-    .layout-tv .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
+    .layout-tv:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
+    .layout-tv:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
+    .layout-tv:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
         transform: translateY(-14.5rem) !important;
     }
 }
@@ -1416,12 +1491,126 @@ body:has(#videoOsdPage) .headerLeft {
     padding: 0.8em 3.3% 0.4em 0 !important;
 }
 
+.layout-desktop [dir=rtl] .detailRibbon.detailRibbon .infoWrapper,
+.layout-tv [dir=rtl] .detailRibbon.detailRibbon .infoWrapper {
+    padding: 0.8em 0 0.4em 3.3% !important;
+}
+
 .layout-desktop .detailPagePrimaryContainer.detailPagePrimaryContainer,
 .layout-tv .detailPagePrimaryContainer.detailPagePrimaryContainer {
-    padding-bottom: 0.5em !important;
+    min-height: calc(min(540px, 28.5vw) - 5.5em) !important;
+    padding-bottom: 2.5em !important;
 }
 
 .layout-desktop .detailPagePrimaryContent.detailPagePrimaryContent,
 .layout-tv .detailPagePrimaryContent.detailPagePrimaryContent {
     padding-top: 1.25em !important;
+}
+
+/* Native <select> dropdown options on Linux/Windows Chromium */
+select option,
+select optgroup {
+    background-color: var(--pt-bg-elev) !important;
+    color: var(--pt-text) !important;
+}
+
+/* Stock Jellyfin #00a4dc accent & indicator overrides */
+.itemProgressBarForeground {
+    background-color: var(--pt-accent) !important;
+}
+
+.mdl-spinner__layer-1,
+.mdl-spinner__layer-2,
+.mdl-spinner__layer-3,
+.mdl-spinner__layer-4,
+.progressring-spiner {
+    border-color: var(--pt-accent) !important;
+}
+
+.countIndicator,
+.playedIndicator,
+.mediaSourceIndicator,
+.fullSyncIndicator {
+    background: var(--pt-accent) !important;
+    color: #000000 !important;
+}
+
+.alphaPickerButton:hover,
+.alphaPickerButton-tv:focus {
+    color: var(--pt-accent) !important;
+}
+
+.alphaPickerButton-selected {
+    background-color: var(--pt-accent) !important;
+    color: #000000 !important;
+}
+
+.selectionCommandsPanel {
+    background: var(--pt-bg-elev) !important;
+    border-bottom: 1px solid var(--pt-accent-soft) !important;
+    color: var(--pt-text) !important;
+}
+
+.upNextDialog-countdownText {
+    color: var(--pt-accent) !important;
+}
+
+.checkboxOutline {
+    border-color: var(--pt-accent-soft) !important;
+}
+
+.emby-checkbox:checked + span + .checkboxOutline,
+.emby-checkbox:checked + .checkboxOutline {
+    background-color: var(--pt-accent) !important;
+    border-color: var(--pt-accent) !important;
+    color: #000000 !important;
+}
+
+.buttonActive,
+.metadataSidebarIcon,
+.detailSectionContent a,
+.itemDetailsGroup a {
+    color: var(--pt-accent) !important;
+}
+
+@media (max-width: 1000px) {
+    .skinHeader:not(.osdHeader) {
+        padding: 0 0.75rem !important;
+    }
+
+    .itemsContainer,
+    .scrollSlider {
+        padding: 0 3.3% !important;
+    }
+
+    .detailPagePrimaryContainer {
+        min-height: 0 !important;
+        padding-bottom: 2em !important;
+    }
+
+    .videoOsdBottom.videoOsdBottom-maincontrols {
+        padding: 0.9rem 1rem 1rem !important;
+    }
+
+    .videoOsdBottom .osdControls > .buttons {
+        flex-wrap: wrap !important;
+        gap: 0.4rem !important;
+    }
+
+    .videoSubtitlesInner,
+    .subtitle-container {
+        bottom: max(5rem, var(--subtitle-bottom, 5rem)) !important;
+    }
+
+    body.videoOsd-visible .videoSubtitlesInner,
+    body.videoOsd-visible .subtitle-container,
+    body.videoOsd-visible .shaka-text-container,
+    body.showing-osd .videoSubtitlesInner,
+    body.showing-osd .subtitle-container,
+    body.showing-osd .shaka-text-container,
+    body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
+    body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
+    body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
+        transform: translateY(-13rem) !important;
+    }
 }

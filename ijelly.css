@@ -70,7 +70,7 @@ body {
 }
 
 .backgroundContainer.withBackdrop,
-body:has(#itemDetailPage) .backgroundContainer {
+body:has(#itemDetailPage:not(.hide)) .backgroundContainer {
     background-color: transparent !important;
 }
 
@@ -336,8 +336,7 @@ header .logo svg {
 .sidebarNav,
 .drawerContent,
 .sidebar,
-.navMenu,
-.mainDrawer-scrollContainer {
+.navMenu {
     background-color: rgba(10, 10, 10, 0.85) !important;
     backdrop-filter: var(--apple-blur) !important;
     -webkit-backdrop-filter: var(--apple-blur) !important;
@@ -345,19 +344,24 @@ header .logo svg {
     border-radius: 0 var(--apple-radius) var(--apple-radius) 0 !important;
     box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5) !important;
     isolation: isolate !important;
-    transform: translateX(-100%);
     transition: transform 0.4s var(--apple-spring-fast),
                 opacity 0.3s ease !important;
-    opacity: 0;
+}
+
+:where(.mainDrawer, .drawer, .navDrawer):where(:not(.drawer-open):not(.is-open)) {
+    opacity: 0 !important;
+    pointer-events: none !important;
 }
 
 .mainDrawer.is-open,
-.mainDrawer[style*="transform: none"],
 .mainDrawer.drawer-open,
+.dashboardDocument .mainDrawer,
 .drawer.is-open,
-.navDrawer.is-open {
-    transform: translateX(0) !important;
+.drawer.drawer-open,
+.navDrawer.is-open,
+.navDrawer.drawer-open {
     opacity: 1 !important;
+    pointer-events: auto !important;
 }
 
 .actionSheet-title {
@@ -539,6 +543,13 @@ header .logo svg {
     -webkit-backdrop-filter: var(--apple-blur) !important;
 }
 
+.cardOverlayButton-br {
+    background: rgba(15, 15, 20, 0.72) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    backdrop-filter: var(--apple-blur) !important;
+    -webkit-backdrop-filter: var(--apple-blur) !important;
+}
+
 .cardOverlayButton:hover {
     background: var(--apple-text) !important;
     color: #000 !important;
@@ -586,7 +597,8 @@ h2.sectionTitle,
     background: rgba(24, 24, 28, 0.85) !important;
 }
 
-.layout-desktop [dir=rtl] .detailRibbon {
+.layout-desktop [dir=rtl] .detailRibbon,
+.layout-tv [dir=rtl] .detailRibbon {
     padding-left: 0 !important;
     padding-right: 25vw !important;
     justify-content: flex-start !important;
@@ -601,22 +613,6 @@ h2.sectionTitle,
     z-index: 2 !important;
 }
 
-.layout-desktop .detailRibbon .infoWrapper,
-.layout-tv .detailRibbon .infoWrapper {
-    position: absolute !important;
-    top: 100% !important;
-    left: 25vw !important;
-    right: 3.3% !important;
-    width: calc(100% - 25vw - 3.3%) !important;
-    padding-top: 0.8em !important;
-    z-index: 2 !important;
-}
-
-.layout-desktop [dir=rtl] .detailRibbon .infoWrapper {
-    left: 3.3% !important;
-    right: 25vw !important;
-}
-
 .layout-desktop .detailPagePrimaryContent,
 .layout-desktop [dir=ltr] .detailPagePrimaryContent,
 .layout-tv .detailPagePrimaryContent,
@@ -625,7 +621,8 @@ h2.sectionTitle,
     padding-top: 6.5em !important;
 }
 
-.layout-desktop [dir=rtl] .detailPagePrimaryContent {
+.layout-desktop [dir=rtl] .detailPagePrimaryContent,
+.layout-tv [dir=rtl] .detailPagePrimaryContent {
     padding-left: 0 !important;
     padding-right: 25vw !important;
 }
@@ -640,7 +637,6 @@ h2.sectionTitle,
 }
 
 .detailPageSecondaryContainer,
-#itemDetailPage .detailSection,
 #itemDetailPage .verticalSection {
     background: var(--apple-bg) !important;
     background-color: var(--apple-bg) !important;
@@ -755,18 +751,6 @@ h2.sectionTitle,
     border-left: none !important;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3) !important;
     margin-bottom: 0.5em !important;
-}
-
-/* Detail page — glass metadata card */
-.detailPageContent,
-.detailSection {
-    background: var(--apple-glass) !important;
-    backdrop-filter: var(--apple-blur) !important;
-    -webkit-backdrop-filter: var(--apple-blur) !important;
-    border-radius: var(--apple-radius) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    padding: 2em !important;
-    margin: 1em 0 !important;
 }
 
 /* Separator between metadata rows */
@@ -901,6 +885,20 @@ body::after {
     height: 8px !important;
 }
 
+.sliderMarker {
+    height: 6px !important;
+    top: 50% !important;
+    transform: translate3d(0, -50%, 0) !important;
+}
+
+.sliderMarker.watched {
+    background-color: var(--apple-accent) !important;
+}
+
+.sliderMarker.unwatched {
+    background-color: rgba(255, 255, 255, 0.45) !important;
+}
+
 .mdl-slider::-webkit-slider-thumb {
     background: #fff !important;
     width: 20px !important;
@@ -910,23 +908,41 @@ body::after {
     transition: transform 0.2s ease !important;
 }
 
-.sliderContainer:hover .mdl-slider::-webkit-slider-thumb {
+.sliderContainer:hover .mdl-slider::-webkit-slider-thumb,
+.mdl-slider:focus::-webkit-slider-thumb,
+.mdl-slider.show-focus:focus::-webkit-slider-thumb {
+    transform: scale(1);
+}
+
+.mdl-slider::-moz-range-thumb {
+    background: #fff !important;
+    border: none !important;
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 50% !important;
+    transform: scale(0);
+    transition: transform 0.2s ease !important;
+}
+
+.sliderContainer:hover .mdl-slider::-moz-range-thumb,
+.mdl-slider:focus::-moz-range-thumb,
+.mdl-slider.show-focus:focus::-moz-range-thumb {
     transform: scale(1);
 }
 
 .videoOsdBottom.videoOsdBottom-maincontrols {
     display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    padding: 0.5em 1.5em !important;
-    gap: 1em !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: center !important;
+    padding: 0.75em 1.5em !important;
+    gap: 0.5em !important;
     height: auto !important;
     min-height: unset !important;
     background: var(--apple-glass) !important;
     backdrop-filter: var(--apple-blur) !important;
     -webkit-backdrop-filter: var(--apple-blur) !important;
-    border-radius: 50px !important;
+    border-radius: 28px !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
     box-shadow: var(--apple-shadow) !important;
     width: 96% !important;
@@ -940,20 +956,21 @@ body::after {
 
 .videoOsdBottom.videoOsdBottom-maincontrols .osdControls {
     display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
     width: 100% !important;
-    gap: 1.5em !important;
+    gap: 0.5em !important;
 }
 
 .videoOsdBottom.videoOsdBottom-maincontrols .osdControls>.flex.flex-direction-row {
     display: flex !important;
     flex-direction: row !important;
-    flex-grow: 1 !important;
-    width: auto !important;
-    margin: 0 1em !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin: 0 !important;
     padding: 0 !important;
-    order: 2 !important;
+    gap: 0.75em !important;
+    order: 1 !important;
 }
 
 .videoOsdBottom.videoOsdBottom-maincontrols .osdControls>.buttons {
@@ -961,9 +978,10 @@ body::after {
     flex-direction: row !important;
     flex-wrap: nowrap !important;
     align-items: center !important;
-    width: auto !important;
+    justify-content: center !important;
+    width: 100% !important;
     gap: 1em !important;
-    order: 1 !important;
+    order: 2 !important;
 }
 
 .videoOsdBottom.videoOsdBottom-maincontrols .osdControls>.buttons>div {
@@ -993,6 +1011,11 @@ body::after {
     font-size: 0.85em !important;
 }
 
+.videoOsdBottom.videoOsdBottom-maincontrols .osdTimeText {
+    margin-left: 0.75rem !important;
+    margin-right: auto !important;
+}
+
 .videoOsdBottom.videoOsdBottom-maincontrols .osdTextContainer.osdMainTextContainer,
 .videoOsdBottom.videoOsdBottom-maincontrols .osdTextContainer.osdSecondaryMediaInfo,
 .videoOsdBottom.videoOsdBottom-maincontrols .osdTitle,
@@ -1008,28 +1031,41 @@ body::after {
 
 /* 1. Native player overlay support (Desktop JMP / WebOS / Tizen):
       Hardware video stream (MPV) renders underneath the webview, so html, body,
-      and all inner UI wrappers MUST be completely transparent. */
-html.transparentDocument,
-html.transparentDocument body,
-body.transparentDocument,
-.transparentDocument,
-.transparentDocument body,
-.transparentDocument .backgroundContainer,
-.transparentDocument .skinBody,
-.transparentDocument .mainAnimatedPage,
-.transparentDocument .pageContainer,
-.transparentDocument #videoOsdPage,
-.transparentDocument .videoPlayerContainer,
-.transparentDocument .backdropContainer,
-.transparentDocument .backdropImage,
-.backgroundContainer-transparent,
+      and inner wrappers stay transparent ONLY when no <video class="htmlvideoplayer"> exists.
+      Page overlay containers (#videoOsdPage) stay transparent over the video layer. */
 #videoOsdPage,
 .videoOsdPage,
 .videoOsdPage .pageContent,
-#videoOsdPage .pageContent,
-.videoPlayerContainer {
+#videoOsdPage .pageContent {
     background: transparent !important;
     background-color: transparent !important;
+}
+
+.videoPlayerContainer {
+    background: #000000 !important;
+    background-color: #000000 !important;
+    z-index: 0 !important;
+}
+
+@supports not selector(:has(*)) {
+    html.transparentDocument,
+    html.transparentDocument body,
+    body.transparentDocument,
+    .transparentDocument,
+    .transparentDocument body,
+    .transparentDocument .backgroundContainer,
+    .transparentDocument .skinBody,
+    .transparentDocument .mainAnimatedPage,
+    .transparentDocument .pageContainer,
+    .transparentDocument #videoOsdPage,
+    .transparentDocument .videoPlayerContainer,
+    .transparentDocument .backdropContainer,
+    .transparentDocument .backdropImage,
+    .backgroundContainer-transparent,
+    .videoPlayerContainer {
+        background: transparent !important;
+        background-color: transparent !important;
+    }
 }
 
 /* 2. Suppress body overlays/pseudo-elements during video playback / transparent mode */
@@ -1053,58 +1089,59 @@ body.transparentDocument::after,
 }
 
 @supports selector(:has(*)) {
-    /* Web playback canvas: pure black during video playback (prevents white canvas bleed on browsers).
-       Excluded when transparentDocument is present so Desktop JMP / native players are never blanked out */
-    html:not(.transparentDocument):not(:has(.transparentDocument)):has(#videoOsdPage),
-    html:not(.transparentDocument):not(:has(.transparentDocument)):has(.videoPlayerContainer),
-    html:not(.transparentDocument):not(:has(.transparentDocument)):has(.htmlvideoplayer),
-    body:not(.transparentDocument):has(#videoOsdPage),
-    body:not(.transparentDocument):has(.videoPlayerContainer),
-    body:not(.transparentDocument):has(.htmlvideoplayer) {
-        background-color: #000 !important;
+    /* Web HTML5 playback canvas: Jellyfin Web adds .transparentDocument on <html>
+       even in browsers. Force pure #000000 behind pillarbox/letterbox bars
+       whenever <video class="htmlvideoplayer"> is present. */
+    html:has(.htmlvideoplayer),
+    body:has(.htmlvideoplayer),
+    html.transparentDocument:has(.htmlvideoplayer),
+    html.transparentDocument:has(.htmlvideoplayer) body,
+    body:has(.htmlvideoplayer) .videoPlayerContainer,
+    .videoPlayerContainer:has(.htmlvideoplayer),
+    .htmlvideoplayer,
+    .transparentDocument .htmlvideoplayer,
+    html.transparentDocument .htmlvideoplayer,
+    body.transparentDocument .htmlvideoplayer {
+        background: #000000 !important;
+        background-color: #000000 !important;
     }
 
     /* Native player overlay support (Desktop JMP / WebOS / Tizen):
-       Keep root and shell explicitly transparent even when :has() selectors match */
-    html.transparentDocument,
-    html.transparentDocument body,
-    body.transparentDocument,
-    html:has(.transparentDocument),
-    html:has(.transparentDocument) body,
-    html.transparentDocument:has(#videoOsdPage),
-    html.transparentDocument body:has(#videoOsdPage),
-    body.transparentDocument:has(#videoOsdPage),
-    body.transparentDocument:has(.videoPlayerContainer),
-    body.transparentDocument:has(.htmlvideoplayer) {
+       No .htmlvideoplayer exists, so keep root and shell transparent for MPV/hardware video. */
+    html.transparentDocument:not(:has(.htmlvideoplayer)),
+    html.transparentDocument:not(:has(.htmlvideoplayer)) body,
+    body.transparentDocument:not(:has(.htmlvideoplayer)),
+    .transparentDocument:not(:has(.htmlvideoplayer)),
+    .transparentDocument:not(:has(.htmlvideoplayer)) .backgroundContainer,
+    .transparentDocument:not(:has(.htmlvideoplayer)) .skinBody,
+    .transparentDocument:not(:has(.htmlvideoplayer)) .mainAnimatedPage,
+    .transparentDocument:not(:has(.htmlvideoplayer)) .pageContainer,
+    .transparentDocument:not(:has(.htmlvideoplayer)) #videoOsdPage,
+    .transparentDocument:not(:has(.htmlvideoplayer)) .videoPlayerContainer,
+    .transparentDocument:not(:has(.htmlvideoplayer)) .backdropContainer,
+    .transparentDocument:not(:has(.htmlvideoplayer)) .backdropImage,
+    .backgroundContainer-transparent:not(:has(.htmlvideoplayer)) {
         background: transparent !important;
         background-color: transparent !important;
     }
 
-    /* Page chrome: make the shell transparent so the video shows through,
-       but keep it VISIBLE (the OSD header lives inside mainAnimatedPage).
-       Never set opacity: 0 here — that hides the video and the OSD. */
-    body:has(#videoOsdPage) .backgroundContainer,
-    body:has(#videoOsdPage) .mainAnimatedPage,
-    body:has(#videoOsdPage) .pageContainer,
-    body:has(#videoOsdPage) .skinBody,
-    body:has(#videoOsdPage) .videoPlayerContainer,
-    body:has(.videoPlayerContainer) .backgroundContainer,
-    body:has(.videoPlayerContainer) .skinBody,
+    /* Page chrome: keep upper wrappers transparent so the video layer shows through,
+       using :not(.hide) so cached views do not leak transparent backgrounds after exit. */
+    body:has(#videoOsdPage:not(.hide)) .backgroundContainer,
+    body:has(#videoOsdPage:not(.hide)) .mainAnimatedPage,
+    body:has(#videoOsdPage:not(.hide)) .pageContainer,
+    body:has(#videoOsdPage:not(.hide)) .skinBody,
     body:has(.htmlvideoplayer) .backgroundContainer,
     body:has(.htmlvideoplayer) .mainAnimatedPage,
     body:has(.htmlvideoplayer) .pageContainer,
-    body:has(.htmlvideoplayer) .skinBody,
-    body:has(.htmlvideoplayer) .videoPlayerContainer {
+    body:has(.htmlvideoplayer) .skinBody {
         background: transparent !important;
         background-color: transparent !important;
     }
 
-    /* Backdrop overlay: fully hide it during playback (this is the only
-       element that is safe to blank out). */
-    body:has(#videoOsdPage) .backdropContainer,
-    body:has(#videoOsdPage) .backdropImage,
-    body:has(.videoPlayerContainer) .backdropContainer,
-    body:has(.videoPlayerContainer) .backdropImage,
+    /* Backdrop overlay: fully hide during active video playback */
+    body:has(#videoOsdPage:not(.hide)) .backdropContainer,
+    body:has(#videoOsdPage:not(.hide)) .backdropImage,
     body:has(.htmlvideoplayer) .backdropContainer,
     body:has(.htmlvideoplayer) .backdropImage {
         background: transparent !important;
@@ -1114,53 +1151,40 @@ body.transparentDocument::after,
         -webkit-filter: none !important;
     }
 
-    body:has(#videoOsdPage)::before,
-    body:has(#videoOsdPage)::after,
-    body:has(.videoPlayerContainer)::before,
-    body:has(.videoPlayerContainer)::after,
+    body:has(#videoOsdPage:not(.hide))::before,
+    body:has(#videoOsdPage:not(.hide))::after,
     body:has(.htmlvideoplayer)::before,
-    body:has(.htmlvideoplayer)::after,
-    body:has(.osdHeader)::before,
-    body:has(.osdHeader)::after {
+    body:has(.htmlvideoplayer)::after {
         display: none !important;
         opacity: 0 !important;
         visibility: hidden !important;
     }
 }
 
-.videoPlayerContainer {
-    background: transparent !important;
-    background-color: transparent !important;
-    z-index: 0 !important;
-}
-
-/* 3. HTML5 video player element (web) vs native transparent player (desktop JMP) */
+/* 3. HTML5 video player element (always opaque black letterbox/pillarbox backing) */
 .htmlvideoplayer {
     display: block !important;
     visibility: visible !important;
     opacity: 1 !important;
-    background-color: #000 !important;
+    background: #000000 !important;
+    background-color: #000000 !important;
 }
 
-.transparentDocument .htmlvideoplayer,
-html.transparentDocument .htmlvideoplayer,
-body.transparentDocument .htmlvideoplayer {
-    background: transparent !important;
-    background-color: transparent !important;
-}
-
-/* Video OSD Header: slim, borderless, subtle vignette */
+/* Video OSD Header: slim, borderless, subtle vignette (no blur seam) */
+.skinHeader.osdHeader,
 .osdHeader,
 .videoOsdHeader,
-#videoOsdPage .skinHeader,
-body:has(#videoOsdPage) .skinHeader {
+body:has(#videoOsdPage:not(.hide)) .skinHeader {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
     display: flex !important;
+    align-items: center !important;
     border-bottom: none !important;
     box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%) !important;
     padding: 0.35rem 1.25rem !important;
     min-height: unset !important;
@@ -1171,7 +1195,7 @@ body:has(#videoOsdPage) .skinHeader {
 
 .osdHeader.osdHeader-hidden,
 .videoOsdHeader.videoOsdHeader-hidden,
-#videoOsdPage .skinHeader.osdHeader-hidden {
+.skinHeader.osdHeader.osdHeader-hidden {
     transform: translateY(-100%) !important;
     opacity: 0 !important;
     pointer-events: none !important;
@@ -1179,8 +1203,7 @@ body:has(#videoOsdPage) .skinHeader {
 
 .osdHeader .headerLeft,
 .videoOsdHeader .headerLeft,
-#videoOsdPage .headerLeft,
-body:has(#videoOsdPage) .headerLeft {
+body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     font-size: 0.95rem !important;
     font-weight: 500 !important;
     letter-spacing: -0.01em !important;
@@ -1213,7 +1236,8 @@ body:has(#videoOsdPage) .headerLeft {
     transform: scale(1.1) !important;
 }
 
-.osdControls .btnPlayPause {
+.osdControls .btnPlayPause,
+.osdControls .btnPause {
     transform: scale(1.3) !important;
 }
 
@@ -1271,7 +1295,7 @@ body:has(#videoOsdPage) .headerLeft {
     width: 100% !important;
     height: 100% !important;
     pointer-events: none !important;
-    z-index: 9999 !important;
+    z-index: 1 !important;
 }
 
 .videoSubtitlesInner,
@@ -1288,56 +1312,42 @@ body:has(#videoOsdPage) .headerLeft {
 
 .libassjs-canvas-parent,
 .JASSUB {
-    transform: translateY(-4rem) !important;
-    transition: transform 0.25s var(--apple-spring-fast) !important;
+    transform: none !important;
 }
 
 /* Lift subtitles when OSD visible. transform:translateY is GPU-accelerated and
-   doesn't trigger layout. Body-class fallbacks run everywhere; :has() is wrapped
-   in @supports and scoped to .videoPlayerContainer so subtitle-cue mutations
-   don't thrash the whole page (and older Tizen drops it cleanly). */
+   doesn't trigger layout. Libass/JASSUB canvases stay untransformed because they
+   measure bounding rects relative to <video>. */
 .videoOsd-visible .videoSubtitlesInner,
 .videoOsd-visible .subtitle-container,
-.videoOsd-visible .libassjs-canvas-parent,
-.videoOsd-visible .JASSUB,
 .videoOsd-visible .shaka-text-container,
 .showing-osd .videoSubtitlesInner,
 .showing-osd .subtitle-container,
-.showing-osd .libassjs-canvas-parent,
-.showing-osd .JASSUB,
 .showing-osd .shaka-text-container {
     transform: translateY(-11rem) !important;
 }
 
 @supports selector(:has(*)) {
-    .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
-    .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
-    .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent,
-    .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .JASSUB,
-    .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
+    body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
+    body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
+    body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
         transform: translateY(-11rem) !important;
     }
 }
 
 .layout-tv.videoOsd-visible .videoSubtitlesInner,
 .layout-tv.videoOsd-visible .subtitle-container,
-.layout-tv.videoOsd-visible .libassjs-canvas-parent,
-.layout-tv.videoOsd-visible .JASSUB,
 .layout-tv.videoOsd-visible .shaka-text-container,
 .layout-tv.showing-osd .videoSubtitlesInner,
 .layout-tv.showing-osd .subtitle-container,
-.layout-tv.showing-osd .libassjs-canvas-parent,
-.layout-tv.showing-osd .JASSUB,
 .layout-tv.showing-osd .shaka-text-container {
     transform: translateY(-14.5rem) !important;
 }
 
 @supports selector(:has(*)) {
-    .layout-tv .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
-    .layout-tv .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
-    .layout-tv .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent,
-    .layout-tv .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .JASSUB,
-    .layout-tv .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
+    .layout-tv:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
+    .layout-tv:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
+    .layout-tv:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
         transform: translateY(-14.5rem) !important;
     }
 }
@@ -1479,43 +1489,32 @@ body:has(#videoOsdPage) .headerLeft {
         display: none !important;
     }
 
-    /* Mobile OSD stacks into two rows: slider + buttons. Total height
-       (padding 1em x 2 + two ~2.5em rows + 0.75em gap + 1.5em bottom)
-       sits well above 8em, so lift subtitles higher to actually clear it. */
+    /* Mobile OSD stacks into two rows: slider + buttons. Replace the desktop
+       -11rem lift cleanly with -13rem (no stacking bottom: 12em double-lift)
+       and never shift libass/JASSUB canvases. */
     body.videoOsd-visible .videoSubtitlesInner,
     body.videoOsd-visible .subtitle-container,
     body.osd-visible .videoSubtitlesInner,
     body.osd-visible .subtitle-container,
     body.showing-osd .videoSubtitlesInner,
     body.showing-osd .subtitle-container {
-        bottom: 12em !important;
-    }
-
-    body.videoOsd-visible .libassjs-canvas-parent,
-    body.videoOsd-visible .JASSUB,
-    body.osd-visible .libassjs-canvas-parent,
-    body.osd-visible .JASSUB,
-    body.showing-osd .libassjs-canvas-parent,
-    body.showing-osd .JASSUB {
+        bottom: max(4.5rem, var(--subtitle-bottom, 4.5rem)) !important;
         transform: translateY(-13rem) !important;
     }
 
     @supports selector(:has(*)) {
-        .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
-        .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container {
-            bottom: 12em !important;
-        }
-
-        .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent,
-        .videoPlayerContainer:has(.videoOsdBottom:not(.videoOsdBottom-hidden)) .JASSUB {
+        body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .videoSubtitlesInner,
+        body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .subtitle-container,
+        body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .shaka-text-container {
+            bottom: max(4.5rem, var(--subtitle-bottom, 4.5rem)) !important;
             transform: translateY(-13rem) !important;
         }
     }
 
-    .view,
-    .mainAnimatedPages,
-    .skinBody,
-    .page-current {
+    body:not(:has(#videoOsdPage:not(.hide))) .view,
+    body:not(:has(#videoOsdPage:not(.hide))) .mainAnimatedPages,
+    body:not(:has(#videoOsdPage:not(.hide))) .skinBody,
+    .page-current:not(#videoOsdPage) {
         padding-top: 4em !important;
     }
 
@@ -1582,23 +1581,28 @@ body:has(#videoOsdPage) .headerLeft {
    dynamically-hashed class names on both Modern (default) and Legacy modes.
    ======================================================================== */
 
-/* App bar / toolbar — transparent with blurred glass */
+/* App bar / toolbar — frosted bar on AppBar; toolbars inside remain transparent */
 .MuiAppBar-root,
-.MuiToolbar-root,
-[class*="AppBar-root"],
-[class*="Toolbar-root"] {
-    background-color: transparent !important;
+[class*="AppBar-root"] {
+    background-color: rgba(20, 20, 22, 0.82) !important;
     background-image: none !important;
     backdrop-filter: var(--apple-blur) !important;
     -webkit-backdrop-filter: var(--apple-blur) !important;
-    box-shadow: none !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
     color: var(--apple-text) !important;
+    min-height: 4em !important;
 }
 
-/* One bar only: the AppBar owns the border and height, toolbars inside it add no second bar */
-.MuiAppBar-root {
-    min-height: 0 !important;
+.MuiToolbar-root,
+[class*="Toolbar-root"] {
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    border-bottom: 0 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    color: var(--apple-text) !important;
 }
 
 .MuiAppBar-root .MuiToolbar-root,
@@ -1606,6 +1610,71 @@ body:has(#videoOsdPage) .headerLeft {
     border-bottom: 0 !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
+}
+
+/* Native <select> options & stock Jellyfin #00a4dc accent indicators */
+select option,
+.emby-select option {
+    background-color: #16161a !important;
+    color: var(--apple-text) !important;
+}
+
+.countIndicator,
+.playedIndicator,
+.mediaSourceIndicator,
+.fullSyncIndicator {
+    background-color: var(--apple-accent) !important;
+    color: #fff !important;
+}
+
+.itemProgressBarForeground {
+    background-color: var(--apple-accent) !important;
+}
+
+.mdl-spinner__layer-1,
+.mdl-spinner__layer-2,
+.mdl-spinner__layer-3,
+.mdl-spinner__layer-4,
+.progressring-spiner {
+    border-color: var(--apple-accent) !important;
+}
+
+.listItemIcon:not(.listItemIcon-transparent) {
+    background-color: var(--apple-accent) !important;
+    color: #fff !important;
+}
+
+.alphaPickerButton {
+    color: var(--apple-text-dim) !important;
+}
+
+.alphaPickerButton-selected {
+    color: var(--apple-accent) !important;
+    font-weight: 700 !important;
+}
+
+.alphaPickerButton-tv:focus {
+    background-color: var(--apple-accent) !important;
+    color: #fff !important;
+}
+
+.selectionCommandsPanel {
+    background: rgba(20, 20, 24, 0.92) !important;
+    backdrop-filter: var(--apple-blur) !important;
+    -webkit-backdrop-filter: var(--apple-blur) !important;
+    color: var(--apple-text) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.upNextDialog-countdownText,
+.buttonActive,
+.metadataSidebarIcon {
+    color: var(--apple-accent) !important;
+}
+
+.emby-checkbox:checked + span + .checkboxOutline {
+    background-color: var(--apple-accent) !important;
+    border-color: var(--apple-accent) !important;
 }
 
 .MuiAppBar-root .MuiToolbar-root + .MuiToolbar-root,
@@ -2148,9 +2217,15 @@ body:has(#videoOsdPage) .headerLeft {
     padding: 0.8em 3.3% 0.4em 0 !important;
 }
 
+.layout-desktop [dir=rtl] .detailRibbon.detailRibbon .infoWrapper,
+.layout-tv [dir=rtl] .detailRibbon.detailRibbon .infoWrapper {
+    padding: 0.8em 0 0.4em 3.3% !important;
+}
+
 .layout-desktop .detailPagePrimaryContainer.detailPagePrimaryContainer,
 .layout-tv .detailPagePrimaryContainer.detailPagePrimaryContainer {
-    padding-bottom: 0.5em !important;
+    min-height: calc(min(540px, 28.5vw) - 5.5em) !important;
+    padding-bottom: 2.5em !important;
 }
 
 .layout-desktop .detailPagePrimaryContent.detailPagePrimaryContent,
