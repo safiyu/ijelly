@@ -185,6 +185,8 @@ h3,
     font-weight: 700 !important;
     letter-spacing: -0.03em !important;
     line-height: 1.15 !important;
+    white-space: normal !important;
+    max-width: 100% !important;
     word-break: normal !important;
     overflow-wrap: break-word !important;
 }
@@ -1606,8 +1608,10 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     position: static !important;
     order: 2 !important;
     flex: 0 0 100% !important;
-    width: auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
     max-width: 100% !important;
+    box-sizing: border-box !important;
     padding: 0.8em 3.3% 0.4em 0 !important;
 }
 
@@ -1842,7 +1846,10 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 }
 
 /* Up Next card — schematic navy surface with amber grid border */
-.upNextContainer {
+.upNextContainer,
+.upNextContainer.upNextDialog {
+    display: flex !important;
+    flex-direction: column !important;
     background: var(--kxta-bg-elev) !important;
     border: 1px solid var(--kxta-border) !important;
     border-left: 3px solid var(--kxta-accent) !important;
@@ -1851,10 +1858,22 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     color: var(--kxta-text) !important;
     font-family: var(--kxta-font-body) !important;
     padding: 1.2rem 1.35rem !important;
+    width: min(28rem, calc(100vw - 3rem)) !important;
     max-width: calc(100vw - 3rem) !important;
+    min-width: 0 !important;
     box-sizing: border-box !important;
+    overflow: hidden !important;
     z-index: 10002 !important;
     transition: opacity 0.3s ease, transform 0.25s var(--kxta-ease) !important;
+}
+
+.upNextContainer > div,
+.upNextDialog > .flex {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
 }
 
 .upNextDialog-nextVideoText {
@@ -1864,11 +1883,21 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     text-transform: uppercase !important;
     color: var(--kxta-text-dim) !important;
     margin-bottom: 0.3rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
 }
 
 .upNextDialog-countdownText {
     color: var(--kxta-accent) !important;
     font-weight: 700 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 
 .upNextDialog-title {
@@ -1876,8 +1905,19 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     font-size: 1.2rem !important;
     font-weight: 600 !important;
     color: var(--kxta-text) !important;
+    width: 100% !important;
     max-width: 100% !important;
-    width: auto !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    white-space: normal !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+    line-height: 1.3 !important;
     margin: 0.15rem 0 0.45rem !important;
 }
 
@@ -1885,13 +1925,35 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     font-family: var(--kxta-font-mono) !important;
     color: var(--kxta-text-dim) !important;
     font-size: 0.8rem !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 0.35rem 0.5rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+.upNextDialog-mediainfo .mediaInfoItem {
+    margin: 0 !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 
 .upNextDialog-buttons {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-end !important;
     margin-top: 1rem !important;
     gap: 0.5rem !important;
+    width: 100% !important;
     max-width: 100% !important;
-    width: auto !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
 }
 
 .upNextDialog-button {
@@ -1923,6 +1985,28 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     transform: translateY(-9rem) !important;
 }
 
+.layout-tv .upNextContainer,
+.layout-tv .upNextContainer.upNextDialog {
+    width: min(32rem, calc(100vw - 6vw)) !important;
+    max-width: calc(100vw - 6vw) !important;
+    margin: 0 3vw 3vh 0 !important;
+}
+
+[dir=rtl] .layout-tv .upNextContainer,
+[dir=rtl] .layout-tv .upNextContainer.upNextDialog {
+    margin: 0 0 3vh 3vw !important;
+}
+
+.layout-tv .videoOsd-visible .upNextContainer:not(.hide),
+.layout-tv .osd-visible .upNextContainer:not(.hide),
+.layout-tv .showing-osd .upNextContainer:not(.hide),
+.layout-tv.videoOsd-visible .upNextContainer:not(.hide),
+.layout-tv.osd-visible .upNextContainer:not(.hide),
+.layout-tv.showing-osd .upNextContainer:not(.hide),
+.layout-tv:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .upNextContainer:not(.hide) {
+    transform: translateY(-11rem) !important;
+}
+
 /* Scrubber Trickplay & Chapter Preview Bubble */
 .sliderBubble {
     background: var(--kxta-bg-elev) !important;
@@ -1930,6 +2014,9 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     border-radius: 0 !important;
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.75) !important;
     color: var(--kxta-text) !important;
+    max-width: min(26rem, calc(100vw - 2rem)) !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
     padding: 0.25rem !important;
 }
 
@@ -1941,6 +2028,11 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 }
 
 .chapterThumbContainer {
+    position: relative !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
     border-radius: 0 !important;
     box-shadow: none !important;
     border: 1px solid var(--kxta-border-dim) !important;
@@ -1949,12 +2041,24 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 .chapterThumbTextContainer {
     background: rgba(6, 10, 18, 0.86) !important;
     border-top: 1px solid var(--kxta-border-dim) !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
 }
 
 .chapterThumbText {
     font-family: var(--kxta-font-mono) !important;
     font-size: 0.78rem !important;
     color: var(--kxta-text) !important;
+    display: block !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
 }
 
 @media (hover: none) and (pointer: coarse), (max-width: 768px) {
@@ -2046,9 +2150,23 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     border: 1px solid var(--kxta-border) !important;
 }
 
+.nowPlayingBarInfoContainer {
+    min-width: 0 !important;
+}
+
 .nowPlayingBarText {
     font-family: var(--kxta-font-title) !important;
     color: var(--kxta-text) !important;
+}
+
+.nowPlayingBarText,
+.nowPlayingBarText > div,
+.nowPlayingBarSecondaryText {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
 }
 
 .nowPlayingBarSecondaryText {
@@ -2127,6 +2245,170 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     color: var(--kxta-bg) !important;
 }
 
+/* Popup, Overlay & TV Text Overflow Guards */
+.playerStats {
+    max-width: min(50em, calc(100vw - 3rem)) !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+.playerStats-stats {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+.playerStats-stat {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    flex-wrap: wrap !important;
+    gap: 0.15em 0.5em !important;
+}
+
+.playerStats-stat-label {
+    flex-shrink: 0 !important;
+    max-width: 100% !important;
+}
+
+.playerStats-stat-value {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+}
+
+.actionSheetContent {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.actionSheetTitle,
+.actionSheetText {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    overflow-wrap: break-word !important;
+}
+
+.actionSheetScroller-tv {
+    width: min(44rem, 80vw) !important;
+    max-width: 90vw !important;
+    box-sizing: border-box !important;
+}
+
+.actionSheetMenuItem {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+.actionsheetListItemBody,
+.listItemBody {
+    min-width: 0 !important;
+}
+
+.actionSheetItemText {
+    display: block !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+[dir=ltr] .actionSheetItemAsideText {
+    margin-left: 1rem !important;
+}
+
+[dir=rtl] .actionSheetItemAsideText {
+    margin-right: 1rem !important;
+}
+
+.listItemBodyText {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+}
+
+.toastContainer {
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+}
+
+.toast {
+    min-width: min(20em, calc(100vw - 2rem)) !important;
+    max-width: min(38rem, calc(100vw - 2rem)) !important;
+    box-sizing: border-box !important;
+    overflow-wrap: anywhere !important;
+    word-break: break-word !important;
+}
+
+.skinHeader.osdHeader,
+.osdHeader,
+.videoOsdHeader {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    overflow: hidden !important;
+}
+
+.osdHeader .headerTop,
+.videoOsdHeader .headerTop {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.osdHeader .headerLeft,
+.videoOsdHeader .headerLeft {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+.headerLeft,
+.header-left {
+    min-width: 0 !important;
+}
+
+.pageTitle:not(.pageTitleWithLogo):not(:has(img, svg, .logo, .headerLogo)),
+.osdHeader .pageTitle,
+.videoOsdHeader .pageTitle,
+.videoOsd-appBar .MuiTypography-root {
+    display: block !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+.formDialogHeader {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.formDialogHeaderTitle {
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
 /* ============================================================================
  * 3. OPT-IN FEATURE TOGGLES (:root --spoiler-blur & --card-labels)
  * ============================================================================ */
@@ -2155,7 +2437,7 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 }
 
 /* ============================================================================
- * 4. SIGNATURE THEME LOADER — FULLSCREEN RADIATING AURORA VORTEX
+ * 4. SIGNATURE THEME LOADER — LIGHTWEIGHT BALANCED SILK WORMHOLE
  * ============================================================================ */
 
 @keyframes ijellySpinCW {
@@ -2168,41 +2450,41 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 
 @keyframes ijellyAuroraRadiateCW {
     0% {
-        transform: scale(0.04) rotate(0deg);
+        transform: scale(0.1) rotate(0deg);
         opacity: 0;
     }
     18% {
         opacity: 0.92;
     }
-    65% {
-        opacity: 0.55;
+    68% {
+        opacity: 0.52;
     }
     100% {
-        transform: scale(1.18) rotate(240deg);
+        transform: scale(1.22) rotate(190deg);
         opacity: 0;
     }
 }
 
 @keyframes ijellyAuroraRadiateCCW {
     0% {
-        transform: scale(0.04) rotate(0deg);
+        transform: scale(0.1) rotate(0deg);
         opacity: 0;
     }
     18% {
-        opacity: 0.88;
+        opacity: 0.86;
     }
-    65% {
-        opacity: 0.5;
+    68% {
+        opacity: 0.46;
     }
     100% {
-        transform: scale(1.18) rotate(-240deg);
+        transform: scale(1.22) rotate(-190deg);
         opacity: 0;
     }
 }
 
 @keyframes ijellyPulseCore {
-    0%, 100% { transform: scale(0.84); opacity: 0.82; }
-    50% { transform: scale(1.16); opacity: 1; }
+    0%, 100% { transform: scale(0.97); }
+    50% { transform: scale(1.03); }
 }
 
 @keyframes ijellySplashPulse {
@@ -2213,11 +2495,11 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 .splashLogo {
     width: 60vh !important;
     height: 60vh !important;
-    filter: drop-shadow(0 0 4vh #e09030) !important;
+    filter: none !important;
     animation: ijellySplashPulse 2.4s var(--kxta-ease) infinite !important;
 }
 
-/* Fullscreen borderless Aurora Vortex canvas */
+/* Fullscreen lightweight Balanced Silk Wormhole (0 blur, 0 backdrop-filter) */
 .docspinner.mdlSpinnerActive {
     display: block !important;
     position: fixed !important;
@@ -2227,7 +2509,7 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     margin: 0 !important;
     transform: none !important;
     animation: none !important;
-    contain: none !important;
+    contain: layout style paint !important;
     overflow: hidden !important;
     pointer-events: none !important;
     z-index: 9999999 !important;
@@ -2235,29 +2517,45 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     outline: none !important;
     box-shadow: none !important;
     border-radius: 0 !important;
-    background: radial-gradient(circle at 50% 50%, rgba(6, 6, 12, 0.52) 0%, rgba(3, 3, 7, 0.88) 100%) !important;
-    backdrop-filter: blur(26px) saturate(165%) !important;
-    -webkit-backdrop-filter: blur(26px) saturate(165%) !important;
+    background: radial-gradient(circle at 50% 50%, rgba(7, 9, 20, 0.78) 0%, rgba(3, 3, 8, 0.92) 100%) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
 }
 
-/* Ambient deep aurora field radiating from center */
+/* Shared cosmic outer wash across all themes (pre-feathered, 0 runtime blur) */
 .docspinner.mdlSpinnerActive::before {
     content: "" !important;
     position: absolute !important;
     left: 50% !important;
     top: 50% !important;
-    width: 130vmax !important;
-    height: 130vmax !important;
-    margin-left: -65vmax !important;
-    margin-top: -65vmax !important;
+    width: 76vmin !important;
+    height: 76vmin !important;
+    margin-left: -38vmin !important;
+    margin-top: -38vmin !important;
     border-radius: 50% !important;
+    z-index: 0 !important;
     pointer-events: none !important;
-    background: conic-gradient(from 0deg, #e09030, #fbbf24, transparent 45%, #f97316 75%, #e09030) !important;
-    -webkit-mask: radial-gradient(circle, #000 0%, rgba(0, 0, 0, 0.5) 42%, transparent 70%) !important;
-    mask: radial-gradient(circle, #000 0%, rgba(0, 0, 0, 0.5) 42%, transparent 70%) !important;
-    filter: blur(80px) !important;
-    opacity: 0.38 !important;
-    animation: ijellySpinCW 14s linear infinite !important;
+    background:
+        radial-gradient(ellipse 46% 34% at 38% 36%, rgba(0, 122, 255, 0.28) 0%, rgba(0, 122, 255, 0.08) 45%, transparent 72%),
+        radial-gradient(ellipse 44% 32% at 64% 62%, rgba(56, 189, 248, 0.22) 0%, rgba(56, 189, 248, 0.06) 45%, transparent 72%),
+        radial-gradient(ellipse 52% 46% at 50% 50%, rgba(99, 102, 241, 0.18) 0%, transparent 70%) !important;
+}
+
+/* Theme-accented soft halo behind the middle wormhole circle */
+.docspinner.mdlSpinnerActive::after {
+    content: "" !important;
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    width: 21vmin !important;
+    height: 21vmin !important;
+    margin-left: -10.5vmin !important;
+    margin-top: -10.5vmin !important;
+    border-radius: 50% !important;
+    z-index: 2 !important;
+    opacity: 0.72 !important;
+    pointer-events: none !important;
+    background: radial-gradient(circle, rgba(224, 144, 48, 0.45) 22%, rgba(251, 191, 36, 0.16) 46%, transparent 72%) !important;
 }
 
 .docspinner .mdl-spinner__circle-clipper,
@@ -2266,7 +2564,6 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 }
 
 .docspinner.mdlSpinnerActive .mdl-spinner__layer {
-    opacity: 1 !important;
     position: absolute !important;
     inset: auto !important;
     left: 50% !important;
@@ -2277,56 +2574,79 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     pointer-events: none !important;
 }
 
-/* Wave 1, 2, 3: Staggered aurora vortex waves radiating from center to outside */
+/* Shared cosmic outer silk waves radiating outward (GPU transform + opacity only) */
 .docspinner.mdlSpinnerActive .mdl-spinner__layer-1,
 .docspinner.mdlSpinnerActive .mdl-spinner__layer-2,
 .docspinner.mdlSpinnerActive .mdl-spinner__layer-3 {
-    width: 110vmax !important;
-    height: 110vmax !important;
-    margin-left: -55vmax !important;
-    margin-top: -55vmax !important;
-    -webkit-mask: radial-gradient(circle, transparent 18%, rgba(0, 0, 0, 0.45) 32%, #000 46%, rgba(0, 0, 0, 0.45) 58%, transparent 70%) !important;
-    mask: radial-gradient(circle, transparent 18%, rgba(0, 0, 0, 0.45) 32%, #000 46%, rgba(0, 0, 0, 0.45) 58%, transparent 70%) !important;
-    filter: blur(26px) !important;
+    width: 64vmin !important;
+    height: 64vmin !important;
+    margin-left: -32vmin !important;
+    margin-top: -32vmin !important;
+    z-index: 1 !important;
+    will-change: transform, opacity !important;
 }
 
 .docspinner.mdlSpinnerActive .mdl-spinner__layer-1 {
-    background: conic-gradient(from 0deg, #e09030, #fbbf24, transparent 42%, #e09030 68%, #f97316 88%, #e09030) !important;
-    animation: ijellyAuroraRadiateCW 3.6s cubic-bezier(0.16, 0.68, 0.38, 0.98) infinite !important;
+    background:
+        radial-gradient(ellipse 36% 22% at 32% 28%, rgba(0, 122, 255, 0.52) 0%, rgba(0, 122, 255, 0.18) 48%, transparent 76%),
+        radial-gradient(ellipse 32% 24% at 70% 66%, rgba(56, 189, 248, 0.44) 0%, rgba(56, 189, 248, 0.14) 50%, transparent 78%),
+        radial-gradient(ellipse 28% 36% at 62% 26%, rgba(99, 102, 241, 0.36) 0%, transparent 72%) !important;
+    animation: ijellyAuroraRadiateCW 3.8s cubic-bezier(0.18, 0.65, 0.35, 0.98) infinite !important;
 }
 
 .docspinner.mdlSpinnerActive .mdl-spinner__layer-2 {
-    background: conic-gradient(from 120deg, transparent 10%, #fbbf24 42%, #ffffff 54%, #e09030 78%, transparent 95%) !important;
-    mix-blend-mode: screen !important;
-    animation: ijellyAuroraRadiateCCW 3.6s cubic-bezier(0.16, 0.68, 0.38, 0.98) -1.2s infinite !important;
+    background:
+        radial-gradient(ellipse 34% 20% at 68% 34%, rgba(56, 189, 248, 0.46) 0%, rgba(56, 189, 248, 0.14) 48%, transparent 76%),
+        radial-gradient(ellipse 30% 24% at 30% 68%, rgba(224, 242, 254, 0.24) 0%, rgba(0, 122, 255, 0.16) 46%, transparent 76%),
+        radial-gradient(ellipse 36% 24% at 48% 24%, rgba(0, 122, 255, 0.32) 0%, transparent 72%) !important;
+    animation: ijellyAuroraRadiateCCW 3.8s cubic-bezier(0.18, 0.65, 0.35, 0.98) -1.26s infinite !important;
 }
 
 .docspinner.mdlSpinnerActive .mdl-spinner__layer-3 {
-    background: conic-gradient(from 240deg, #f97316, #e09030 36%, transparent 56%, #fbbf24 82%, #ffffff 94%, #f97316) !important;
-    animation: ijellyAuroraRadiateCW 3.6s cubic-bezier(0.16, 0.68, 0.38, 0.98) -2.4s infinite !important;
+    background:
+        radial-gradient(ellipse 34% 22% at 34% 64%, rgba(99, 102, 241, 0.44) 0%, rgba(99, 102, 241, 0.14) 48%, transparent 76%),
+        radial-gradient(ellipse 32% 22% at 66% 36%, rgba(0, 122, 255, 0.42) 0%, rgba(56, 189, 248, 0.12) 50%, transparent 76%) !important;
+    animation: ijellyAuroraRadiateCW 3.8s cubic-bezier(0.18, 0.65, 0.35, 0.98) -2.53s infinite !important;
 }
 
-/* Layer 4: Radiant center source core + crisp inner flare arc */
+/* Balanced middle wormhole circle: theme border + orbiting start-point bead */
 .docspinner.mdlSpinnerActive .mdl-spinner__layer-4 {
-    width: 16vmin !important;
-    height: 16vmin !important;
-    margin-left: -8vmin !important;
-    margin-top: -8vmin !important;
-    background: radial-gradient(circle, #ffffff 0%, #fbbf24 34%, #e09030 62%, transparent 76%) !important;
-    box-shadow: 0 0 5vh #e09030, 0 0 12vh #e09030 !important;
-    animation: ijellyPulseCore 1.8s ease-in-out infinite !important;
+    width: 11vmin !important;
+    height: 11vmin !important;
+    margin-left: -5.5vmin !important;
+    margin-top: -5.5vmin !important;
+    z-index: 3 !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+    border: 2.2px solid #e09030 !important;
+    background: radial-gradient(circle at 50% 50%, #020205 60%, #060812 82%, rgba(224, 144, 48, 0.28) 100%) !important;
+    box-shadow: none !important;
+    will-change: transform !important;
+    animation: ijellyPulseCore 2.6s ease-in-out infinite !important;
 }
 
 .docspinner.mdlSpinnerActive .mdl-spinner__layer-4::before {
     content: "" !important;
     position: absolute !important;
-    inset: -45% !important;
+    inset: -7px !important;
     border-radius: 50% !important;
-    background: conic-gradient(from 0deg, transparent 0deg, transparent 190deg, #e09030 305deg, #ffffff 356deg, transparent 360deg) !important;
-    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 1.5px)) !important;
-    mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 1.5px)) !important;
-    filter: drop-shadow(0 0 10px #e09030) !important;
-    animation: ijellySpinCW 1.25s linear infinite !important;
+    background: conic-gradient(from 0deg, transparent 0deg, transparent 210deg, #e09030 314deg, #fbbf24 360deg) !important;
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.6px), #000 calc(100% - 0.5px)) !important;
+    mask: radial-gradient(farthest-side, transparent calc(100% - 2.6px), #000 calc(100% - 0.5px)) !important;
+    will-change: transform !important;
+    animation: ijellySpinCW 1.35s linear infinite !important;
+    pointer-events: none !important;
+}
+
+.docspinner.mdlSpinnerActive .mdl-spinner__layer-4::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: -15px !important;
+    border-radius: 50% !important;
+    background: radial-gradient(circle 8.5px at 50% 9px, #ffffff 0%, #fbbf24 26%, #e09030 56%, transparent 100%) !important;
+    will-change: transform !important;
+    animation: ijellySpinCW 1.35s linear infinite !important;
+    pointer-events: none !important;
 }
 
 /* Inline section spinners */
@@ -2352,6 +2672,8 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 
 @media (prefers-reduced-motion: reduce) {
     .docspinner.mdlSpinnerActive .mdl-spinner__layer,
+    .docspinner.mdlSpinnerActive .mdl-spinner__layer-4::before,
+    .docspinner.mdlSpinnerActive .mdl-spinner__layer-4::after,
     .mdl-spinner.mdlSpinnerActive:not(.docspinner)::before,
     .splashLogo {
         animation-duration: 3s !important;

@@ -85,7 +85,7 @@ The page takes its colors from the current art. No script needed.
 
 Open **Dashboard › General › Custom CSS** and paste one of the imports below. Save, then enable **Settings › Display › Backdrops**.
 
-The `@latest` tag tracks the newest release. jsDelivr caches it, so a new release can take a while to show up. To pin a version, replace `@latest` with a release tag such as `@3.0.3`. A pinned tag never changes and is never stale.
+The `@latest` tag tracks the newest release. jsDelivr caches it, so a new release can take a while to show up. To pin a version, replace `@latest` with a release tag such as `@3.1`. A pinned tag never changes and is never stale.
 
 ### Apple TV
 
