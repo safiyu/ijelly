@@ -955,6 +955,7 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     display: none !important;
 }
 
+/* Video OSD Bottom — Modular Pro (Split-Dock Dual Islands) */
 .videoOsdBottom.videoOsdBottom-maincontrols {
     position: fixed !important;
     bottom: 0 !important;
@@ -963,16 +964,18 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     width: 100% !important;
     max-width: 100% !important;
     height: auto !important;
-    min-height: 5.5rem !important;
-    padding: 1.25rem 1.75rem 1.1rem !important;
+    min-height: unset !important;
+    padding: 0 2rem 1.35rem !important;
+    margin: 0 !important;
     box-sizing: border-box !important;
-    background: linear-gradient(to top, rgba(6, 10, 18, 0.95) 0%, rgba(6, 10, 18, 0.75) 60%, rgba(6, 10, 18, 0.4) 100%) !important;
+    background: transparent !important;
     border: none !important;
-    border-top: 1px solid var(--kxta-border) !important;
     border-radius: 0 !important;
-    backdrop-filter: blur(10px) !important;
-    -webkit-backdrop-filter: blur(10px) !important;
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4) !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    pointer-events: none !important;
+    overflow: visible !important;
     z-index: 1000 !important;
     transition: transform 0.25s var(--kxta-ease), opacity 0.25s var(--kxta-ease) !important;
 }
@@ -986,32 +989,61 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
 .videoOsdBottom .osdControls {
     display: flex !important;
     flex-direction: column !important;
+    align-items: stretch !important;
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
     gap: 0.65rem !important;
+    pointer-events: none !important;
 }
 
+/* Top Timeline Island */
 .videoOsdBottom .osdControls > .flex.flex-direction-row {
+    order: 1 !important;
+    pointer-events: auto !important;
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
     width: 100% !important;
+    box-sizing: border-box !important;
     margin: 0 !important;
-    padding: 0.25rem 0 !important;
-    gap: 0.75rem !important;
+    padding: 0.55rem 1.15rem !important;
+    gap: 0.9rem !important;
+    background: rgba(10, 14, 24, 0.90) !important;
+    border: 1px solid var(--kxta-border) !important;
+    border-radius: 0px !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.52) !important;
+}
+
+.videoOsdBottom .osdPositionText,
+.videoOsdBottom .osdDurationText {
+    display: block !important;
+    font-family: var(--kxta-font-mono) !important;
+    font-variant-numeric: tabular-nums !important;
+    font-size: 0.8rem !important;
+    color: var(--kxta-text-dim) !important;
+    white-space: nowrap !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 .videoOsdBottom .sliderContainer {
     flex-grow: 1 !important;
     height: 6px !important;
     padding: 0.25rem 0 !important;
-    margin: 0.25rem 0 !important;
-    transition: height 0.2s var(--kxta-ease) !important;
+    margin: 0.2rem 0 !important;
+    transition: height 0.18s var(--kxta-ease) !important;
 }
 
 .videoOsdBottom .sliderContainer:hover {
     height: 8px !important;
+}
+
+.videoOsdBottom .osdPositionSlider,
+.videoOsdBottom .osdVolumeSlider {
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
 }
 
 .sliderContainer .mdl-slider-background-lower,
@@ -1020,7 +1052,7 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
 }
 
 .mdl-slider-background-upper {
-    background-color: rgba(224, 144, 48, 0.15) !important;
+    background-color: rgba(224, 144, 48, 0.18) !important;
 }
 
 .sliderMarker {
@@ -1034,12 +1066,12 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
 }
 
 .sliderMarker.unwatched {
-    background-color: rgba(232, 237, 245, 0.35) !important;
+    background-color: rgba(255, 255, 255, 0.35) !important;
 }
 
 .mdl-slider::-webkit-slider-thumb {
     background: var(--kxta-accent) !important;
-    border-radius: 0 !important;
+    border-radius: 0px !important;
     width: 10px !important;
     height: 14px !important;
 }
@@ -1047,76 +1079,184 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
 .mdl-slider::-moz-range-thumb {
     background: var(--kxta-accent) !important;
     border: none !important;
-    border-radius: 0 !important;
+    border-radius: 0px !important;
     width: 10px !important;
     height: 14px !important;
+}
+
+/* Bottom Split Islands Row */
+.videoOsdBottom .osdControls > .buttons {
+    order: 2 !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    gap: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Left Transport Island */
+.videoOsdBottom .osdControls > .buttons > div[dir="ltr"],
+.videoOsdBottom .osdControls > .buttons > div:first-child {
+    pointer-events: auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    height: 3.1rem !important;
+    padding: 0 0.7rem !important;
+    gap: 0.3rem !important;
+    box-sizing: border-box !important;
+    background: rgba(10, 14, 24, 0.90) !important;
+    border: 1px solid var(--kxta-border) !important;
+    border-radius: 0px !important;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55) !important;
+}
+
+/* Ends At Pill & Flex Spacer */
+.videoOsdBottom .osdControls > .buttons > .osdTimeText {
+    pointer-events: auto !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    margin: 0 auto 0 0.75rem !important;
+    padding: 0 !important;
+}
+
+.videoOsdBottom .osdControls > .buttons > .osdTimeText:has(.endsAtText:not(:empty)) {
+    height: 2.3rem !important;
+    padding: 0 0.85rem !important;
+    box-sizing: border-box !important;
+    background: rgba(10, 14, 24, 0.78) !important;
+    border: 1px solid var(--kxta-border) !important;
+    border-radius: 0px !important;
 }
 
 .videoOsdBottom .osdTimeText,
 .videoOsdBottom .endsAtText {
     font-family: var(--kxta-font-mono) !important;
     font-size: 0.75rem !important;
-    letter-spacing: 0.05em !important;
+    font-variant-numeric: tabular-nums !important;
+    letter-spacing: 0.04em !important;
     color: var(--kxta-text-dim) !important;
     white-space: nowrap !important;
-    padding: 0 !important;
-    margin: 0 0.25rem !important;
 }
 
-.videoOsdBottom .osdControls > .buttons {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    width: 100% !important;
+/* Right Utility Island (seamless multi-sibling strip) */
+.videoOsdBottom .osdControls > .buttons > .osdTimeText ~ :not(.hide) {
+    pointer-events: auto !important;
+    height: 3.1rem !important;
+    box-sizing: border-box !important;
     margin: 0 !important;
-    padding: 0 !important;
+    background: rgba(10, 14, 24, 0.90) !important;
+    border-top: 1px solid var(--kxta-border) !important;
+    border-bottom: 1px solid var(--kxta-border) !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-radius: 0 !important;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55) !important;
 }
 
-.videoOsdBottom .osdControls > .buttons > div {
-    display: flex !important;
-    flex-direction: row !important;
+.videoOsdBottom .osdControls > .buttons > .osdTimeText ~ :not(.hide):not(.osdTimeText ~ :not(.hide) ~ *) {
+    border-left: 1px solid var(--kxta-border) !important;
+    border-top-left-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+    padding-left: 0.45rem !important;
+}
+
+.videoOsdBottom .osdControls > .buttons > .osdTimeText ~ :not(.hide):not(:has(~ :not(.hide))) {
+    border-right: 1px solid var(--kxta-border) !important;
+    border-top-right-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+    padding-right: 0.45rem !important;
+}
+
+.videoOsdBottom .buttons button:not(.hide),
+.videoOsdBottom .buttons .paper-icon-button-light:not(.hide) {
+    background: transparent !important;
+    border: none !important;
+    display: inline-flex !important;
     align-items: center !important;
-    gap: 0.35rem !important;
-}
-
-.videoOsdBottom .buttons .paper-icon-button-light {
-    padding: 0.3em !important;
+    justify-content: center !important;
+    padding: 0.45rem !important;
     margin: 0 !important;
     width: auto !important;
-    height: auto !important;
+    min-width: 2.35rem !important;
+    height: 2.35rem !important;
+    border-radius: 0px !important;
     color: var(--kxta-text) !important;
-    transition: transform 0.2s var(--kxta-ease), color 0.2s var(--kxta-ease) !important;
+    transition: transform 0.16s var(--kxta-ease), color 0.16s var(--kxta-ease), background 0.16s var(--kxta-ease) !important;
 }
 
+.videoOsdBottom .osdControls > .buttons > .osdTimeText ~ button:not(.hide),
+.videoOsdBottom .osdControls > .buttons > .osdTimeText ~ .paper-icon-button-light:not(.hide) {
+    background: rgba(10, 14, 24, 0.90) !important;
+    height: 3.1rem !important;
+    min-width: 2.65rem !important;
+    padding: 0 0.55rem !important;
+    border-radius: 0 !important;
+}
+
+.videoOsdBottom .buttons button:hover,
+.videoOsdBottom .buttons button:focus,
 .videoOsdBottom .buttons .paper-icon-button-light:hover,
 .videoOsdBottom .buttons .paper-icon-button-light:focus {
     color: var(--kxta-accent) !important;
-    transform: scale(1.1) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+    transform: none !important;
 }
 
-.videoOsdBottom .btnPlayPause,
-.videoOsdBottom .btnPause {
-    transform: scale(1.15) !important;
-    color: var(--kxta-accent) !important;
+.videoOsdBottom .osdControls > .buttons > div button:hover,
+.videoOsdBottom .osdControls > .buttons > div button:focus,
+.videoOsdBottom .osdControls > .buttons > div .paper-icon-button-light:hover,
+.videoOsdBottom .osdControls > .buttons > div .paper-icon-button-light:focus {
+    transform: scale(1.08) !important;
 }
 
-.videoOsdBottom .btnPlayPause:hover,
-.videoOsdBottom .btnPlayPause:focus,
-.videoOsdBottom .btnPause:hover,
-.videoOsdBottom .btnPause:focus {
-    transform: scale(1.25) !important;
+.videoOsdBottom .osdControls > .buttons .btnPlayPause,
+.videoOsdBottom .osdControls > .buttons .btnPause {
+    background: var(--kxta-accent) !important;
+    color: var(--kxta-bg) !important;
+    width: 2.35rem !important;
+    height: 2.35rem !important;
+    border-radius: 0px !important;
+    padding: 0 !important;
+    transform: none !important;
+}
+
+.videoOsdBottom .osdControls > .buttons .btnPlayPause:hover,
+.videoOsdBottom .osdControls > .buttons .btnPlayPause:focus,
+.videoOsdBottom .osdControls > .buttons .btnPause:hover,
+.videoOsdBottom .osdControls > .buttons .btnPause:focus {
+    background: var(--kxta-accent) !important;
+    color: var(--kxta-bg) !important;
+    box-shadow: 0 0 18px var(--kxta-accent-soft) !important;
+    transform: scale(1.08) !important;
 }
 
 .videoOsdBottom .volumeButtons {
-    display: flex !important;
+    display: inline-flex !important;
     flex-direction: row !important;
+    flex-wrap: nowrap !important;
     align-items: center !important;
-    gap: 0.25rem !important;
+    gap: 0.35rem !important;
+    padding: 0 0.45rem 0 0.25rem !important;
 }
 
 .videoOsdBottom .osdVolumeSliderContainer {
-    width: 70px !important;
+    width: 72px !important;
+}
+
+.videoOsdBottom.videoOsdBottom-maincontrols .osdTextContainer.osdMainTextContainer,
+.videoOsdBottom.videoOsdBottom-maincontrols .osdTextContainer.osdSecondaryMediaInfo,
+.videoOsdBottom.videoOsdBottom-maincontrols .osdTitle,
+.osdMainTextContainer,
+.osdSecondaryMediaInfo,
+.osdTitle {
+    display: none !important;
 }
 
 /* Subtitles */
@@ -1504,73 +1644,78 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     opacity: 0.7;
 }
 
-/* TV player controls: seek bar on the top row, one packed cluster of controls below */
-.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    gap: 1.6vh !important;
+/* TV player controls — Modular Pro (Split-Dock Dual Islands) */
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols {
+    padding: 0 var(--tv-pad) 2.6vh !important;
     width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
+    max-width: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls {
+    gap: 1.4vh !important;
 }
 
 .layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .flex.flex-direction-row {
-    order: 1 !important;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
+    padding: 0.7rem 1.4rem !important;
     gap: 1.2vw !important;
 }
 
 .layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdPositionText,
 .layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdDurationText {
     display: block !important;
-    font-size: 1.1rem !important;
-    white-space: nowrap !important;
+    font-size: 1.05rem !important;
 }
 
 .layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons {
-    order: 2 !important;
-    display: flex !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 100% !important;
-    gap: 1.6vw !important;
-    margin: 0 !important;
-    padding: 0 !important;
+    justify-content: flex-start !important;
+    gap: 0 !important;
 }
 
-.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons > div {
-    display: flex !important;
-    flex-wrap: nowrap !important;
-    align-items: center !important;
-    gap: 1.2vw !important;
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons > div[dir="ltr"],
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons > div:first-child {
+    height: 3.6rem !important;
+    padding: 0 0.95rem !important;
+    gap: 0.55rem !important;
 }
 
-.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons .osdTimeText {
-    order: 10 !important;
-    margin: 0 0 0 1vw !important;
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons > .osdTimeText {
+    order: 0 !important;
+    margin: 0 auto 0 1vw !important;
+}
+
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons > .osdTimeText ~ :not(.hide) {
+    height: 3.6rem !important;
+}
+
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons > .osdTimeText ~ button:not(.hide),
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons > .osdTimeText ~ .paper-icon-button-light:not(.hide) {
+    height: 3.6rem !important;
+    min-width: 3.1rem !important;
+    padding: 0 0.7rem !important;
+}
+
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons .btnPlayPause,
+.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons .btnPause {
+    width: 2.75rem !important;
+    height: 2.75rem !important;
 }
 
 .layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdControls .paper-icon-button-light {
     margin: 0 !important;
 }
 
-.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .volumeButtons {
-    margin: 0 !important;
-    gap: 0.6vw !important;
-}
-
 .layout-tv .videoOsdBottom.videoOsdBottom-maincontrols .osdVolumeSliderContainer {
-    flex: 0 0 8vw !important;
-    width: 8vw !important;
-}
-
-.layout-tv .videoOsdBottom.videoOsdBottom-maincontrols {
-    padding: 2.4vh var(--tv-pad) 3.6vh !important;
+    flex: 0 0 7.5vw !important;
+    width: 7.5vw !important;
 }
 
 /* Detail header: the title block sits in normal flow under the buttons, so the ribbon grows with it (original titles, series names)
@@ -1750,7 +1895,52 @@ select option,
     }
 
     .videoOsdBottom.videoOsdBottom-maincontrols {
-        padding: 0.9rem 1rem !important;
+        width: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        padding: 0 0.75rem 0.85rem !important;
+        border-radius: 0 !important;
+        height: auto !important;
+    }
+
+    .videoOsdBottom.videoOsdBottom-maincontrols .osdControls {
+        gap: 0.5rem !important;
+    }
+
+    .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .flex.flex-direction-row {
+        padding: 0.45rem 0.8rem !important;
+        gap: 0.6rem !important;
+    }
+
+    .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons > div[dir="ltr"],
+    .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons > div:first-child {
+        height: 2.75rem !important;
+        padding: 0 0.45rem !important;
+        gap: 0.15rem !important;
+    }
+
+    .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons > .osdTimeText {
+        display: none !important;
+    }
+
+    .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons > .osdTimeText ~ :not(.hide) {
+        height: 2.75rem !important;
+    }
+
+    .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons > .osdTimeText ~ button:not(.hide),
+    .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons > .osdTimeText ~ .paper-icon-button-light:not(.hide) {
+        height: 2.75rem !important;
+        min-width: 2.3rem !important;
+        padding: 0 0.35rem !important;
+    }
+
+    .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons > .volumeButtons {
+        display: none !important;
+    }
+
+    .videoOsdBottom.videoOsdBottom-maincontrols .osdControls > .buttons > div:first-child {
+        margin-right: auto !important;
     }
 
     .videoOsdBottom.videoOsdBottom-maincontrols .volumeButtons,
