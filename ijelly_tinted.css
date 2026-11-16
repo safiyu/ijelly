@@ -1113,6 +1113,18 @@ body:has(#videoOsdPage:not(.hide)) .headerLeft {
     transition: transform 0.25s var(--pt-ease), translate 0.25s var(--pt-ease) !important;
 }
 
+/* Jellyfin caps the inner box at max-width:70%; with left:0 + width:100% it hugged the left edge on TV, so size it to its text and centre it */
+.videoSubtitles .videoSubtitlesInner,
+.videoSubtitles .videoSecondarySubtitlesInner,
+.videoSubtitlesInner.videoSubtitlesInner,
+.videoSecondarySubtitlesInner.videoSecondarySubtitlesInner {
+    width: fit-content !important;
+    max-width: min(70%, calc(100vw - 4rem)) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box !important;
+}
+
 .libassjs-canvas-parent,
 .JASSUB {
     transform: none !important;
