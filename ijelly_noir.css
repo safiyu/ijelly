@@ -799,7 +799,7 @@ body.transparentDocument::after,
     background-color: #000000 !important;
 }
 
-/* Video OSD Header: slim, borderless, subtle vignette (no blur seam) */
+/* Video OSD Header — Full-Width Floating Header Dock (mirrors Modular Pro timeline) */
 .skinHeader.osdHeader,
 .osdHeader,
 .videoOsdHeader,
@@ -808,18 +808,102 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader {
     top: 0 !important;
     left: 0 !important;
     right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
     display: flex !important;
     align-items: center !important;
+    border: none !important;
     border-bottom: none !important;
+    border-radius: 0 !important;
     box-shadow: none !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-    background: linear-gradient(to bottom, rgba(14, 10, 7, 0.85) 0%, rgba(14, 10, 7, 0.4) 60%, transparent 100%) !important;
-    padding: 0.35rem 1.25rem !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    padding: 1rem 2rem 0 !important;
     min-height: unset !important;
     height: auto !important;
+    pointer-events: none !important;
     z-index: 1001 !important;
     transition: transform 0.25s var(--noir-ease), opacity 0.25s var(--noir-ease) !important;
+}
+
+.osdHeader > .videoOsd-appBar,
+.videoOsdHeader > .videoOsd-appBar,
+.osdHeader > .headerTop:not(.hide),
+.videoOsdHeader > .headerTop:not(.hide) {
+    pointer-events: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    height: 3.1rem !important;
+    min-height: 3.1rem !important;
+    padding: 0 0.85rem !important;
+    margin: 0 !important;
+    background: rgba(16, 12, 8, 0.90) !important;
+    border: 1px solid var(--noir-rule) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.52) !important;
+}
+
+.osdHeader .MuiIconButton-root,
+.osdHeader .paper-icon-button-light,
+.videoOsdHeader .MuiIconButton-root,
+.videoOsdHeader .paper-icon-button-light {
+    color: var(--noir-text) !important;
+    background: transparent !important;
+    transition: color 0.16s var(--noir-ease), background 0.16s var(--noir-ease) !important;
+}
+
+.osdHeader .MuiIconButton-root:hover,
+.osdHeader .MuiIconButton-root:focus,
+.osdHeader .paper-icon-button-light:hover,
+.osdHeader .paper-icon-button-light:focus,
+.videoOsdHeader .MuiIconButton-root:hover,
+.videoOsdHeader .MuiIconButton-root:focus,
+.videoOsdHeader .paper-icon-button-light:hover,
+.videoOsdHeader .paper-icon-button-light:focus {
+    color: var(--noir-accent) !important;
+    background: rgba(255, 255, 255, 0.08) !important;
+}
+
+.layout-tv .skinHeader.osdHeader,
+.layout-tv .osdHeader,
+.layout-tv .videoOsdHeader,
+.layout-tv:has(#videoOsdPage:not(.hide)) .skinHeader {
+    padding: 2.2vh var(--tv-pad) 0 !important;
+}
+
+.layout-tv .osdHeader > .videoOsd-appBar,
+.layout-tv .videoOsdHeader > .videoOsd-appBar,
+.layout-tv .osdHeader > .headerTop:not(.hide),
+.layout-tv .videoOsdHeader > .headerTop:not(.hide) {
+    height: 3.6rem !important;
+    min-height: 3.6rem !important;
+    padding: 0 1.2rem !important;
+}
+
+@media (max-width: 768px) {
+    .skinHeader.osdHeader,
+    .osdHeader,
+    .videoOsdHeader,
+    body:has(#videoOsdPage:not(.hide)) .skinHeader {
+        padding: 0.75rem 0.75rem 0 !important;
+    }
+
+    .osdHeader > .videoOsd-appBar,
+    .videoOsdHeader > .videoOsd-appBar,
+    .osdHeader > .headerTop:not(.hide),
+    .videoOsdHeader > .headerTop:not(.hide) {
+        height: 2.85rem !important;
+        min-height: 2.85rem !important;
+        padding: 0 0.65rem !important;
+    }
 }
 
 .osdHeader.osdHeader-hidden,
@@ -2492,7 +2576,7 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     box-sizing: border-box !important;
     width: 100% !important;
     max-width: 100vw !important;
-    overflow: hidden !important;
+    overflow: visible !important;
 }
 
 /* The OSD header is a flex column centred by the theme; stretch the MUI toolbar so title and buttons sit at the edges (left back/title, right cast/sync) */
