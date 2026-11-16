@@ -1383,12 +1383,10 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
 
 .videoOsd-visible .libassjs-canvas,
 .videoOsd-visible .libassjs-canvas-parent canvas,
-.libassjs-canvas-parent canvas,
 .videoOsd-visible .JASSUB canvas,
 .videoOsd-visible .videoPlayerContainer > canvas,
 .showing-osd .libassjs-canvas,
 .showing-osd .libassjs-canvas-parent canvas,
-.libassjs-canvas-parent canvas,
 .showing-osd .JASSUB canvas,
 .showing-osd .videoPlayerContainer > canvas {
     transform: translateY(-12rem) !important;
@@ -1409,7 +1407,6 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
 
     body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas,
     body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent canvas,
-.libassjs-canvas-parent canvas,
     body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .JASSUB canvas,
     body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .videoPlayerContainer > canvas {
         transform: translateY(-12rem) !important;
@@ -1434,14 +1431,10 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
 
 .layout-tv.videoOsd-visible .libassjs-canvas,
 .layout-tv.videoOsd-visible .libassjs-canvas-parent canvas,
-.videoOsd-visible .libassjs-canvas-parent canvas,
-.libassjs-canvas-parent canvas,
 .layout-tv.videoOsd-visible .JASSUB canvas,
 .layout-tv.videoOsd-visible .videoPlayerContainer > canvas,
 .layout-tv.showing-osd .libassjs-canvas,
 .layout-tv.showing-osd .libassjs-canvas-parent canvas,
-.showing-osd .libassjs-canvas-parent canvas,
-.libassjs-canvas-parent canvas,
 .layout-tv.showing-osd .JASSUB canvas,
 .layout-tv.showing-osd .videoPlayerContainer > canvas {
     transform: translateY(-14.5rem) !important;
@@ -1462,7 +1455,6 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
 
     .layout-tv:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas,
     .layout-tv:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent canvas,
-.libassjs-canvas-parent canvas,
     .layout-tv:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .JASSUB canvas,
     .layout-tv:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .videoPlayerContainer > canvas {
         transform: translateY(-14.5rem) !important;
@@ -2037,19 +2029,14 @@ select option,
 
     body.videoOsd-visible .libassjs-canvas,
     body.videoOsd-visible .libassjs-canvas-parent canvas,
-.videoOsd-visible .libassjs-canvas-parent canvas,
-.libassjs-canvas-parent canvas,
     body.videoOsd-visible .JASSUB canvas,
     body.videoOsd-visible .videoPlayerContainer > canvas,
     body.osd-visible .libassjs-canvas,
     body.osd-visible .libassjs-canvas-parent canvas,
-.libassjs-canvas-parent canvas,
     body.osd-visible .JASSUB canvas,
     body.osd-visible .videoPlayerContainer > canvas,
     body.showing-osd .libassjs-canvas,
     body.showing-osd .libassjs-canvas-parent canvas,
-.showing-osd .libassjs-canvas-parent canvas,
-.libassjs-canvas-parent canvas,
     body.showing-osd .JASSUB canvas,
     body.showing-osd .videoPlayerContainer > canvas {
         transform: translateY(-13rem) !important;
@@ -2071,8 +2058,6 @@ select option,
 
         body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas,
         body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent canvas,
-    body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .libassjs-canvas-parent canvas,
-.libassjs-canvas-parent canvas,
         body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .JASSUB canvas,
         body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .videoPlayerContainer > canvas {
             transform: translateY(-13rem) !important;
