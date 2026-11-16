@@ -1182,7 +1182,6 @@ body::after {
     height: 3.1rem !important;
     min-width: 2.65rem !important;
     padding: 0 0.55rem !important;
-    border-radius: 0 !important;
 }
 
 .videoOsdBottom .buttons button:hover,
@@ -1514,7 +1513,7 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     width: 100% !important;
     height: 100% !important;
     pointer-events: none !important;
-    z-index: 1 !important;
+    z-index: 1001 !important;
 }
 
 .videoSubtitlesInner,
