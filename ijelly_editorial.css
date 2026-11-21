@@ -580,9 +580,7 @@ h3,
 
 
 .detailPagePrimaryContainer {
-    background: linear-gradient(180deg,
-            rgba(13, 13, 14, 0.82) 0%,
-            var(--ed-bg) 28%) !important;
+    background: var(--ed-bg) !important;
     padding-top: 2em !important;
     padding-bottom: 4em !important;
 }
@@ -1768,6 +1766,7 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     align-content: flex-start !important;
     align-items: flex-start !important;
     height: auto !important;
+    margin-top: -7.2em !important;
     background: none !important;
     background-color: transparent !important;
     border: 0 !important;
@@ -1782,9 +1781,9 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     position: absolute;
     left: 25vw;
     right: 3.3%;
-    top: 0;
+    top: calc(7.2em - 1px);
     height: 1px;
-    z-index: -1;
+    z-index: 0;
     pointer-events: none;
     background: linear-gradient(90deg,
             var(--ed-accent) 0%,
@@ -1814,14 +1813,15 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     position: absolute;
     left: 0;
     right: 0;
-    top: 0;
-    height: 7.2em;
+    top: -4.5em;
+    height: calc(11.7em + 2px);
     z-index: -2;
     pointer-events: none;
     background: linear-gradient(to bottom,
-            rgba(200, 16, 46, 0.06) 0%,
-            rgba(13, 13, 14, 0.56) 36%,
-            rgba(13, 13, 14, 0.82) 100%) !important;
+            rgba(13, 13, 14, 0) 0%,
+            rgba(13, 13, 14, 0.22) 30%,
+            rgba(13, 13, 14, 0.66) 68%,
+            var(--ed-bg) 100%) !important;
 }
 
 .layout-desktop .detailRibbon.detailRibbon .mainDetailButtons,
@@ -1829,6 +1829,8 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     order: 1 !important;
     width: 100% !important;
     height: 7.2em !important;
+    align-items: flex-end !important;
+    padding-bottom: 0.9em !important;
     box-sizing: border-box !important;
 }
 
@@ -1852,6 +1854,7 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
 .layout-desktop .detailPagePrimaryContainer.detailPagePrimaryContainer,
 .layout-tv .detailPagePrimaryContainer.detailPagePrimaryContainer {
     min-height: calc(min(540px, 28.5vw) - 5.5em) !important;
+    padding-top: 1px !important;
     padding-bottom: 2.5em !important;
 }
 

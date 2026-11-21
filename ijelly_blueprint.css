@@ -1822,6 +1822,7 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     align-content: flex-start !important;
     align-items: flex-start !important;
     height: auto !important;
+    margin-top: -7.2em !important;
     background: none !important;
     background-color: transparent !important;
     border: 0 !important;
@@ -1836,8 +1837,8 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     position: absolute;
     left: 0;
     right: 0;
-    top: -1.1em;
-    height: 8.4em;
+    top: 0.5em;
+    height: calc(6.7em + 2px);
     z-index: -2;
     pointer-events: none;
     background: linear-gradient(90deg,
@@ -1877,8 +1878,8 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     position: absolute;
     left: 0;
     right: 0;
-    top: -1.1em;
-    height: 8.4em;
+    top: 0.5em;
+    height: calc(6.7em + 2px);
     z-index: -1;
     pointer-events: none;
     background: linear-gradient(180deg,
@@ -1960,6 +1961,8 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     order: 1 !important;
     width: 100% !important;
     height: 7.2em !important;
+    align-items: flex-end !important;
+    padding-bottom: 1.0em !important;
     box-sizing: border-box !important;
 }
 
@@ -1983,6 +1986,7 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
 .layout-desktop .detailPagePrimaryContainer.detailPagePrimaryContainer,
 .layout-tv .detailPagePrimaryContainer.detailPagePrimaryContainer {
     min-height: calc(min(540px, 28.5vw) - 5.5em) !important;
+    padding-top: 1px !important;
     padding-bottom: 2.5em !important;
 }
 

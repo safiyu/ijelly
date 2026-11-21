@@ -570,9 +570,7 @@ h3,
 
 
 .detailPagePrimaryContainer {
-    background: linear-gradient(180deg,
-            rgba(0, 0, 0, 0.76) 0%,
-            var(--pt-bg) 28%) !important;
+    background: var(--pt-bg) !important;
     padding-top: 2em !important;
     padding-bottom: 4em !important;
 }
@@ -1779,6 +1777,7 @@ body:has(#videoOsdPage:not(.hide)) .headerLeft {
     align-content: flex-start !important;
     align-items: flex-start !important;
     height: auto !important;
+    margin-top: -7.2em !important;
     background: none !important;
     background-color: transparent !important;
     border: 0 !important;
@@ -1793,15 +1792,16 @@ body:has(#videoOsdPage:not(.hide)) .headerLeft {
     position: absolute;
     left: 0;
     right: 0;
-    top: -3.5em;
-    height: 10.7em;
+    top: -5.5em;
+    height: calc(12.7em + 2px);
     z-index: -1;
     pointer-events: none;
     background: linear-gradient(to bottom,
             rgba(0, 0, 0, 0) 0%,
-            rgba(0, 0, 0, 0.28) 38%,
-            rgba(0, 0, 0, 0.62) 74%,
-            rgba(0, 0, 0, 0.76) 100%) !important;
+            rgba(0, 0, 0, 0.16) 24%,
+            rgba(0, 0, 0, 0.5) 54%,
+            rgba(0, 0, 0, 0.86) 82%,
+            var(--pt-bg) 100%) !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     border: 0 !important;
@@ -1813,6 +1813,8 @@ body:has(#videoOsdPage:not(.hide)) .headerLeft {
     order: 1 !important;
     width: 100% !important;
     height: 7.2em !important;
+    align-items: flex-end !important;
+    padding-bottom: 0.9em !important;
     box-sizing: border-box !important;
 }
 
@@ -1836,6 +1838,7 @@ body:has(#videoOsdPage:not(.hide)) .headerLeft {
 .layout-desktop .detailPagePrimaryContainer.detailPagePrimaryContainer,
 .layout-tv .detailPagePrimaryContainer.detailPagePrimaryContainer {
     min-height: calc(min(540px, 28.5vw) - 5.5em) !important;
+    padding-top: 1px !important;
     padding-bottom: 2.5em !important;
 }
 

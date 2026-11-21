@@ -1871,6 +1871,7 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     align-content: flex-start !important;
     align-items: flex-start !important;
     height: auto !important;
+    margin-top: -7.2em !important;
     background: none !important;
     background-color: transparent !important;
     border: 0 !important;
@@ -1885,9 +1886,9 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     position: absolute;
     left: 0;
     right: 0;
-    top: -6px;
+    top: calc(7.2em - 12px);
     height: 12px;
-    z-index: -1;
+    z-index: 0;
     pointer-events: none;
     background-color: rgba(26, 26, 26, 0.94) !important;
     background-image: repeating-linear-gradient(90deg,
@@ -1913,13 +1914,15 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     position: absolute;
     left: 0;
     right: 0;
-    top: 6px;
-    height: calc(7.2em - 6px);
+    top: -4em;
+    height: calc(11.2em + 2px);
     z-index: -2;
     pointer-events: none;
     background: linear-gradient(to bottom,
-            rgba(26, 26, 26, 0.9) 0%,
-            var(--gl-bg) 72%) !important;
+            rgba(26, 26, 26, 0) 0%,
+            rgba(26, 26, 26, 0.24) 30%,
+            rgba(26, 26, 26, 0.72) 72%,
+            var(--gl-bg) 100%) !important;
 }
 
 .layout-desktop .detailRibbon.detailRibbon .mainDetailButtons,
@@ -1927,6 +1930,8 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     order: 1 !important;
     width: 100% !important;
     height: 7.2em !important;
+    align-items: flex-end !important;
+    padding-bottom: 1.45em !important;
     box-sizing: border-box !important;
 }
 
@@ -1950,6 +1955,7 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
 .layout-desktop .detailPagePrimaryContainer.detailPagePrimaryContainer,
 .layout-tv .detailPagePrimaryContainer.detailPagePrimaryContainer {
     min-height: calc(min(540px, 28.5vw) - 5.5em) !important;
+    padding-top: 1px !important;
     padding-bottom: 2.5em !important;
 }
 
