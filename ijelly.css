@@ -3653,7 +3653,7 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     margin-bottom: 2.1rem !important;
 }
 
-/* Architectural Coordinate Ruler Section Headers */
+/* Section Headers — 02: Dual-Hairline Horizon */
 #indexPage .verticalSection > .sectionTitleContainer,
 #indexPage .verticalSection > h2.sectionTitle,
 .homePage .verticalSection > .sectionTitleContainer,
@@ -3661,69 +3661,122 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     position: relative !important;
     display: flex !important;
     align-items: center !important;
+    gap: 0.75rem !important;
     width: auto !important;
     margin: 0 3.3% 1.05rem 3.3% !important;
-    padding: 0.45rem 0 0.72rem 0 !important;
-    border-top: none !important;
-    border-left: none !important;
-    border-right: none !important;
-    border-bottom: 1px dashed var(--lb-rule) !important;
-    background-image:
-        repeating-linear-gradient(90deg, var(--lb-tick) 0 1px, transparent 1px 16px),
-        repeating-linear-gradient(90deg, var(--lb-accent) 0 1px, transparent 1px 80px) !important;
-    background-size: 100% 4px, 100% 8px !important;
-    background-position: left bottom, left bottom !important;
-    background-repeat: no-repeat !important;
+    padding: 0.32rem 0 0.52rem 0 !important;
+    border: none !important;
+    background: none !important;
 }
 
-#indexPage .verticalSection .sectionTitleContainer h2.sectionTitle,
-#indexPage .verticalSection .sectionTitleContainer .sectionTitleTextButton,
-.homePage .verticalSection .sectionTitleContainer h2.sectionTitle,
-.homePage .verticalSection .sectionTitleContainer .sectionTitleTextButton {
+#indexPage .verticalSection .sectionTitleContainer > .sectionTitleTextButton,
+#indexPage .verticalSection .sectionTitleContainer > h2.sectionTitle,
+.homePage .verticalSection .sectionTitleContainer > .sectionTitleTextButton,
+.homePage .verticalSection .sectionTitleContainer > h2.sectionTitle {
     margin: 0 !important;
     padding: 0 !important;
     border: none !important;
     background: transparent !important;
+    text-decoration: none !important;
     display: inline-flex !important;
     align-items: center !important;
     gap: 0.35rem !important;
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+}
+
+#indexPage .verticalSection .sectionTitleContainer .sectionTitleTextButton h2.sectionTitle,
+.homePage .verticalSection .sectionTitleContainer .sectionTitleTextButton h2.sectionTitle {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    display: block !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+#indexPage .verticalSection .sectionTitleContainer > h2.sectionTitle,
+.homePage .verticalSection .sectionTitleContainer > h2.sectionTitle {
+    display: block !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 
 #indexPage .verticalSection h2.sectionTitle,
 .homePage .verticalSection h2.sectionTitle {
-    font-family: var(--lb-mono) !important;
-    font-size: 0.82rem !important;
+    font-family: var(--apple-font) !important;
+    font-size: 0.86rem !important;
     font-weight: 600 !important;
     font-style: normal !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.16em !important;
+    letter-spacing: 0.12em !important;
     color: var(--lb-text) !important;
     line-height: 1.2 !important;
+    white-space: nowrap !important;
 }
 
 #indexPage .verticalSection h2.sectionTitle::before,
 .homePage .verticalSection h2.sectionTitle::before {
-    content: "+ " counter(ijelly-sec, decimal-leading-zero) " // " !important;
+    content: counter(ijelly-sec, decimal-leading-zero) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0.14rem 0.42rem !important;
+    margin-right: 0.55rem !important;
+    border: 1px solid var(--lb-accent) !important;
+    background: var(--lb-wash) !important;
     color: var(--lb-accent) !important;
     font-family: var(--lb-mono) !important;
-    font-weight: 500 !important;
-    letter-spacing: 0.14em !important;
-    margin-right: 0.25rem !important;
+    font-size: 0.66rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.12em !important;
+    line-height: 1.2 !important;
+}
+
+[dir="rtl"] #indexPage .verticalSection h2.sectionTitle::before,
+[dir="rtl"] .homePage .verticalSection h2.sectionTitle::before {
+    margin-right: 0 !important;
+    margin-left: 0.55rem !important;
 }
 
 #indexPage .verticalSection > .sectionTitleContainer::after,
 #indexPage .verticalSection > h2.sectionTitle::after,
 .homePage .verticalSection > .sectionTitleContainer::after,
 .homePage .verticalSection > h2.sectionTitle::after {
-    content: "040 · 080 · 120 · 160 +" !important;
-    margin-left: auto !important;
+    content: "+" !important;
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    height: 16px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
     font-family: var(--lb-mono) !important;
-    font-size: 0.62rem !important;
+    font-size: 0.75rem !important;
     font-weight: 400 !important;
-    letter-spacing: 0.18em !important;
-    color: var(--lb-coord) !important;
-    white-space: nowrap !important;
+    color: var(--lb-text-dim) !important;
     pointer-events: none !important;
+    background-image:
+        linear-gradient(90deg, var(--lb-rule) 0%, var(--lb-rule) 74%, transparent 94%),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.08) 68%, transparent 90%) !important;
+    background-size: calc(100% - 18px) 1px, calc(100% - 18px) 1px !important;
+    background-position: left calc(50% - 2px), left calc(50% + 2px) !important;
+    background-repeat: no-repeat !important;
+}
+
+[dir="rtl"] #indexPage .verticalSection > .sectionTitleContainer::after,
+[dir="rtl"] #indexPage .verticalSection > h2.sectionTitle::after,
+[dir="rtl"] .homePage .verticalSection > .sectionTitleContainer::after,
+[dir="rtl"] .homePage .verticalSection > h2.sectionTitle::after {
+    background-image:
+        linear-gradient(270deg, var(--lb-rule) 0%, var(--lb-rule) 74%, transparent 94%),
+        linear-gradient(270deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.08) 68%, transparent 90%) !important;
+    background-position: right calc(50% - 2px), right calc(50% + 2px) !important;
 }
 
 #indexPage .verticalSection .sectionTitleTextButton .material-icons,
@@ -4450,7 +4503,9 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     #indexPage .verticalSection > h2.sectionTitle::after,
     .homePage .verticalSection > .sectionTitleContainer::after,
     .homePage .verticalSection > h2.sectionTitle::after {
-        display: none !important;
+        content: "" !important;
+        min-width: 0 !important;
+        background-size: 100% 1px, 100% 1px !important;
     }
 
     #indexPage .verticalSection:has(.emby-scrollbuttons) > .sectionTitleContainer,

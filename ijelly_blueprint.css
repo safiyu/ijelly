@@ -3051,46 +3051,89 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     margin-bottom: 2.1rem !important;
 }
 
-/* Architectural Coordinate Ruler Section Headers */
+/* Section Headers — 01: Chamfered Nameplate Datum */
 #indexPage .verticalSection > .sectionTitleContainer,
+.homePage .verticalSection > .sectionTitleContainer {
+    position: relative !important;
+    display: flex !important;
+    align-items: flex-end !important;
+    width: auto !important;
+    margin: 0 3.3% 1.05rem 3.3% !important;
+    padding: 0 !important;
+    border: none !important;
+    background-image: linear-gradient(90deg, var(--lb-accent) 0%, var(--lb-rule) 42%, transparent 100%) !important;
+    background-size: 100% 1px !important;
+    background-position: left bottom !important;
+    background-repeat: no-repeat !important;
+}
+
 #indexPage .verticalSection > h2.sectionTitle,
-.homePage .verticalSection > .sectionTitleContainer,
 .homePage .verticalSection > h2.sectionTitle {
     position: relative !important;
     display: flex !important;
     align-items: center !important;
     width: auto !important;
     margin: 0 3.3% 1.05rem 3.3% !important;
-    padding: 0.45rem 0 0.72rem 0 !important;
-    border-top: none !important;
-    border-left: none !important;
-    border-right: none !important;
-    border-bottom: 1px dashed var(--lb-rule) !important;
+    padding: 0.36rem 0 0.44rem 0.9rem !important;
+    border: none !important;
     background-image:
-        repeating-linear-gradient(90deg, var(--lb-tick) 0 1px, transparent 1px 16px),
-        repeating-linear-gradient(90deg, var(--lb-accent) 0 1px, transparent 1px 80px) !important;
-    background-size: 100% 4px, 100% 8px !important;
-    background-position: left bottom, left bottom !important;
+        linear-gradient(var(--lb-accent), var(--lb-accent)),
+        linear-gradient(var(--lb-rule), var(--lb-rule)),
+        linear-gradient(135deg, transparent 7px, var(--lb-surface) 7.4px, var(--lb-surface) calc(100% - 7.4px), transparent calc(100% - 7px)),
+        linear-gradient(90deg, var(--lb-accent) 0%, var(--lb-rule) 42%, transparent 100%) !important;
+    background-size: 8.9rem 2px, 8rem 1px, 9.5rem 100%, 100% 1px !important;
+    background-position: left bottom, 10px top, left bottom, left bottom !important;
     background-repeat: no-repeat !important;
 }
 
-#indexPage .verticalSection .sectionTitleContainer h2.sectionTitle,
-#indexPage .verticalSection .sectionTitleContainer .sectionTitleTextButton,
-.homePage .verticalSection .sectionTitleContainer h2.sectionTitle,
-.homePage .verticalSection .sectionTitleContainer .sectionTitleTextButton {
+#indexPage .verticalSection .sectionTitleContainer > .sectionTitleTextButton,
+#indexPage .verticalSection .sectionTitleContainer > h2.sectionTitle,
+.homePage .verticalSection .sectionTitleContainer > .sectionTitleTextButton,
+.homePage .verticalSection .sectionTitleContainer > h2.sectionTitle {
+    margin: 0 !important;
+    padding: 0.36rem 1.25rem 0.44rem 0.9rem !important;
+    border: none !important;
+    border-top: 1px solid var(--lb-rule) !important;
+    background: var(--lb-surface) !important;
+    clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%, 0 10px) !important;
+    box-shadow: inset 0 -2px 0 var(--lb-accent) !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.35rem !important;
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+}
+
+#indexPage .verticalSection .sectionTitleContainer .sectionTitleTextButton h2.sectionTitle,
+.homePage .verticalSection .sectionTitleContainer .sectionTitleTextButton h2.sectionTitle {
     margin: 0 !important;
     padding: 0 !important;
     border: none !important;
     background: transparent !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 0.35rem !important;
+    clip-path: none !important;
+    box-shadow: none !important;
+    display: block !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+#indexPage .verticalSection .sectionTitleContainer > h2.sectionTitle,
+.homePage .verticalSection .sectionTitleContainer > h2.sectionTitle {
+    display: block !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
 }
 
 #indexPage .verticalSection h2.sectionTitle,
 .homePage .verticalSection h2.sectionTitle {
     font-family: var(--lb-mono) !important;
-    font-size: 0.82rem !important;
+    font-size: 0.78rem !important;
     font-weight: 600 !important;
     font-style: normal !important;
     text-transform: uppercase !important;
@@ -3101,27 +3144,31 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 
 #indexPage .verticalSection h2.sectionTitle::before,
 .homePage .verticalSection h2.sectionTitle::before {
-    content: "+ " counter(ijelly-sec, decimal-leading-zero) " // " !important;
+    content: counter(ijelly-sec, decimal-leading-zero) !important;
     color: var(--lb-accent) !important;
     font-family: var(--lb-mono) !important;
     font-weight: 500 !important;
     letter-spacing: 0.14em !important;
-    margin-right: 0.25rem !important;
+    margin-right: 0.5rem !important;
 }
 
 #indexPage .verticalSection > .sectionTitleContainer::after,
 #indexPage .verticalSection > h2.sectionTitle::after,
 .homePage .verticalSection > .sectionTitleContainer::after,
 .homePage .verticalSection > h2.sectionTitle::after {
-    content: "040 · 080 · 120 · 160 +" !important;
+    content: "◆" !important;
     margin-left: auto !important;
-    font-family: var(--lb-mono) !important;
-    font-size: 0.62rem !important;
-    font-weight: 400 !important;
-    letter-spacing: 0.18em !important;
-    color: var(--lb-coord) !important;
-    white-space: nowrap !important;
+    padding-bottom: 0.34rem !important;
+    font-size: 0.65rem !important;
+    color: var(--lb-accent) !important;
+    opacity: 0.8 !important;
+    line-height: 1 !important;
     pointer-events: none !important;
+}
+
+#indexPage .verticalSection > h2.sectionTitle::after,
+.homePage .verticalSection > h2.sectionTitle::after {
+    padding-bottom: 0 !important;
 }
 
 #indexPage .verticalSection .sectionTitleTextButton .material-icons,
@@ -3142,7 +3189,7 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 
 #indexPage .verticalSection > .emby-scrollbuttons,
 .homePage .verticalSection > .emby-scrollbuttons {
-    top: 0.22rem !important;
+    top: 0.1rem !important;
     right: 3.3% !important;
     padding: 0 !important;
     min-width: auto !important;

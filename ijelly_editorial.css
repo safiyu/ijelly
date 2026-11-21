@@ -2965,7 +2965,7 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     margin-bottom: 2.1rem !important;
 }
 
-/* Architectural Coordinate Ruler Section Headers */
+/* Section Headers — 06: Optical Viewfinder Brackets */
 #indexPage .verticalSection > .sectionTitleContainer,
 #indexPage .verticalSection > h2.sectionTitle,
 .homePage .verticalSection > .sectionTitleContainer,
@@ -2973,32 +2973,52 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     position: relative !important;
     display: flex !important;
     align-items: center !important;
+    gap: 0.85rem !important;
     width: auto !important;
     margin: 0 3.3% 1.05rem 3.3% !important;
-    padding: 0.45rem 0 0.72rem 0 !important;
-    border-top: none !important;
-    border-left: none !important;
-    border-right: none !important;
-    border-bottom: 1px dashed var(--lb-rule) !important;
+    padding: 0.42rem 0.7rem 0.52rem 0.7rem !important;
+    border: none !important;
     background-image:
-        repeating-linear-gradient(90deg, var(--lb-tick) 0 1px, transparent 1px 16px),
-        repeating-linear-gradient(90deg, var(--lb-accent) 0 1px, transparent 1px 80px) !important;
-    background-size: 100% 4px, 100% 8px !important;
-    background-position: left bottom, left bottom !important;
+        linear-gradient(var(--lb-accent), var(--lb-accent)),
+        linear-gradient(var(--lb-accent), var(--lb-accent)),
+        linear-gradient(var(--lb-accent), var(--lb-accent)),
+        linear-gradient(var(--lb-accent), var(--lb-accent)) !important;
+    background-size: 12px 1.5px, 1.5px 12px, 12px 1.5px, 1.5px 12px !important;
+    background-position: left top, left top, right top, right top !important;
     background-repeat: no-repeat !important;
 }
 
-#indexPage .verticalSection .sectionTitleContainer h2.sectionTitle,
-#indexPage .verticalSection .sectionTitleContainer .sectionTitleTextButton,
-.homePage .verticalSection .sectionTitleContainer h2.sectionTitle,
-.homePage .verticalSection .sectionTitleContainer .sectionTitleTextButton {
+#indexPage .verticalSection .sectionTitleContainer > .sectionTitleTextButton,
+#indexPage .verticalSection .sectionTitleContainer > h2.sectionTitle,
+.homePage .verticalSection .sectionTitleContainer > .sectionTitleTextButton,
+.homePage .verticalSection .sectionTitleContainer > h2.sectionTitle {
     margin: 0 !important;
     padding: 0 !important;
     border: none !important;
     background: transparent !important;
+    text-decoration: none !important;
     display: inline-flex !important;
     align-items: center !important;
     gap: 0.35rem !important;
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+}
+
+#indexPage .verticalSection .sectionTitleContainer .sectionTitleTextButton h2.sectionTitle,
+.homePage .verticalSection .sectionTitleContainer .sectionTitleTextButton h2.sectionTitle,
+#indexPage .verticalSection .sectionTitleContainer > h2.sectionTitle,
+.homePage .verticalSection .sectionTitleContainer > h2.sectionTitle {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    display: block !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
 }
 
 #indexPage .verticalSection h2.sectionTitle,
@@ -3011,30 +3031,36 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     letter-spacing: 0.16em !important;
     color: var(--lb-text) !important;
     line-height: 1.2 !important;
+    white-space: nowrap !important;
 }
 
 #indexPage .verticalSection h2.sectionTitle::before,
 .homePage .verticalSection h2.sectionTitle::before {
-    content: "+ " counter(ijelly-sec, decimal-leading-zero) " // " !important;
+    content: counter(ijelly-sec, decimal-leading-zero) " // " !important;
     color: var(--lb-accent) !important;
     font-family: var(--lb-mono) !important;
     font-weight: 500 !important;
     letter-spacing: 0.14em !important;
-    margin-right: 0.25rem !important;
+    margin-right: 0.3rem !important;
+}
+
+[dir="rtl"] #indexPage .verticalSection h2.sectionTitle::before,
+[dir="rtl"] .homePage .verticalSection h2.sectionTitle::before {
+    margin-right: 0 !important;
+    margin-left: 0.3rem !important;
 }
 
 #indexPage .verticalSection > .sectionTitleContainer::after,
 #indexPage .verticalSection > h2.sectionTitle::after,
 .homePage .verticalSection > .sectionTitleContainer::after,
 .homePage .verticalSection > h2.sectionTitle::after {
-    content: "040 · 080 · 120 · 160 +" !important;
-    margin-left: auto !important;
-    font-family: var(--lb-mono) !important;
-    font-size: 0.62rem !important;
-    font-weight: 400 !important;
-    letter-spacing: 0.18em !important;
-    color: var(--lb-coord) !important;
-    white-space: nowrap !important;
+    content: "" !important;
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    height: 1px !important;
+    margin-inline-end: 0.45rem !important;
+    background-image: repeating-linear-gradient(90deg, var(--lb-rule) 0 2px, transparent 2px 7px) !important;
+    background-repeat: repeat-x !important;
     pointer-events: none !important;
 }
 
@@ -3052,6 +3078,12 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 #indexPage .verticalSection:has(.emby-scrollbuttons) > .sectionTitleContainer,
 .homePage .verticalSection:has(.emby-scrollbuttons) > .sectionTitleContainer {
     padding-inline-end: 92px !important;
+    background-position: left top, left top, right 82px top, right 82px top !important;
+}
+
+[dir="rtl"] #indexPage .verticalSection:has(.emby-scrollbuttons) > .sectionTitleContainer,
+[dir="rtl"] .homePage .verticalSection:has(.emby-scrollbuttons) > .sectionTitleContainer {
+    background-position: left 82px top, left 82px top, right top, right top !important;
 }
 
 #indexPage .verticalSection > .emby-scrollbuttons,
@@ -3761,12 +3793,18 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     #indexPage .verticalSection > h2.sectionTitle::after,
     .homePage .verticalSection > .sectionTitleContainer::after,
     .homePage .verticalSection > h2.sectionTitle::after {
-        display: none !important;
+        min-width: 0 !important;
     }
 
     #indexPage .verticalSection:has(.emby-scrollbuttons) > .sectionTitleContainer,
     .homePage .verticalSection:has(.emby-scrollbuttons) > .sectionTitleContainer {
         padding-inline-end: 82px !important;
+        background-position: left top, left top, right 74px top, right 74px top !important;
+    }
+
+    [dir="rtl"] #indexPage .verticalSection:has(.emby-scrollbuttons) > .sectionTitleContainer,
+    [dir="rtl"] .homePage .verticalSection:has(.emby-scrollbuttons) > .sectionTitleContainer {
+        background-position: left 74px top, left 74px top, right top, right top !important;
     }
 
     #indexPage .itemsContainer > .card,

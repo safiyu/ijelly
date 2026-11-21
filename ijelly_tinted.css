@@ -2979,7 +2979,7 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     margin-bottom: 2.1rem !important;
 }
 
-/* Architectural Coordinate Ruler Section Headers */
+/* Section Headers — 05: Monolith Plinth & Fade Rule */
 #indexPage .verticalSection > .sectionTitleContainer,
 #indexPage .verticalSection > h2.sectionTitle,
 .homePage .verticalSection > .sectionTitleContainer,
@@ -2989,67 +2989,99 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     align-items: center !important;
     width: auto !important;
     margin: 0 3.3% 1.05rem 3.3% !important;
-    padding: 0.45rem 0 0.72rem 0 !important;
-    border-top: none !important;
-    border-left: none !important;
-    border-right: none !important;
-    border-bottom: 1px dashed var(--lb-rule) !important;
-    background-image:
-        repeating-linear-gradient(90deg, var(--lb-tick) 0 1px, transparent 1px 16px),
-        repeating-linear-gradient(90deg, var(--lb-accent) 0 1px, transparent 1px 80px) !important;
-    background-size: 100% 4px, 100% 8px !important;
-    background-position: left bottom, left bottom !important;
+    padding: 0.35rem 0 0.72rem 0 !important;
+    border: none !important;
+    background-image: linear-gradient(90deg, var(--lb-accent) 0 140px, var(--lb-rule) 260px, transparent 100%) !important;
+    background-size: 100% 1px !important;
+    background-position: left bottom !important;
     background-repeat: no-repeat !important;
 }
 
-#indexPage .verticalSection .sectionTitleContainer h2.sectionTitle,
-#indexPage .verticalSection .sectionTitleContainer .sectionTitleTextButton,
-.homePage .verticalSection .sectionTitleContainer h2.sectionTitle,
-.homePage .verticalSection .sectionTitleContainer .sectionTitleTextButton {
+[dir="rtl"] #indexPage .verticalSection > .sectionTitleContainer,
+[dir="rtl"] #indexPage .verticalSection > h2.sectionTitle,
+[dir="rtl"] .homePage .verticalSection > .sectionTitleContainer,
+[dir="rtl"] .homePage .verticalSection > h2.sectionTitle {
+    background-image: linear-gradient(270deg, var(--lb-accent) 0 140px, var(--lb-rule) 260px, transparent 100%) !important;
+    background-position: right bottom !important;
+}
+
+#indexPage .verticalSection .sectionTitleContainer > .sectionTitleTextButton,
+#indexPage .verticalSection .sectionTitleContainer > h2.sectionTitle,
+.homePage .verticalSection .sectionTitleContainer > .sectionTitleTextButton,
+.homePage .verticalSection .sectionTitleContainer > h2.sectionTitle {
     margin: 0 !important;
     padding: 0 !important;
     border: none !important;
     background: transparent !important;
+    text-decoration: none !important;
     display: inline-flex !important;
     align-items: center !important;
     gap: 0.35rem !important;
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+}
+
+#indexPage .verticalSection .sectionTitleContainer .sectionTitleTextButton h2.sectionTitle,
+.homePage .verticalSection .sectionTitleContainer .sectionTitleTextButton h2.sectionTitle,
+#indexPage .verticalSection .sectionTitleContainer > h2.sectionTitle,
+.homePage .verticalSection .sectionTitleContainer > h2.sectionTitle {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    display: block !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
 }
 
 #indexPage .verticalSection h2.sectionTitle,
 .homePage .verticalSection h2.sectionTitle {
-    font-family: var(--lb-mono) !important;
-    font-size: 0.82rem !important;
+    font-family: var(--pt-font) !important;
+    font-size: 0.86rem !important;
     font-weight: 600 !important;
     font-style: normal !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.16em !important;
+    letter-spacing: 0.12em !important;
     color: var(--lb-text) !important;
     line-height: 1.2 !important;
 }
 
 #indexPage .verticalSection h2.sectionTitle::before,
 .homePage .verticalSection h2.sectionTitle::before {
-    content: "+ " counter(ijelly-sec, decimal-leading-zero) " // " !important;
+    content: counter(ijelly-sec, decimal-leading-zero) " ·" !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    border-left: 3px solid var(--lb-accent) !important;
+    padding-left: 0.6rem !important;
+    margin-right: 0.5rem !important;
     color: var(--lb-accent) !important;
     font-family: var(--lb-mono) !important;
-    font-weight: 500 !important;
+    font-size: 0.76rem !important;
+    font-weight: 600 !important;
     letter-spacing: 0.14em !important;
-    margin-right: 0.25rem !important;
+    line-height: 1.15 !important;
+}
+
+[dir="rtl"] #indexPage .verticalSection h2.sectionTitle::before,
+[dir="rtl"] .homePage .verticalSection h2.sectionTitle::before {
+    border-left: none !important;
+    border-right: 3px solid var(--lb-accent) !important;
+    padding-left: 0 !important;
+    padding-right: 0.6rem !important;
+    margin-right: 0 !important;
+    margin-left: 0.5rem !important;
 }
 
 #indexPage .verticalSection > .sectionTitleContainer::after,
 #indexPage .verticalSection > h2.sectionTitle::after,
 .homePage .verticalSection > .sectionTitleContainer::after,
 .homePage .verticalSection > h2.sectionTitle::after {
-    content: "040 · 080 · 120 · 160 +" !important;
-    margin-left: auto !important;
-    font-family: var(--lb-mono) !important;
-    font-size: 0.62rem !important;
-    font-weight: 400 !important;
-    letter-spacing: 0.18em !important;
-    color: var(--lb-coord) !important;
-    white-space: nowrap !important;
-    pointer-events: none !important;
+    content: none !important;
+    display: none !important;
 }
 
 #indexPage .verticalSection .sectionTitleTextButton .material-icons,
