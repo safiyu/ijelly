@@ -197,7 +197,7 @@ h3,
     border-radius: var(--pt-r-pill) !important;
     padding: 0.55em 1.3em !important;
     margin: 0 0.25em !important;
-    transition: all 0.25s var(--pt-ease) !important;
+    transition: background-color 0.12s ease, color 0.12s ease, border-color 0.12s ease !important;
     min-height: unset !important;
 }
 
@@ -242,7 +242,7 @@ h3,
     overflow: visible !important;
     background: transparent !important;
     margin: 1em !important;
-    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    transition: transform 0.12s ease-out !important;
 }
 
 .cardBox {
@@ -259,7 +259,7 @@ h3,
     border-radius: var(--pt-r) !important;
     overflow: visible !important;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
-    transition: box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    transition: none !important;
 }
 
 .cardOverlayButton {
@@ -293,7 +293,7 @@ h3,
 /* Focus: glow in the current accent — this is the signature */
 .card:focus,
 .card:hover {
-    transform: scale(1.05) !important;
+    transform: translateY(-2px) !important;
     z-index: 100 !important;
     outline: none !important;
 }
@@ -311,21 +311,15 @@ h3,
 }
 
 /* Poster halo: a blurred copy of the poster itself, so the glow always matches the art */
-.card:focus,
-.card:hover,
 .detailImageContainer .card {
     contain: none !important;
 }
 
-.card:focus .cardImageContainer,
-.card:hover .cardImageContainer,
 .detailImageContainer .card .cardImageContainer {
     overflow: visible !important;
     contain: none !important;
 }
 
-.card:focus .cardImageContainer::before,
-.card:hover .cardImageContainer::before,
 .detailImageContainer .card .cardImageContainer::before {
     content: '';
     position: absolute;
@@ -364,7 +358,7 @@ h3,
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
     box-shadow: none !important;
-    transition: all 0.2s var(--pt-ease) !important;
+    transition: background-color 0.12s ease, color 0.12s ease, border-color 0.12s ease !important;
 }
 
 .emby-button.raised:not(.detailButton),
@@ -388,7 +382,7 @@ h3,
     background: var(--pt-accent) !important;
     border-color: var(--pt-accent) !important;
     color: #000 !important;
-    transform: scale(1.04) !important;
+    transform: none !important;
     box-shadow: 0 0 30px var(--pt-accent-glow) !important;
 }
 
@@ -413,7 +407,7 @@ h3,
 .headerButton {
     color: var(--pt-text) !important;
     border-radius: 50% !important;
-    transition: all 0.2s var(--pt-ease) !important;
+    transition: background-color 0.12s ease, color 0.12s ease, border-color 0.12s ease !important;
 }
 
 .paper-icon-button-light:focus,
@@ -973,13 +967,13 @@ body:has(#videoOsdPage:not(.hide)) .headerLeft {
     background: transparent !important;
     border-radius: 50% !important;
     color: var(--pt-text) !important;
-    transition: transform 0.2s var(--pt-ease), background 0.2s var(--pt-ease) !important;
+    transition: color 0.12s ease, background-color 0.12s ease !important;
 }
 
 .btnVideoOsdBack:hover,
 .btnVideoOsdBack:focus {
     background: var(--pt-accent-soft) !important;
-    transform: scale(1.08) !important;
+    transform: none !important;
 }
 
 /* Player OSD: compact Tinted bottom dock */
@@ -1224,7 +1218,7 @@ body:has(#videoOsdPage:not(.hide)) .headerLeft {
     height: 2.35rem !important;
     border-radius: 50% !important;
     color: var(--pt-text) !important;
-    transition: transform 0.16s var(--pt-ease), color 0.16s var(--pt-ease), background 0.16s var(--pt-ease) !important;
+    transition: color 0.12s ease, background-color 0.12s ease !important;
 }
 
 .videoOsdBottom .osdControls > .buttons > .osdTimeText ~ button:not(.hide),
@@ -1248,7 +1242,7 @@ body:has(#videoOsdPage:not(.hide)) .headerLeft {
 .videoOsdBottom .osdControls > .buttons > div button:focus,
 .videoOsdBottom .osdControls > .buttons > div .paper-icon-button-light:hover,
 .videoOsdBottom .osdControls > .buttons > div .paper-icon-button-light:focus {
-    transform: scale(1.08) !important;
+    transform: none !important;
 }
 
 .videoOsdBottom .osdControls > .buttons .btnPlayPause,
@@ -1269,7 +1263,7 @@ body:has(#videoOsdPage:not(.hide)) .headerLeft {
     background: var(--pt-accent) !important;
     color: #000000 !important;
     box-shadow: 0 0 18px var(--pt-accent-glow) !important;
-    transform: scale(1.08) !important;
+    transform: none !important;
 }
 
 .videoOsdBottom .volumeButtons {
@@ -1512,7 +1506,7 @@ body:has(#videoOsdPage:not(.hide)) .headerLeft {
 
 .layout-tv .card:focus,
 .layout-tv .card:hover {
-    transform: scale(1.12) !important;
+    transform: none !important;
 }
 
 /* Scrollbars */
@@ -2041,14 +2035,14 @@ select optgroup {
     font-size: 0.92rem !important;
     font-weight: 600 !important;
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6) !important;
-    transition: transform 0.2s var(--pt-ease), background 0.2s ease, border-color 0.2s ease !important;
+    transition: background 0.12s ease, border-color 0.12s ease !important;
 }
 
 .skip-button:hover,
 .skip-button:focus-visible {
     background: var(--pt-glass-strong) !important;
     border-color: var(--pt-accent) !important;
-    transform: scale(1.03) !important;
+    transform: none !important;
 }
 
 .skip-button-hidden {
@@ -2186,7 +2180,7 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     padding: 0.55rem 1.2rem !important;
     font-weight: 600 !important;
     border: 1px solid var(--pt-border) !important;
-    transition: transform 0.18s var(--pt-ease), background 0.18s ease !important;
+    transition: background 0.12s ease !important;
 }
 
 .upNextDialog-button.btnStartNow {
@@ -2202,7 +2196,7 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 
 .upNextDialog-button:hover,
 .upNextDialog-button:focus-visible {
-    transform: scale(1.03) !important;
+    transform: none !important;
 }
 
 body.videoOsd-visible .upNextContainer:not(.hide),
@@ -2353,12 +2347,12 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 
 #divUsers .squareCard .cardScalable {
     border: 1px solid var(--pt-border) !important;
-    transition: transform 0.22s var(--pt-ease), border-color 0.2s ease, box-shadow 0.2s ease !important;
+    transition: border-color 0.12s ease, box-shadow 0.12s ease !important;
 }
 
 #divUsers .squareCard:hover .cardScalable,
 #divUsers .squareCard:focus .cardScalable {
-    transform: scale(1.04) !important;
+    transform: none !important;
     border-color: var(--pt-accent) !important;
     box-shadow: 0 0 0 2px var(--pt-accent) !important;
 }
@@ -2471,14 +2465,14 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     padding: 0.4rem 0.95rem !important;
     margin: 0.3rem !important;
     text-decoration: none !important;
-    transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s var(--pt-ease) !important;
+    transition: background 0.12s ease, border-color 0.12s ease !important;
 }
 
 .searchSuggestionsList .button-link:hover,
 .searchSuggestionsList .button-link:focus-visible {
     background: var(--pt-glass-strong) !important;
     border-color: var(--pt-accent) !important;
-    transform: translateY(-1px) !important;
+    transform: none !important;
 }
 
 /* Popup, Overlay & TV Text Overflow Guards */
@@ -3065,14 +3059,7 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     color: var(--lb-accent) !important;
     font-size: 1.05rem !important;
     margin: 0 !important;
-    transition: transform 0.2s ease !important;
-}
-
-#indexPage .verticalSection .sectionTitleTextButton:hover .material-icons,
-#indexPage .verticalSection .sectionTitleTextButton:focus .material-icons,
-.homePage .verticalSection .sectionTitleTextButton:hover .material-icons,
-.homePage .verticalSection .sectionTitleTextButton:focus .material-icons {
-    transform: translateX(3px) !important;
+    transition: none !important;
 }
 
 /* Scroll buttons aligned cleanly inside ruler right end */
@@ -3108,7 +3095,7 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     border: 1px solid var(--lb-rule) !important;
     background: var(--lb-surface) !important;
     color: var(--lb-text-dim) !important;
-    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease !important;
+    transition: none !important;
 }
 
 #indexPage .emby-scrollbuttons-button:not([disabled]):hover,
@@ -3159,7 +3146,7 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     position: relative !important;
     border-radius: 0 !important;
     box-shadow: none !important;
-    transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1), filter 0.24s ease !important;
+    transition: transform 0.12s ease-out !important;
 }
 
 #indexPage .itemsContainer > .card,
@@ -3205,11 +3192,11 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 #itemDetailPage .collectionItemsContainer > .card:hover,
 #itemDetailPage .collectionItemsContainer > .card:focus,
 #itemDetailPage .collectionItemsContainer > .card:focus-within {
-    transform: translateY(-5px) scale(1.025) !important;
+    transform: translateY(-2px) !important;
     z-index: 25 !important;
     outline: none !important;
     box-shadow: none !important;
-    filter: drop-shadow(0 0 14px var(--lb-glow)) drop-shadow(0 16px 26px rgba(0, 0, 0, 0.72)) !important;
+    filter: none !important;
 }
 
 /* Chamfered Card Container & 6-Sided Glowing Perimeter Border */
@@ -3226,7 +3213,7 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     overflow: hidden !important;
     background: var(--lb-surface) !important;
     clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px) !important;
-    transition: background-color 0.22s ease !important;
+    transition: none !important;
 }
 
 #indexPage .card:hover .cardBox,
@@ -3263,7 +3250,7 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
         linear-gradient(to bottom, var(--lb-edge) 0%, var(--lb-edge-mid) 50%, var(--lb-edge) 100%) top left / 1px 100% no-repeat,
         linear-gradient(to bottom, var(--lb-edge) 0%, var(--lb-edge-mid) 50%, var(--lb-edge) 100%) top right / 1px 100% no-repeat !important;
     opacity: 0.85 !important;
-    transition: opacity 0.22s ease !important;
+    transition: none !important;
 }
 
 #indexPage .card:hover .cardBox::after,
@@ -3385,8 +3372,8 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
         linear-gradient(var(--lb-accent), var(--lb-accent)) bottom right / 11px 1.5px no-repeat,
         linear-gradient(var(--lb-accent), var(--lb-accent)) bottom right / 1.5px 11px no-repeat !important;
     opacity: 0 !important;
-    transform: scale(1.06) !important;
-    transition: opacity 0.22s ease, transform 0.24s cubic-bezier(0.22, 1, 0.36, 1) !important;
+    transform: none !important;
+    transition: opacity 0.12s ease-out !important;
 }
 
 #indexPage .card:hover .cardScalable::before,
@@ -3402,7 +3389,6 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 #itemDetailPage .collectionItemsContainer .card:focus .cardScalable::before,
 #itemDetailPage .collectionItemsContainer .card:focus-within .cardScalable::before {
     opacity: 0.95 !important;
-    transform: scale(1) !important;
 }
 
 #indexPage .card .cardScalable::after,
@@ -3425,7 +3411,7 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     line-height: 1.35 !important;
     color: var(--lb-accent) !important;
     opacity: 0.84 !important;
-    transition: opacity 0.2s ease, border-color 0.2s ease !important;
+    transition: none !important;
 }
 
 #indexPage .card:hover .cardScalable::after,
@@ -3641,7 +3627,7 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     margin: 0 !important;
     clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px) !important;
     box-shadow: inset 0 0 0 1px var(--lb-rule) !important;
-    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease !important;
+    transition: none !important;
 }
 
 #indexPage .homeLibraryButton:hover,
@@ -3651,10 +3637,27 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     background: var(--lb-surface-hover) !important;
     color: var(--lb-accent) !important;
     box-shadow: inset 0 0 0 1px var(--lb-accent) !important;
-    transform: translateY(-2px) !important;
+    transform: none !important;
 }
 
 /* TV Layout Overrides */
+.layout-tv .card,
+.layout-tv .card .cardBox,
+.layout-tv .card .cardBox::after,
+.layout-tv .card .cardScalable,
+.layout-tv .card .cardScalable::before,
+.layout-tv .card .cardScalable::after,
+.layout-tv .homeLibraryButton,
+.layout-tv .emby-button,
+.layout-tv .emby-tab-button,
+.layout-tv .navMenuOption,
+.layout-tv .paper-icon-button-light,
+.layout-tv .MuiButton-root,
+.layout-tv .MuiTab-root,
+.layout-tv .MuiIconButton-root {
+    transition: none !important;
+}
+
 .layout-tv #indexPage .verticalSection > .sectionTitleContainer,
 .layout-tv #indexPage .verticalSection > h2.sectionTitle,
 .layout-tv .homePage .verticalSection > .sectionTitleContainer,
@@ -3726,8 +3729,30 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
 .layout-tv #itemDetailPage .collectionItemsContainer > .card:focus,
 .layout-tv #itemDetailPage .collectionItemsContainer > .card:focus-within,
 .layout-tv #itemDetailPage .collectionItemsContainer > .card:hover {
-    transform: translateY(-4px) scale(1.03) !important;
-    filter: drop-shadow(0 0 12px var(--lb-glow)) !important;
+    transform: none !important;
+    filter: none !important;
+}
+
+.layout-tv #indexPage .card:focus .cardBox::after,
+.layout-tv #indexPage .card:focus-within .cardBox::after,
+.layout-tv #indexPage .card:hover .cardBox::after,
+.layout-tv .homePage .card:focus .cardBox::after,
+.layout-tv .homePage .card:focus-within .cardBox::after,
+.layout-tv .homePage .card:hover .cardBox::after,
+.layout-tv .libraryPage:not(#itemDetailPage):not(.itemDetailPage):not(.userPreferencesPage):not(.metadataEditorPage) .card:focus .cardBox::after,
+.layout-tv .libraryPage:not(#itemDetailPage):not(.itemDetailPage):not(.userPreferencesPage):not(.metadataEditorPage) .card:focus-within .cardBox::after,
+.layout-tv .libraryPage:not(#itemDetailPage):not(.itemDetailPage):not(.userPreferencesPage):not(.metadataEditorPage) .card:hover .cardBox::after,
+.layout-tv #itemDetailPage .collectionItemsContainer .card:focus .cardBox::after,
+.layout-tv #itemDetailPage .collectionItemsContainer .card:focus-within .cardBox::after,
+.layout-tv #itemDetailPage .collectionItemsContainer .card:hover .cardBox::after {
+    background:
+        linear-gradient(135deg, transparent 9px, var(--lb-accent) 9.4px, var(--lb-accent) 11.8px, transparent 12.2px) top left / 17px 17px no-repeat,
+        linear-gradient(315deg, transparent 9px, var(--lb-accent) 9.4px, var(--lb-accent) 11.8px, transparent 12.2px) bottom right / 17px 17px no-repeat,
+        linear-gradient(var(--lb-accent), var(--lb-accent)) top left / 100% 2px no-repeat,
+        linear-gradient(var(--lb-accent), var(--lb-accent)) bottom left / 100% 2px no-repeat,
+        linear-gradient(var(--lb-accent), var(--lb-accent)) top left / 2px 100% no-repeat,
+        linear-gradient(var(--lb-accent), var(--lb-accent)) top right / 2px 100% no-repeat !important;
+    opacity: 1 !important;
 }
 
 .layout-tv #indexPage .card .cardBox .cardText,
@@ -3774,6 +3799,32 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     #itemDetailPage .collectionItemsContainer > .card {
         margin: 0 !important;
         padding: 0.35rem !important;
+    }
+
+    #indexPage .itemsContainer > .card,
+    #indexPage .card .cardScalable::before,
+    .homePage .itemsContainer > .card,
+    .homePage .card .cardScalable::before,
+    .libraryPage:not(#itemDetailPage):not(.itemDetailPage):not(.userPreferencesPage):not(.metadataEditorPage) .itemsContainer > .card,
+    .libraryPage:not(#itemDetailPage):not(.itemDetailPage):not(.userPreferencesPage):not(.metadataEditorPage) .card .cardScalable::before,
+    #itemDetailPage .collectionItemsContainer > .card,
+    #itemDetailPage .collectionItemsContainer .card .cardScalable::before {
+        transition: none !important;
+    }
+
+    #indexPage .itemsContainer > .card:hover,
+    #indexPage .itemsContainer > .card:focus,
+    #indexPage .itemsContainer > .card:focus-within,
+    .homePage .itemsContainer > .card:hover,
+    .homePage .itemsContainer > .card:focus,
+    .homePage .itemsContainer > .card:focus-within,
+    .libraryPage:not(#itemDetailPage):not(.itemDetailPage):not(.userPreferencesPage):not(.metadataEditorPage) .itemsContainer > .card:hover,
+    .libraryPage:not(#itemDetailPage):not(.itemDetailPage):not(.userPreferencesPage):not(.metadataEditorPage) .itemsContainer > .card:focus,
+    .libraryPage:not(#itemDetailPage):not(.itemDetailPage):not(.userPreferencesPage):not(.metadataEditorPage) .itemsContainer > .card:focus-within,
+    #itemDetailPage .collectionItemsContainer > .card:hover,
+    #itemDetailPage .collectionItemsContainer > .card:focus,
+    #itemDetailPage .collectionItemsContainer > .card:focus-within {
+        transform: none !important;
     }
 
     #indexPage .card .cardBox,
@@ -3857,6 +3908,32 @@ body:has(#videoOsdPage:not(.hide) .videoOsdBottom:not(.videoOsdBottom-hidden)) .
     }
 
     #indexPage .itemsContainer > .card,
+    #indexPage .itemsContainer > .card,
+    #indexPage .card .cardScalable::before,
+    .homePage .itemsContainer > .card,
+    .homePage .card .cardScalable::before,
+    .libraryPage:not(#itemDetailPage):not(.itemDetailPage):not(.userPreferencesPage):not(.metadataEditorPage) .itemsContainer > .card,
+    .libraryPage:not(#itemDetailPage):not(.itemDetailPage):not(.userPreferencesPage):not(.metadataEditorPage) .card .cardScalable::before,
+    #itemDetailPage .collectionItemsContainer > .card,
+    #itemDetailPage .collectionItemsContainer .card .cardScalable::before {
+        transition: none !important;
+    }
+
+    #indexPage .itemsContainer > .card:hover,
+    #indexPage .itemsContainer > .card:focus,
+    #indexPage .itemsContainer > .card:focus-within,
+    .homePage .itemsContainer > .card:hover,
+    .homePage .itemsContainer > .card:focus,
+    .homePage .itemsContainer > .card:focus-within,
+    .libraryPage:not(#itemDetailPage):not(.itemDetailPage):not(.userPreferencesPage):not(.metadataEditorPage) .itemsContainer > .card:hover,
+    .libraryPage:not(#itemDetailPage):not(.itemDetailPage):not(.userPreferencesPage):not(.metadataEditorPage) .itemsContainer > .card:focus,
+    .libraryPage:not(#itemDetailPage):not(.itemDetailPage):not(.userPreferencesPage):not(.metadataEditorPage) .itemsContainer > .card:focus-within,
+    #itemDetailPage .collectionItemsContainer > .card:hover,
+    #itemDetailPage .collectionItemsContainer > .card:focus,
+    #itemDetailPage .collectionItemsContainer > .card:focus-within {
+        transform: none !important;
+    }
+
     #indexPage .card .cardBox,
     #indexPage .card .cardBox::after,
     #indexPage .card .cardScalable::before,
