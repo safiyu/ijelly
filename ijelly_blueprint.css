@@ -590,12 +590,12 @@ h3,
 }
 
 .detailRibbon {
-    background: rgba(10, 12, 14, 0.88) !important;
-    backdrop-filter: blur(20px) !important;
-    -webkit-backdrop-filter: blur(20px) !important;
+    background: rgba(6, 10, 18, 0.92) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
     border-top: 1px solid var(--kxta-border) !important;
-    border-bottom: 1px solid var(--kxta-border) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+    border-bottom: 0 !important;
+    box-shadow: none !important;
 }
 
 .layout-desktop .detailRibbon,
@@ -608,7 +608,7 @@ h3,
     justify-content: flex-start !important;
     padding-left: 25vw !important;
     z-index: 2 !important;
-    background: rgba(10, 12, 14, 0.88) !important;
+    background: transparent !important;
 }
 
 .layout-desktop [dir=rtl] .detailRibbon,
@@ -643,9 +643,7 @@ h3,
 
 
 .detailPagePrimaryContainer {
-    background: linear-gradient(180deg,
-            rgba(8, 9, 10, 0.88) 0%,
-            var(--kxta-bg) 25%) !important;
+    background: var(--kxta-bg) !important;
     padding-top: 2em !important;
     padding-bottom: 4em !important;
 }
@@ -669,11 +667,17 @@ h3,
 }
 
 .itemBackdrop {
-    height: 50vh !important;
-    mask-image: linear-gradient(to bottom, black 50%, transparent 100%) !important;
-    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%) !important;
+    height: 52vh !important;
+    mask-image: linear-gradient(to bottom,
+            #000 58%,
+            rgba(0, 0, 0, 0.72) 86%,
+            rgba(0, 0, 0, 0.2) 100%) !important;
+    -webkit-mask-image: linear-gradient(to bottom,
+            #000 58%,
+            rgba(0, 0, 0, 0.72) 86%,
+            rgba(0, 0, 0, 0.2) 100%) !important;
     filter: brightness(0.5) contrast(1.05) !important;
-    opacity: 0.8 !important;
+    opacity: 0.85 !important;
 }
 
 .detailPagePrimaryContainer .card,
@@ -1832,16 +1836,123 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     position: absolute;
     left: 0;
     right: 0;
-    top: 0;
-    height: 7.2em;
+    top: -1.1em;
+    height: 8.4em;
+    z-index: -2;
+    pointer-events: none;
+    background: linear-gradient(90deg,
+            var(--kxta-border-dim) 0%,
+            var(--kxta-border) 21%,
+            var(--kxta-accent) 24.5%,
+            var(--kxta-border) 56%,
+            rgba(224, 144, 48, 0.28) 68%,
+            rgba(255, 255, 255, 0.08) 100%) !important;
+    clip-path: polygon(
+            0 1.35em,
+            22.5vw 1.35em,
+            calc(22.5vw + 1.1em) 0.25em,
+            66vw 0.25em,
+            calc(66vw + 1.1em) 1.35em,
+            100% 1.35em,
+            100% 100%,
+            0 100%) !important;
+    -webkit-clip-path: polygon(
+            0 1.35em,
+            22.5vw 1.35em,
+            calc(22.5vw + 1.1em) 0.25em,
+            66vw 0.25em,
+            calc(66vw + 1.1em) 1.35em,
+            100% 1.35em,
+            100% 100%,
+            0 100%) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
+}
+
+.layout-desktop .detailRibbon.detailRibbon::after,
+.layout-tv .detailRibbon.detailRibbon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -1.1em;
+    height: 8.4em;
     z-index: -1;
     pointer-events: none;
-    background: rgba(10, 12, 14, 0.88) !important;
-    backdrop-filter: blur(20px) !important;
-    -webkit-backdrop-filter: blur(20px) !important;
-    border-top: 1px solid var(--kxta-border) !important;
-    border-bottom: 1px solid var(--kxta-border) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+    background: linear-gradient(180deg,
+            rgba(13, 17, 25, 0.95) 0%,
+            var(--kxta-bg) 72%) !important;
+    clip-path: polygon(
+            0 calc(1.35em + 1px),
+            22.5vw calc(1.35em + 1px),
+            calc(22.5vw + 1.1em) calc(0.25em + 1px),
+            66vw calc(0.25em + 1px),
+            calc(66vw + 1.1em) calc(1.35em + 1px),
+            100% calc(1.35em + 1px),
+            100% 100%,
+            0 100%) !important;
+    -webkit-clip-path: polygon(
+            0 calc(1.35em + 1px),
+            22.5vw calc(1.35em + 1px),
+            calc(22.5vw + 1.1em) calc(0.25em + 1px),
+            66vw calc(0.25em + 1px),
+            calc(66vw + 1.1em) calc(1.35em + 1px),
+            100% calc(1.35em + 1px),
+            100% 100%,
+            0 100%) !important;
+}
+
+.layout-desktop [dir=rtl] .detailRibbon.detailRibbon::before,
+.layout-tv [dir=rtl] .detailRibbon.detailRibbon::before {
+    background: linear-gradient(270deg,
+            var(--kxta-border-dim) 0%,
+            var(--kxta-border) 21%,
+            var(--kxta-accent) 24.5%,
+            var(--kxta-border) 56%,
+            rgba(224, 144, 48, 0.28) 68%,
+            rgba(255, 255, 255, 0.08) 100%) !important;
+    clip-path: polygon(
+            0 1.35em,
+            calc(34vw - 1.1em) 1.35em,
+            34vw 0.25em,
+            calc(77.5vw - 1.1em) 0.25em,
+            77.5vw 1.35em,
+            100% 1.35em,
+            100% 100%,
+            0 100%) !important;
+    -webkit-clip-path: polygon(
+            0 1.35em,
+            calc(34vw - 1.1em) 1.35em,
+            34vw 0.25em,
+            calc(77.5vw - 1.1em) 0.25em,
+            77.5vw 1.35em,
+            100% 1.35em,
+            100% 100%,
+            0 100%) !important;
+}
+
+.layout-desktop [dir=rtl] .detailRibbon.detailRibbon::after,
+.layout-tv [dir=rtl] .detailRibbon.detailRibbon::after {
+    clip-path: polygon(
+            0 calc(1.35em + 1px),
+            calc(34vw - 1.1em) calc(1.35em + 1px),
+            34vw calc(0.25em + 1px),
+            calc(77.5vw - 1.1em) calc(0.25em + 1px),
+            77.5vw calc(1.35em + 1px),
+            100% calc(1.35em + 1px),
+            100% 100%,
+            0 100%) !important;
+    -webkit-clip-path: polygon(
+            0 calc(1.35em + 1px),
+            calc(34vw - 1.1em) calc(1.35em + 1px),
+            34vw calc(0.25em + 1px),
+            calc(77.5vw - 1.1em) calc(0.25em + 1px),
+            77.5vw calc(1.35em + 1px),
+            100% calc(1.35em + 1px),
+            100% 100%,
+            0 100%) !important;
 }
 
 .layout-desktop .detailRibbon.detailRibbon .mainDetailButtons,

@@ -642,12 +642,12 @@ select optgroup,
 }
 
 .detailRibbon {
-    background: rgba(16, 16, 18, 0.88) !important;
-    backdrop-filter: blur(20px) !important;
-    -webkit-backdrop-filter: blur(20px) !important;
+    background: rgba(26, 26, 26, 0.92) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
     border-top: 1px solid var(--gl-rule) !important;
-    border-bottom: 1px solid var(--gl-rule) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+    border-bottom: 0 !important;
+    box-shadow: none !important;
 }
 
 .layout-desktop .detailRibbon,
@@ -660,7 +660,7 @@ select optgroup,
     justify-content: flex-start !important;
     padding-left: 25vw !important;
     z-index: 2 !important;
-    background: rgba(16, 16, 18, 0.88) !important;
+    background: transparent !important;
 }
 
 .layout-desktop [dir=rtl] .detailRibbon,
@@ -696,9 +696,7 @@ select optgroup,
 
 
 .detailPagePrimaryContainer {
-    background: linear-gradient(180deg,
-            rgba(12, 12, 14, 0.88) 0%,
-            var(--gl-bg) 25%) !important;
+    background: var(--gl-bg) !important;
     padding-top: 2em !important;
     padding-bottom: 5em !important;
 }
@@ -723,10 +721,16 @@ select optgroup,
 
 .itemBackdrop {
     height: 50vh !important;
-    mask-image: linear-gradient(to bottom, black 50%, transparent 100%) !important;
-    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%) !important;
+    mask-image: linear-gradient(to bottom,
+            #000 66%,
+            rgba(0, 0, 0, 0.45) 95%,
+            transparent 100%) !important;
+    -webkit-mask-image: linear-gradient(to bottom,
+            #000 66%,
+            rgba(0, 0, 0, 0.45) 95%,
+            transparent 100%) !important;
     filter: grayscale(0.5) brightness(0.4) !important;
-    opacity: 0.8 !important;
+    opacity: 0.85 !important;
 }
 
 .detailPagePrimaryContainer .card,
@@ -1881,16 +1885,41 @@ body:has(#videoOsdPage:not(.hide)) .skinHeader .headerLeft {
     position: absolute;
     left: 0;
     right: 0;
-    top: 0;
-    height: 7.2em;
+    top: -6px;
+    height: 12px;
     z-index: -1;
     pointer-events: none;
-    background: rgba(16, 16, 18, 0.88) !important;
-    backdrop-filter: blur(20px) !important;
-    -webkit-backdrop-filter: blur(20px) !important;
-    border-top: 1px solid var(--gl-rule) !important;
-    border-bottom: 1px solid var(--gl-rule) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+    background-color: rgba(26, 26, 26, 0.94) !important;
+    background-image: repeating-linear-gradient(90deg,
+            transparent 0px,
+            transparent 12px,
+            rgba(229, 226, 219, 0.16) 12px,
+            rgba(229, 226, 219, 0.16) 17px) !important;
+    background-size: 100% 4px !important;
+    background-repeat: no-repeat !important;
+    background-position: 0 center !important;
+    border-top: 1px solid rgba(229, 226, 219, 0.16) !important;
+    border-bottom: 1px solid var(--gl-frame-dim) !important;
+    mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.25) 0%, #000 22%, #000 76%, rgba(0, 0, 0, 0.12) 100%) !important;
+    -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.25) 0%, #000 22%, #000 76%, rgba(0, 0, 0, 0.12) 100%) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: none !important;
+}
+
+.layout-desktop .detailRibbon.detailRibbon::after,
+.layout-tv .detailRibbon.detailRibbon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 6px;
+    height: calc(7.2em - 6px);
+    z-index: -2;
+    pointer-events: none;
+    background: linear-gradient(to bottom,
+            rgba(26, 26, 26, 0.9) 0%,
+            var(--gl-bg) 72%) !important;
 }
 
 .layout-desktop .detailRibbon.detailRibbon .mainDetailButtons,

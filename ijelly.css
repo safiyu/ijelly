@@ -570,12 +570,11 @@ h2.sectionTitle,
 }
 
 .detailRibbon {
-    background: rgba(24, 24, 28, 0.85) !important;
-    backdrop-filter: blur(25px) !important;
-    -webkit-backdrop-filter: blur(25px) !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
 }
 
 .layout-desktop .detailRibbon,
@@ -588,7 +587,7 @@ h2.sectionTitle,
     justify-content: flex-start !important;
     padding-left: 25vw !important;
     z-index: 2 !important;
-    background: rgba(24, 24, 28, 0.85) !important;
+    background: transparent !important;
 }
 
 .layout-desktop [dir=rtl] .detailRibbon,
@@ -624,8 +623,8 @@ h2.sectionTitle,
 
 .detailPagePrimaryContainer {
     background: linear-gradient(180deg,
-            rgba(20, 20, 22, 0.85) 0%,
-            var(--apple-bg) 25%) !important;
+            rgba(10, 10, 12, 0.76) 0%,
+            var(--apple-bg) 28%) !important;
     padding-top: 2em !important;
     padding-bottom: 4em !important;
 }
@@ -659,10 +658,22 @@ h2.sectionTitle,
 }
 
 .itemBackdrop {
-    height: 50vh !important;
-    mask-image: linear-gradient(to bottom, black 50%, transparent 100%) !important;
-    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%) !important;
-    opacity: 0.8 !important;
+    height: 56vh !important;
+    mask-image: linear-gradient(to bottom,
+            #000 0%,
+            rgba(0, 0, 0, 0.96) 28%,
+            rgba(0, 0, 0, 0.72) 48%,
+            rgba(0, 0, 0, 0.36) 68%,
+            rgba(0, 0, 0, 0.1) 86%,
+            transparent 100%) !important;
+    -webkit-mask-image: linear-gradient(to bottom,
+            #000 0%,
+            rgba(0, 0, 0, 0.96) 28%,
+            rgba(0, 0, 0, 0.72) 48%,
+            rgba(0, 0, 0, 0.36) 68%,
+            rgba(0, 0, 0, 0.1) 86%,
+            transparent 100%) !important;
+    opacity: 0.85 !important;
 }
 
 .detailPagePrimaryContainer .card,
@@ -2627,16 +2638,19 @@ select option,
     position: absolute;
     left: 0;
     right: 0;
-    top: 0;
-    height: 7.2em;
+    top: -3.5em;
+    height: 10.7em;
     z-index: -1;
     pointer-events: none;
-    background: rgba(24, 24, 28, 0.85) !important;
-    backdrop-filter: blur(25px) !important;
-    -webkit-backdrop-filter: blur(25px) !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+    background: linear-gradient(to bottom,
+            rgba(10, 10, 12, 0) 0%,
+            rgba(10, 10, 12, 0.28) 38%,
+            rgba(10, 10, 12, 0.62) 74%,
+            rgba(10, 10, 12, 0.76) 100%) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: 0 !important;
+    box-shadow: none !important;
 }
 
 .layout-desktop .detailRibbon.detailRibbon .mainDetailButtons,
