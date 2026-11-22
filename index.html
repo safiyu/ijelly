@@ -47,7 +47,7 @@ a{color:inherit}
 .picks{display:grid;grid-template-columns:repeat(6,1fr);gap:clamp(10px,1.4vw,20px);margin-top:clamp(40px,6vw,72px)}
 .pick{display:flex;flex-direction:column;text-decoration:none;background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
 .pick:hover .pick-name{text-decoration:underline;text-decoration-color:var(--accent);text-underline-offset:5px;text-decoration-thickness:2px}
-.pick img{width:100%;aspect-ratio:560/270;object-fit:cover;object-position:top left}
+.pick img{width:100%;aspect-ratio:560/267;object-fit:cover;object-position:top left}
 .pick-name{padding:12px 14px 14px;font-family:var(--display);font-weight:var(--dweight);font-style:var(--dstyle);font-size:1.2rem;letter-spacing:var(--track);line-height:1.2}
 
 /* theme worlds: each room borrows that theme's palette and typeface */
@@ -209,13 +209,13 @@ dialog.lightbox button{position:absolute;top:-44px;right:0;font:600 .92rem 'Inte
 <main id="top">
   <div class="wrap intro">
     <h1>Six looks for your Jellyfin library</h1>
-    <p>Paste one line of CSS into the Jellyfin dashboard and your library, detail pages and video player take on a new design. Built for Jellyfin 12, on desktop and on TV.</p>
+    <p>Paste one line of CSS into the Jellyfin dashboard and your homescreen, library, detail pages and video player take on a new design. Built for Jellyfin 12+, on desktop and on TV.</p>
     <nav class="picks" aria-label="Themes">
-<a class="pick t-apple" href="#apple"><img src="screenshots/web/apple-library-thumb.jpg" width="560" height="259" alt="" loading="eager"><span class="pick-name">Apple TV</span></a>
-<a class="pick t-noir" href="#noir"><img src="screenshots/web/noir-library-thumb.jpg" width="560" height="259" alt="" loading="eager"><span class="pick-name">Cinematheque Noir</span></a>
+<a class="pick t-apple" href="#apple"><img src="screenshots/web/apple-library-thumb.jpg" width="560" height="267" alt="" loading="eager"><span class="pick-name">Apple TV</span></a>
+<a class="pick t-noir" href="#noir"><img src="screenshots/web/noir-library-thumb.jpg" width="560" height="267" alt="" loading="eager"><span class="pick-name">Cinematheque Noir</span></a>
 <a class="pick t-editorial" href="#editorial"><img src="screenshots/web/editorial-library-thumb.jpg" width="560" height="267" alt="" loading="eager"><span class="pick-name">Editorial</span></a>
-<a class="pick t-gallery" href="#gallery"><img src="screenshots/web/gallery-library-thumb.jpg" width="560" height="259" alt="" loading="eager"><span class="pick-name">Gallery</span></a>
-<a class="pick t-blueprint" href="#blueprint"><img src="screenshots/web/blueprint-library-thumb.jpg" width="560" height="259" alt="" loading="eager"><span class="pick-name">Blueprint</span></a>
+<a class="pick t-gallery" href="#gallery"><img src="screenshots/web/gallery-library-thumb.jpg" width="560" height="267" alt="" loading="eager"><span class="pick-name">Gallery</span></a>
+<a class="pick t-blueprint" href="#blueprint"><img src="screenshots/web/blueprint-library-thumb.jpg" width="560" height="267" alt="" loading="eager"><span class="pick-name">Blueprint</span></a>
 <a class="pick t-tinted" href="#tinted"><img src="screenshots/web/tinted-library-thumb.jpg" width="560" height="267" alt="" loading="eager"><span class="pick-name">Poster-Tinted</span></a>
     </nav>
   </div>
@@ -233,7 +233,7 @@ dialog.lightbox button{position:absolute;top:-44px;right:0;font:600 .92rem 'Inte
           <button class="cmp-tab" type="button" data-img="screenshots/web/editorial-detail.jpg" data-label="Editorial" aria-pressed="false">Editorial</button>
           <button class="cmp-tab" type="button" data-img="screenshots/web/gallery-detail.jpg" data-label="Gallery" aria-pressed="false">Gallery</button>
           <button class="cmp-tab" type="button" data-img="screenshots/web/blueprint-detail.jpg" data-label="Blueprint" aria-pressed="false">Blueprint</button>
-          <button class="cmp-tab" type="button" data-img="screenshots/web/tinted-library.jpg" data-label="Poster-Tinted (Library)" aria-pressed="false">Poster-Tinted</button>
+          <button class="cmp-tab" type="button" data-img="screenshots/web/tinted-detail.jpg" data-label="Poster-Tinted" aria-pressed="false">Poster-Tinted</button>
         </div>
       </div>
       <div class="cmp-stage" id="cmp-stage">
@@ -268,16 +268,17 @@ dialog.lightbox button{position:absolute;top:-44px;right:0;font:600 .92rem 'Inte
   <div class="wrap room-grid">
     <div class="room-copy">
       <h2 id="h-apple">Apple TV</h2>
-      <p>Dark glass bars, pill navigation and rounded cards, with a floating two-row player bar. Modeled on the tvOS look.</p>
+      <p>Dark obsidian slate with crisp azure blue accents, Dual-Hairline Horizon shelves, atmospheric backdrop dissolve, and frosted Modular Pro dual-island player controls.</p>
       <div class="install">
         <code>@import url('https:/<wbr>/<wbr>cdn.jsdelivr.net/<wbr>gh/<wbr>safiyu/<wbr>ijelly@latest/<wbr>ijelly.css');</code>
         <button class="copy" type="button" data-copy="@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@latest/ijelly.css');">Copy import</button>
       </div>
     </div>
     <div class="shots">
-<figure><button class="shot" type="button" data-full="screenshots/web/apple-library.jpg" data-alt="Apple TV theme: movie library on dark glass with a pill navigation bar" aria-label="Enlarge: Apple TV theme: movie library on dark glass with a pill navigation bar"><img src="screenshots/web/apple-library.jpg" width="1600" height="741" alt="Apple TV theme: movie library on dark glass with a pill navigation bar" loading="lazy" decoding="async"></button><figcaption>Library</figcaption></figure>
-<figure><button class="shot" type="button" data-full="screenshots/web/apple-detail.jpg" data-alt="Apple TV theme: movie detail page with a rounded play button and meta chips" aria-label="Enlarge: Apple TV theme: movie detail page with a rounded play button and meta chips"><img src="screenshots/web/apple-detail.jpg" width="1600" height="764" alt="Apple TV theme: movie detail page with a rounded play button and meta chips" loading="lazy" decoding="async"></button><figcaption>Detail page</figcaption></figure>
-<figure><button class="shot" type="button" data-full="screenshots/web/apple-player.jpg" data-alt="Apple TV theme: video player with a floating glass control bar" aria-label="Enlarge: Apple TV theme: video player with a floating glass control bar"><img src="screenshots/web/apple-player.jpg" width="1600" height="764" alt="Apple TV theme: video player with a floating glass control bar" loading="lazy" decoding="async"></button><figcaption>Player</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/apple-home.jpg" data-alt="Apple TV theme: homescreen with Dual-Hairline Horizon section separators and Chamfered Viewfinder cards" aria-label="Enlarge: Apple TV theme homescreen"><img src="screenshots/web/apple-home.jpg" width="1600" height="764" alt="Apple TV theme: homescreen with Dual-Hairline Horizon section separators and Chamfered Viewfinder cards" loading="lazy" decoding="async"></button><figcaption>Home</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/apple-library.jpg" data-alt="Apple TV theme: movie library with cobalt optical viewfinder focus brackets" aria-label="Enlarge: Apple TV theme library"><img src="screenshots/web/apple-library.jpg" width="1600" height="764" alt="Apple TV theme: movie library with cobalt optical viewfinder focus brackets" loading="lazy" decoding="async"></button><figcaption>Library</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/apple-detail.jpg" data-alt="Apple TV theme: detail page with atmospheric backdrop dissolve, pill play button and frosted meta chips" aria-label="Enlarge: Apple TV theme detail page"><img src="screenshots/web/apple-detail.jpg" width="1600" height="764" alt="Apple TV theme: detail page with atmospheric backdrop dissolve, pill play button and frosted meta chips" loading="lazy" decoding="async"></button><figcaption>Detail page</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/apple-player.jpg" data-alt="Apple TV theme: video player with Floating Header Dock and Modular Pro dual-island OSD" aria-label="Enlarge: Apple TV theme player"><img src="screenshots/web/apple-player.jpg" width="1600" height="764" alt="Apple TV theme: video player with Floating Header Dock and Modular Pro dual-island OSD" loading="lazy" decoding="async"></button><figcaption>Player</figcaption></figure>
     </div>
   </div>
 </section>
@@ -286,15 +287,17 @@ dialog.lightbox button{position:absolute;top:-44px;right:0;font:600 .92rem 'Inte
   <div class="wrap room-grid">
     <div class="room-copy">
       <h2 id="h-noir">Cinematheque Noir</h2>
-      <p>Warm sepia, serif titles and a brass frame around every poster. Section names are set in lowercase italics.</p>
+      <p>Warm espresso-sepia darkroom surfaces, antique gold hairline frames, Refined Vernier Horizon shelves, Playfair Display titles, and a Floating Command Island on detail pages.</p>
       <div class="install">
         <code>@import url('https:/<wbr>/<wbr>cdn.jsdelivr.net/<wbr>gh/<wbr>safiyu/<wbr>ijelly@latest/<wbr>ijelly_noir.css');</code>
         <button class="copy" type="button" data-copy="@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@latest/ijelly_noir.css');">Copy import</button>
       </div>
     </div>
     <div class="shots">
-<figure><button class="shot" type="button" data-full="screenshots/web/noir-library.jpg" data-alt="Noir theme: movie library with brass-framed posters on a sepia background" aria-label="Enlarge: Noir theme: movie library with brass-framed posters on a sepia background"><img src="screenshots/web/noir-library.jpg" width="1600" height="741" alt="Noir theme: movie library with brass-framed posters on a sepia background" loading="lazy" decoding="async"></button><figcaption>Library</figcaption></figure>
-<figure><button class="shot" type="button" data-full="screenshots/web/noir-detail.jpg" data-alt="Noir theme: movie detail page with a serif title and a brass-framed poster" aria-label="Enlarge: Noir theme: movie detail page with a serif title and a brass-framed poster"><img src="screenshots/web/noir-detail.jpg" width="1600" height="764" alt="Noir theme: movie detail page with a serif title and a brass-framed poster" loading="lazy" decoding="async"></button><figcaption>Detail page</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/noir-home.jpg" data-alt="Cinematheque Noir theme: homescreen with Refined Vernier Horizon ticks and warm gold framing" aria-label="Enlarge: Cinematheque Noir theme homescreen"><img src="screenshots/web/noir-home.jpg" width="1600" height="764" alt="Cinematheque Noir theme: homescreen with Refined Vernier Horizon ticks and warm gold framing" loading="lazy" decoding="async"></button><figcaption>Home</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/noir-library.jpg" data-alt="Cinematheque Noir theme: movie library with warm sepia-brass hairline frames" aria-label="Enlarge: Cinematheque Noir theme library"><img src="screenshots/web/noir-library.jpg" width="1600" height="764" alt="Cinematheque Noir theme: movie library with warm sepia-brass hairline frames" loading="lazy" decoding="async"></button><figcaption>Library</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/noir-detail.jpg" data-alt="Cinematheque Noir theme: detail page with Floating Command Island across the backdrop seam" aria-label="Enlarge: Cinematheque Noir theme detail page"><img src="screenshots/web/noir-detail.jpg" width="1600" height="764" alt="Cinematheque Noir theme: detail page with Floating Command Island across the backdrop seam" loading="lazy" decoding="async"></button><figcaption>Detail page</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/noir-player.jpg" data-alt="Cinematheque Noir theme: video player with warm gold Modular Pro dual-island OSD" aria-label="Enlarge: Cinematheque Noir theme player"><img src="screenshots/web/noir-player.jpg" width="1600" height="764" alt="Cinematheque Noir theme: video player with warm gold Modular Pro dual-island OSD" loading="lazy" decoding="async"></button><figcaption>Player</figcaption></figure>
     </div>
   </div>
 </section>
@@ -303,15 +306,17 @@ dialog.lightbox button{position:absolute;top:-44px;right:0;font:600 .92rem 'Inte
   <div class="wrap room-grid">
     <div class="room-copy">
       <h2 id="h-editorial">Editorial</h2>
-      <p>Deep ink and cream type with a red accent. The first poster on each shelf is set larger, like a magazine spread.</p>
+      <p>Deep ink and cream Fraunces typography with a vivid crimson accent, Optical Viewfinder Bracket section rules, and an Illuminated Horizon Datum across every detail banner.</p>
       <div class="install">
         <code>@import url('https:/<wbr>/<wbr>cdn.jsdelivr.net/<wbr>gh/<wbr>safiyu/<wbr>ijelly@latest/<wbr>ijelly_editorial.css');</code>
         <button class="copy" type="button" data-copy="@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@latest/ijelly_editorial.css');">Copy import</button>
       </div>
     </div>
     <div class="shots">
-<figure><button class="shot" type="button" data-full="screenshots/web/editorial-library.jpg" data-alt="Editorial theme: movie library with an oversized first poster" aria-label="Enlarge: Editorial theme: movie library with an oversized first poster"><img src="screenshots/web/editorial-library.jpg" width="1600" height="764" alt="Editorial theme: movie library with an oversized first poster" loading="lazy" decoding="async"></button><figcaption>Library</figcaption></figure>
-<figure><button class="shot" type="button" data-full="screenshots/web/editorial-detail.jpg" data-alt="Editorial theme: movie detail page with a red play button and a pull-quote synopsis" aria-label="Enlarge: Editorial theme: movie detail page with a red play button and a pull-quote synopsis"><img src="screenshots/web/editorial-detail.jpg" width="1600" height="764" alt="Editorial theme: movie detail page with a red play button and a pull-quote synopsis" loading="lazy" decoding="async"></button><figcaption>Detail page</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/editorial-home.jpg" data-alt="Editorial theme: homescreen with Optical Viewfinder Brackets and crimson dotted section rules" aria-label="Enlarge: Editorial theme homescreen"><img src="screenshots/web/editorial-home.jpg" width="1600" height="764" alt="Editorial theme: homescreen with Optical Viewfinder Brackets and crimson dotted section rules" loading="lazy" decoding="async"></button><figcaption>Home</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/editorial-library.jpg" data-alt="Editorial theme: movie library with crimson viewfinder cards and red hover action controls" aria-label="Enlarge: Editorial theme library"><img src="screenshots/web/editorial-library.jpg" width="1600" height="764" alt="Editorial theme: movie library with crimson viewfinder cards and red hover action controls" loading="lazy" decoding="async"></button><figcaption>Library</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/editorial-detail.jpg" data-alt="Editorial theme: detail page with Illuminated Horizon Datum hairline and crimson square play button" aria-label="Enlarge: Editorial theme detail page"><img src="screenshots/web/editorial-detail.jpg" width="1600" height="764" alt="Editorial theme: detail page with Illuminated Horizon Datum hairline and crimson square play button" loading="lazy" decoding="async"></button><figcaption>Detail page</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/editorial-player.jpg" data-alt="Editorial theme: video player with sharp crimson Modular Pro dual-island controls" aria-label="Enlarge: Editorial theme player"><img src="screenshots/web/editorial-player.jpg" width="1600" height="764" alt="Editorial theme: video player with sharp crimson Modular Pro dual-island controls" loading="lazy" decoding="async"></button><figcaption>Player</figcaption></figure>
     </div>
   </div>
 </section>
@@ -320,15 +325,17 @@ dialog.lightbox button{position:absolute;top:-44px;right:0;font:600 .92rem 'Inte
   <div class="wrap room-grid">
     <div class="room-copy">
       <h2 id="h-gallery">Gallery</h2>
-      <p>Posters sit on cream mats in gold frames against a charcoal wall, with small museum-style captions.</p>
+      <p>Archival charcoal walls with champagne-gold accents, Cormorant Garamond italic typography, cream-matted detail posters, and perforated 35mm Filmstrip Rails across homescreen and hero seams.</p>
       <div class="install">
         <code>@import url('https:/<wbr>/<wbr>cdn.jsdelivr.net/<wbr>gh/<wbr>safiyu/<wbr>ijelly@latest/<wbr>ijelly_gallery.css');</code>
         <button class="copy" type="button" data-copy="@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@latest/ijelly_gallery.css');">Copy import</button>
       </div>
     </div>
     <div class="shots">
-<figure><button class="shot" type="button" data-full="screenshots/web/gallery-library.jpg" data-alt="Gallery theme: movie library with cream-matted posters in gold frames" aria-label="Enlarge: Gallery theme: movie library with cream-matted posters in gold frames"><img src="screenshots/web/gallery-library.jpg" width="1600" height="741" alt="Gallery theme: movie library with cream-matted posters in gold frames" loading="lazy" decoding="async"></button><figcaption>Library</figcaption></figure>
-<figure><button class="shot" type="button" data-full="screenshots/web/gallery-detail.jpg" data-alt="Gallery theme: movie detail page with a matted poster and serif text" aria-label="Enlarge: Gallery theme: movie detail page with a matted poster and serif text"><img src="screenshots/web/gallery-detail.jpg" width="1600" height="764" alt="Gallery theme: movie detail page with a matted poster and serif text" loading="lazy" decoding="async"></button><figcaption>Detail page</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/gallery-home.jpg" data-alt="Gallery theme: homescreen with 35mm Filmstrip Rail section dividers and Reel tags" aria-label="Enlarge: Gallery theme homescreen"><img src="screenshots/web/gallery-home.jpg" width="1600" height="764" alt="Gallery theme: homescreen with 35mm Filmstrip Rail section dividers and Reel tags" loading="lazy" decoding="async"></button><figcaption>Home</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/gallery-library.jpg" data-alt="Gallery theme: movie library with champagne frames on a curatorial charcoal grid" aria-label="Enlarge: Gallery theme library"><img src="screenshots/web/gallery-library.jpg" width="1600" height="764" alt="Gallery theme: movie library with champagne frames on a curatorial charcoal grid" loading="lazy" decoding="async"></button><figcaption>Library</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/gallery-detail.jpg" data-alt="Gallery theme: detail page with cream-matted poster and 35mm Film-Gate Curtain seam" aria-label="Enlarge: Gallery theme detail page"><img src="screenshots/web/gallery-detail.jpg" width="1600" height="764" alt="Gallery theme: detail page with cream-matted poster and 35mm Film-Gate Curtain seam" loading="lazy" decoding="async"></button><figcaption>Detail page</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/gallery-player.jpg" data-alt="Gallery theme: video player with warm champagne Modular Pro dual-island OSD" aria-label="Enlarge: Gallery theme player"><img src="screenshots/web/gallery-player.jpg" width="1600" height="764" alt="Gallery theme: video player with warm champagne Modular Pro dual-island OSD" loading="lazy" decoding="async"></button><figcaption>Player</figcaption></figure>
     </div>
   </div>
 </section>
@@ -337,17 +344,17 @@ dialog.lightbox button{position:absolute;top:-44px;right:0;font:600 .92rem 'Inte
   <div class="wrap room-grid">
     <div class="room-copy">
       <h2 id="h-blueprint">Blueprint</h2>
-      <p>Navy-black with an amber accent, square corners and monospaced labels over a faint drafting grid.</p>
+      <p>Deep navy-black over a precision drafting grid with ember amber accents, Saira and JetBrains Mono labels, Chamfered Nameplate Datums, and a 45° Architectural Chamfer Horizon.</p>
       <div class="install">
         <code>@import url('https:/<wbr>/<wbr>cdn.jsdelivr.net/<wbr>gh/<wbr>safiyu/<wbr>ijelly@latest/<wbr>ijelly_blueprint.css');</code>
         <button class="copy" type="button" data-copy="@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@latest/ijelly_blueprint.css');">Copy import</button>
       </div>
     </div>
     <div class="shots">
-<figure><button class="shot" type="button" data-full="screenshots/web/blueprint-library.jpg" data-alt="Blueprint theme: movie library with square amber-outlined cards" aria-label="Enlarge: Blueprint theme: movie library with square amber-outlined cards"><img src="screenshots/web/blueprint-library.jpg" width="1600" height="741" alt="Blueprint theme: movie library with square amber-outlined cards" loading="lazy" decoding="async"></button><figcaption>Library</figcaption></figure>
-<figure><button class="shot" type="button" data-full="screenshots/web/blueprint-detail.jpg" data-alt="Blueprint theme: movie detail page with an amber play button" aria-label="Enlarge: Blueprint theme: movie detail page with an amber play button"><img src="screenshots/web/blueprint-detail.jpg" width="1600" height="764" alt="Blueprint theme: movie detail page with an amber play button" loading="lazy" decoding="async"></button><figcaption>Detail page</figcaption></figure>
-<figure><button class="shot" type="button" data-full="screenshots/web/blueprint-cast.jpg" data-alt="Blueprint theme: cast and crew row with square portrait cards" aria-label="Enlarge: Blueprint theme: cast and crew row with square portrait cards"><img src="screenshots/web/blueprint-cast.jpg" width="1600" height="741" alt="Blueprint theme: cast and crew row with square portrait cards" loading="lazy" decoding="async"></button><figcaption>Cast and crew</figcaption></figure>
-<figure><button class="shot" type="button" data-full="screenshots/web/blueprint-player.jpg" data-alt="Blueprint theme: video player with a full-width amber seek bar" aria-label="Enlarge: Blueprint theme: video player with a full-width amber seek bar"><img src="screenshots/web/blueprint-player.jpg" width="1600" height="764" alt="Blueprint theme: video player with a full-width amber seek bar" loading="lazy" decoding="async"></button><figcaption>Player</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/blueprint-home.jpg" data-alt="Blueprint theme: homescreen with Chamfered Nameplate Datums and enlarged My Media tiles" aria-label="Enlarge: Blueprint theme homescreen"><img src="screenshots/web/blueprint-home.jpg" width="1600" height="764" alt="Blueprint theme: homescreen with Chamfered Nameplate Datums and enlarged My Media tiles" loading="lazy" decoding="async"></button><figcaption>Home</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/blueprint-library.jpg" data-alt="Blueprint theme: movie library with amber-outlined chamfered cards" aria-label="Enlarge: Blueprint theme library"><img src="screenshots/web/blueprint-library.jpg" width="1600" height="764" alt="Blueprint theme: movie library with amber-outlined chamfered cards" loading="lazy" decoding="async"></button><figcaption>Library</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/blueprint-detail.jpg" data-alt="Blueprint theme: detail page with Architectural Chamfer Horizon and ember amber controls" aria-label="Enlarge: Blueprint theme detail page"><img src="screenshots/web/blueprint-detail.jpg" width="1600" height="764" alt="Blueprint theme: detail page with Architectural Chamfer Horizon and ember amber controls" loading="lazy" decoding="async"></button><figcaption>Detail page</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/blueprint-player.jpg" data-alt="Blueprint theme: video player with ember amber Floating Header Dock and Modular Pro dual-island OSD" aria-label="Enlarge: Blueprint theme player"><img src="screenshots/web/blueprint-player.jpg" width="1600" height="764" alt="Blueprint theme: video player with ember amber Floating Header Dock and Modular Pro dual-island OSD" loading="lazy" decoding="async"></button><figcaption>Player</figcaption></figure>
     </div>
   </div>
 </section>
@@ -356,15 +363,17 @@ dialog.lightbox button{position:absolute;top:-44px;right:0;font:600 .92rem 'Inte
   <div class="wrap room-grid">
     <div class="room-copy">
       <h2 id="h-tinted">Poster-Tinted</h2>
-      <p>The page takes its colors from whatever you are looking at. A blurred copy of the backdrop washes the screen, and the poster you focus glows in its own colors. CSS only, so it works on TV.</p>
+      <p>Monochrome obsidian chrome so your artwork owns every hue. Blurred backdrops wash the page and hovered posters radiate their own color halo via pure CSS — zero scripts needed.</p>
       <div class="install">
         <code>@import url('https:/<wbr>/<wbr>cdn.jsdelivr.net/<wbr>gh/<wbr>safiyu/<wbr>ijelly@latest/<wbr>ijelly_tinted.css');</code>
         <button class="copy" type="button" data-copy="@import url('https://cdn.jsdelivr.net/gh/safiyu/ijelly@latest/ijelly_tinted.css');">Copy import</button>
       </div>
     </div>
     <div class="shots">
-<figure><button class="shot" type="button" data-full="screenshots/web/tinted-library.jpg" data-alt="Poster-Tinted theme: movie library with a color wash from the backdrop" aria-label="Enlarge: Poster-Tinted theme: movie library with a color wash from the backdrop"><img src="screenshots/web/tinted-library.jpg" width="1600" height="764" alt="Poster-Tinted theme: movie library with a color wash from the backdrop" loading="lazy" decoding="async"></button><figcaption>Library</figcaption></figure>
-<figure><button class="shot" type="button" data-full="screenshots/web/tinted-player.jpg" data-alt="Poster-Tinted theme: video player tinted by the video" aria-label="Enlarge: Poster-Tinted theme: video player tinted by the video"><img src="screenshots/web/tinted-player.jpg" width="1600" height="764" alt="Poster-Tinted theme: video player tinted by the video" loading="lazy" decoding="async"></button><figcaption>Player</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/tinted-home.jpg" data-alt="Poster-Tinted theme: homescreen with Monolith Plinth section dividers on pitch-black canvas" aria-label="Enlarge: Poster-Tinted theme homescreen"><img src="screenshots/web/tinted-home.jpg" width="1600" height="764" alt="Poster-Tinted theme: homescreen with Monolith Plinth section dividers on pitch-black canvas" loading="lazy" decoding="async"></button><figcaption>Home</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/tinted-library.jpg" data-alt="Poster-Tinted theme: movie library with poster-inherited color halo around the focused poster" aria-label="Enlarge: Poster-Tinted theme library"><img src="screenshots/web/tinted-library.jpg" width="1600" height="764" alt="Poster-Tinted theme: movie library with poster-inherited color halo around the focused poster" loading="lazy" decoding="async"></button><figcaption>Library</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/tinted-detail.jpg" data-alt="Poster-Tinted theme: detail page dissolving backdrop color straight into pure obsidian black" aria-label="Enlarge: Poster-Tinted theme detail page"><img src="screenshots/web/tinted-detail.jpg" width="1600" height="764" alt="Poster-Tinted theme: detail page dissolving backdrop color straight into pure obsidian black" loading="lazy" decoding="async"></button><figcaption>Detail page</figcaption></figure>
+<figure><button class="shot" type="button" data-full="screenshots/web/tinted-player.jpg" data-alt="Poster-Tinted theme: video player with pure monochrome Floating Header Dock and Modular Pro dual-island OSD" aria-label="Enlarge: Poster-Tinted theme player"><img src="screenshots/web/tinted-player.jpg" width="1600" height="764" alt="Poster-Tinted theme: video player with pure monochrome Floating Header Dock and Modular Pro dual-island OSD" loading="lazy" decoding="async"></button><figcaption>Player</figcaption></figure>
     </div>
   </div>
 </section>
@@ -442,7 +451,7 @@ dialog.lightbox button{position:absolute;top:-44px;right:0;font:600 .92rem 'Inte
         <ul>
           <li>Pages use the same layout as desktop: backdrop banner, poster, buttons, then the description.</li>
           <li>Home rows and library grids fit the screen with safe margins.</li>
-          <li>The player puts the seek bar on its own row, with the controls packed together underneath.</li>
+          <li>The player splits controls into a Full-Width Floating Header Dock and Modular Pro dual islands beneath a full-width seek track.</li>
         </ul>
         <p>Tested on the Samsung Tizen app. Keep the Jellyfin app on your TV up to date.</p>
       </div>
